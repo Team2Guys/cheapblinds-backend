@@ -12,7 +12,7 @@ const VIEWS_DIRECTORY = path.join(__dirname, "../views");
 const { USER_EMAIL, NODE_ENV } = env;
 
 // Supported email types
-const SUPPORTED_HTML_TEMPLATES = ["otp-email", "verification-email", "reset-password"];
+const SUPPORTED_HTML_TEMPLATES = ["otp-email", "verification-email", "reset-email"];
 
 // In-memory template cache
 const templateCache = new Map();
