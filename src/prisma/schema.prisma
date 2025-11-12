@@ -7,6 +7,51 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+}
+
+model Admin {
+  id                        String    @id @default(uuid()) @db.Uuid
+  fullName                  String    @db.VarChar(100)
+  email                     String    @unique @db.VarChar(255)
+  password                  String    @db.VarChar(255)
+  role                      AdminRole @default(ADMIN)
+  canAddProduct             Boolean   @default(false)
+  canEditProduct            Boolean   @default(false)
+  canDeleteProduct          Boolean   @default(false)
+  canAddCategory            Boolean   @default(false)
+  canDeleteCategory         Boolean   @default(false)
+  canEditCategory           Boolean   @default(false)
+  canCheckProfit            Boolean   @default(false)
+  canCheckRevenue           Boolean   @default(false)
+  canCheckVisitors          Boolean   @default(false)
+  canViewUsers              Boolean   @default(false)
+  canViewSales              Boolean   @default(false)
+  canViewAdmins             Boolean   @default(false)
+  canViewTotalProducts      Boolean   @default(false)
+  canViewTotalCategories    Boolean   @default(false)
+  canAddSubCategory         Boolean   @default(false)
+  canDeleteSubCategory      Boolean   @default(false)
+  canEditSubCategory        Boolean   @default(false)
+  canViewTotalSubCategories Boolean   @default(false)
+  canAddBlog                Boolean   @default(false)
+  canDeleteBlog             Boolean   @default(false)
+  canEditBlog               Boolean   @default(false)
+  canViewTotalBlog          Boolean   @default(false)
+  canAddRedirectUrls        Boolean   @default(false)
+  canDeleteRedirectUrls     Boolean   @default(false)
+  canEditRedirectUrls       Boolean   @default(false)
+  canViewTotalRedirectUrls  Boolean   @default(false)
+  canViewAppointments       Boolean   @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
 model User {
   id                     String   @id @default(uuid()) @db.Uuid
   firstName              String   @db.VarChar(100)
