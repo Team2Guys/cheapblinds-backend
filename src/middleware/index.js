@@ -1,9 +1,9 @@
 import cors from "cors";
+import xss from "xss-clean";
 import helmet from "helmet";
 import express from "express";
 import compression from "compression";
 import { expressMiddleware } from "@as-integrations/express4";
-import xss from "xss-clean";
 
 // eslint-disable-next-line no-unused-vars
 import { logTheme } from "./colors.js";
