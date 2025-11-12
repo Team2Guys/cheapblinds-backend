@@ -12,15 +12,13 @@ import { apiRateLimiter } from "./rate-limiter.js";
 import { tokenUtils } from "#utils/token.utils.js";
 
 export const setupMiddleware = (app, apolloServer) => {
-  // Security & performance
   app.use(helmet()); // secure HTTP headers
   app.use(compression()); // response compression
 
-  // GraphQL endpoint
   app.use(
     "/graphql",
-    cors(corsOptions), // CORS
-    apiRateLimiter, // rate limiting for public APIs
+    cors(corsOptions),
+    apiRateLimiter,
     express.json({ limit: "10mb" }),
     xss(), // sanitize input
     expressMiddleware(apolloServer, {
@@ -39,7 +37,7 @@ export const setupMiddleware = (app, apolloServer) => {
 
         return { user, req, res };
       },
-      csrfPrevention: true, // optional for browser clients
+      csrfPrevention: true,
     }),
   );
 };
