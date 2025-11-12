@@ -48,7 +48,6 @@
   },
   "imports": {
     "#config/*": "./src/config/*",
-    "#constants/*": "./src/constants/*",
     "#middleware/*": "./src/middleware/*",
     "#modules/*": "./src/modules/*",
     "#repository/*": "./src/repository/*",

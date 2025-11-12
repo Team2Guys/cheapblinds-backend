@@ -27,10 +27,6 @@ const validators = {
   EMAIL_PORT: port({ desc: "Email port" }),
   USER_EMAIL: email({ desc: "Email address" }),
   USER_PASSWORD: str({ desc: "Email password" }),
-
-  CLOUDINARY_CLOUD_NAME: str({ desc: "Cloudinary cloud name" }),
-  CLOUDINARY_API_KEY: str({ desc: "Cloudinary API key" }),
-  CLOUDINARY_API_SECRET: str({ desc: "Cloudinary API secret" }),
 };
 
 export const env = cleanEnv(process.env, validators, {

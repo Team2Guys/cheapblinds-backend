@@ -1,7 +1,5 @@
 import winston from "winston";
 
-import { IS_PROD_ENV } from "#constants/index.js";
-
 const createLogger = () => {
   const levels = { error: 0, warn: 1, info: 2, debug: 3 };
   const colors = { error: "red", warn: "yellow", info: "green", debug: "blue" };
@@ -19,7 +17,6 @@ const createLogger = () => {
             ({ level, message, timestamp }) => `[${timestamp}] [${level}] - ${message}`,
           ),
         ),
-        level: IS_PROD_ENV ? "warn" : "debug",
         handleExceptions: true,
       }),
     ],

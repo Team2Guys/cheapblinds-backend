@@ -1,66 +1,87 @@
-import { readFile } from "fs/promises";
+import { readFile, access, constants } from "fs/promises";
+import path, { dirname, join } from "path";
 import createError from "http-errors";
-import { join } from "path";
+import { fileURLToPath } from "url";
 
 import { env, transporter } from "#config/index.js";
-import { VIEWS_DIRECTORY } from "#constants/index.js";
 
-const { USER_EMAIL } = env;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
+const VIEWS_DIRECTORY = path.join(__dirname, "../views");
+const { USER_EMAIL, NODE_ENV } = env;
+
+// Supported email types
+const SUPPORTED_HTML_TEMPLATES = ["otp-email", "verification-email", "reset-password"];
+
+// In-memory template cache
 const templateCache = new Map();
 
-const getEmailTemplate = async (folder, filename) => {
-  const cacheKey = `${folder}/${filename}`;
+// Escape HTML special characters
+const escapeHtml = (str) =>
+  str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
-  if (templateCache.has(cacheKey)) {
-    return templateCache.get(cacheKey);
-  }
+// Read template with caching
+const getEmailTemplate = async (type, templateName = "index.html") => {
+  const cacheKey = `${type}/${templateName}`;
+  if (templateCache.has(cacheKey)) return templateCache.get(cacheKey);
 
+  const filePath = join(VIEWS_DIRECTORY, type, templateName);
   try {
-    const filePath = join(VIEWS_DIRECTORY, folder, filename);
+    await access(filePath, constants.R_OK);
     const template = await readFile(filePath, "utf-8");
-
-    // Cache template for future use
     templateCache.set(cacheKey, template);
     return template;
   } catch (error) {
-    throw createError(500, `Failed to read email template: ${error.message}`);
+    throw createError(
+      500,
+      `Failed to load email template "${type}/${templateName}": ${error.message}`,
+    );
   }
 };
 
+// Replace variables in template
 const processTemplate = (template, variables) => {
   return Object.entries(variables).reduce(
-    (processed, [key, value]) => processed.replace(new RegExp(`\\$\\{${key}\\}`, "g"), value),
+    (processed, [key, value]) =>
+      processed.replace(new RegExp(`\\$\\{${key}\\}`, "g"), escapeHtml(String(value))),
     template,
   );
 };
 
-const sendMail = async (mailOptions) => {
+// Send email via transporter
+const sendMail = async ({ to, subject, html }) => {
   try {
-    return await transporter.sendMail({
-      from: USER_EMAIL,
-      ...mailOptions,
-    });
+    return await transporter.sendMail({ from: USER_EMAIL, to, subject, html });
   } catch (error) {
-    throw createError(500, `Failed to send email: ${error.message}`);
+    if (NODE_ENV !== "production") console.error("[Email Send Error]", error);
+    throw createError(500, "Failed to send email.");
   }
 };
 
+/**
+ * Send an email
+ * @param {string} type - Template folder type (must be in SUPPORTED_HTML_TEMPLATES)
+ * @param {object} options - { email, subject, ...variables }
+ */
 export const sendEmail = async (type, options) => {
-  console.log("options:", options);
-  const { email, subject, ...rest } = options;
-  const template = await getEmailTemplate(type, "index.html");
-  const html = processTemplate(template, { ...rest, email });
-
-  const supportedTypes = ["otp-email", "verification-email", "reset-password"];
-
-  if (!supportedTypes.includes(type)) {
-    throw createError(400, "Invalid email type.");
+  if (!SUPPORTED_HTML_TEMPLATES.includes(type)) {
+    throw createError(
+      400,
+      `Invalid email type: "${type}". Supported types: ${SUPPORTED_HTML_TEMPLATES.join(", ")}`,
+    );
   }
 
-  return sendMail({
-    to: email,
-    subject,
-    html,
-  });
+  const { email, subject, ...variables } = options;
+  if (!email || !subject) throw createError(400, "Email and subject are required.");
+
+  const template = await getEmailTemplate(type);
+  const html = processTemplate(template, { ...variables, email });
+
+  return sendMail({ to: email, subject, html });
 };
