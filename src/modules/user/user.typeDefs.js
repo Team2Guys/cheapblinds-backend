@@ -1,11 +1,6 @@
 import { gql } from "graphql-tag";
 
 export const userTypeDefs = gql`
-  enum Role {
-    USER
-    ADMIN
-  }
-
   input GetUserByIdInput {
     id: String!
   }
@@ -16,7 +11,6 @@ export const userTypeDefs = gql`
     lastName: String
     email: String
     password: String
-    role: Role
   }
 
   input RemoveUserByIdInput {
@@ -28,7 +22,6 @@ export const userTypeDefs = gql`
     firstName: String!
     lastName: String!
     email: String!
-    role: String!
     isEmailVerified: Boolean!
     createdAt: String!
     updatedAt: String!

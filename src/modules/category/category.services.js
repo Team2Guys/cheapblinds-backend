@@ -4,8 +4,8 @@ import { repository } from "#repository/index.js";
 const { write, read, update, remove } = repository;
 
 export const categoryServices = {
-  createCategory: async (data) => {
-    const category = await write.category(data);
+  createCategory: async (requestBody) => {
+    const category = await write.category(requestBody);
 
     return {
       status: "success",
@@ -36,12 +36,12 @@ export const categoryServices = {
     };
   },
 
-  updateCategoryById: async ({ id, ...data }) => {
+  updateCategoryById: async ({ id, ...requestBody }) => {
     const existingCategory = await read.categoryById(id);
 
     if (!existingCategory) throw createError(404, "Category not found.");
 
-    const updatedCategory = await update.categoryById(id, data);
+    const updatedCategory = await update.categoryById(id, requestBody);
 
     return {
       status: "success",

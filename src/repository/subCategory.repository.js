@@ -6,11 +6,11 @@ import { commonUtils } from "#utils/index.js";
 const { validateUuid } = commonUtils;
 const prisma = new PrismaClient();
 
-export const subCategoryRepository = {
+export const subcategoryRepository = {
   read: {
     subcategories: async () => await prisma.subcategory.findMany(),
 
-    subCategoryById: async (id) => {
+    subcategoryById: async (id) => {
       if (!validateUuid(id)) throw createError(400, "Invalid subcategory ID format.");
 
       return await prisma.subcategory.findUnique({ where: { id } });
@@ -22,7 +22,7 @@ export const subCategoryRepository = {
   },
 
   update: {
-    subCategoryById: async ({ id, ...data }) => {
+    subcategoryById: async ({ id, ...data }) => {
       if (!validateUuid(id)) throw createError(400, "Invalid subcategory ID format.");
       if (Object.keys(data).length === 0) throw createError(400, "No data provided for update.");
 
@@ -31,7 +31,7 @@ export const subCategoryRepository = {
   },
 
   remove: {
-    subCategoryById: async (id) => {
+    subcategoryById: async (id) => {
       if (!validateUuid(id)) throw createError(400, "Invalid subcategory ID format.");
 
       return await prisma.subcategory.delete({ where: { id } });

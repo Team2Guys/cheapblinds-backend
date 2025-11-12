@@ -1,5 +1,5 @@
 import { categoryRepository } from "./category.repository.js";
-import { subCategoryRepository } from "./subcategory.repository.js";
+import { subcategoryRepository } from "./subcategory.repository.js";
 import { userRepository } from "./user.repository.js";
 import { otpRepository } from "./otp.repository.js";
 import { productRepository } from "./product.repository.js";
@@ -9,7 +9,7 @@ export const repository = {
     ...categoryRepository.read,
     ...otpRepository.read,
     ...userRepository.read,
-    ...subCategoryRepository.read,
+    ...subcategoryRepository.read,
     ...productRepository.read,
   },
 
@@ -17,21 +17,21 @@ export const repository = {
     ...categoryRepository.write,
     ...otpRepository.write,
     ...userRepository.write,
-    ...subCategoryRepository.write,
+    ...subcategoryRepository.write,
     ...productRepository.write,
   },
 
   update: {
     ...categoryRepository.update,
     ...userRepository.update,
-    ...subCategoryRepository.update,
+    ...subcategoryRepository.update,
     ...productRepository.update,
   },
 
   remove: {
     ...categoryRepository.remove,
     ...userRepository.remove,
-    ...subCategoryRepository.remove,
+    ...subcategoryRepository.remove,
     ...productRepository.remove,
   },
 };

@@ -9,9 +9,9 @@ export const authResolvers = {
   },
 
   Mutation: {
-    signUp: asyncHandler(async (_parent, { input }) => authServices.signUp(input)),
+    signup: asyncHandler(async (_parent, { input }) => authServices.signup(input)),
 
-    signIn: asyncHandler(async (_parent, { input }) => authServices.signIn(input)),
+    signin: asyncHandler(async (_parent, { input }) => authServices.signin(input)),
 
     requestPasswordReset: asyncHandler(async (_parent, { input }) =>
       authServices.requestPasswordReset(input),

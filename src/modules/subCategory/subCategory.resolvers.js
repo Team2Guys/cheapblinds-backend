@@ -1,40 +1,32 @@
-import { subCategoryServices } from "./subcategory.services.js";
+import { subcategoryServices } from "./subcategory.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
 const { asyncHandler } = commonUtils;
-const { verifyAccessToken, verifyAuthRole } = verifications;
+const { verifyAccessToken } = verifications;
 
-export const subCategoryResolvers = {
+export const subcategoryResolvers = {
   Query: {
-    getSubCategories: asyncHandler(async () => subCategoryServices.getSubCategories()),
+    getSubCategories: asyncHandler(async () => subcategoryServices.getSubCategories()),
 
-    getSubCategoryById: asyncHandler(async (_parent, { input }) =>
-      subCategoryServices.getSubCategoryById(input),
+    getSubcategoryById: asyncHandler(async (_parent, { input }) =>
+      subcategoryServices.getSubcategoryById(input),
     ),
   },
 
   Mutation: {
-    createSubCategory: asyncHandler(
-      verifyAccessToken(
-        verifyAuthRole(["ADMIN"])(async (_parent, { input }) =>
-          subCategoryServices.createSubCategory(input),
-        ),
+    createSubcategory: asyncHandler(
+      verifyAccessToken(async (_parent, { input }) => subcategoryServices.createSubcategory(input)),
+    ),
+
+    updateSubcategoryById: asyncHandler(
+      verifyAccessToken(async (_parent, { input }) =>
+        subcategoryServices.updateSubcategoryById(input),
       ),
     ),
 
-    updateSubCategoryById: asyncHandler(
-      verifyAccessToken(
-        verifyAuthRole(["ADMIN"])(async (_parent, { input }) =>
-          subCategoryServices.updateSubCategoryById(input),
-        ),
-      ),
-    ),
-
-    removeSubCategoryById: asyncHandler(
-      verifyAccessToken(
-        verifyAuthRole(["ADMIN"])(async (_parent, { input }) =>
-          subCategoryServices.removeSubCategoryById(input),
-        ),
+    removeSubcategoryById: asyncHandler(
+      verifyAccessToken(async (_parent, { input }) =>
+        subcategoryServices.removeSubcategoryById(input),
       ),
     ),
   },

@@ -8,7 +8,9 @@ const { write, read, update } = repository;
 const { FRONTEND_URL } = env;
 
 export const authServices = {
-  signUp: async ({ firstName, lastName, email, password, role, isNewsletterSubscribed }) => {
+  signup: async (requestBody) => {
+    const { email, password } = requestBody;
+
     const existingEmail = await read.userByEmail(email);
 
     if (existingEmail) throw createError(400, "User already exists.");
@@ -16,12 +18,8 @@ export const authServices = {
     const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
 
     const registrationData = {
-      firstName,
-      lastName,
-      email,
       password: hashedPassword,
-      role,
-      isNewsletterSubscribed,
+      ...requestBody,
     };
 
     const newUser = await write.user(registrationData);
@@ -46,7 +44,9 @@ export const authServices = {
     };
   },
 
-  signIn: async ({ email, password }) => {
+  signin: async (requestBody) => {
+    const { email, password } = requestBody;
+
     const user = await read.userByEmail(email);
 
     if (!user) throw createError(401, "Invalid credentials.");
@@ -76,7 +76,7 @@ export const authServices = {
 
     if (!isPasswordValid) throw createError(401, "Invalid credentials.");
 
-    const accessToken = tokenUtils.generate({ id: user.id, role: user.role }, "accessToken");
+    const accessToken = tokenUtils.generate({ id: user.id }, "accessToken");
 
     if (!accessToken) throw createError(500, "Failed to generate access token.");
 
@@ -85,13 +85,14 @@ export const authServices = {
       message: "Signed in successfully.",
       data: {
         id: user.id,
-        role: user.role,
         accessToken,
       },
     };
   },
 
-  requestPasswordReset: async ({ email }) => {
+  requestPasswordReset: async (requestBody) => {
+    const { email } = requestBody;
+
     const existingUser = await read.userByEmail(email);
 
     if (!existingUser) throw createError(404, "User not found.");
@@ -114,10 +115,10 @@ export const authServices = {
     };
   },
 
-  updatePassword: async ({ password, resetToken }) => {
-    const decodedToken = tokenUtils.verify(resetToken);
+  updatePassword: async (requestBody) => {
+    const { resetToken, password } = requestBody;
 
-    const { id } = decodedToken;
+    const { id } = tokenUtils.verify(resetToken);
 
     const existingUser = await read.userById(id);
 

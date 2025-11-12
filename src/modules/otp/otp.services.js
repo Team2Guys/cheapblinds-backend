@@ -7,7 +7,9 @@ import { repository } from "#repository/index.js";
 const { write, read } = repository;
 
 export const otpServices = {
-  sendOtp: async ({ email }) => {
+  sendOtp: async (requestBody) => {
+    const { email } = requestBody;
+
     const existingUser = await read.userByEmail(email);
 
     if (!existingUser) throw createError(404, "User not found.");
@@ -38,7 +40,9 @@ export const otpServices = {
     };
   },
 
-  verifyOtp: async ({ email, otp }) => {
+  verifyOtp: async (requestBody) => {
+    const { email, otp } = requestBody;
+
     const existingUser = await read.userByEmail(email);
 
     if (!existingUser) throw createError(404, "User not found.");

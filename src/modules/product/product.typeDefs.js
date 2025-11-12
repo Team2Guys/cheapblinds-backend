@@ -31,7 +31,7 @@ export const productTypeDefs = gql`
     customUrl: String
     shippingOptions: [JSON!]
     categoryId: String!
-    subCategoryId: String!
+    subcategoryId: String!
   }
 
   input GetProductByIdInput {
@@ -78,7 +78,7 @@ export const productTypeDefs = gql`
     customUrl: String
     shippingOptions: [JSON!]
     categoryId: String!
-    subCategoryId: String!
+    subcategoryId: String!
     createdAt: String!
     updatedAt: String!
   }

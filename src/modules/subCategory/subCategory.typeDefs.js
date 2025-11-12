@@ -1,7 +1,7 @@
 import { gql } from "graphql-tag";
 
-export const subCategoryTypeDefs = gql`
-  input CreateSubCategoryInput {
+export const subcategoryTypeDefs = gql`
+  input CreateSubcategoryInput {
     name: String!
     categoryId: String!
     description: String
@@ -15,11 +15,11 @@ export const subCategoryTypeDefs = gql`
     thumbnailText: String
   }
 
-  input GetSubCategoryByIdInput {
+  input GetSubcategoryByIdInput {
     id: String!
   }
 
-  input UpdateSubCategoryByIdInput {
+  input UpdateSubcategoryByIdInput {
     id: String!
     name: String
     description: String
@@ -33,7 +33,7 @@ export const subCategoryTypeDefs = gql`
     thumbnailText: String
   }
 
-  input RemoveSubCategoryByIdInput {
+  input RemoveSubcategoryByIdInput {
     id: String!
   }
 
@@ -60,7 +60,7 @@ export const subCategoryTypeDefs = gql`
     data: [Subcategory!]!
   }
 
-  type SubCategoryResponse {
+  type SubcategoryResponse {
     status: String!
     message: String!
     data: Subcategory!
@@ -73,12 +73,12 @@ export const subCategoryTypeDefs = gql`
 
   type Query {
     getSubCategories: SubCategoriesResponse!
-    getSubCategoryById(input: GetSubCategoryByIdInput!): SubCategoryResponse!
+    getSubcategoryById(input: GetSubcategoryByIdInput!): SubcategoryResponse!
   }
 
   type Mutation {
-    createSubCategory(input: CreateSubCategoryInput!): SubCategoryResponse!
-    updateSubCategoryById(input: UpdateSubCategoryByIdInput!): SubCategoryResponse!
-    removeSubCategoryById(input: RemoveSubCategoryByIdInput!): GenericResponse!
+    createSubcategory(input: CreateSubcategoryInput!): SubcategoryResponse!
+    updateSubcategoryById(input: UpdateSubcategoryByIdInput!): SubcategoryResponse!
+    removeSubcategoryById(input: RemoveSubcategoryByIdInput!): GenericResponse!
   }
 `;

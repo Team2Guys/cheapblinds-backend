@@ -17,7 +17,7 @@ asyncHandler(async function main() {
 
   setupMiddleware(app, apolloServer);
 
-  app.get("/health", (req, res) => {
+  app.get("/health", (_, res) => {
     res.json({ status: "ok" });
   });
 

@@ -3,13 +3,13 @@ import { repository } from "#repository/index.js";
 
 const { write, read, update, remove } = repository;
 
-export const subCategoryServices = {
-  createSubCategory: async (data) => {
-    const subcategory = await write.subcategory(data);
+export const subcategoryServices = {
+  createSubcategory: async (requestBody) => {
+    const subcategory = await write.subcategory(requestBody);
 
     return {
       status: "success",
-      message: "Sub-category created successfully",
+      message: "subcategory created successfully",
       data: subcategory,
     };
   },
@@ -24,38 +24,44 @@ export const subCategoryServices = {
     };
   },
 
-  getSubCategoryById: async ({ id }) => {
-    const subcategory = await read.subCategoryById(id);
+  getSubcategoryById: async (requestBody) => {
+    const { id } = requestBody;
 
-    if (!subcategory) throw createError(404, "Subcategory not found.");
+    const subcategory = await read.subcategoryById(id);
+
+    if (!subcategory) throw createError(404, "subcategory not found.");
 
     return {
       status: "success",
-      message: "Sub-category retrieved successfully",
+      message: "subcategory retrieved successfully",
       data: subcategory,
     };
   },
 
-  updateSubCategoryById: async ({ id, ...data }) => {
-    const existing = await read.subCategoryById(id);
+  updateSubcategoryById: async (requestBody) => {
+    const { id, ...data } = requestBody;
 
-    if (!existing) throw createError(404, "Subcategory not found.");
+    const existing = await read.subcategoryById(id);
 
-    const updated = await update.subCategoryById({ id, ...data });
+    if (!existing) throw createError(404, "subcategory not found.");
+
+    const updated = await update.subcategoryById({ id, ...data });
 
     return {
       status: "success",
-      message: "Sub-category updated successfully",
+      message: "subcategory updated successfully",
       data: updated,
     };
   },
 
-  removeSubCategoryById: async ({ id }) => {
-    await remove.subCategoryById(id);
+  removeSubcategoryById: async (requestBody) => {
+    const { id } = requestBody;
+
+    await remove.subcategoryById(id);
 
     return {
       status: "success",
-      message: "Sub-category deleted successfully",
+      message: "subcategory deleted successfully",
     };
   },
 };

@@ -1,21 +1,15 @@
 import { gql } from "graphql-tag";
 
 export const authTypeDefs = gql`
-  enum ROLE {
-    USER
-    ADMIN
-  }
-
-  input SignUpInput {
+  input SignupInput {
     firstName: String!
     lastName: String!
     email: String!
     password: String!
-    role: ROLE
     isNewsletterSubscribed: Boolean
   }
 
-  input SignInInput {
+  input SigninInput {
     email: String!
     password: String!
   }
@@ -31,7 +25,6 @@ export const authTypeDefs = gql`
 
   type TokenData {
     id: ID!
-    role: Role!
     accessToken: String!
   }
 
@@ -51,8 +44,8 @@ export const authTypeDefs = gql`
   }
 
   type Mutation {
-    signUp(input: SignUpInput!): GenericResponse!
-    signIn(input: SignInInput!): SigninResponse!
+    signup(input: SignupInput!): GenericResponse!
+    signin(input: SigninInput!): SigninResponse!
     requestPasswordReset(input: PasswordResetRequestInput!): GenericResponse!
     updatePassword(input: PasswordUpdateInput!): GenericResponse!
   }
