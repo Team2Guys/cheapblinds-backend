@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id                     String   @id @default(uuid()) @db.Uuid
+  firstName              String   @db.VarChar(100)
+  lastName               String   @db.VarChar(100)
+  email                  String   @unique @db.VarChar(255)
+  password               String   @db.VarChar(255)
+  isEmailVerified        Boolean  @default(false)
+  isNewsletterSubscribed Boolean  @default(false)
+  otps                   Otp[]    @relation(name: "UserOtps")
+  role                   Role     @default(USER)
+  reviews                Review[] @relation(name: "UserReviews")
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  @@index([email])
+}
+
+model Otp {
+  id        String   @id @default(uuid()) @db.Uuid
+  otpHash   String   @db.Text()
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], name: "UserOtps", onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime
+
+  @@index([userId])
+}
+
+model Category {
+  id                String        @id @default(uuid()) @db.Uuid
+  name              String        @unique @db.VarChar(100)
+  description       String?       @db.Text()
+  shortDescription  String?       @db.VarChar(255)
+  customUrl         String?       @unique @db.VarChar(255)
+  metaTitle         String?       @db.VarChar(70)
+  metaDescription   String?       @db.VarChar(160)
+  canonicalTag      String?       @db.VarChar(255)
+  thumbnailUrl      String?       @db.VarChar(512)
+  thumbnailPublicId String?       @db.VarChar(255)
+  thumbnailText     String?       @db.VarChar(255)
+  products          Product[]     @relation("CategoryProducts")
+  subCategories     SubCategory[] @relation("CategorySubCategories")
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([name])
+}
+
+model SubCategory {
+  id                String    @id @default(uuid()) @db.Uuid
+  name              String    @unique @db.VarChar(100)
+  description       String?   @db.Text()
+  shortDescription  String?   @db.VarChar(255)
+  customUrl         String?   @unique @db.VarChar(255)
+  metaTitle         String?   @db.VarChar(70)
+  metaDescription   String?   @db.VarChar(160)
+  canonicalTag      String?   @db.VarChar(255)
+  thumbnailUrl      String?   @db.VarChar(512)
+  thumbnailPublicId String?   @db.VarChar(255)
+  thumbnailText     String?   @db.VarChar(255)
+  categoryId        String    @db.Uuid
+  category          Category  @relation(fields: [categoryId], references: [id], name: "CategorySubCategories", onDelete: Cascade)
+  products          Product[] @relation("SubCategoryProducts")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([categoryId])
+}
+
+model Product {
+  id                   String      @id @default(uuid()) @db.Uuid
+  name                 String      @unique @db.VarChar(255)
+  price                Int         @default(0)
+  description          String      @db.Text()
+  stock                Int         @default(0)
+  discountPrice        Int?
+  thumbnailUrl         String      @db.VarChar(512)
+  thumbnailPublicId    String      @db.VarChar(255)
+  productImages        Json[]      @default([])
+  colors               Json[]      @default([])
+  specifications       Json[]      @default([])
+  sale                 String?     @default("0")
+  saleDuration         DateTime?
+  canonicalTag         String?     @db.VarChar(255)
+  metaDescription      String?     @db.VarChar(160)
+  metaTitle            String?     @db.VarChar(70)
+  ogImage              String?     @db.VarChar(512)
+  ogUrl                String?     @db.VarChar(512)
+  ogTitle              String?     @db.VarChar(70)
+  thumbnailAltText     String?     @db.VarChar(255)
+  productImagesAltText String?     @db.VarChar(255)
+  sections             Json[]      @default([])
+  saleCounter          String?
+  sizes                Json[]      @default([])
+  filter               Json[]      @default([])
+  customUrl            String?     @unique @db.VarChar(255)
+  shippingOptions      Json[]      @default([])
+  categoryId           String      @db.Uuid
+  subCategoryId        String      @db.Uuid
+  category             Category    @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
+  subCategory          SubCategory @relation(fields: [subCategoryId], references: [id], name: "SubCategoryProducts", onDelete: Cascade)
+  reviews              Review[]    @relation(name: "ProductReviews")
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+
+  @@index([name])
+  @@index([categoryId])
+  @@index([subCategoryId])
+  @@index([price])
+}
+
+model Review {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String?  @db.Uuid
+  user       User?    @relation(fields: [userId], references: [id], name: "UserReviews", onDelete: SetNull)
+  productId  String   @db.Uuid
+  product    Product  @relation(fields: [productId], references: [id], name: "ProductReviews", onDelete: Cascade)
+  review     String   @db.Text()
+  stars      Int      @default(1)
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([productId])
+}
