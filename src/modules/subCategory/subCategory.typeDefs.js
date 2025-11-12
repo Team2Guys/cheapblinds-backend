@@ -72,7 +72,7 @@ export const subcategoryTypeDefs = gql`
   }
 
   type Query {
-    getSubCategories: SubCategoriesResponse!
+    getSubcategories: SubCategoriesResponse!
     getSubcategoryById(input: GetSubcategoryByIdInput!): SubcategoryResponse!
   }
 

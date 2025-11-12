@@ -10,7 +10,7 @@ export const productRepository = {
     products: async () => await prisma.product.findMany(),
 
     productById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid product ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid product id.");
 
       return await prisma.product.findUnique({
         where: { id },
@@ -27,7 +27,7 @@ export const productRepository = {
 
   update: {
     productById: async ({ id, ...data }) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid product ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid product id.");
       if (Object.keys(data).length === 0) throw createError(400, "No data provided for update.");
 
       return await prisma.product.update({
@@ -39,7 +39,7 @@ export const productRepository = {
 
   remove: {
     productById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid product ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid product id.");
 
       return await prisma.product.delete({
         where: { id },

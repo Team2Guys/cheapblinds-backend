@@ -22,7 +22,7 @@ export const userRepository = {
       }),
 
     userById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid user ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid user id.");
       return prisma.user.findUnique({
         where: { id },
         select: {
@@ -52,7 +52,7 @@ export const userRepository = {
 
   update: {
     userById: async ({ id, ...data }) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid user ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid user id.");
       if (!Object.keys(data).length) throw createError(400, "No data provided for update");
 
       return await prisma.user.update({
@@ -64,7 +64,7 @@ export const userRepository = {
 
   remove: {
     userById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid user ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid user id.");
 
       return await prisma.user.delete({
         where: { id },

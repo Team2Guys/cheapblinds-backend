@@ -2,7 +2,7 @@ import { categoryServices } from "./category.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
 const { asyncHandler } = commonUtils;
-const { verifyAccessToken } = verifications;
+const { verifyAccessToken, verifyAuthRole } = verifications;
 
 export const categoryResolvers = {
   Query: {
@@ -15,15 +15,27 @@ export const categoryResolvers = {
 
   Mutation: {
     createCategory: asyncHandler(
-      verifyAccessToken(async (_parent, { input }) => categoryServices.createCategory(input)),
+      verifyAccessToken(
+        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+          categoryServices.createCategory(input),
+        ),
+      ),
     ),
 
     updateCategoryById: asyncHandler(
-      verifyAccessToken(async (_parent, { input }) => categoryServices.updateCategoryById(input)),
+      verifyAccessToken(
+        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+          categoryServices.updateCategoryById(input),
+        ),
+      ),
     ),
 
     removeCategoryById: asyncHandler(
-      verifyAccessToken(async (_parent, { input }) => categoryServices.removeCategoryById(input)),
+      verifyAccessToken(
+        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+          categoryServices.removeCategoryById(input),
+        ),
+      ),
     ),
   },
 };

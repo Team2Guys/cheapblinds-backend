@@ -11,7 +11,7 @@ export const categoryRepository = {
     categories: async () => await prisma.category.findMany(),
 
     categoryById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid category ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid category id.");
 
       return await prisma.category.findUnique({
         where: { id },
@@ -28,7 +28,7 @@ export const categoryRepository = {
 
   update: {
     categoryById: async ({ id, ...data }) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid category ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid category id.");
       if (Object.keys(data).length === 0) throw createError(400, "No data provided for update.");
 
       return await prisma.category.update({
@@ -40,7 +40,7 @@ export const categoryRepository = {
 
   remove: {
     categoryById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid category ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid category id.");
 
       return await prisma.category.delete({
         where: { id },

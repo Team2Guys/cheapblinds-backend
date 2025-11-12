@@ -1,3 +1,4 @@
+import { adminRepository } from "./admin.repository.js";
 import { categoryRepository } from "./category.repository.js";
 import { subcategoryRepository } from "./subcategory.repository.js";
 import { userRepository } from "./user.repository.js";
@@ -6,6 +7,7 @@ import { productRepository } from "./product.repository.js";
 
 export const repository = {
   read: {
+    ...adminRepository.read,
     ...categoryRepository.read,
     ...otpRepository.read,
     ...userRepository.read,
@@ -14,6 +16,7 @@ export const repository = {
   },
 
   write: {
+    ...adminRepository.write,
     ...categoryRepository.write,
     ...otpRepository.write,
     ...userRepository.write,
@@ -22,6 +25,7 @@ export const repository = {
   },
 
   update: {
+    ...adminRepository.update,
     ...categoryRepository.update,
     ...userRepository.update,
     ...subcategoryRepository.update,
@@ -29,6 +33,7 @@ export const repository = {
   },
 
   remove: {
+    ...adminRepository.remove,
     ...categoryRepository.remove,
     ...userRepository.remove,
     ...subcategoryRepository.remove,

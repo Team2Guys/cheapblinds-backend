@@ -11,7 +11,7 @@ export const subcategoryRepository = {
     subcategories: async () => await prisma.subcategory.findMany(),
 
     subcategoryById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid subcategory ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
 
       return await prisma.subcategory.findUnique({ where: { id } });
     },
@@ -23,7 +23,7 @@ export const subcategoryRepository = {
 
   update: {
     subcategoryById: async ({ id, ...data }) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid subcategory ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
       if (Object.keys(data).length === 0) throw createError(400, "No data provided for update.");
 
       return await prisma.subcategory.update({ where: { id }, data });
@@ -32,7 +32,7 @@ export const subcategoryRepository = {
 
   remove: {
     subcategoryById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid subcategory ID format.");
+      if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
 
       return await prisma.subcategory.delete({ where: { id } });
     },

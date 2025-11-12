@@ -3,7 +3,7 @@ import { productServices } from "./product.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
 const { asyncHandler } = commonUtils;
-const { verifyAccessToken } = verifications;
+const { verifyAccessToken, verifyAuthRole } = verifications;
 
 export const productResolvers = {
   JSON: GraphQLJSON,
@@ -18,15 +18,27 @@ export const productResolvers = {
 
   Mutation: {
     createProduct: asyncHandler(
-      verifyAccessToken(async (_parent, { input }) => productServices.createProduct(input)),
+      verifyAccessToken(
+        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+          productServices.createProduct(input),
+        ),
+      ),
     ),
 
     updateProductById: asyncHandler(
-      verifyAccessToken(async (_parent, { input }) => productServices.updateProductById(input)),
+      verifyAccessToken(
+        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+          productServices.updateProductById(input),
+        ),
+      ),
     ),
 
     removeProductById: asyncHandler(
-      verifyAccessToken(async (_parent, { input }) => productServices.removeProductById(input)),
+      verifyAccessToken(
+        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+          productServices.removeProductById(input),
+        ),
+      ),
     ),
   },
 };
