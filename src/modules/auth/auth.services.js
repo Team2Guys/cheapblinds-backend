@@ -101,7 +101,7 @@ export const authServices = {
 
     if (!resetToken) throw createError(500, "Failed to generate reset token.");
 
-    const sentEmail = await sendEmail("reset-password", {
+    const sentEmail = await sendEmail("reset-email", {
       email,
       subject: "Reset your password",
       resetToken,

@@ -78,7 +78,7 @@
 │   ├── 📁 views
 │   │   ├── 📁 otp-email
 │   │   │   └── 🌐 index.html
-│   │   ├── 📁 reset-password
+│   │   ├── 📁 reset-email
 │   │   │   └── 🌐 index.html
 │   │   └── 📁 verification-email
 │   │       └── 🌐 index.html
