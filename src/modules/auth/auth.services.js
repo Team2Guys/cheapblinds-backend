@@ -11,9 +11,7 @@ export const authServices = {
   signUp: async ({ firstName, lastName, email, password, role, isNewsletterSubscribed }) => {
     const existingEmail = await read.userByEmail(email);
 
-    if (existingEmail) {
-      throw createError(400, "A user with this email already exists.");
-    }
+    if (existingEmail) throw createError(400, "User already exists.");
 
     const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
 
@@ -30,7 +28,7 @@ export const authServices = {
 
     const verificationToken = tokenUtils.generate({ id: newUser.id }, "verificationToken");
 
-    if (!verificationToken) throw createError(500, "Verification token generation failed.");
+    if (!verificationToken) throw createError(500, "Failed to generate verification token.");
     if (!FRONTEND_URL) throw createError(500, "FRONTEND_URL is not defined.");
 
     const sentEmail = await sendEmail("verification-email", {
@@ -40,7 +38,7 @@ export const authServices = {
       verificationToken,
     });
 
-    if (!sentEmail) throw createError(500, "Send the welcome email failed.");
+    if (!sentEmail) throw createError(500, "Failed to send welcome email.");
 
     return {
       status: "success",
@@ -56,7 +54,7 @@ export const authServices = {
     if (!user.isEmailVerified) {
       const verificationToken = tokenUtils.generate({ id: user.id }, "verificationToken");
 
-      if (!verificationToken) throw createError(500, "Verification token generation failed.");
+      if (!verificationToken) throw createError(500, "Failed to generate verification token.");
       if (!FRONTEND_URL) throw createError(500, "FRONTEND_URL is not defined.");
 
       const sentEmail = await sendEmail("verification-email", {
@@ -66,9 +64,8 @@ export const authServices = {
         verificationToken,
       });
 
-      if (!sentEmail) throw createError(500, "Send verification email failed.");
+      if (!sentEmail) throw createError(500, "Failed to send verification email.");
 
-      // Then throw error informing the user
       throw createError(
         403,
         "Email not verified. A new verification link has been sent to your email.",
@@ -81,7 +78,7 @@ export const authServices = {
 
     const accessToken = tokenUtils.generate({ id: user.id, role: user.role }, "accessToken");
 
-    if (!accessToken) throw createError(500, "Token generation failed.");
+    if (!accessToken) throw createError(500, "Failed to generate access token.");
 
     return {
       status: "success",
@@ -101,7 +98,7 @@ export const authServices = {
 
     const resetToken = tokenUtils.generate({ id: existingUser.id }, "passwordResetToken");
 
-    if (!resetToken) throw createError(500, "Reset token generation failed.");
+    if (!resetToken) throw createError(500, "Failed to generate reset token.");
 
     const sentEmail = await sendEmail("reset-password", {
       email,
@@ -109,7 +106,7 @@ export const authServices = {
       resetToken,
     });
 
-    if (!sentEmail) throw createError(500, "Send reset password email failed.");
+    if (!sentEmail) throw createError(500, "Failed to send reset password email.");
 
     return {
       status: "success",
@@ -132,7 +129,7 @@ export const authServices = {
       password: hashedPassword,
     });
 
-    if (!isPasswordUpdated) throw createError(500, "Password update failed.");
+    if (!isPasswordUpdated) throw createError(500, "Failed to update password.");
 
     return {
       status: "success",

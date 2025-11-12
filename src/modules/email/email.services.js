@@ -8,7 +8,7 @@ const { read, update } = repository;
 export const emailServices = {
   checkVerificationToken: async ({ verificationToken }) => {
     if (!verificationToken || typeof verificationToken !== "string")
-      throw createError(400, "Verification token is required and must be a string.");
+      throw createError(400, "Verification token is undefined or invalid.");
 
     const decodedToken = tokenUtils.verify(verificationToken);
 
@@ -18,7 +18,7 @@ export const emailServices = {
 
     const isUserUpdated = await update.userById({ id, isEmailVerified: true });
 
-    if (!isUserUpdated) throw createError(500, "Email verification failed.");
+    if (!isUserUpdated) throw createError(500, "Failed to update user email verification.");
 
     return {
       status: "success",
@@ -33,7 +33,7 @@ export const emailServices = {
 
     const verificationToken = tokenUtils.generate({ id: user.id }, "verificationToken");
 
-    if (!verificationToken) throw createError(500, "Verification token generation failed.");
+    if (!verificationToken) throw createError(500, "Failed to generate verification token.");
 
     const sentEmail = await sendEmail("verification-email", {
       email,
@@ -41,7 +41,7 @@ export const emailServices = {
       verificationToken,
     });
 
-    if (!sentEmail) throw createError(500, "Send welcome email failed.");
+    if (!sentEmail) throw createError(500, "Failed to send verification email.");
 
     return {
       status: "success",

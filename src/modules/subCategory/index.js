@@ -1,2 +1,2 @@
-export * from "./subCategory.typeDefs.js";
-export * from "./subCategory.resolvers.js";
+export * from "./subcategory.typeDefs.js";
+export * from "./subcategory.resolvers.js";

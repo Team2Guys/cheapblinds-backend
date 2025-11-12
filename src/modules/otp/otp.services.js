@@ -22,7 +22,7 @@ export const otpServices = {
 
     const isOTPSaved = await write.otp(otpData);
 
-    if (!isOTPSaved) throw createError(500, "Saving OTP failed.");
+    if (!isOTPSaved) throw createError(500, "Failed to save otp.");
 
     const sentEmail = await sendEmail("otp-email", {
       email,
@@ -30,7 +30,7 @@ export const otpServices = {
       rawOTP,
     });
 
-    if (!sentEmail) throw createError(500, "Sending email failed.");
+    if (!sentEmail) throw createError(500, "Failed to send otp.");
 
     return {
       status: "success",

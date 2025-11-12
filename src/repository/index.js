@@ -1,5 +1,5 @@
 import { categoryRepository } from "./category.repository.js";
-import { subCategoryRepository } from "./subCategory.repository.js";
+import { subCategoryRepository } from "./subcategory.repository.js";
 import { userRepository } from "./user.repository.js";
 import { otpRepository } from "./otp.repository.js";
 import { productRepository } from "./product.repository.js";

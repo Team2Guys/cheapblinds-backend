@@ -1,3 +1,1 @@
-### PERN E-COMMERCE STARTER
-
-## GraphQL APIs Supported
+### CheapBlinds Backend

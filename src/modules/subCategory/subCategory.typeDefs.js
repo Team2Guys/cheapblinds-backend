@@ -37,7 +37,7 @@ export const subCategoryTypeDefs = gql`
     id: String!
   }
 
-  type SubCategory {
+  type Subcategory {
     id: ID!
     name: String!
     categoryId: String!
@@ -57,13 +57,13 @@ export const subCategoryTypeDefs = gql`
   type SubCategoriesResponse {
     status: String!
     message: String!
-    data: [SubCategory!]!
+    data: [Subcategory!]!
   }
 
   type SubCategoryResponse {
     status: String!
     message: String!
-    data: SubCategory!
+    data: Subcategory!
   }
 
   type GenericResponse {

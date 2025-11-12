@@ -29,7 +29,7 @@ export const tokenUtils = {
     }
 
     if (!JWT_SECRET_KEY) {
-      throw createError(500, "JWT secret key is not defined");
+      throw createError(500, "JWT secret key is undefined");
     }
 
     return jwt.sign(payload, JWT_SECRET_KEY, options);
@@ -37,7 +37,7 @@ export const tokenUtils = {
 
   verify: (token) => {
     if (!JWT_SECRET_KEY) {
-      throw createError(500, "JWT secret key is not defined");
+      throw createError(500, "JWT secret key is undefined");
     }
 
     const decoded = jwt.verify(token, JWT_SECRET_KEY);

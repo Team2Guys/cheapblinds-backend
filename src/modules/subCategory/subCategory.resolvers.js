@@ -1,4 +1,4 @@
-import { subCategoryServices } from "./subCategory.services.js";
+import { subCategoryServices } from "./subcategory.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
 const { asyncHandler } = commonUtils;
