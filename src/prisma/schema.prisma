@@ -93,14 +93,14 @@ model Category {
   thumbnailPublicId String?       @db.VarChar(255)
   thumbnailText     String?       @db.VarChar(255)
   products          Product[]     @relation("CategoryProducts")
-  subcategories     subcategory[] @relation("CategorySubcategories")
+  subcategories     Subcategory[] @relation("CategorySubcategories")
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
 
   @@index([name])
 }
 
-model subcategory {
+model Subcategory {
   id                String    @id @default(uuid()) @db.Uuid
   name              String    @unique @db.VarChar(100)
   description       String?   @db.Text()
@@ -114,7 +114,7 @@ model subcategory {
   thumbnailText     String?   @db.VarChar(255)
   categoryId        String    @db.Uuid
   category          Category  @relation(fields: [categoryId], references: [id], name: "CategorySubcategories", onDelete: Cascade)
-  products          Product[] @relation("subcategoryProducts")
+  products          Product[] @relation("SubcategoryProducts")
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
@@ -152,7 +152,7 @@ model Product {
   categoryId           String      @db.Uuid
   subcategoryId        String      @db.Uuid
   category             Category    @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
-  subcategory          subcategory @relation(fields: [subcategoryId], references: [id], name: "subcategoryProducts", onDelete: Cascade)
+  subcategory          Subcategory @relation(fields: [subcategoryId], references: [id], name: "SubcategoryProducts", onDelete: Cascade)
   reviews              Review[]    @relation(name: "ProductReviews")
   createdAt            DateTime    @default(now())
   updatedAt            DateTime    @updatedAt
