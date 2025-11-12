@@ -37,7 +37,7 @@ export const setupMiddleware = (app, apolloServer) => {
 
         return { user, req, res };
       },
-      csrfPrevention: true,
+      csrfPrevention: true, // optional for browser clients
     }),
   );
 };
