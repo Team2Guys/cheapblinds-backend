@@ -18,4 +18,8 @@ const app = express();
   app.listen(PORT || 5000, () => {
     logger.info(`[connected] Backend (url: ${BACKEND_URL})`.server);
   });
+
+  app.get("/health", (req, res) => {
+    res.json({ status: "ok" });
+  });
 })();
