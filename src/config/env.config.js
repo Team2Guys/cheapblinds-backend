@@ -27,6 +27,10 @@ const validators = {
   EMAIL_PORT: port({ desc: "Email port" }),
   USER_EMAIL: email({ desc: "Email address" }),
   USER_PASSWORD: str({ desc: "Email password" }),
+
+  SUPER_ADMIN_ID: str({ desc: "Super admin id" }),
+  SUPER_ADMIN_EMAIL: email({ desc: "Super admin email" }),
+  SUPER_ADMIN_PASSWORD: str({ desc: "Super admin password" }),
 };
 
 export const env = cleanEnv(process.env, validators, {

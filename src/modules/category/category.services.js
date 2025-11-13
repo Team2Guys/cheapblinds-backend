@@ -24,7 +24,9 @@ export const categoryServices = {
     };
   },
 
-  getCategoryById: async ({ id }) => {
+  getCategoryById: async (requestBody) => {
+    const { id } = requestBody;
+
     const category = await read.categoryById(id);
 
     if (!category) throw createError(404, "Category not found.");
@@ -36,12 +38,14 @@ export const categoryServices = {
     };
   },
 
-  updateCategoryById: async ({ id, ...requestBody }) => {
+  updateCategoryById: async (requestBody) => {
+    const { id, ...data } = requestBody;
+
     const existingCategory = await read.categoryById(id);
 
     if (!existingCategory) throw createError(404, "Category not found.");
 
-    const updatedCategory = await update.categoryById(id, requestBody);
+    const updatedCategory = await update.categoryById(id, data);
 
     return {
       status: "success",
@@ -50,7 +54,9 @@ export const categoryServices = {
     };
   },
 
-  removeCategoryById: async ({ id }) => {
+  removeCategoryById: async (requestBody) => {
+    const { id } = requestBody;
+
     await remove.categoryById(id);
 
     return {

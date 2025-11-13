@@ -15,7 +15,9 @@ export const userServices = {
     };
   },
 
-  getUserById: async ({ id }) => {
+  getUserById: async (requestBody) => {
+    const { id } = requestBody;
+
     const user = await read.userById(id);
 
     if (!user) throw createError(404, "User not found.");
@@ -27,7 +29,9 @@ export const userServices = {
     };
   },
 
-  updateUserById: async ({ id, password, ...data }) => {
+  updateUserById: async (requestBody) => {
+    const { id, password, ...data } = requestBody;
+
     const existingUser = await read.userById(id);
 
     if (!existingUser) throw createError(404, "User not found.");
@@ -46,7 +50,9 @@ export const userServices = {
     };
   },
 
-  removeUserById: async ({ id }) => {
+  removeUserById: async (requestBody) => {
+    const { id } = requestBody;
+
     await remove.userById(id);
 
     return {

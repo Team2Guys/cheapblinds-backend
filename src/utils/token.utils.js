@@ -13,7 +13,7 @@ export const tokenUtils = {
 
     switch (tokenType) {
       case "verificationToken":
-        options.expiresIn = "10s";
+        options.expiresIn = "10m";
         break;
       case "accessToken":
         options.expiresIn = "30h";

@@ -47,7 +47,7 @@ export const adminTypeDefs = gql`
     accessToken: String!
   }
 
-  type AdminLoginResponse {
+  type SigninResponse {
     status: String!
     message: String!
     data: TokenData!
@@ -64,7 +64,8 @@ export const adminTypeDefs = gql`
   }
 
   type Mutation {
-    adminLogin(email: String!, password: String!): AdminLoginResponse!
+    superAdminLogin(email: String!, password: String!): SigninResponse!
+    adminLogin(email: String!, password: String!): SigninResponse!
     createAdmin(input: CreateAdminInput!): AdminResponse!
     updateAdminById(input: UpdateAdminByIdInput!): AdminResponse!
     removeAdminById(input: RemoveAdminByIdInput!): GenericResponse!

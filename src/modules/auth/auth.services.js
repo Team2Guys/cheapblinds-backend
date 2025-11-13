@@ -18,8 +18,8 @@ export const authServices = {
     const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
 
     const registrationData = {
-      password: hashedPassword,
       ...requestBody,
+      password: hashedPassword,
     };
 
     const newUser = await write.user(registrationData);
@@ -105,6 +105,7 @@ export const authServices = {
       email,
       subject: "Reset your password",
       resetToken,
+      FRONTEND_URL,
     });
 
     if (!sentEmail) throw createError(500, "Failed to send reset password email.");

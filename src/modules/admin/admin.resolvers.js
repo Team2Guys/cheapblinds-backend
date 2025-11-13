@@ -16,6 +16,10 @@ export const adminResolvers = {
   },
 
   Mutation: {
+    superAdminLogin: asyncHandler(async (_parent, { input }) =>
+      adminServices.superAdminLogin(input),
+    ),
+
     adminLogin: asyncHandler(async (_parent, { input }) => adminServices.adminLogin(input)),
 
     createAdmin: asyncHandler(
