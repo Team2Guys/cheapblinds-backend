@@ -14,7 +14,7 @@ export const productServices = {
     };
   },
 
-  getProducts: async () => {
+  getAllProducts: async () => {
     const products = await read.products();
 
     return {

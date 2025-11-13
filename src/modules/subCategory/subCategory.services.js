@@ -14,7 +14,7 @@ export const subcategoryServices = {
     };
   },
 
-  getSubCategories: async () => {
+  getAllSubCategories: async () => {
     const subcategories = await read.subcategories();
 
     return {

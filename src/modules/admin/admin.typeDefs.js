@@ -6,6 +6,7 @@ export const adminTypeDefs = gql`
     firstName: String!
     lastName: String!
     email: String!
+    role: Role!
     canAddProduct: Boolean
     canEditProduct: Boolean
     canDeleteProduct: Boolean
@@ -33,8 +34,8 @@ export const adminTypeDefs = gql`
     canViewTotalBlog: Boolean
     canViewTotalRedirectUrls: Boolean
     canViewAppointments: Boolean
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type AdminsResponse {
@@ -58,7 +59,7 @@ export const adminTypeDefs = gql`
     lastName: String!
     email: String!
     password: String!
-    role: Role! # This 'Role' will come from commonTypeDefs
+    role: Role!
     canAddProduct: Boolean
     canEditProduct: Boolean
     canDeleteProduct: Boolean
@@ -94,7 +95,7 @@ export const adminTypeDefs = gql`
     lastName: String
     email: String
     password: String
-    role: Role # This 'Role' will come from commonTypeDefs
+    role: Role
     canAddProduct: Boolean
     canEditProduct: Boolean
     canDeleteProduct: Boolean

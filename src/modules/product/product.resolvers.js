@@ -9,7 +9,7 @@ export const productResolvers = {
   JSON: GraphQLJSON,
 
   Query: {
-    getProducts: asyncHandler(async () => productServices.getProducts()),
+    getAllProducts: asyncHandler(async () => productServices.getAllProducts()),
 
     getProductById: asyncHandler(async (_parent, { input }) =>
       productServices.getProductById(input),

@@ -5,7 +5,7 @@ import { repository } from "#repository/index.js";
 const { read, update, remove } = repository;
 
 export const userServices = {
-  getUsers: async () => {
+  getAllUsers: async () => {
     const users = await read.users();
 
     return {
