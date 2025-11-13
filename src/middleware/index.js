@@ -9,7 +9,7 @@ import { expressMiddleware } from "@as-integrations/express4";
 import { logTheme } from "./colors.js";
 import { corsOptions } from "./cors.js";
 import { apiRateLimiter } from "./rate-limiter.js";
-import { tokenUtils } from "#utils/token.utils.js";
+import { tokenUtils } from "#utils/index.js";
 
 export const setupMiddleware = (app, apolloServer) => {
   app.use(helmet()); // secure HTTP headers
@@ -24,6 +24,7 @@ export const setupMiddleware = (app, apolloServer) => {
     expressMiddleware(apolloServer, {
       context: async ({ req, res }) => {
         const authHeader = req.headers.authorization;
+
         let user = null;
 
         if (authHeader?.startsWith("Bearer ")) {

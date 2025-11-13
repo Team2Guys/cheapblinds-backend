@@ -10,7 +10,7 @@ export const userTypeDefs = gql`
     firstName: String
     lastName: String
     email: String
-    password: String
+    isNewsletterSubscribed: Boolean
   }
 
   input RemoveUserByIdInput {
