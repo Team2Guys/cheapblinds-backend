@@ -27,6 +27,7 @@ export const adminServices = {
       data: {
         id: SUPER_ADMIN_ID,
         accessToken,
+        role: "SUPER_ADMIN",
       },
     };
   },
@@ -52,6 +53,7 @@ export const adminServices = {
       data: {
         id: admin.id,
         accessToken,
+        role: "ADMIN",
       },
     };
   },

@@ -23,7 +23,7 @@ export const authTypeDefs = gql`
     resetToken: String!
   }
 
-  type TokenData {
+  type ResponseData {
     id: ID!
     accessToken: String!
   }
@@ -31,7 +31,7 @@ export const authTypeDefs = gql`
   type SigninResponse {
     status: String!
     message: String!
-    data: TokenData
+    data: ResponseData
   }
 
   type GenericResponse {

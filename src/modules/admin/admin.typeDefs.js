@@ -47,15 +47,21 @@ export const adminTypeDefs = gql`
     data: Admin!
   }
 
-  type TokenData {
+  enum Role {
+    SUPER_ADMIN
+    ADMIN
+  }
+
+  type ResponseData {
     id: ID!
     accessToken: String!
+    role: Role!
   }
 
   type SigninResponse {
     status: String!
     message: String!
-    data: TokenData!
+    data: ResponseData!
   }
 
   type GenericResponse {
@@ -71,8 +77,8 @@ export const adminTypeDefs = gql`
   type Mutation {
     superAdminLogin(input: SigninInput!): SigninResponse!
     adminLogin(input: SigninInput!): SigninResponse!
-    createAdmin(input: CreateAdminInput!): AdminResponse!
-    updateAdminById(input: UpdateAdminByIdInput!): AdminResponse!
+    createAdmin(input: CreateAdminInput!): GenericResponse!
+    updateAdminById(input: UpdateAdminByIdInput!): GenericResponse!
     removeAdminById(input: RemoveAdminByIdInput!): GenericResponse!
   }
 `;
