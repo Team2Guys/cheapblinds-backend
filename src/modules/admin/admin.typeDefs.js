@@ -5,6 +5,11 @@ export const adminTypeDefs = gql`
     id: String!
   }
 
+  input SigninInput {
+    email: String!
+    password: String!
+  }
+
   input CreateAdminInput {
     fullName: String!
     email: String!
@@ -64,8 +69,8 @@ export const adminTypeDefs = gql`
   }
 
   type Mutation {
-    superAdminLogin(email: String!, password: String!): SigninResponse!
-    adminLogin(email: String!, password: String!): SigninResponse!
+    superAdminLogin(input: SigninInput!): SigninResponse!
+    adminLogin(input: SigninInput!): SigninResponse!
     createAdmin(input: CreateAdminInput!): AdminResponse!
     updateAdminById(input: UpdateAdminByIdInput!): AdminResponse!
     removeAdminById(input: RemoveAdminByIdInput!): GenericResponse!

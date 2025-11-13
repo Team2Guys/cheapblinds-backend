@@ -2,6 +2,7 @@ import createError from "http-errors";
 
 import { env } from "#config/index.js";
 import { repository } from "#repository/index.js";
+import { tokenUtils } from "#utils/index.js";
 
 const { read, update, remove } = repository;
 const { SUPER_ADMIN_ID, SUPER_ADMIN_EMAIL, SUPER_ADMIN_PASSWORD } = env;
