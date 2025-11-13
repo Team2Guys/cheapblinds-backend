@@ -9,11 +9,6 @@ export const authTypeDefs = gql`
     isNewsletterSubscribed: Boolean
   }
 
-  input SigninInput {
-    email: String!
-    password: String!
-  }
-
   input PasswordResetRequestInput {
     email: String!
   }
@@ -21,22 +16,6 @@ export const authTypeDefs = gql`
   input PasswordUpdateInput {
     password: String!
     resetToken: String!
-  }
-
-  type ResponseData {
-    id: ID!
-    accessToken: String!
-  }
-
-  type SigninResponse {
-    status: String!
-    message: String!
-    data: ResponseData
-  }
-
-  type GenericResponse {
-    status: String!
-    message: String!
   }
 
   type Query {

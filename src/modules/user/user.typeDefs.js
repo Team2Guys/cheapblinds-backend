@@ -2,7 +2,7 @@ import { gql } from "graphql-tag";
 
 export const userTypeDefs = gql`
   input GetUserByIdInput {
-    id: String!
+    id: ID!
   }
 
   input UpdateUserByIdInput {
@@ -14,7 +14,7 @@ export const userTypeDefs = gql`
   }
 
   input RemoveUserByIdInput {
-    id: String!
+    id: ID!
   }
 
   type User {

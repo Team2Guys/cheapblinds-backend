@@ -1,11 +1,6 @@
 import { gql } from "graphql-tag";
 
 export const emailTypeDefs = gql`
-  type GenericResponse {
-    status: String!
-    message: String!
-  }
-
   input CheckVerificationTokenInput {
     verificationToken: String!
   }

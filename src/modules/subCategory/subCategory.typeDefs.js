@@ -16,11 +16,11 @@ export const subcategoryTypeDefs = gql`
   }
 
   input GetSubcategoryByIdInput {
-    id: String!
+    id: ID!
   }
 
   input UpdateSubcategoryByIdInput {
-    id: String!
+    id: ID!
     name: String
     description: String
     shortDescription: String
@@ -34,7 +34,7 @@ export const subcategoryTypeDefs = gql`
   }
 
   input RemoveSubcategoryByIdInput {
-    id: String!
+    id: ID!
   }
 
   type Subcategory {

@@ -10,11 +10,6 @@ export const otpTypeDefs = gql`
     otp: String!
   }
 
-  type GenericResponse {
-    status: String!
-    message: String!
-  }
-
   type Query {
     _empty: String
   }

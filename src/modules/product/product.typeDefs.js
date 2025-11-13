@@ -35,10 +35,10 @@ export const productTypeDefs = gql`
   }
 
   input GetProductByIdInput {
-    id: String!
+    id: ID!
   }
   input UpdateProductByIdInput {
-    id: String!
+    id: ID!
     name: String
     price: Int
     description: String
@@ -46,7 +46,7 @@ export const productTypeDefs = gql`
     discountPrice: Int
   }
   input RemoveProductByIdInput {
-    id: String!
+    id: ID!
   }
 
   type Product {
@@ -88,14 +88,11 @@ export const productTypeDefs = gql`
     message: String!
     data: [Product!]!
   }
+
   type ProductResponse {
     status: String!
     message: String!
     data: Product!
-  }
-  type GenericResponse {
-    status: String!
-    message: String!
   }
 
   type Query {

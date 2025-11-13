@@ -15,11 +15,11 @@ export const categoryTypeDefs = gql`
   }
 
   input GetCategoryByIdInput {
-    id: String!
+    id: ID!
   }
 
   input UpdateCategoryByIdInput {
-    id: String!
+    id: ID!
     name: String
     description: String
     shortDescription: String
@@ -33,7 +33,7 @@ export const categoryTypeDefs = gql`
   }
 
   input RemoveCategoryByIdInput {
-    id: String!
+    id: ID!
   }
 
   type Category {
@@ -62,11 +62,6 @@ export const categoryTypeDefs = gql`
     status: String!
     message: String!
     data: Category!
-  }
-
-  type GenericResponse {
-    status: String!
-    message: String!
   }
 
   type Query {

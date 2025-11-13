@@ -1,36 +1,38 @@
 import { gql } from "graphql-tag";
 
 export const adminTypeDefs = gql`
-  input GetAdminByIdInput {
-    id: String!
-  }
-
-  input SigninInput {
-    email: String!
-    password: String!
-  }
-
-  input CreateAdminInput {
-    fullName: String!
-    email: String!
-    password: String!
-  }
-
-  input UpdateAdminByIdInput {
-    id: ID!
-    fullName: String
-    email: String
-    password: String
-  }
-
-  input RemoveAdminByIdInput {
-    id: String!
-  }
-
   type Admin {
     id: ID!
-    fullName: String!
+    firstName: String!
+    lastName: String!
     email: String!
+    canAddProduct: Boolean
+    canEditProduct: Boolean
+    canDeleteProduct: Boolean
+    canAddCategory: Boolean
+    canEditCategory: Boolean
+    canDeleteCategory: Boolean
+    canAddSubcategory: Boolean
+    canEditSubcategory: Boolean
+    canDeleteSubcategory: Boolean
+    canAddBlog: Boolean
+    canEditBlog: Boolean
+    canDeleteBlog: Boolean
+    canAddRedirectUrls: Boolean
+    canEditRedirectUrls: Boolean
+    canDeleteRedirectUrls: Boolean
+    canCheckProfit: Boolean
+    canCheckRevenue: Boolean
+    canCheckVisitors: Boolean
+    canViewUsers: Boolean
+    canViewSales: Boolean
+    canViewAdmins: Boolean
+    canViewTotalProducts: Boolean
+    canViewTotalCategories: Boolean
+    canViewTotalSubCategories: Boolean
+    canViewTotalBlog: Boolean
+    canViewTotalRedirectUrls: Boolean
+    canViewAppointments: Boolean
     createdAt: String!
     updatedAt: String!
   }
@@ -47,26 +49,83 @@ export const adminTypeDefs = gql`
     data: Admin!
   }
 
-  enum Role {
-    SUPER_ADMIN
-    ADMIN
+  input GetAdminByIdInput {
+    id: ID! # Corrected from ID!!
   }
 
-  type ResponseData {
+  input CreateAdminInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    role: Role! # This 'Role' will come from commonTypeDefs
+    canAddProduct: Boolean
+    canEditProduct: Boolean
+    canDeleteProduct: Boolean
+    canAddCategory: Boolean
+    canEditCategory: Boolean
+    canDeleteCategory: Boolean
+    canAddSubcategory: Boolean
+    canEditSubcategory: Boolean
+    canDeleteSubcategory: Boolean
+    canAddBlog: Boolean
+    canEditBlog: Boolean
+    canDeleteBlog: Boolean
+    canAddRedirectUrls: Boolean
+    canEditRedirectUrls: Boolean
+    canDeleteRedirectUrls: Boolean
+    canCheckProfit: Boolean
+    canCheckRevenue: Boolean
+    canCheckVisitors: Boolean
+    canViewUsers: Boolean
+    canViewSales: Boolean
+    canViewAdmins: Boolean
+    canViewTotalProducts: Boolean
+    canViewTotalCategories: Boolean
+    canViewTotalSubCategories: Boolean
+    canViewTotalBlog: Boolean
+    canViewTotalRedirectUrls: Boolean
+    canViewAppointments: Boolean
+  }
+
+  input UpdateAdminByIdInput {
     id: ID!
-    accessToken: String!
-    role: Role!
+    firstName: String
+    lastName: String
+    email: String
+    password: String
+    role: Role # This 'Role' will come from commonTypeDefs
+    canAddProduct: Boolean
+    canEditProduct: Boolean
+    canDeleteProduct: Boolean
+    canAddCategory: Boolean
+    canEditCategory: Boolean
+    canDeleteCategory: Boolean
+    canAddSubcategory: Boolean
+    canEditSubcategory: Boolean
+    canDeleteSubcategory: Boolean
+    canAddBlog: Boolean
+    canEditBlog: Boolean
+    canDeleteBlog: Boolean
+    canAddRedirectUrls: Boolean
+    canEditRedirectUrls: Boolean
+    canDeleteRedirectUrls: Boolean
+    canCheckProfit: Boolean
+    canCheckRevenue: Boolean
+    canCheckVisitors: Boolean
+    canViewUsers: Boolean
+    canViewSales: Boolean
+    canViewAdmins: Boolean
+    canViewTotalProducts: Boolean
+    canViewTotalCategories: Boolean
+    canViewTotalSubCategories: Boolean
+    canViewTotalBlog: Boolean
+    canViewTotalRedirectUrls: Boolean
+    canViewAppointments: Boolean
   }
 
-  type SigninResponse {
-    status: String!
-    message: String!
-    data: ResponseData!
-  }
-
-  type GenericResponse {
-    status: String!
-    message: String!
+  input RemoveAdminByIdInput {
+    id: ID!
   }
 
   type Query {
