@@ -15,7 +15,7 @@ export const productTypeDefs = gql`
     colors: [JSON!]
     specifications: [JSON!]
     sale: String
-    saleDuration: DateTime
+    saleDuration: String
     canonicalTag: String
     metaDescription: String
     metaTitle: String
@@ -62,7 +62,7 @@ export const productTypeDefs = gql`
     colors: [JSON!]
     specifications: [JSON!]
     sale: String
-    saleDuration: DateTime
+    saleDuration: String
     canonicalTag: String
     metaDescription: String
     metaTitle: String
@@ -81,8 +81,8 @@ export const productTypeDefs = gql`
     subcategoryId: String!
     category: Category
     subcategory: Subcategory
-    createdAt: DateTime!
-    updatedAt: DateTime!
+    createdAt: String!
+    updatedAt: String!
   }
 
   type ProductsResponse {

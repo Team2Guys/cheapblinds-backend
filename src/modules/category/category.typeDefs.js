@@ -48,8 +48,8 @@ export const categoryTypeDefs = gql`
     thumbnailUrl: String
     thumbnailPublicId: String
     thumbnailText: String
-    createdAt: DateTime!
-    updatedAt: DateTime!
+    createdAt: String!
+    updatedAt: String!
   }
 
   type CategoriesResponse {

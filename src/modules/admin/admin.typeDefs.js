@@ -34,8 +34,8 @@ export const adminTypeDefs = gql`
     canViewTotalBlog: Boolean
     canViewTotalRedirectUrls: Boolean
     canViewAppointments: Boolean
-    createdAt: DateTime!
-    updatedAt: DateTime!
+    createdAt: String!
+    updatedAt: String!
   }
 
   type AdminsResponse {

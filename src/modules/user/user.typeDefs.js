@@ -23,8 +23,8 @@ export const userTypeDefs = gql`
     lastName: String!
     email: String!
     isEmailVerified: Boolean!
-    createdAt: DateTime!
-    updatedAt: DateTime!
+    createdAt: String!
+    updatedAt: String!
   }
 
   type UsersResponse {
