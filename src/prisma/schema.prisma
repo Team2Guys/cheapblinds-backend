@@ -7,9 +7,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// =================== Enums ===================
+
 enum AdminRole {
   SUPER_ADMIN
   ADMIN
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
 }
 
 // =================== Admin ===================
@@ -21,7 +29,7 @@ model Admin {
   email       String     @unique @db.VarChar(255)
   password    String     @db.VarChar(255)
   role        AdminRole? @default(ADMIN)
-  permissions String[]   @default([]) // Array of permission names
+  permissions String[]   @default([])
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 
@@ -110,40 +118,30 @@ model Subcategory {
 // =================== Product ===================
 
 model Product {
-  id                   String      @id @default(uuid()) @db.Uuid
-  name                 String      @unique @db.VarChar(255)
-  price                Int         @default(0)
-  description          String      @db.Text()
-  stock                Int         @default(0)
-  discountPrice        Int?
-  thumbnailUrl         String      @db.VarChar(512)
-  thumbnailPublicId    String      @db.VarChar(255)
-  productImages        Json[]      @default([])
-  colors               Json[]      @default([])
-  specifications       Json[]      @default([])
-  sale                 String?     @default("0")
-  saleDuration         DateTime?
-  canonicalTag         String?     @db.VarChar(255)
-  metaDescription      String?     @db.VarChar(160)
-  metaTitle            String?     @db.VarChar(70)
-  ogImage              String?     @db.VarChar(512)
-  ogUrl                String?     @db.VarChar(512)
-  ogTitle              String?     @db.VarChar(70)
-  thumbnailAltText     String?     @db.VarChar(255)
-  productImagesAltText String?     @db.VarChar(255)
-  sections             Json[]      @default([])
-  saleCounter          String?
-  sizes                Json[]      @default([])
-  filter               Json[]      @default([])
-  customUrl            String?     @unique @db.VarChar(255)
-  shippingOptions      Json[]      @default([])
-  categoryId           String      @db.Uuid
-  subcategoryId        String      @db.Uuid
-  category             Category    @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
-  subcategory          Subcategory @relation(fields: [subcategoryId], references: [id], name: "SubcategoryProducts", onDelete: Cascade)
-  reviews              Review[]    @relation(name: "ProductReviews")
-  createdAt            DateTime    @default(now())
-  updatedAt            DateTime    @updatedAt
+  id               String         @id @default(uuid()) @db.Uuid
+  name             String         @unique
+  description      String?        @db.Text()
+  shortDescription String?
+  price            Int
+  thumbnailUrl     Json
+  customUrl        String
+  breadCrumb       String?
+  discountPrice    Int?
+  stock            Int
+  metaTitle        String?
+  metaDescription  String?
+  canonicalTag     String?
+  status           ProductStatus? @default(PUBLISHED)
+  seoSchema        String?
+  productImages    Json[]         @default([])
+  lastEditedBy     String?
+  categoryId       String         @db.Uuid
+  subcategoryId    String         @db.Uuid
+  category         Category       @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
+  subcategory      Subcategory    @relation(fields: [subcategoryId], references: [id], name: "SubcategoryProducts", onDelete: Cascade)
+  reviews          Review[]       @relation(name: "ProductReviews")
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 
   @@index([name])
   @@index([categoryId])
