@@ -56,7 +56,7 @@ export const adminTypeDefs = gql`
   type Mutation {
     signinSuperAdmin(input: SigninInput!): SigninResponse!
     signinAdmin(input: SigninInput!): SigninResponse!
-    createAdmin(input: CreateAdminInput!): AdminResponse!
+    createAdmin(input: CreateAdminInput!): GenericResponse!
     updateAdminById(input: UpdateAdminByIdInput!): AdminResponse!
     removeAdminById(input: RemoveAdminByIdInput!): GenericResponse!
   }
