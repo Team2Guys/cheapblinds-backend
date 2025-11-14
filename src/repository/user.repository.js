@@ -51,7 +51,7 @@ export const userRepository = {
   },
 
   update: {
-    userById: async ({ id, ...data }) => {
+    userById: async (id, { ...data }) => {
       if (!validateUuid(id)) throw createError(400, "Invalid user id.");
       if (!Object.keys(data).length) throw createError(400, "No data provided for update");
 
