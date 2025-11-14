@@ -4,8 +4,8 @@ import { repository } from "#repository/index.js";
 const { write, read, update, remove } = repository;
 
 export const categoryServices = {
-  createCategory: async (requestBody) => {
-    const category = await write.category(requestBody);
+  createCategory: async (input) => {
+    const category = await write.category(input);
 
     return {
       status: "success",
@@ -24,8 +24,8 @@ export const categoryServices = {
     };
   },
 
-  getCategoryById: async (requestBody) => {
-    const { id } = requestBody;
+  getCategoryById: async (input) => {
+    const { id } = input;
 
     const category = await read.categoryById(id);
 
@@ -38,8 +38,8 @@ export const categoryServices = {
     };
   },
 
-  updateCategoryById: async (requestBody) => {
-    const { id, ...data } = requestBody;
+  updateCategoryById: async (input) => {
+    const { id, ...data } = input;
 
     const existingCategory = await read.categoryById(id);
 
@@ -54,8 +54,8 @@ export const categoryServices = {
     };
   },
 
-  removeCategoryById: async (requestBody) => {
-    const { id } = requestBody;
+  removeCategoryById: async (input) => {
+    const { id } = input;
 
     await remove.categoryById(id);
 

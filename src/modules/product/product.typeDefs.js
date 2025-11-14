@@ -81,11 +81,11 @@ export const productTypeDefs = gql`
     subcategoryId: String!
     category: Category
     subcategory: Subcategory
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
-  type ProductsResponse {
+  type ProductListResponse {
     status: String!
     message: String!
     data: [Product!]!
@@ -98,7 +98,7 @@ export const productTypeDefs = gql`
   }
 
   type Query {
-    getAllProducts: ProductsResponse!
+    getAllProducts: ProductListResponse!
     getProductById(input: GetProductByIdInput!): ProductResponse!
   }
 

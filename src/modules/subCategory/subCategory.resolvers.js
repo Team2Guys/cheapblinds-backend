@@ -6,7 +6,7 @@ const { verifyAccessToken, verifyAuthRole } = verifications;
 
 export const subcategoryResolvers = {
   Query: {
-    getAllSubCategories: asyncHandler(async () => subcategoryServices.getAllSubCategories()),
+    getAllSubcategories: asyncHandler(async () => subcategoryServices.getAllSubCategories()),
 
     getSubcategoryById: asyncHandler(async (_parent, { input }) =>
       subcategoryServices.getSubcategoryById(input),

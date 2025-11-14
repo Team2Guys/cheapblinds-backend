@@ -10,7 +10,7 @@ export const commonTypeDefs = gql`
   type SigninResponseData {
     id: ID!
     accessToken: String!
-    role: Role
+    role: AdminRole
   }
 
   type SigninResponse {
@@ -24,10 +24,11 @@ export const commonTypeDefs = gql`
     password: String!
   }
 
-  enum Role {
+  enum AdminRole {
     SUPER_ADMIN
     ADMIN
   }
 
   scalar JSON
+  scalar DateTime
 `;

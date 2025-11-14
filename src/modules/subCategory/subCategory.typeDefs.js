@@ -50,11 +50,11 @@ export const subcategoryTypeDefs = gql`
     thumbnailUrl: String
     thumbnailPublicId: String
     thumbnailText: String
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
-  type SubCategoriesResponse {
+  type SubcategoryListResponse {
     status: String!
     message: String!
     data: [Subcategory!]!
@@ -67,7 +67,7 @@ export const subcategoryTypeDefs = gql`
   }
 
   type Query {
-    getAllSubCategories: SubCategoriesResponse!
+    getAllSubcategories: SubcategoryListResponse!
     getSubcategoryById(input: GetSubcategoryByIdInput!): SubcategoryResponse!
   }
 

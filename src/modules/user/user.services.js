@@ -15,8 +15,8 @@ export const userServices = {
     };
   },
 
-  getUserById: async (requestBody) => {
-    const { id } = requestBody;
+  getUserById: async (input) => {
+    const { id } = input;
 
     const user = await read.userById(id);
 
@@ -29,8 +29,8 @@ export const userServices = {
     };
   },
 
-  updateUserById: async (requestBody) => {
-    const { id, password, ...data } = requestBody;
+  updateUserById: async (input) => {
+    const { id, password, ...data } = input;
 
     const existingUser = await read.userById(id);
 
@@ -50,8 +50,8 @@ export const userServices = {
     };
   },
 
-  removeUserById: async (requestBody) => {
-    const { id } = requestBody;
+  removeUserById: async (input) => {
+    const { id } = input;
 
     await remove.userById(id);
 

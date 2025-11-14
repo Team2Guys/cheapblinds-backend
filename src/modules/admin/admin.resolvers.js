@@ -7,7 +7,7 @@ const { verifyAccessToken, verifyAuthRole } = verifications;
 export const adminResolvers = {
   Query: {
     getAdmins: verifyAuthRole(["SUPER_ADMIN"])(
-      verifyAccessToken(asyncHandler(async (_parent, { input }) => adminServices.getAdmins(input))),
+      verifyAccessToken(asyncHandler(async () => adminServices.getAdmins())),
     ),
 
     getAdminById: verifyAuthRole(["SUPER_ADMIN"])(
@@ -18,11 +18,11 @@ export const adminResolvers = {
   },
 
   Mutation: {
-    superAdminLogin: asyncHandler(async (_parent, { input }) =>
-      adminServices.superAdminLogin(input),
+    signinSuperAdmin: asyncHandler(async (_parent, { input }) =>
+      adminServices.signinSuperAdmin(input),
     ),
 
-    adminLogin: asyncHandler(async (_parent, { input }) => adminServices.adminLogin(input)),
+    signinAdmin: asyncHandler(async (_parent, { input }) => adminServices.signinAdmin(input)),
 
     createAdmin: asyncHandler(
       verifyAuthRole(["SUPER_ADMIN"])(

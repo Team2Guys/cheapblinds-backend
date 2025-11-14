@@ -6,39 +6,13 @@ export const adminTypeDefs = gql`
     firstName: String!
     lastName: String!
     email: String!
-    role: Role!
-    canAddProduct: Boolean
-    canEditProduct: Boolean
-    canDeleteProduct: Boolean
-    canAddCategory: Boolean
-    canEditCategory: Boolean
-    canDeleteCategory: Boolean
-    canAddSubcategory: Boolean
-    canEditSubcategory: Boolean
-    canDeleteSubcategory: Boolean
-    canAddBlog: Boolean
-    canEditBlog: Boolean
-    canDeleteBlog: Boolean
-    canAddRedirectUrls: Boolean
-    canEditRedirectUrls: Boolean
-    canDeleteRedirectUrls: Boolean
-    canCheckProfit: Boolean
-    canCheckRevenue: Boolean
-    canCheckVisitors: Boolean
-    canViewUsers: Boolean
-    canViewSales: Boolean
-    canViewAdmins: Boolean
-    canViewTotalProducts: Boolean
-    canViewTotalCategories: Boolean
-    canViewTotalSubCategories: Boolean
-    canViewTotalBlog: Boolean
-    canViewTotalRedirectUrls: Boolean
-    canViewAppointments: Boolean
-    createdAt: String!
-    updatedAt: String!
+    role: AdminRole!
+    permissions: [String!]!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
-  type AdminsResponse {
+  type AdminListResponse {
     status: String!
     message: String!
     data: [Admin!]!
@@ -51,7 +25,7 @@ export const adminTypeDefs = gql`
   }
 
   input GetAdminByIdInput {
-    id: ID! # Corrected from ID!!
+    id: ID!
   }
 
   input CreateAdminInput {
@@ -59,70 +33,15 @@ export const adminTypeDefs = gql`
     lastName: String!
     email: String!
     password: String!
-    role: Role!
-    canAddProduct: Boolean
-    canEditProduct: Boolean
-    canDeleteProduct: Boolean
-    canAddCategory: Boolean
-    canEditCategory: Boolean
-    canDeleteCategory: Boolean
-    canAddSubcategory: Boolean
-    canEditSubcategory: Boolean
-    canDeleteSubcategory: Boolean
-    canAddBlog: Boolean
-    canEditBlog: Boolean
-    canDeleteBlog: Boolean
-    canAddRedirectUrls: Boolean
-    canEditRedirectUrls: Boolean
-    canDeleteRedirectUrls: Boolean
-    canCheckProfit: Boolean
-    canCheckRevenue: Boolean
-    canCheckVisitors: Boolean
-    canViewUsers: Boolean
-    canViewSales: Boolean
-    canViewAdmins: Boolean
-    canViewTotalProducts: Boolean
-    canViewTotalCategories: Boolean
-    canViewTotalSubCategories: Boolean
-    canViewTotalBlog: Boolean
-    canViewTotalRedirectUrls: Boolean
-    canViewAppointments: Boolean
+    permissions: [String!]!
   }
 
   input UpdateAdminByIdInput {
     id: ID!
     firstName: String
     lastName: String
-    email: String
+    permissions: [String!]
     password: String
-    role: Role
-    canAddProduct: Boolean
-    canEditProduct: Boolean
-    canDeleteProduct: Boolean
-    canAddCategory: Boolean
-    canEditCategory: Boolean
-    canDeleteCategory: Boolean
-    canAddSubcategory: Boolean
-    canEditSubcategory: Boolean
-    canDeleteSubcategory: Boolean
-    canAddBlog: Boolean
-    canEditBlog: Boolean
-    canDeleteBlog: Boolean
-    canAddRedirectUrls: Boolean
-    canEditRedirectUrls: Boolean
-    canDeleteRedirectUrls: Boolean
-    canCheckProfit: Boolean
-    canCheckRevenue: Boolean
-    canCheckVisitors: Boolean
-    canViewUsers: Boolean
-    canViewSales: Boolean
-    canViewAdmins: Boolean
-    canViewTotalProducts: Boolean
-    canViewTotalCategories: Boolean
-    canViewTotalSubCategories: Boolean
-    canViewTotalBlog: Boolean
-    canViewTotalRedirectUrls: Boolean
-    canViewAppointments: Boolean
   }
 
   input RemoveAdminByIdInput {
@@ -130,15 +49,15 @@ export const adminTypeDefs = gql`
   }
 
   type Query {
-    getAdmins: AdminsResponse!
+    getAdmins: AdminListResponse!
     getAdminById(input: GetAdminByIdInput!): AdminResponse!
   }
 
   type Mutation {
-    superAdminLogin(input: SigninInput!): SigninResponse!
-    adminLogin(input: SigninInput!): SigninResponse!
-    createAdmin(input: CreateAdminInput!): GenericResponse!
-    updateAdminById(input: UpdateAdminByIdInput!): GenericResponse!
+    signinSuperAdmin(input: SigninInput!): SigninResponse!
+    signinAdmin(input: SigninInput!): SigninResponse!
+    createAdmin(input: CreateAdminInput!): AdminResponse!
+    updateAdminById(input: UpdateAdminByIdInput!): AdminResponse!
     removeAdminById(input: RemoveAdminByIdInput!): GenericResponse!
   }
 `;

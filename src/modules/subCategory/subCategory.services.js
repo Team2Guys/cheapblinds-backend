@@ -4,28 +4,28 @@ import { repository } from "#repository/index.js";
 const { write, read, update, remove } = repository;
 
 export const subcategoryServices = {
-  createSubcategory: async (requestBody) => {
-    const subcategory = await write.subcategory(requestBody);
+  createSubcategory: async (input) => {
+    const subcategory = await write.subcategory(input);
 
     return {
       status: "success",
-      message: "subcategory created successfully",
+      message: "Subcategory created successfully",
       data: subcategory,
     };
   },
 
-  getAllSubCategories: async () => {
+  getAllSubcategories: async () => {
     const subcategories = await read.subcategories();
 
     return {
       status: "success",
-      message: "Sub-categories retrieved successfully",
+      message: "Subcategories retrieved successfully",
       data: subcategories,
     };
   },
 
-  getSubcategoryById: async (requestBody) => {
-    const { id } = requestBody;
+  getSubcategoryById: async (input) => {
+    const { id } = input;
 
     const subcategory = await read.subcategoryById(id);
 
@@ -33,13 +33,13 @@ export const subcategoryServices = {
 
     return {
       status: "success",
-      message: "subcategory retrieved successfully",
+      message: "Subcategory retrieved successfully",
       data: subcategory,
     };
   },
 
-  updateSubcategoryById: async (requestBody) => {
-    const { id, ...data } = requestBody;
+  updateSubcategoryById: async (input) => {
+    const { id, ...data } = input;
 
     const existing = await read.subcategoryById(id);
 
@@ -49,19 +49,19 @@ export const subcategoryServices = {
 
     return {
       status: "success",
-      message: "subcategory updated successfully",
+      message: "Subcategory updated successfully",
       data: updated,
     };
   },
 
-  removeSubcategoryById: async (requestBody) => {
-    const { id } = requestBody;
+  removeSubcategoryById: async (input) => {
+    const { id } = input;
 
     await remove.subcategoryById(id);
 
     return {
       status: "success",
-      message: "subcategory deleted successfully",
+      message: "Subcategory deleted successfully",
     };
   },
 };

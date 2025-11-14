@@ -7,8 +7,8 @@ import { repository } from "#repository/index.js";
 const { write, read } = repository;
 
 export const otpServices = {
-  sendOtp: async (requestBody) => {
-    const { email } = requestBody;
+  sendOtp: async (input) => {
+    const { email } = input;
 
     const existingUser = await read.userByEmail(email);
 
@@ -40,8 +40,8 @@ export const otpServices = {
     };
   },
 
-  verifyOtp: async (requestBody) => {
-    const { email, otp } = requestBody;
+  verifyOtp: async (input) => {
+    const { email, otp } = input;
 
     const existingUser = await read.userByEmail(email);
 

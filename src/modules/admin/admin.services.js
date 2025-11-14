@@ -1,16 +1,14 @@
 import createError from "http-errors";
-
-import { env } from "#config/index.js";
 import { repository } from "#repository/index.js";
 import { passwordUtils, tokenUtils } from "#utils/index.js";
+import { env } from "#config/index.js";
 
 const { read, write, update, remove } = repository;
 const { SUPER_ADMIN_ID, SUPER_ADMIN_EMAIL, SUPER_ADMIN_PASSWORD } = env;
 
 export const adminServices = {
-  superAdminLogin: async (requestBody) => {
-    const { email, password } = requestBody;
-
+  signinSuperAdmin: async (input) => {
+    const { email, password } = input;
     if (email !== SUPER_ADMIN_EMAIL || password !== SUPER_ADMIN_PASSWORD)
       throw createError(401, "Invalid credentials.");
 
@@ -19,122 +17,68 @@ export const adminServices = {
       "accessToken",
     );
 
-    if (!accessToken) throw createError(500, "Failed to generate access token.");
-
     return {
       status: "success",
-      message: "Super admin logged in successfully",
-      data: {
-        id: SUPER_ADMIN_ID,
-        accessToken,
-        role: "SUPER_ADMIN",
-      },
+      message: "Signed in successfully",
+      data: { id: SUPER_ADMIN_ID, accessToken, role: "SUPER_ADMIN", permissions: [] },
     };
   },
 
-  adminLogin: async (requestBody) => {
-    const { email, password } = requestBody;
-
+  signinAdmin: async (input) => {
+    const { email, password } = input;
     const admin = await read.adminByEmail(email);
-
     if (!admin) throw createError(404, "Invalid credentials.");
 
-    const isPasswordValid = await passwordUtils.verify(password, admin.password);
-
-    if (!isPasswordValid) throw createError(401, "Invalid credentials.");
+    const valid = await passwordUtils.verify(password, admin.password);
+    if (!valid) throw createError(401, "Invalid credentials.");
 
     const accessToken = tokenUtils.generate({ id: admin.id, role: "ADMIN" }, "accessToken");
-
-    if (!accessToken) throw createError(500, "Failed to generate access token.");
-
     return {
       status: "success",
-      message: "Admin logged in successfully",
-      data: {
-        id: admin.id,
-        accessToken,
-        role: "ADMIN",
-      },
+      message: "Signed in successfully",
+      data: { ...admin, accessToken },
     };
   },
 
-  createAdmin: async (requestBody) => {
-    const { email, password } = requestBody;
-
-    const existingAdmin = await read.adminByEmail(email);
-
-    if (existingAdmin) throw createError(400, "Admin already exists.");
+  createAdmin: async (input) => {
+    const { email, password, permissions } = input;
+    const exists = await read.adminByEmail(email);
+    if (exists) throw createError(400, "Admin already exists.");
 
     const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
 
-    const registrationData = {
-      ...requestBody,
-      email,
-      password: hashedPassword,
-    };
-
-    const newAdmin = await write.admin(registrationData);
-
-    return {
-      status: "success",
-      message: "Admin created successfully",
-      data: newAdmin,
-    };
+    const admin = await write.admin({ ...input, password: hashedPassword, permissions });
+    return { status: "success", message: "Admin created successfully", data: admin };
   },
 
   getAdmins: async () => {
     const admins = await read.admins();
-
-    return {
-      status: "success",
-      message: "Admins retrieved successfully",
-      data: admins,
-    };
+    return { status: "success", message: "Admins retrieved successfully", data: admins };
   },
 
-  getAdminById: async (requestBody) => {
-    const { id } = requestBody;
-
-    const admin = await read.adminById(id);
-
+  getAdminById: async (input) => {
+    const admin = await read.adminById(input.id);
     if (!admin) throw createError(404, "Admin not found.");
-
-    return {
-      status: "success",
-      message: "Admin retrieved successfully",
-      data: admin,
-    };
+    return { status: "success", message: "Admin retrieved successfully", data: admin };
   },
 
-  updateAdminById: async (requestBody) => {
-    const { id, password, ...data } = requestBody;
-
-    const existingAdmin = await read.adminById(id);
-
-    if (!existingAdmin) throw createError(404, "Admin not found.");
+  updateAdminById: async (input) => {
+    const { id, password, permissions, ...data } = input;
+    const existing = await read.adminById(id);
+    if (!existing) throw createError(404, "Admin not found.");
 
     const updateData = {
       ...data,
       ...(password && { password: await passwordUtils.hash(password, { rounds: 12 }) }),
+      ...(permissions && { permissions }),
     };
 
-    const updatedAdmin = await update.adminById({ id, ...updateData });
-
-    return {
-      status: "success",
-      message: "Admin updated successfully",
-      data: updatedAdmin,
-    };
+    const updated = await update.adminById({ id, ...updateData });
+    return { status: "success", message: "Admin updated successfully", data: updated };
   },
 
-  removeAdminById: async (requestBody) => {
-    const { id } = requestBody;
-
-    await remove.adminById(id);
-
-    return {
-      status: "success",
-      message: "Admin deleted successfully",
-    };
+  removeAdminById: async (input) => {
+    await remove.adminById(input.id);
+    return { status: "success", message: "Admin deleted successfully" };
   },
 };

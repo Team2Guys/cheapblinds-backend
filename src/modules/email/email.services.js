@@ -6,8 +6,8 @@ import { repository } from "#repository/index.js";
 const { read, update } = repository;
 
 export const emailServices = {
-  checkVerificationToken: async (requestBody) => {
-    const { verificationToken } = requestBody;
+  checkVerificationToken: async (input) => {
+    const { verificationToken } = input;
 
     if (!verificationToken || typeof verificationToken !== "string")
       throw createError(400, "Verification token is undefined or invalid.");
@@ -28,8 +28,8 @@ export const emailServices = {
     };
   },
 
-  sendVerificationToken: async (requestBody) => {
-    const { email } = requestBody;
+  sendVerificationToken: async (input) => {
+    const { email } = input;
 
     const user = await read.userByEmail(email);
 

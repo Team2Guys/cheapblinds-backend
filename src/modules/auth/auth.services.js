@@ -8,8 +8,8 @@ const { write, read, update } = repository;
 const { FRONTEND_URL } = env;
 
 export const authServices = {
-  signup: async (requestBody) => {
-    const { email, password } = requestBody;
+  signup: async (input) => {
+    const { email, password } = input;
 
     const existingEmail = await read.userByEmail(email);
 
@@ -18,7 +18,7 @@ export const authServices = {
     const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
 
     const registrationData = {
-      ...requestBody,
+      ...input,
       password: hashedPassword,
     };
 
@@ -40,12 +40,12 @@ export const authServices = {
 
     return {
       status: "success",
-      message: "Signed up successfully. Please verify your email address.",
+      message: "Signed up successfully. Check your email to verify your account.",
     };
   },
 
-  signin: async (requestBody) => {
-    const { email, password } = requestBody;
+  signin: async (input) => {
+    const { email, password } = input;
 
     const user = await read.userByEmail(email);
 
@@ -82,7 +82,7 @@ export const authServices = {
 
     return {
       status: "success",
-      message: "Signed in successfully.",
+      message: "Signed in successfully",
       data: {
         id: user.id,
         accessToken,
@@ -90,8 +90,8 @@ export const authServices = {
     };
   },
 
-  requestPasswordReset: async (requestBody) => {
-    const { email } = requestBody;
+  requestPasswordReset: async (input) => {
+    const { email } = input;
 
     const existingUser = await read.userByEmail(email);
 
@@ -116,8 +116,8 @@ export const authServices = {
     };
   },
 
-  updatePassword: async (requestBody) => {
-    const { resetToken, password } = requestBody;
+  updatePassword: async (input) => {
+    const { resetToken, password } = input;
 
     const { id } = tokenUtils.verify(resetToken);
 

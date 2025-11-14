@@ -4,8 +4,8 @@ import { repository } from "#repository/index.js";
 const { write, read, update, remove } = repository;
 
 export const productServices = {
-  createProduct: async (requestBody) => {
-    const product = await write.product(requestBody);
+  createProduct: async (input) => {
+    const product = await write.product(input);
 
     return {
       status: "success",
@@ -24,8 +24,8 @@ export const productServices = {
     };
   },
 
-  getProductById: async (requestBody) => {
-    const { id } = requestBody;
+  getProductById: async (input) => {
+    const { id } = input;
 
     const product = await read.productById(id);
 
@@ -38,8 +38,8 @@ export const productServices = {
     };
   },
 
-  updateProductById: async (requestBody) => {
-    const { id, ...data } = requestBody;
+  updateProductById: async (input) => {
+    const { id, ...data } = input;
 
     const existingProduct = await read.productById(id);
 
@@ -54,8 +54,8 @@ export const productServices = {
     };
   },
 
-  removeProductById: async (requestBody) => {
-    const { id } = requestBody;
+  removeProductById: async (input) => {
+    const { id } = input;
 
     await remove.productById(id);
 

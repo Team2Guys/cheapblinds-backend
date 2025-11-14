@@ -23,11 +23,11 @@ export const userTypeDefs = gql`
     lastName: String!
     email: String!
     isEmailVerified: Boolean!
-    createdAt: String!
-    updatedAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
-  type UsersResponse {
+  type UserListResponse {
     status: String!
     message: String!
     data: [User!]!
@@ -40,7 +40,7 @@ export const userTypeDefs = gql`
   }
 
   type Query {
-    getAllUsers: UsersResponse!
+    getAllUsers: UserListResponse!
     getUserById(input: GetUserByIdInput!): UserResponse!
   }
 
