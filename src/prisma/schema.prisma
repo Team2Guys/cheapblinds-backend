@@ -14,7 +14,7 @@ enum AdminRole {
   ADMIN
 }
 
-enum ProductStatus {
+enum ContentStatus {
   DRAFT
   PUBLISHED
   ARCHIVED
@@ -85,9 +85,9 @@ model Category {
   thumbnailText     String?       @db.VarChar(255)
   lastEditedBy      String?       @db.VarChar(255)
   seoSchema         String?       @db.Text()
+  status            ContentStatus @default(PUBLISHED)
   products          Product[]     @relation("CategoryProducts")
   subcategories     Subcategory[] @relation("CategorySubcategories")
-  status            ProductStatus @default(PUBLISHED)
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
 
@@ -115,7 +115,7 @@ model Subcategory {
   categoryId        String        @db.Uuid
   category          Category      @relation(fields: [categoryId], references: [id], name: "CategorySubcategories", onDelete: Cascade)
   products          Product[]     @relation("SubcategoryProducts")
-  status            ProductStatus @default(PUBLISHED)
+  status            ContentStatus @default(PUBLISHED)
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
 
@@ -150,7 +150,7 @@ model Product {
   category          Category       @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
   subcategory       Subcategory    @relation(fields: [subcategoryId], references: [id], name: "SubcategoryProducts", onDelete: Cascade)
   reviews           Review[]       @relation(name: "ProductReviews")
-  status            ProductStatus? @default(PUBLISHED)
+  status            ContentStatus? @default(PUBLISHED)
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
 
