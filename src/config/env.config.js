@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { cleanEnv, str, port, email, url, testOnly } from "envalid";
 
-import { logger } from "./logger.config.js";
+import { logger } from "#utils/index.js";
 
 dotenv.config();
 
