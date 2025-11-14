@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 export const userRepository = {
   read: {
-    users: async () =>
+    users: () =>
       prisma.user.findMany({
         select: {
           id: true,
@@ -21,8 +21,9 @@ export const userRepository = {
         },
       }),
 
-    userById: async (id) => {
+    userById: (id) => {
       if (!validateUuid(id)) throw createError(400, "Invalid user id.");
+
       return prisma.user.findUnique({
         where: { id },
         select: {
@@ -37,38 +38,31 @@ export const userRepository = {
       });
     },
 
-    userByEmail: async (email) =>
+    userByEmail: (email) =>
       prisma.user.findUnique({
         where: { email },
       }),
   },
 
   write: {
-    user: async (data) =>
-      await prisma.user.create({
+    user: (data) =>
+      prisma.user.create({
         data,
       }),
   },
 
   update: {
-    userById: async (id, { ...data }) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid user id.");
-      if (!Object.keys(data).length) throw createError(400, "No data provided for update");
-
-      return await prisma.user.update({
+    userById: (id, data) =>
+      prisma.user.update({
         where: { id },
         data,
-      });
-    },
+      }),
   },
 
   remove: {
-    userById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid user id.");
-
-      return await prisma.user.delete({
+    userById: (id) =>
+      prisma.user.delete({
         where: { id },
-      });
-    },
+      }),
   },
 };

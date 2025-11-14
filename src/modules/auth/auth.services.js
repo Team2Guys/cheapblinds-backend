@@ -11,9 +11,9 @@ export const authServices = {
   signup: async (input) => {
     const { email, password } = input;
 
-    const existingEmail = await read.userByEmail(email);
+    const existingUser = await read.userByEmail(email);
 
-    if (existingEmail) throw createError(400, "User already exists.");
+    if (existingUser) throw createError(400, "User already exists.");
 
     const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
 

@@ -18,7 +18,7 @@ export const emailServices = {
 
     if (!id) throw createError(400, "Token does not contain the user id");
 
-    const isUserUpdated = await update.userById({ id, isEmailVerified: true });
+    const isUserUpdated = await update.userById(id, { isEmailVerified: true });
 
     if (!isUserUpdated) throw createError(500, "Failed to update user email verification.");
 

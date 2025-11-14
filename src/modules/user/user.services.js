@@ -30,18 +30,13 @@ export const userServices = {
   },
 
   updateUserById: async (input) => {
-    const { id, password, ...data } = input;
+    const { id, ...rest } = input;
 
     const existingUser = await read.userById(id);
 
     if (!existingUser) throw createError(404, "User not found.");
 
-    const updateData = {
-      ...data,
-      ...(password && { password: await passwordUtils.hash(password, { rounds: 12 }) }),
-    };
-
-    const updatedUser = await update.userById({ id, ...updateData });
+    const updatedUser = await update.userById(id, rest);
 
     return {
       status: "success",

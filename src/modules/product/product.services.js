@@ -39,13 +39,13 @@ export const productServices = {
   },
 
   updateProductById: async (input) => {
-    const { id, ...data } = input;
+    const { id, ...rest } = input;
 
     const existingProduct = await read.productById(id);
 
     if (!existingProduct) throw createError(404, "Product not found.");
 
-    const updatedProduct = await update.productById({ id, ...data });
+    const updatedProduct = await update.productById(id, rest);
 
     return {
       status: "success",
@@ -56,6 +56,10 @@ export const productServices = {
 
   removeProductById: async (input) => {
     const { id } = input;
+
+    const existingProduct = await read.productById(id);
+
+    if (!existingProduct) throw createError(404, "Product not found.");
 
     await remove.productById(id);
 

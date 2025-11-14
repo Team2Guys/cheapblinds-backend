@@ -7,43 +7,36 @@ const { validateUuid } = commonUtils;
 
 export const productRepository = {
   read: {
-    products: async () => await prisma.product.findMany(),
+    products: () => prisma.product.findMany(),
 
-    productById: async (id) => {
+    productById: (id) => {
       if (!validateUuid(id)) throw createError(400, "Invalid product id.");
 
-      return await prisma.product.findUnique({
+      return prisma.product.findUnique({
         where: { id },
       });
     },
   },
 
   write: {
-    product: async (data) =>
-      await prisma.product.create({
+    product: (data) =>
+      prisma.product.create({
         data,
       }),
   },
 
   update: {
-    productById: async ({ id, ...data }) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid product id.");
-      if (Object.keys(data).length === 0) throw createError(400, "No data provided for update.");
-
-      return await prisma.product.update({
+    productById: (id, data) =>
+      prisma.product.update({
         where: { id },
         data,
-      });
-    },
+      }),
   },
 
   remove: {
-    productById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid product id.");
-
-      return await prisma.product.delete({
+    productById: (id) =>
+      prisma.product.delete({
         where: { id },
-      });
-    },
+      }),
   },
 };

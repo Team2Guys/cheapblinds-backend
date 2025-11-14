@@ -8,43 +8,36 @@ const prisma = new PrismaClient();
 
 export const categoryRepository = {
   read: {
-    categories: async () => await prisma.category.findMany(),
+    categories: () => prisma.category.findMany(),
 
-    categoryById: async (id) => {
+    categoryById: (id) => {
       if (!validateUuid(id)) throw createError(400, "Invalid category id.");
 
-      return await prisma.category.findUnique({
+      return prisma.category.findUnique({
         where: { id },
       });
     },
   },
 
   write: {
-    category: async (data) =>
-      await prisma.category.create({
+    category: (data) =>
+      prisma.category.create({
         data,
       }),
   },
 
   update: {
-    categoryById: async ({ id, ...data }) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid category id.");
-      if (Object.keys(data).length === 0) throw createError(400, "No data provided for update.");
-
-      return await prisma.category.update({
+    categoryById: (id, data) =>
+      prisma.category.update({
         where: { id },
         data,
-      });
-    },
+      }),
   },
 
   remove: {
-    categoryById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid category id.");
-
-      return await prisma.category.delete({
+    categoryById: (id) =>
+      prisma.category.delete({
         where: { id },
-      });
-    },
+      }),
   },
 };

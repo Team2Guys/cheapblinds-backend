@@ -8,33 +8,24 @@ const prisma = new PrismaClient();
 
 export const subcategoryRepository = {
   read: {
-    subcategories: async () => await prisma.subcategory.findMany(),
+    subcategories: () => prisma.subcategory.findMany(),
 
-    subcategoryById: async (id) => {
+    subcategoryById: (id) => {
       if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
 
-      return await prisma.subcategory.findUnique({ where: { id } });
+      return prisma.subcategory.findUnique({ where: { id } });
     },
   },
 
   write: {
-    subcategory: async (data) => await prisma.subcategory.create({ data }),
+    subcategory: (data) => prisma.subcategory.create({ data }),
   },
 
   update: {
-    subcategoryById: async ({ id, ...data }) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
-      if (Object.keys(data).length === 0) throw createError(400, "No data provided for update.");
-
-      return await prisma.subcategory.update({ where: { id }, data });
-    },
+    subcategoryById: (id, data) => prisma.subcategory.update({ where: { id }, data }),
   },
 
   remove: {
-    subcategoryById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
-
-      return await prisma.subcategory.delete({ where: { id } });
-    },
+    subcategoryById: (id) => prisma.subcategory.delete({ where: { id } }),
   },
 };

@@ -51,8 +51,10 @@ export const adminServices = {
 
   createAdmin: async (input) => {
     const { email, password, permissions } = input;
-    const exists = await read.adminByEmail(email);
-    if (exists) throw createError(400, "Admin already exists.");
+
+    const existingAdmin = await read.adminByEmail(email);
+
+    if (existingAdmin) throw createError(400, "Admin already exists.");
 
     const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
 
@@ -87,17 +89,18 @@ export const adminServices = {
   },
 
   updateAdminById: async (input) => {
-    const { id, password, permissions, ...data } = input;
-    const existing = await read.adminById(id);
-    if (!existing) throw createError(404, "Admin not found.");
+    const { id, password, ...rest } = input;
+
+    const existingAdmin = await read.adminByEmail(email);
+
+    if (!existingAdmin) throw createError(400, "Admin not found.");
 
     const updateData = {
-      ...data,
+      ...rest,
       ...(password && { password: await passwordUtils.hash(password, { rounds: 12 }) }),
-      ...(permissions && { permissions }),
     };
 
-    await update.adminById({ id, ...updateData });
+    await update.adminById(id, updateData);
 
     return {
       status: "success",
@@ -106,6 +109,10 @@ export const adminServices = {
   },
 
   removeAdminById: async (input) => {
+    const existingAdmin = await read.adminByEmail(email);
+
+    if (!existingAdmin) throw createError(400, "Admin not found.");
+
     await remove.adminById(input.id);
 
     return {

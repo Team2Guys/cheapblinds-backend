@@ -18,20 +18,14 @@ export const adminRepository = {
   },
 
   write: {
-    admin: async (data) => prisma.admin.create({ data }),
+    admin: (data) => prisma.admin.create({ data }),
   },
 
   update: {
-    adminById: async ({ id, ...data }) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid admin id.");
-      return prisma.admin.update({ where: { id }, data });
-    },
+    adminById: (id, data) => prisma.admin.update({ where: { id }, data }),
   },
 
   remove: {
-    adminById: async (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid admin id.");
-      return prisma.admin.delete({ where: { id } });
-    },
+    adminById: (id) => prisma.admin.delete({ where: { id } }),
   },
 };

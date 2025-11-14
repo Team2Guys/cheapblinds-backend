@@ -39,13 +39,13 @@ export const categoryServices = {
   },
 
   updateCategoryById: async (input) => {
-    const { id, ...data } = input;
+    const { id, ...rest } = input;
 
     const existingCategory = await read.categoryById(id);
 
     if (!existingCategory) throw createError(404, "Category not found.");
 
-    const updatedCategory = await update.categoryById(id, data);
+    const updatedCategory = await update.categoryById(id, rest);
 
     return {
       status: "success",
@@ -56,6 +56,10 @@ export const categoryServices = {
 
   removeCategoryById: async (input) => {
     const { id } = input;
+
+    const existingCategory = await read.categoryById(id);
+
+    if (!existingCategory) throw createError(404, "Category not found.");
 
     await remove.categoryById(id);
 

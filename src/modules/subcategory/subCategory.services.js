@@ -29,7 +29,7 @@ export const subcategoryServices = {
 
     const subcategory = await read.subcategoryById(id);
 
-    if (!subcategory) throw createError(404, "subcategory not found.");
+    if (!subcategory) throw createError(404, "Subcategory not found.");
 
     return {
       status: "success",
@@ -39,13 +39,13 @@ export const subcategoryServices = {
   },
 
   updateSubcategoryById: async (input) => {
-    const { id, ...data } = input;
+    const { id, ...rest } = input;
 
-    const existing = await read.subcategoryById(id);
+    const existingSubcategory = await read.subcategoryById(id);
 
-    if (!existing) throw createError(404, "subcategory not found.");
+    if (!existingSubcategory) throw createError(404, "Subcategory not found.");
 
-    const updated = await update.subcategoryById({ id, ...data });
+    const updated = await update.subcategoryById(id, rest);
 
     return {
       status: "success",
@@ -56,6 +56,10 @@ export const subcategoryServices = {
 
   removeSubcategoryById: async (input) => {
     const { id } = input;
+
+    const existingSubcategory = await read.subcategoryById(id);
+
+    if (!existingSubcategory) throw createError(404, "Subcategory not found.");
 
     await remove.subcategoryById(id);
 
