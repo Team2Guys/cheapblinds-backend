@@ -20,7 +20,11 @@ export const adminServices = {
     return {
       status: "success",
       message: "Signed in successfully",
-      data: { id: SUPER_ADMIN_ID, accessToken, role: "SUPER_ADMIN", permissions: [] },
+      data: {
+        id: SUPER_ADMIN_ID,
+        accessToken,
+        role: "SUPER_ADMIN",
+      },
     };
   },
 
@@ -33,10 +37,15 @@ export const adminServices = {
     if (!valid) throw createError(401, "Invalid credentials.");
 
     const accessToken = tokenUtils.generate({ id: admin.id, role: "ADMIN" }, "accessToken");
+
     return {
       status: "success",
       message: "Signed in successfully",
-      data: { ...admin, accessToken },
+      data: {
+        id: admin.id,
+        accessToken,
+        role: "ADMIN",
+      },
     };
   },
 
@@ -47,19 +56,34 @@ export const adminServices = {
 
     const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
 
-    const admin = await write.admin({ ...input, password: hashedPassword, permissions });
-    return { status: "success", message: "Admin created successfully", data: admin };
+    await write.admin({ ...input, password: hashedPassword, permissions });
+
+    return {
+      status: "success",
+      message: "Admin created successfully",
+    };
   },
 
   getAdmins: async () => {
     const admins = await read.admins();
-    return { status: "success", message: "Admins retrieved successfully", data: admins };
+
+    return {
+      status: "success",
+      message: "Admins retrieved successfully",
+      data: admins,
+    };
   },
 
   getAdminById: async (input) => {
     const admin = await read.adminById(input.id);
+
     if (!admin) throw createError(404, "Admin not found.");
-    return { status: "success", message: "Admin retrieved successfully", data: admin };
+
+    return {
+      status: "success",
+      message: "Admin retrieved successfully",
+      data: admin,
+    };
   },
 
   updateAdminById: async (input) => {
@@ -73,12 +97,20 @@ export const adminServices = {
       ...(permissions && { permissions }),
     };
 
-    const updated = await update.adminById({ id, ...updateData });
-    return { status: "success", message: "Admin updated successfully", data: updated };
+    await update.adminById({ id, ...updateData });
+
+    return {
+      status: "success",
+      message: "Admin updated successfully",
+    };
   },
 
   removeAdminById: async (input) => {
     await remove.adminById(input.id);
-    return { status: "success", message: "Admin deleted successfully" };
+
+    return {
+      status: "success",
+      message: "Admin deleted successfully",
+    };
   },
 };
