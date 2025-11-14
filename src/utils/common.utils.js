@@ -1,7 +1,7 @@
 import createError from "http-errors";
 
 export const commonUtils = {
-  asyncHandler:
+  handleAsync:
     (fn) =>
     async (...args) => {
       try {

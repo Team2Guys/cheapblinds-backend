@@ -1,44 +1,42 @@
 import { adminServices } from "./admin.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
-const { asyncHandler } = commonUtils;
-const { verifyAccessToken, verifyAuthRole } = verifications;
+const { handleAsync } = commonUtils;
+const { verifyAccess, verifyRole } = verifications;
 
 export const adminResolvers = {
   Query: {
-    getAdmins: verifyAuthRole(["SUPER_ADMIN"])(
-      verifyAccessToken(asyncHandler(async () => adminServices.getAdmins())),
+    getAdmins: verifyRole(["SUPER_ADMIN"])(
+      verifyAccess(handleAsync(async () => adminServices.getAdmins())),
     ),
 
-    getAdminById: verifyAuthRole(["SUPER_ADMIN"])(
-      verifyAccessToken(
-        asyncHandler(async (_parent, { input }) => adminServices.getAdminById(input)),
-      ),
+    getAdminById: verifyRole(["SUPER_ADMIN"])(
+      verifyAccess(handleAsync(async (_parent, { input }) => adminServices.getAdminById(input))),
     ),
   },
 
   Mutation: {
-    signinSuperAdmin: asyncHandler(async (_parent, { input }) =>
+    signinSuperAdmin: handleAsync(async (_parent, { input }) =>
       adminServices.signinSuperAdmin(input),
     ),
 
-    signinAdmin: asyncHandler(async (_parent, { input }) => adminServices.signinAdmin(input)),
+    signinAdmin: handleAsync(async (_parent, { input }) => adminServices.signinAdmin(input)),
 
-    createAdmin: asyncHandler(
-      verifyAuthRole(["SUPER_ADMIN"])(
-        verifyAccessToken(async (_parent, { input }) => adminServices.createAdmin(input)),
+    createAdmin: handleAsync(
+      verifyRole(["SUPER_ADMIN"])(
+        verifyAccess(async (_parent, { input }) => adminServices.createAdmin(input)),
       ),
     ),
 
-    updateAdminById: asyncHandler(
-      verifyAuthRole(["SUPER_ADMIN"])(
-        verifyAccessToken(async (_parent, { input }) => adminServices.updateAdminById(input)),
+    updateAdminById: handleAsync(
+      verifyRole(["SUPER_ADMIN"])(
+        verifyAccess(async (_parent, { input }) => adminServices.updateAdminById(input)),
       ),
     ),
 
-    removeAdminById: asyncHandler(
-      verifyAuthRole(["SUPER_ADMIN"])(
-        verifyAccessToken(async (_parent, { input }) => adminServices.removeAdminById(input)),
+    removeAdminById: handleAsync(
+      verifyRole(["SUPER_ADMIN"])(
+        verifyAccess(async (_parent, { input }) => adminServices.removeAdminById(input)),
       ),
     ),
   },

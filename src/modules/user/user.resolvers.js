@@ -1,23 +1,23 @@
 import { userServices } from "./user.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
-const { asyncHandler } = commonUtils;
-const { verifyAccessToken } = verifications;
+const { handleAsync } = commonUtils;
+const { verifyAccess } = verifications;
 
 export const userResolvers = {
   Query: {
-    getAllUsers: asyncHandler(async () => userServices.getAllUsers()),
+    getAllUsers: handleAsync(async () => userServices.getAllUsers()),
 
-    getUserById: asyncHandler(async (_parent, { input }) => userServices.getUserById(input)),
+    getUserById: handleAsync(async (_parent, { input }) => userServices.getUserById(input)),
   },
 
   Mutation: {
-    updateUserById: asyncHandler(
-      verifyAccessToken(async (_parent, { input }) => userServices.updateUserById(input)),
+    updateUserById: handleAsync(
+      verifyAccess(async (_parent, { input }) => userServices.updateUserById(input)),
     ),
 
-    removeUserById: asyncHandler(
-      verifyAccessToken(async (_parent, { input }) => userServices.removeUserById(input)),
+    removeUserById: handleAsync(
+      verifyAccess(async (_parent, { input }) => userServices.removeUserById(input)),
     ),
   },
 };

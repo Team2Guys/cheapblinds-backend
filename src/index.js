@@ -6,11 +6,11 @@ import { setupMiddleware } from "#middleware/index.js";
 import { logger, env, connectDatabase } from "#config/index.js";
 
 const { PORT, BACKEND_URL } = env;
-const { asyncHandler } = commonUtils;
+const { handleAsync } = commonUtils;
 
 const app = express();
 
-asyncHandler(async function main() {
+handleAsync(async function main() {
   await connectDatabase();
 
   await apolloServer.start();

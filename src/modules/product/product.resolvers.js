@@ -2,40 +2,40 @@ import { GraphQLJSON } from "graphql-type-json";
 import { productServices } from "./product.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
-const { asyncHandler } = commonUtils;
-const { verifyAccessToken, verifyAuthRole } = verifications;
+const { handleAsync } = commonUtils;
+const { verifyAccess, verifyRole } = verifications;
 
 export const productResolvers = {
   JSON: GraphQLJSON,
 
   Query: {
-    getAllProducts: asyncHandler(async () => productServices.getAllProducts()),
+    getAllProducts: handleAsync(async () => productServices.getAllProducts()),
 
-    getProductById: asyncHandler(async (_parent, { input }) =>
+    getProductById: handleAsync(async (_parent, { input }) =>
       productServices.getProductById(input),
     ),
   },
 
   Mutation: {
-    createProduct: asyncHandler(
-      verifyAccessToken(
-        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+    createProduct: handleAsync(
+      verifyAccess(
+        verifyRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
           productServices.createProduct(input),
         ),
       ),
     ),
 
-    updateProductById: asyncHandler(
-      verifyAccessToken(
-        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+    updateProductById: handleAsync(
+      verifyAccess(
+        verifyRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
           productServices.updateProductById(input),
         ),
       ),
     ),
 
-    removeProductById: asyncHandler(
-      verifyAccessToken(
-        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+    removeProductById: handleAsync(
+      verifyAccess(
+        verifyRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
           productServices.removeProductById(input),
         ),
       ),

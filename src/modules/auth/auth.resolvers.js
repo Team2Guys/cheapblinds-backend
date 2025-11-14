@@ -1,7 +1,7 @@
 import { commonUtils } from "#utils/index.js";
 import { authServices } from "./auth.services.js";
 
-const { asyncHandler } = commonUtils;
+const { handleAsync } = commonUtils;
 
 export const authResolvers = {
   Query: {
@@ -9,14 +9,14 @@ export const authResolvers = {
   },
 
   Mutation: {
-    signup: asyncHandler(async (_parent, { input }) => authServices.signup(input)),
+    signup: handleAsync(async (_parent, { input }) => authServices.signup(input)),
 
-    signin: asyncHandler(async (_parent, { input }) => authServices.signin(input)),
+    signin: handleAsync(async (_parent, { input }) => authServices.signin(input)),
 
-    requestPasswordReset: asyncHandler(async (_parent, { input }) =>
+    requestPasswordReset: handleAsync(async (_parent, { input }) =>
       authServices.requestPasswordReset(input),
     ),
 
-    updatePassword: asyncHandler(async (_parent, { input }) => authServices.updatePassword(input)),
+    updatePassword: handleAsync(async (_parent, { input }) => authServices.updatePassword(input)),
   },
 };

@@ -1,7 +1,7 @@
 import { commonUtils } from "#utils/index.js";
 import { otpServices } from "./otp.services.js";
 
-const { asyncHandler } = commonUtils;
+const { handleAsync } = commonUtils;
 
 export const otpResolvers = {
   Query: {
@@ -9,8 +9,8 @@ export const otpResolvers = {
   },
 
   Mutation: {
-    sendOtp: asyncHandler(async (_parent, { input }) => otpServices.sendOtp(input)),
+    sendOtp: handleAsync(async (_parent, { input }) => otpServices.sendOtp(input)),
 
-    verifyOtp: asyncHandler(async (_parent, { input }) => otpServices.verifyOtp(input)),
+    verifyOtp: handleAsync(async (_parent, { input }) => otpServices.verifyOtp(input)),
   },
 };

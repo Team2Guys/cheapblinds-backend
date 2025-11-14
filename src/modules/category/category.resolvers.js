@@ -1,38 +1,38 @@
 import { categoryServices } from "./category.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
-const { asyncHandler } = commonUtils;
-const { verifyAccessToken, verifyAuthRole } = verifications;
+const { handleAsync } = commonUtils;
+const { verifyAccess, verifyRole } = verifications;
 
 export const categoryResolvers = {
   Query: {
-    getAllCategories: asyncHandler(async () => categoryServices.getAllCategories()),
+    getAllCategories: handleAsync(async () => categoryServices.getAllCategories()),
 
-    getCategoryById: asyncHandler(async (_parent, { input }) =>
+    getCategoryById: handleAsync(async (_parent, { input }) =>
       categoryServices.getCategoryById(input),
     ),
   },
 
   Mutation: {
-    createCategory: asyncHandler(
-      verifyAccessToken(
-        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+    createCategory: handleAsync(
+      verifyAccess(
+        verifyRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
           categoryServices.createCategory(input),
         ),
       ),
     ),
 
-    updateCategoryById: asyncHandler(
-      verifyAccessToken(
-        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+    updateCategoryById: handleAsync(
+      verifyAccess(
+        verifyRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
           categoryServices.updateCategoryById(input),
         ),
       ),
     ),
 
-    removeCategoryById: asyncHandler(
-      verifyAccessToken(
-        verifyAuthRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+    removeCategoryById: handleAsync(
+      verifyAccess(
+        verifyRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
           categoryServices.removeCategoryById(input),
         ),
       ),
