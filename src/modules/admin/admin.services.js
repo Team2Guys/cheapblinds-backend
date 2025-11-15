@@ -67,7 +67,7 @@ export const adminServices = {
     };
   },
 
-  getAdmins: async () => {
+  getAdminList: async () => {
     const admins = await read.admins();
 
     return {
@@ -78,7 +78,9 @@ export const adminServices = {
   },
 
   getAdminById: async (input) => {
-    const admin = await read.adminById(input.id);
+    const { id } = input;
+
+    const admin = await read.adminById(id);
 
     if (!admin) throw createError(404, "Admin not found.");
 
@@ -90,9 +92,9 @@ export const adminServices = {
   },
 
   updateAdminById: async (input) => {
-    const { id, password, ...rest } = input;
+    const { id, ...rest } = input;
 
-    const existingAdmin = await read.adminByEmail(email);
+    const existingAdmin = await read.adminById(id);
 
     if (!existingAdmin) throw createError(400, "Admin not found.");
 
@@ -110,11 +112,13 @@ export const adminServices = {
   },
 
   removeAdminById: async (input) => {
-    const existingAdmin = await read.adminByEmail(email);
+    const { id } = input;
+
+    const existingAdmin = await read.adminById(id);
 
     if (!existingAdmin) throw createError(400, "Admin not found.");
 
-    await remove.adminById(input.id);
+    await remove.adminById(id);
 
     return {
       status: "success",

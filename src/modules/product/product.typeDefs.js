@@ -98,7 +98,7 @@ export const productTypeDefs = gql`
   }
 
   type Query {
-    getAllProducts: ProductListResponse!
+    getProductList: ProductListResponse!
     getProductById(input: GetProductByIdInput!): ProductResponse!
   }
 

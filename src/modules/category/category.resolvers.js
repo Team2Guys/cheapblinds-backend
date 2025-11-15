@@ -6,7 +6,7 @@ const { verifyAccess, verifyRole } = verifications;
 
 export const categoryResolvers = {
   Query: {
-    getAllCategories: handleAsync(async () => categoryServices.getAllCategories()),
+    getCategoryList: handleAsync(async () => categoryServices.getCategoryList()),
 
     getCategoryById: handleAsync(async (_parent, { input }) =>
       categoryServices.getCategoryById(input),

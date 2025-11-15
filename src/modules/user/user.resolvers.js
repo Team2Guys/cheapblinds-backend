@@ -6,7 +6,7 @@ const { verifyAccess } = verifications;
 
 export const userResolvers = {
   Query: {
-    getAllUsers: handleAsync(async () => userServices.getAllUsers()),
+    getUserList: handleAsync(async () => userServices.getUserList()),
 
     getUserById: handleAsync(async (_parent, { input }) => userServices.getUserById(input)),
   },

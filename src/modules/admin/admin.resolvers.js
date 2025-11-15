@@ -6,8 +6,8 @@ const { verifyAccess, verifyRole } = verifications;
 
 export const adminResolvers = {
   Query: {
-    getAdmins: verifyRole(["SUPER_ADMIN"])(
-      verifyAccess(handleAsync(async () => adminServices.getAdmins())),
+    getAdminList: verifyRole(["SUPER_ADMIN"])(
+      verifyAccess(handleAsync(async () => adminServices.getAdminList())),
     ),
 
     getAdminById: verifyRole(["SUPER_ADMIN"])(

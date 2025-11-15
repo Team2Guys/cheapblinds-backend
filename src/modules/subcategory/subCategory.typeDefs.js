@@ -67,13 +67,13 @@ export const subcategoryTypeDefs = gql`
   }
 
   type Query {
-    getAllSubcategories: SubcategoryListResponse!
+    getSubcategoryList: SubcategoryListResponse!
     getSubcategoryById(input: GetSubcategoryByIdInput!): SubcategoryResponse!
   }
 
   type Mutation {
-    createSubcategory(input: CreateSubcategoryInput!): SubcategoryResponse!
-    updateSubcategoryById(input: UpdateSubcategoryByIdInput!): SubcategoryResponse!
+    createSubcategory(input: CreateSubcategoryInput!): GenericResponse!
+    updateSubcategoryById(input: UpdateSubcategoryByIdInput!): GenericResponse!
     removeSubcategoryById(input: RemoveSubcategoryByIdInput!): GenericResponse!
   }
 `;
