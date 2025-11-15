@@ -13,13 +13,16 @@ export const tokenUtils = {
 
     switch (tokenType) {
       case "verificationToken":
-        options.expiresIn = "10m";
+        options.expiresIn = "5m";
         break;
       case "accessToken":
-        options.expiresIn = "30h";
+        options.expiresIn = "10m";
+        break;
+      case "refreshToken":
+        options.expiresIn = "7d";
         break;
       case "passwordResetToken":
-        options.expiresIn = "15m";
+        options.expiresIn = "5m";
         break;
       default:
         throw createError(400, "Invalid token type specified.");
