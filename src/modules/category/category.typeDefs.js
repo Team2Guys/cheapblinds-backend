@@ -65,13 +65,13 @@ export const categoryTypeDefs = gql`
   }
 
   type Query {
-    getAllCategories: CategoryListResponse!
+    getCategoryList: CategoryListResponse!
     getCategoryById(input: GetCategoryByIdInput!): CategoryResponse!
   }
 
   type Mutation {
-    createCategory(input: CreateCategoryInput!): CategoryResponse!
-    updateCategoryById(input: UpdateCategoryByIdInput!): CategoryResponse!
+    createCategory(input: CreateCategoryInput!): GenericResponse!
+    updateCategoryById(input: UpdateCategoryByIdInput!): GenericResponse!
     removeCategoryById(input: RemoveCategoryByIdInput!): GenericResponse!
   }
 `;

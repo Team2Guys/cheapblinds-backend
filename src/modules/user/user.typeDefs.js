@@ -40,7 +40,7 @@ export const userTypeDefs = gql`
   }
 
   type Query {
-    getAllUsers: UserListResponse!
+    getUserList: UserListResponse!
     getUserById(input: GetUserByIdInput!): UserResponse!
   }
 

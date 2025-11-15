@@ -5,16 +5,15 @@ const { write, read, update, remove } = repository;
 
 export const subcategoryServices = {
   createSubcategory: async (input) => {
-    const subcategory = await write.subcategory(input);
+    await write.subcategory(input);
 
     return {
       status: "success",
       message: "Subcategory created successfully",
-      data: subcategory,
     };
   },
 
-  getAllSubcategories: async () => {
+  getSubcategoryList: async () => {
     const subcategories = await read.subcategories();
 
     return {
@@ -45,12 +44,11 @@ export const subcategoryServices = {
 
     if (!existingSubcategory) throw createError(404, "Subcategory not found.");
 
-    const updated = await update.subcategoryById(id, rest);
+    await update.subcategoryById(id, rest);
 
     return {
       status: "success",
-      message: "Subcategory updated successfully",
-      data: updated,
+      message: "Subcategory updated successfully"
     };
   },
 

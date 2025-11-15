@@ -40,8 +40,9 @@ export const adminTypeDefs = gql`
     id: ID!
     firstName: String
     lastName: String
-    permissions: [String!]
+    email: String
     password: String
+    permissions: [String!]
   }
 
   input RemoveAdminByIdInput {
@@ -49,7 +50,7 @@ export const adminTypeDefs = gql`
   }
 
   type Query {
-    getAdmins: AdminListResponse!
+    getAdminList: AdminListResponse!
     getAdminById(input: GetAdminByIdInput!): AdminResponse!
   }
 
@@ -57,7 +58,7 @@ export const adminTypeDefs = gql`
     signinSuperAdmin(input: SigninInput!): SigninResponse!
     signinAdmin(input: SigninInput!): SigninResponse!
     createAdmin(input: CreateAdminInput!): GenericResponse!
-    updateAdminById(input: UpdateAdminByIdInput!): AdminResponse!
+    updateAdminById(input: UpdateAdminByIdInput!): GenericResponse!
     removeAdminById(input: RemoveAdminByIdInput!): GenericResponse!
   }
 `;
