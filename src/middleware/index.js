@@ -29,11 +29,8 @@ export const setupMiddleware = (app, apolloServer) => {
 
         if (authHeader?.startsWith("Bearer ")) {
           const accessToken = authHeader.split(" ")[1];
-          try {
-            user = tokenUtils.verify(accessToken);
-          } catch (err) {
-            console.warn("Invalid access token", err.message);
-          }
+          user = tokenUtils.verify(accessToken);
+          if (!user) throw createError("Invalid access token");
         }
 
         return { user, req, res };

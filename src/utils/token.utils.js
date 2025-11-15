@@ -16,7 +16,7 @@ export const tokenUtils = {
         options.expiresIn = "5m";
         break;
       case "accessToken":
-        options.expiresIn = "10m";
+        options.expiresIn = "24h";
         break;
       case "refreshToken":
         options.expiresIn = "7d";
@@ -41,10 +41,7 @@ export const tokenUtils = {
     }
 
     const decoded = jwt.verify(token, JWT_SECRET_KEY);
-
-    if (!decoded || typeof decoded !== "object" || !("id" in decoded)) {
-      throw new Error("Invalid token");
-    }
+    if (!decoded) throw createError(401, "Invalid token");
 
     return decoded;
   },
