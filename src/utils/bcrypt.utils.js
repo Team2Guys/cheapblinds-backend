@@ -1,22 +1,19 @@
 import createError from "http-errors";
 import bcrypt from "bcryptjs";
 
-export const passwordUtils = {
-  hashSync: (password, options = {}) => {
+export const bcryptUtils = {
+  hashSync: (value, options = {}) => {
     const { rounds = 12 } = options;
 
-    if (!password) {
-      throw createError(400, "Password is required for hashing");
-    }
+    if (!value) throw createError(400, "Password is required for hashing");
 
-    if (Buffer.byteLength(password, "utf8") > 72) {
+    if (Buffer.byteLength(value, "utf8") > 72)
       throw createError(400, "Password exceeds maximum length of 72 UTF-8 bytes");
-    }
 
     try {
       return bcrypt.hashSync(password, rounds);
     } catch (error) {
-      throw createError(500, `Failed to hash password: ${error.message}`);
+      throw createError(500, `Failed to hash the provided value: ${error.message}`);
     }
   },
 
@@ -106,7 +103,7 @@ export const passwordUtils = {
     }
   },
 
-  willTruncate: (password) => {
+  exceedsMaxSize: (password) => {
     if (!password) {
       return false;
     }
@@ -114,7 +111,7 @@ export const passwordUtils = {
     return Buffer.byteLength(password, "utf8") > 72;
   },
 
-  validatePassword: (password) => {
+  validateValue: (password) => {
     const errors = [];
 
     if (!password) {

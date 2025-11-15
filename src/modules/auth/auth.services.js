@@ -1,6 +1,6 @@
 import createError from "http-errors";
 
-import { tokenUtils, sendEmail, passwordUtils } from "#utils/index.js";
+import { tokenUtils, sendEmail, bcryptUtils } from "#utils/index.js";
 import { repository } from "#repository/index.js";
 import { env } from "#config/index.js";
 
@@ -15,7 +15,7 @@ export const authServices = {
 
     if (existingUser) throw createError(400, "User already exists.");
 
-    const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
+    const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
     const registrationData = {
       ...input,
@@ -72,7 +72,7 @@ export const authServices = {
       );
     }
 
-    const isPasswordValid = await passwordUtils.compare(password, user.password);
+    const isPasswordValid = await bcryptUtils.compare(password, user.password);
 
     if (!isPasswordValid) throw createError(401, "Invalid credentials.");
 
@@ -125,7 +125,7 @@ export const authServices = {
 
     if (!existingUser) throw createError(404, "User not found.");
 
-    const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
+    const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
     const isPasswordUpdated = await update.userById(id, {
       password: hashedPassword,

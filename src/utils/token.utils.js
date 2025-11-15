@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 import { env } from "#config/index.js";
 
-const { JWT_SECRET_KEY } = env;
+const { JWT_SECRET } = env;
 
 export const tokenUtils = {
   generate: (payload, tokenType) => {
@@ -16,10 +16,10 @@ export const tokenUtils = {
         options.expiresIn = "5m";
         break;
       case "accessToken":
-        options.expiresIn = "24h";
+        options.expiresIn = "10h";
         break;
       case "refreshToken":
-        options.expiresIn = "7d";
+        options.expiresIn = "30d";
         break;
       case "passwordResetToken":
         options.expiresIn = "5m";
@@ -28,30 +28,37 @@ export const tokenUtils = {
         throw createError(400, "Invalid token type specified.");
     }
 
-    if (!JWT_SECRET_KEY) {
+    if (!JWT_SECRET) {
       throw createError(500, "JWT secret key is undefined");
     }
 
-    return jwt.sign(payload, JWT_SECRET_KEY, options);
+    return jwt.sign(payload, JWT_SECRET, options);
   },
 
   verify: (token) => {
-    if (!JWT_SECRET_KEY) {
-      throw createError(500, "JWT secret key is undefined");
-    }
+    if (!JWT_SECRET) throw createError(500, "JWT Secret is undefined");
 
-    const decoded = jwt.verify(token, JWT_SECRET_KEY);
-    if (!decoded) throw createError(401, "Invalid token");
+    const decoded = jwt.verify(token, JWT_SECRET, (err, decoded) => {
+      if (err) {
+        throw createError(401, "Invalid or expired token");
+      }
+
+      return decoded;
+    });
 
     return decoded;
   },
 
   decode: (token) => {
-    const decoded = jwt.decode(token);
+    const decoded = jwt.decode(token, (err, decoded) => {
+      if (err) {
+        throw createError(401, "Invalid or expired token");
+      }
 
-    if (!decoded || typeof decoded !== "object" || !("id" in decoded)) {
-      throw new Error("Invalid token format");
-    }
+      return decoded;
+    });
+
+    if (!decoded) throw createError(401, "Invalid token");
 
     return decoded;
   },

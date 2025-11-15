@@ -1,6 +1,6 @@
 import createError from "http-errors";
 import { repository } from "#repository/index.js";
-import { passwordUtils, tokenUtils } from "#utils/index.js";
+import { bcryptUtils, tokenUtils } from "#utils/index.js";
 import { env } from "#config/index.js";
 
 const { read, write, update, remove } = repository;
@@ -33,7 +33,7 @@ export const adminServices = {
     const admin = await read.adminByEmail(email);
     if (!admin) throw createError(404, "Invalid credentials.");
 
-    const valid = passwordUtils.validatePassword(password, admin.password);
+    const valid = bcryptUtils.validateValue(password, admin.password);
 
     if (!valid) throw createError(401, "Invalid credentials.");
 
@@ -57,7 +57,7 @@ export const adminServices = {
 
     if (existingAdmin) throw createError(400, "Admin already exists.");
 
-    const hashedPassword = await passwordUtils.hash(password, { rounds: 12 });
+    const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
     await write.admin({ ...input, password: hashedPassword, permissions });
 
@@ -98,7 +98,7 @@ export const adminServices = {
 
     const updateData = {
       ...rest,
-      ...(password && { password: await passwordUtils.hash(password, { rounds: 12 }) }),
+      ...(password && { password: await bcryptUtils.hash(password, { rounds: 12 }) }),
     };
 
     await update.adminById(id, updateData);

@@ -18,7 +18,7 @@ const validators = {
 
   DATABASE_URL: url({ desc: "Database Connection String" }),
 
-  JWT_SECRET_KEY: str({
+  JWT_SECRET: str({
     devDefault: testOnly("test-secret"),
     desc: "JWT secret key",
   }),
