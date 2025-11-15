@@ -33,7 +33,8 @@ export const adminServices = {
     const admin = await read.adminByEmail(email);
     if (!admin) throw createError(404, "Invalid credentials.");
 
-    const valid = await passwordUtils.verify(password, admin.password);
+    const valid = passwordUtils.validatePassword(password, admin.password);
+
     if (!valid) throw createError(401, "Invalid credentials.");
 
     const accessToken = tokenUtils.generate({ id: admin.id, role: "ADMIN" }, "accessToken");
