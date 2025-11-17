@@ -48,7 +48,7 @@ export const subcategoryServices = {
 
     return {
       status: "success",
-      message: "Subcategory updated successfully"
+      message: "Subcategory updated successfully",
     };
   },
 

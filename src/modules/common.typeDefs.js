@@ -29,6 +29,12 @@ export const commonTypeDefs = gql`
     ADMIN
   }
 
+  enum ContentStatus {
+    DRAFT
+    PUBLISHED
+    ARCHIVED
+  }
+
   scalar JSON
   scalar DateTime
 `;

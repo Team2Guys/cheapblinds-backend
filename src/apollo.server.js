@@ -33,10 +33,38 @@ const requestLoggerPlugin = {
   },
 };
 
+/**
+ * formatError - Production-ready GraphQL error formatter
+ * Logs full error details internally, but only exposes safe messages to clients
+ */
+const formatError = (error) => {
+  // Log full error stack for internal monitoring
+  if (error.originalError) {
+    console.error("GraphQL Error:", {
+      message: error.message,
+      stack: error.originalError.stack,
+      path: error.path,
+      extensions: error.extensions,
+    });
+  } else {
+    console.error("GraphQL Error:", error);
+  }
+
+  // Only expose safe message to client
+  return {
+    message: "Something went wrong.", // Generic message
+    path: error.path,
+    extensions: {
+      code: error.extensions?.code || "INTERNAL_SERVER_ERROR",
+    },
+  };
+};
+
 // Initialize Apollo Server
 export const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
+  formatError,
   introspection: process.env.NODE_ENV !== "production",
   allowBatchedHttpRequests: true,
   validationRules: [depthLimit(5)], // prevent very deep queries

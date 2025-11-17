@@ -5,13 +5,17 @@ export const categoryTypeDefs = gql`
     name: String!
     description: String
     shortDescription: String
-    customUrl: String
+    customUrl: String!
     metaTitle: String
     metaDescription: String
     canonicalTag: String
+    breadCrumb: String
     thumbnailUrl: String
     thumbnailPublicId: String
     thumbnailText: String
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus
   }
 
   input GetCategoryByIdInput {
@@ -20,16 +24,20 @@ export const categoryTypeDefs = gql`
 
   input UpdateCategoryByIdInput {
     id: ID!
-    name: String
+    name: String!
     description: String
     shortDescription: String
-    customUrl: String
+    customUrl: String!
     metaTitle: String
     metaDescription: String
     canonicalTag: String
+    breadCrumb: String
     thumbnailUrl: String
     thumbnailPublicId: String
     thumbnailText: String
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus
   }
 
   input RemoveCategoryByIdInput {
@@ -41,13 +49,17 @@ export const categoryTypeDefs = gql`
     name: String!
     description: String
     shortDescription: String
-    customUrl: String
+    customUrl: String!
     metaTitle: String
     metaDescription: String
     canonicalTag: String
+    breadCrumb: String
     thumbnailUrl: String
     thumbnailPublicId: String
     thumbnailText: String
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus
     createdAt: DateTime!
     updatedAt: DateTime!
   }
