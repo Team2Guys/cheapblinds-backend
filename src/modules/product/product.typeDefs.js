@@ -4,83 +4,89 @@ export const productTypeDefs = gql`
   scalar JSON
 
   input CreateProductInput {
+    categoryId: ID!
+    subcategoryId: ID!
     name: String!
-    price: Int
     description: String!
-    stock: Int
-    discountPrice: Int
+    shortDescription: String!
+    customUrl: String!
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadCrumb: String
     thumbnailUrl: String!
     thumbnailPublicId: String!
-    productImages: [JSON!]
-    colors: [JSON!]
-    specifications: [JSON!]
+    thumbnailAltText: String!
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus!
+    price: Int!
+    stock: Int!
+    discountPrice: Int
+    productImages: [JSON!]!
     sale: String
     saleDuration: String
-    canonicalTag: String
-    metaDescription: String
-    metaTitle: String
-    ogImage: String
-    ogUrl: String
-    ogTitle: String
-    thumbnailAltText: String
-    productImagesAltText: String
-    sections: [JSON!]
     saleCounter: String
-    sizes: [JSON!]
-    filter: [JSON!]
-    customUrl: String
-    shippingOptions: [JSON!]
-    categoryId: String!
-    subcategoryId: String!
   }
 
   input GetProductByIdInput {
     id: ID!
   }
+
   input UpdateProductByIdInput {
     id: ID!
     name: String
-    price: Int
     description: String
+    shortDescription: String
+    customUrl: String
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadCrumb: String
+    thumbnailUrl: String
+    thumbnailPublicId: String
+    thumbnailAltText: String
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus
+    price: Int
     stock: Int
     discountPrice: Int
+    productImages: [JSON!]
+    sale: String
+    saleDuration: String
+    saleCounter: String
   }
+
   input RemoveProductByIdInput {
     id: ID!
   }
 
   type Product {
     id: ID!
+    categoryId: ID!
+    subcategoryId: ID!
     name: String!
-    price: Int!
     description: String!
-    stock: Int!
-    discountPrice: Int
+    shortDescription: String!
+    customUrl: String!
+    metaTitle: String!
+    metaDescription: String!
+    canonicalTag: String
+    breadCrumb: String
     thumbnailUrl: String!
     thumbnailPublicId: String!
-    productImages: [JSON!]
-    colors: [JSON!]
-    specifications: [JSON!]
+    thumbnailAltText: String!
+    lastEditedBy: String
+    seoSchema: String!
+    status: ContentStatus!
+    price: Int!
+    stock: Int!
+    discountPrice: Int
+    productImages: [JSON!]!
     sale: String
     saleDuration: String
-    canonicalTag: String
-    metaDescription: String
-    metaTitle: String
-    ogImage: String
-    ogUrl: String
-    ogTitle: String
-    thumbnailAltText: String
-    productImagesAltText: String
-    sections: [JSON!]
     saleCounter: String
-    sizes: [JSON!]
-    filter: [JSON!]
-    customUrl: String
-    shippingOptions: [JSON!]
-    categoryId: String!
-    subcategoryId: String!
-    category: Category
-    subcategory: Subcategory
     createdAt: DateTime!
     updatedAt: DateTime!
   }
