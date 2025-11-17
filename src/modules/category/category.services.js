@@ -5,12 +5,11 @@ const { write, read, update, remove } = repository;
 
 export const categoryServices = {
   createCategory: async (input) => {
-    const category = await write.category(input);
+    await write.category(input);
 
     return {
       status: "success",
       message: "Category created successfully",
-      data: category,
     };
   },
 
@@ -45,12 +44,11 @@ export const categoryServices = {
 
     if (!existingCategory) throw createError(404, "Category not found.");
 
-    const updatedCategory = await update.categoryById(id, rest);
+    await update.categoryById(id, rest);
 
     return {
       status: "success",
       message: "Category updated successfully",
-      data: updatedCategory,
     };
   },
 
