@@ -13,7 +13,7 @@ export const subcategoryTypeDefs = gql`
     breadCrumb: String
     thumbnailUrl: String
     thumbnailPublicId: String
-    thumbnailText: String
+    thumbnailAltText: String
     lastEditedBy: String
     seoSchema: String
     status: ContentStatus
@@ -36,7 +36,7 @@ export const subcategoryTypeDefs = gql`
     breadCrumb: String
     thumbnailUrl: String
     thumbnailPublicId: String
-    thumbnailText: String
+    thumbnailAltText: String
     lastEditedBy: String
     seoSchema: String
     status: ContentStatus
@@ -59,7 +59,7 @@ export const subcategoryTypeDefs = gql`
     breadCrumb: String
     thumbnailUrl: String
     thumbnailPublicId: String
-    thumbnailText: String
+    thumbnailAltText: String
     lastEditedBy: String
     seoSchema: String
     status: ContentStatus
