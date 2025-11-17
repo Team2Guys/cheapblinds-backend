@@ -2,17 +2,21 @@ import { gql } from "graphql-tag";
 
 export const subcategoryTypeDefs = gql`
   input CreateSubcategoryInput {
+    categoryId: ID!
     name: String!
-    categoryId: String!
     description: String
     shortDescription: String
     customUrl: String
     metaTitle: String
     metaDescription: String
     canonicalTag: String
+    breadCrumb: String
     thumbnailUrl: String
     thumbnailPublicId: String
     thumbnailText: String
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus
   }
 
   input GetSubcategoryByIdInput {
@@ -21,6 +25,7 @@ export const subcategoryTypeDefs = gql`
 
   input UpdateSubcategoryByIdInput {
     id: ID!
+    categoryId: ID!
     name: String
     description: String
     shortDescription: String
@@ -28,9 +33,13 @@ export const subcategoryTypeDefs = gql`
     metaTitle: String
     metaDescription: String
     canonicalTag: String
+    breadCrumb: String
     thumbnailUrl: String
     thumbnailPublicId: String
     thumbnailText: String
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus
   }
 
   input RemoveSubcategoryByIdInput {
@@ -39,17 +48,21 @@ export const subcategoryTypeDefs = gql`
 
   type Subcategory {
     id: ID!
-    name: String!
-    categoryId: String!
+    categoryId: ID!
+    name: String
     description: String
     shortDescription: String
     customUrl: String
     metaTitle: String
     metaDescription: String
     canonicalTag: String
+    breadCrumb: String
     thumbnailUrl: String
     thumbnailPublicId: String
     thumbnailText: String
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus
     createdAt: DateTime!
     updatedAt: DateTime!
   }
