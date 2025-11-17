@@ -1,72 +1,10 @@
 import createError from "http-errors";
 import { repository } from "#repository/index.js";
-import { bcryptUtils, tokenUtils } from "#utils/index.js";
-import { env } from "#config/index.js";
+import { bcryptUtils } from "#utils/index.js";
 
-const { read, write, update, remove } = repository;
-const { SUPER_ADMIN_ID, SUPER_ADMIN_EMAIL, SUPER_ADMIN_PASSWORD } = env;
+const { read, update, remove } = repository;
 
 export const adminServices = {
-  signinSuperAdmin: async (input) => {
-    const { email, password } = input;
-    if (email !== SUPER_ADMIN_EMAIL || password !== SUPER_ADMIN_PASSWORD)
-      throw createError(401, "Invalid credentials.");
-
-    const accessToken = tokenUtils.generate(
-      { id: SUPER_ADMIN_ID, role: "SUPER_ADMIN" },
-      "accessToken",
-    );
-
-    return {
-      status: "success",
-      message: "Signed in successfully",
-      data: {
-        id: SUPER_ADMIN_ID,
-        accessToken,
-        role: "SUPER_ADMIN",
-      },
-    };
-  },
-
-  signinAdmin: async (input) => {
-    const { email, password } = input;
-    const admin = await read.adminByEmail(email);
-    if (!admin) throw createError(404, "Invalid credentials.");
-
-    const valid = bcryptUtils.validateValue(password, admin.password);
-
-    if (!valid) throw createError(401, "Invalid credentials.");
-
-    const accessToken = tokenUtils.generate({ id: admin.id, role: "ADMIN" }, "accessToken");
-
-    return {
-      status: "success",
-      message: "Signed in successfully",
-      data: {
-        id: admin.id,
-        accessToken,
-        role: "ADMIN",
-      },
-    };
-  },
-
-  createAdmin: async (input) => {
-    const { email, password, permissions } = input;
-
-    const existingAdmin = await read.adminByEmail(email);
-
-    if (existingAdmin) throw createError(400, "Admin already exists.");
-
-    const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
-
-    await write.admin({ ...input, password: hashedPassword, permissions });
-
-    return {
-      status: "success",
-      message: "Admin created successfully",
-    };
-  },
-
   getAdminList: async () => {
     const admins = await read.admins();
 

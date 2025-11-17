@@ -1,4 +1,3 @@
-// src/graphql/commonTypeDefs.js
 import { gql } from "graphql-tag";
 
 export const commonTypeDefs = gql`
@@ -10,7 +9,7 @@ export const commonTypeDefs = gql`
   type SigninResponseData {
     id: ID!
     accessToken: String!
-    role: AdminRole
+    role: Role
   }
 
   type SigninResponse {
@@ -22,11 +21,13 @@ export const commonTypeDefs = gql`
   input SigninInput {
     email: String!
     password: String!
+    role: Role!
   }
 
-  enum AdminRole {
-    SUPER_ADMIN
+  enum Role {
+    USER
     ADMIN
+    SUPER_ADMIN
   }
 
   enum ContentStatus {

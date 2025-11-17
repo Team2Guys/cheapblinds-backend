@@ -9,9 +9,10 @@ datasource db {
 
 // =================== Enums ===================
 
-enum AdminRole {
-  SUPER_ADMIN
+enum Role {
+  USER
   ADMIN
+  SUPER_ADMIN
 }
 
 enum ContentStatus {
@@ -23,15 +24,15 @@ enum ContentStatus {
 // =================== Admin ===================
 
 model Admin {
-  id          String     @id @default(uuid()) @db.Uuid
-  firstName   String     @db.VarChar(100)
-  lastName    String     @db.VarChar(100)
-  email       String     @unique @db.VarChar(255)
-  password    String     @db.VarChar(255)
-  role        AdminRole? @default(ADMIN)
-  permissions String[]   @default([])
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id          String   @id @default(uuid()) @db.Uuid
+  firstName   String   @db.VarChar(100)
+  lastName    String   @db.VarChar(100)
+  email       String   @unique @db.VarChar(255)
+  password    String   @db.VarChar(255)
+  role        Role     @default(ADMIN)
+  permissions String[] @default([])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@index([email])
 }
@@ -46,6 +47,7 @@ model User {
   password               String   @db.VarChar(255)
   isEmailVerified        Boolean  @default(false)
   isNewsletterSubscribed Boolean  @default(false)
+  role                   Role     @default(USER)
   otps                   Otp[]    @relation(name: "UserOtps")
   reviews                Review[] @relation(name: "UserReviews")
   createdAt              DateTime @default(now())
