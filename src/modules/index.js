@@ -8,6 +8,8 @@ import { emailTypeDefs, emailResolvers } from "./email/index.js";
 import { categoryTypeDefs, categoryResolvers } from "./category/index.js";
 import { subcategoryTypeDefs, subcategoryResolvers } from "./subcategory/index.js";
 import { productTypeDefs, productResolvers } from "./product/index.js";
+import { fileUploadTypeDefs, fileUploadResolvers } from "./fileUpload/index.js";
+
 import { commonTypeDefs } from "./common.typeDefs.js";
 
 export const typeDefs = mergeTypeDefs([
@@ -20,6 +22,7 @@ export const typeDefs = mergeTypeDefs([
   otpTypeDefs,
   userTypeDefs,
   productTypeDefs,
+  fileUploadTypeDefs,
 ]);
 
 export const resolvers = mergeResolvers([
@@ -31,4 +34,5 @@ export const resolvers = mergeResolvers([
   otpResolvers,
   userResolvers,
   productResolvers,
+  fileUploadResolvers,
 ]);

@@ -72,25 +72,23 @@ model Otp {
 // =================== Category ===================
 
 model Category {
-  id                String        @id @default(uuid()) @db.Uuid
-  name              String        @unique @db.VarChar(100)
-  description       String?       @db.Text()
-  shortDescription  String?       @db.VarChar(255)
-  customUrl         String?       @unique @db.VarChar(255)
-  metaTitle         String?       @db.VarChar(70)
-  metaDescription   String?       @db.VarChar(160)
-  canonicalTag      String?       @db.VarChar(255)
-  breadCrumb        String?       @db.VarChar(255)
-  thumbnailUrl      String?       @db.VarChar(512)
-  thumbnailPublicId String?       @db.VarChar(255)
-  thumbnailAltText  String?       @db.VarChar(255)
-  lastEditedBy      String?       @db.VarChar(255)
-  seoSchema         String?       @db.Text()
-  status            ContentStatus @default(PUBLISHED)
-  products          Product[]     @relation("CategoryProducts")
-  subcategories     Subcategory[] @relation("CategorySubcategories")
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
+  id               String        @id @default(uuid()) @db.Uuid
+  name             String        @unique @db.VarChar(100)
+  description      String?       @db.Text()
+  shortDescription String?       @db.VarChar(255)
+  customUrl        String?       @unique @db.VarChar(255)
+  metaTitle        String?       @db.VarChar(70)
+  metaDescription  String?       @db.VarChar(160)
+  canonicalTag     String?       @db.VarChar(255)
+  breadCrumb       String?       @db.VarChar(255)
+  thumbnailUrl     String?       @db.VarChar(512)
+  lastEditedBy     String?       @db.VarChar(255)
+  seoSchema        String?       @db.Text()
+  status           ContentStatus @default(PUBLISHED)
+  products         Product[]     @relation("CategoryProducts")
+  subcategories    Subcategory[] @relation("CategorySubcategories")
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
 
   @@index([name])
   @@index([customUrl])
@@ -99,26 +97,24 @@ model Category {
 // =================== Subcategory ===================
 
 model Subcategory {
-  id                String        @id @default(uuid()) @db.Uuid
-  name              String        @unique @db.VarChar(100)
-  description       String?       @db.Text()
-  shortDescription  String?       @db.VarChar(255)
-  customUrl         String?       @unique @db.VarChar(255)
-  metaTitle         String?       @db.VarChar(70)
-  metaDescription   String?       @db.VarChar(160)
-  canonicalTag      String?       @db.VarChar(255)
-  breadCrumb        String?       @db.VarChar(255)
-  thumbnailUrl      String?       @db.VarChar(512)
-  thumbnailPublicId String?       @db.VarChar(255)
-  thumbnailAltText  String?       @db.VarChar(255)
-  lastEditedBy      String?       @db.VarChar(255)
-  seoSchema         String?       @db.Text()
-  categoryId        String        @db.Uuid
-  category          Category      @relation(fields: [categoryId], references: [id], name: "CategorySubcategories", onDelete: Cascade)
-  products          Product[]     @relation("SubcategoryProducts")
-  status            ContentStatus @default(PUBLISHED)
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
+  id               String        @id @default(uuid()) @db.Uuid
+  name             String        @unique @db.VarChar(100)
+  description      String?       @db.Text()
+  shortDescription String?       @db.VarChar(255)
+  customUrl        String?       @unique @db.VarChar(255)
+  metaTitle        String?       @db.VarChar(70)
+  metaDescription  String?       @db.VarChar(160)
+  canonicalTag     String?       @db.VarChar(255)
+  breadCrumb       String?       @db.VarChar(255)
+  thumbnailUrl     String?       @db.VarChar(512)
+  lastEditedBy     String?       @db.VarChar(255)
+  seoSchema        String?       @db.Text()
+  categoryId       String        @db.Uuid
+  category         Category      @relation(fields: [categoryId], references: [id], name: "CategorySubcategories", onDelete: Cascade)
+  products         Product[]     @relation("SubcategoryProducts")
+  status           ContentStatus @default(PUBLISHED)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
 
   @@index([categoryId])
   @@index([customUrl])
@@ -127,33 +123,31 @@ model Subcategory {
 // =================== Product ===================
 
 model Product {
-  id                String         @id @default(uuid()) @db.Uuid
-  name              String         @unique @db.VarChar(100)
-  description       String?        @db.Text()
-  shortDescription  String?        @db.VarChar(255)
-  customUrl         String?        @unique @db.VarChar(255)
-  metaTitle         String?        @db.VarChar(70)
-  metaDescription   String?        @db.VarChar(160)
-  canonicalTag      String         @db.VarChar(255)
-  breadCrumb        String?        @db.VarChar(255)
-  thumbnailUrl      String?        @db.VarChar(512)
-  thumbnailPublicId String?        @db.VarChar(255)
-  thumbnailAltText  String?        @db.VarChar(255)
-  productImages     Json[]         @db.JsonB()
-  lastEditedBy      String?        @db.VarChar(255)
-  seoSchema         String?        @db.Text()
-  price             Float          @default(0)
-  discountPrice     Int?           @default(0)
-  stock             Int            @default(0)
-  sale              String?        @db.VarChar(255)
-  categoryId        String         @db.Uuid
-  subcategoryId     String         @db.Uuid
-  category          Category       @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
-  subcategory       Subcategory    @relation(fields: [subcategoryId], references: [id], name: "SubcategoryProducts", onDelete: Cascade)
-  reviews           Review[]       @relation(name: "ProductReviews")
-  status            ContentStatus? @default(PUBLISHED)
-  createdAt         DateTime       @default(now())
-  updatedAt         DateTime       @updatedAt
+  id               String         @id @default(uuid()) @db.Uuid
+  name             String         @unique @db.VarChar(100)
+  description      String?        @db.Text()
+  shortDescription String?        @db.VarChar(255)
+  customUrl        String?        @unique @db.VarChar(255)
+  metaTitle        String?        @db.VarChar(70)
+  metaDescription  String?        @db.VarChar(160)
+  canonicalTag     String         @db.VarChar(255)
+  breadCrumb       String?        @db.VarChar(255)
+  thumbnailUrl     String?        @db.VarChar(512)
+  productImages    Json[]         @default([]) @db.JsonB()
+  lastEditedBy     String?        @db.VarChar(255)
+  seoSchema        String?        @db.Text()
+  price            Float          @default(0)
+  discountPrice    Int?           @default(0)
+  stock            Int            @default(0)
+  sale             String?        @db.VarChar(255)
+  categoryId       String         @db.Uuid
+  subcategoryId    String         @db.Uuid
+  category         Category       @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
+  subcategory      Subcategory    @relation(fields: [subcategoryId], references: [id], name: "SubcategoryProducts", onDelete: Cascade)
+  reviews          Review[]       @relation(name: "ProductReviews")
+  status           ContentStatus? @default(PUBLISHED)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 
   @@index([name])
   @@index([categoryId])
