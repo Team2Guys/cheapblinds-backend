@@ -3,7 +3,6 @@ import { ApolloServer } from "@apollo/server";
 
 import { typeDefs, resolvers } from "#modules/index.js";
 
-// Request/response logger plugin for Apollo
 const requestLoggerPlugin = {
   async requestDidStart(requestContext) {
     const { request } = requestContext;
@@ -33,34 +32,18 @@ const requestLoggerPlugin = {
   },
 };
 
-/**
- * formatError - Production-ready GraphQL error formatter
- * Logs full error details internally, but only exposes safe messages to clients
- */
 const formatError = (error) => {
-  // Log full error stack for internal monitoring
-  if (error.originalError) {
-    console.error("GraphQL Error:", {
-      message: error.message,
-      stack: error.originalError.stack,
-      path: error.path,
-      extensions: error.extensions,
-    });
-  } else {
-    console.error("GraphQL Error:", error);
-  }
-
-  // Only expose safe message to client
-  return {
-    message: "Something went wrong.", // Generic message
+  console.error("GraphQL Error:", {
+    message: error.message,
     path: error.path,
-    extensions: {
-      code: error.extensions?.code || "INTERNAL_SERVER_ERROR",
-    },
+  });
+
+  return {
+    message: error.message || "An unexpected error occurred.",
+    path: error.path || [],
   };
 };
 
-// Initialize Apollo Server
 export const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
