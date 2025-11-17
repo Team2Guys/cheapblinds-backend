@@ -18,9 +18,6 @@ export const tokenUtils = {
       case "accessToken":
         options.expiresIn = "10h";
         break;
-      case "refreshToken":
-        options.expiresIn = "30d";
-        break;
       case "passwordResetToken":
         options.expiresIn = "5m";
         break;

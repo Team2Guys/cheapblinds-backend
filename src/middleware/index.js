@@ -3,6 +3,7 @@ import xss from "xss-clean";
 import helmet from "helmet";
 import express from "express";
 import compression from "compression";
+import cookieParser from "cookie-parser";
 import { expressMiddleware } from "@as-integrations/express4";
 
 // eslint-disable-next-line no-unused-vars
@@ -14,6 +15,7 @@ import { tokenUtils } from "#utils/index.js";
 export const setupMiddleware = (app, apolloServer) => {
   app.use(helmet()); // secure HTTP headers
   app.use(compression()); // response compression
+  app.use(cookieParser()); // parse cookies
 
   app.use(
     "/graphql",
@@ -23,14 +25,11 @@ export const setupMiddleware = (app, apolloServer) => {
     xss(), // sanitize input
     expressMiddleware(apolloServer, {
       context: async ({ req, res }) => {
-        const authHeader = req.headers.authorization;
-
         let user = null;
 
-        if (authHeader?.startsWith("Bearer ")) {
-          const accessToken = authHeader.split(" ")[1];
+        const accessToken = req.cookies["accessToken"];
+        if (accessToken) {
           user = tokenUtils.verify(accessToken);
-          if (!user) throw createError("Invalid access token");
         }
 
         return { user, req, res };
