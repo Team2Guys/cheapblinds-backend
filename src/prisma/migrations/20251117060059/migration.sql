@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "AdminRole" AS ENUM ('SUPER_ADMIN', 'ADMIN');
+CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN', 'SUPER_ADMIN');
 
 -- CreateEnum
 CREATE TYPE "ContentStatus" AS ENUM ('DRAFT', 'PUBLISHED', 'ARCHIVED');
@@ -11,7 +11,7 @@ CREATE TABLE "Admin" (
     "lastName" VARCHAR(100) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
     "password" VARCHAR(255) NOT NULL,
-    "role" "AdminRole" DEFAULT 'ADMIN',
+    "role" "Role" NOT NULL DEFAULT 'ADMIN',
     "permissions" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -28,24 +28,11 @@ CREATE TABLE "User" (
     "password" VARCHAR(255) NOT NULL,
     "isEmailVerified" BOOLEAN NOT NULL DEFAULT false,
     "isNewsletterSubscribed" BOOLEAN NOT NULL DEFAULT false,
+    "role" "Role" NOT NULL DEFAULT 'USER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "RefreshToken" (
-    "id" UUID NOT NULL,
-    "jti" TEXT NOT NULL,
-    "tokenHash" TEXT NOT NULL,
-    "revoked" BOOLEAN NOT NULL DEFAULT false,
-    "replacedBy" TEXT,
-    "userId" UUID NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "expiresAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "RefreshToken_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -163,12 +150,6 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE INDEX "User_email_idx" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "RefreshToken_jti_key" ON "RefreshToken"("jti");
-
--- CreateIndex
-CREATE INDEX "RefreshToken_userId_idx" ON "RefreshToken"("userId");
-
--- CreateIndex
 CREATE INDEX "Otp_userId_idx" ON "Otp"("userId");
 
 -- CreateIndex
@@ -218,9 +199,6 @@ CREATE INDEX "Product_customUrl_idx" ON "Product"("customUrl");
 
 -- CreateIndex
 CREATE INDEX "Review_productId_idx" ON "Review"("productId");
-
--- AddForeignKey
-ALTER TABLE "RefreshToken" ADD CONSTRAINT "RefreshToken_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Otp" ADD CONSTRAINT "Otp_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -16,18 +16,6 @@ export const adminResolvers = {
   },
 
   Mutation: {
-    signinSuperAdmin: handleAsync(async (_parent, { input }) =>
-      adminServices.signinSuperAdmin(input),
-    ),
-
-    signinAdmin: handleAsync(async (_parent, { input }) => adminServices.signinAdmin(input)),
-
-    createAdmin: handleAsync(
-      verifyRole(["SUPER_ADMIN"])(
-        verifyAccess(async (_parent, { input }) => adminServices.createAdmin(input)),
-      ),
-    ),
-
     updateAdminById: handleAsync(
       verifyRole(["SUPER_ADMIN"])(
         verifyAccess(async (_parent, { input }) => adminServices.updateAdminById(input)),

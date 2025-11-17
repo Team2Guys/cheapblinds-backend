@@ -5,78 +5,103 @@ import { repository } from "#repository/index.js";
 import { env } from "#config/index.js";
 
 const { write, read, update } = repository;
-const { FRONTEND_URL } = env;
+const { FRONTEND_URL, SUPER_ADMIN_ID, SUPER_ADMIN_EMAIL, SUPER_ADMIN_PASSWORD } = env;
 
 export const authServices = {
   signup: async (input) => {
-    const { email, password } = input;
+    const { email, password, role, permissions } = input;
 
-    const existingUser = await read.userByEmail(email);
-
-    if (existingUser) throw createError(400, "User already exists.");
-
+    // Hash password once
     const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
-    const registrationData = {
-      ...input,
-      password: hashedPassword,
-    };
+    switch (role) {
+      case "ADMIN": {
+        const existingAdmin = await read.adminByEmail(email);
+        if (existingAdmin) throw createError(400, "Admin already exists.");
 
-    const newUser = await write.user(registrationData);
+        await write.admin({ ...input, password: hashedPassword, permissions });
+        break;
+      }
 
-    const verificationToken = tokenUtils.generate({ id: newUser.id }, "verificationToken");
+      default: {
+        // regular user
+        const existingUser = await read.userByEmail(email);
+        if (existingUser) throw createError(400, "User already exists.");
 
-    if (!verificationToken) throw createError(500, "Failed to generate verification token.");
-    if (!FRONTEND_URL) throw createError(500, "FRONTEND_URL is not defined.");
+        const newUser = await write.user({ ...input, password: hashedPassword });
 
-    const sentEmail = await sendEmail("verification-email", {
-      email,
-      subject: "Welcome - Verify your email",
-      FRONTEND_URL,
-      verificationToken,
-    });
+        const verificationToken = tokenUtils.generate({ id: newUser.id }, "verificationToken");
+        if (!verificationToken) throw createError(500, "Failed to generate verification token.");
+        if (!FRONTEND_URL) throw createError(500, "FRONTEND_URL is not defined.");
 
-    if (!sentEmail) throw createError(500, "Failed to send welcome email.");
+        const sentEmail = await sendEmail("verification-email", {
+          email,
+          subject: "Welcome - Verify your email",
+          FRONTEND_URL,
+          verificationToken,
+        });
+        if (!sentEmail) throw createError(500, "Failed to send welcome email.");
+      }
+    }
 
     return {
       status: "success",
-      message: "Signed up successfully. Check your email to verify your account.",
+      message:
+        role === "USER"
+          ? "Signed up successfully. Check your email to verify your account."
+          : "Signed up successfully.",
     };
   },
 
   signin: async (input) => {
-    const { email, password } = input;
+    const { email, password, role } = input;
+    let user;
+    let accessToken;
 
-    const user = await read.userByEmail(email);
+    switch (role) {
+      case "SUPER_ADMIN":
+        if (email !== SUPER_ADMIN_EMAIL || password !== SUPER_ADMIN_PASSWORD)
+          throw createError(401, "Invalid credentials.");
 
-    if (!user) throw createError(401, "Invalid credentials.");
+        accessToken = tokenUtils.generate({ id: SUPER_ADMIN_ID, role }, "accessToken");
+        break;
 
-    if (!user.isEmailVerified) {
-      const verificationToken = tokenUtils.generate({ id: user.id }, "verificationToken");
+      case "ADMIN":
+        user = await read.adminByEmail(email);
+        if (!user) throw createError(404, "Invalid credentials.");
 
-      if (!verificationToken) throw createError(500, "Failed to generate verification token.");
-      if (!FRONTEND_URL) throw createError(500, "FRONTEND_URL is not defined.");
+        if (!bcryptUtils.validateValue(password, user.password))
+          throw createError(401, "Invalid credentials.");
 
-      const sentEmail = await sendEmail("verification-email", {
-        email,
-        subject: "Welcome - Please, verify your email",
-        FRONTEND_URL,
-        verificationToken,
-      });
+        accessToken = tokenUtils.generate({ id: user.id, role: "ADMIN" }, "accessToken");
+        break;
 
-      if (!sentEmail) throw createError(500, "Failed to send verification email.");
+      default: // regular user
+        user = await read.userByEmail(email);
+        if (!user) throw createError(401, "Invalid credentials.");
 
-      throw createError(
-        403,
-        "Email not verified. A new verification link has been sent to your email.",
-      );
+        if (!user.isEmailVerified) {
+          const verificationToken = tokenUtils.generate({ id: user.id }, "verificationToken");
+          if (!verificationToken) throw createError(500, "Failed to generate verification token.");
+          if (!FRONTEND_URL) throw createError(500, "FRONTEND_URL is not defined.");
+
+          const sentEmail = await sendEmail("verification-email", {
+            email,
+            subject: "Welcome - Please, verify your email",
+            FRONTEND_URL,
+            verificationToken,
+          });
+
+          if (!sentEmail) throw createError(500, "Failed to send verification email.");
+
+          throw createError(403, "Email not verified. A new verification link has been sent.");
+        }
+
+        if (!(await bcryptUtils.compare(password, user.password)))
+          throw createError(401, "Invalid credentials.");
+
+        accessToken = tokenUtils.generate({ id: user.id }, "accessToken");
     }
-
-    const isPasswordValid = await bcryptUtils.compare(password, user.password);
-
-    if (!isPasswordValid) throw createError(401, "Invalid credentials.");
-
-    const accessToken = tokenUtils.generate({ id: user.id }, "accessToken");
 
     if (!accessToken) throw createError(500, "Failed to generate access token.");
 
@@ -84,8 +109,9 @@ export const authServices = {
       status: "success",
       message: "Signed in successfully",
       data: {
-        id: user.id,
+        id: role === "SUPER_ADMIN" ? SUPER_ADMIN_ID : user.id,
         accessToken,
+        role,
       },
     };
   },
