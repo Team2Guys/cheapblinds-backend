@@ -12,8 +12,6 @@ export const subcategoryTypeDefs = gql`
     canonicalTag: String
     breadCrumb: String
     thumbnailUrl: String
-    thumbnailPublicId: String
-    thumbnailAltText: String
     lastEditedBy: String
     seoSchema: String
     status: ContentStatus
@@ -35,8 +33,6 @@ export const subcategoryTypeDefs = gql`
     canonicalTag: String
     breadCrumb: String
     thumbnailUrl: String
-    thumbnailPublicId: String
-    thumbnailAltText: String
     lastEditedBy: String
     seoSchema: String
     status: ContentStatus
@@ -58,8 +54,6 @@ export const subcategoryTypeDefs = gql`
     canonicalTag: String
     breadCrumb: String
     thumbnailUrl: String
-    thumbnailPublicId: String
-    thumbnailAltText: String
     lastEditedBy: String
     seoSchema: String
     status: ContentStatus
