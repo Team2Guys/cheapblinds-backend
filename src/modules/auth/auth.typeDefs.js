@@ -27,6 +27,7 @@ export const authTypeDefs = gql`
   type Mutation {
     signup(input: SignupInput!): GenericResponse!
     signin(input: SigninInput!): SigninResponse!
+    signout: GenericResponse!
     requestPasswordReset(input: PasswordResetRequestInput!): GenericResponse!
     updatePassword(input: PasswordUpdateInput!): GenericResponse!
   }

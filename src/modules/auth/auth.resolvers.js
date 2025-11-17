@@ -11,7 +11,31 @@ export const authResolvers = {
   Mutation: {
     signup: handleAsync(async (_parent, { input }) => authServices.signup(input)),
 
-    signin: handleAsync(async (_parent, { input }) => authServices.signin(input)),
+    signin: handleAsync(async (_parent, { input }, { res }) => {
+      const responseBody = await authServices.signin(input);
+      const {
+        data: { accessToken },
+      } = responseBody;
+
+      res.cookie("accessToken", accessToken, {
+        httpOnly: true, // cannot be read by JS
+        secure: process.env.NODE_ENV === "production", // only over HTTPS
+        sameSite: "lax", // protects against CSRF
+        maxAge: 10 * 60 * 60 * 1000, // 10 hours
+      });
+
+      return { ...responseBody, data: { accessToken: undefined, ...responseBody.data } };
+    }),
+
+    signout: handleAsync(async (_parent, _args, { res }) => {
+      res.clearCookie("accessToken", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+      });
+
+      return { status: "success", message: "Logged out successfully" };
+    }),
 
     requestPasswordReset: handleAsync(async (_parent, { input }) =>
       authServices.requestPasswordReset(input),

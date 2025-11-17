@@ -8,8 +8,7 @@ export const commonTypeDefs = gql`
 
   type SigninResponseData {
     id: ID!
-    accessToken: String!
-    role: Role
+    role: Role!
   }
 
   type SigninResponse {
