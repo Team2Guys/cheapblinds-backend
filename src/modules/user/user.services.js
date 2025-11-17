@@ -36,12 +36,11 @@ export const userServices = {
 
     if (!existingUser) throw createError(404, "User not found.");
 
-    const updatedUser = await update.userById(id, rest);
+    await update.userById(id, rest);
 
     return {
       status: "success",
       message: "User updated successfully",
-      data: updatedUser,
     };
   },
 

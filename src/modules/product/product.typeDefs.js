@@ -103,8 +103,8 @@ export const productTypeDefs = gql`
   }
 
   type Mutation {
-    createProduct(input: CreateProductInput!): ProductResponse!
-    updateProductById(input: UpdateProductByIdInput!): ProductResponse!
+    createProduct(input: CreateProductInput!): GenericResponse!
+    updateProductById(input: UpdateProductByIdInput!): GenericResponse!
     removeProductById(input: RemoveProductByIdInput!): GenericResponse!
   }
 `;

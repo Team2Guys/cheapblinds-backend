@@ -16,7 +16,7 @@ export const subcategoryResolvers = {
   Mutation: {
     createSubcategory: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
           subcategoryServices.createSubcategory(input),
         ),
       ),
@@ -24,7 +24,7 @@ export const subcategoryResolvers = {
 
     updateSubcategoryById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
           subcategoryServices.updateSubcategoryById(input),
         ),
       ),
@@ -32,7 +32,7 @@ export const subcategoryResolvers = {
 
     removeSubcategoryById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN, SUPER_ADMIN"])(async (_parent, { input }) =>
+        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
           subcategoryServices.removeSubcategoryById(input),
         ),
       ),
