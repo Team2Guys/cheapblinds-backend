@@ -5,7 +5,7 @@ export const categoryTypeDefs = gql`
     name: String!
     description: String
     shortDescription: String
-    customUrl: String!
+    customUrl: String
     metaTitle: String
     metaDescription: String
     canonicalTag: String
@@ -24,10 +24,10 @@ export const categoryTypeDefs = gql`
 
   input UpdateCategoryByIdInput {
     id: ID!
-    name: String!
+    name: String
     description: String
     shortDescription: String
-    customUrl: String!
+    customUrl: String
     metaTitle: String
     metaDescription: String
     canonicalTag: String

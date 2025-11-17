@@ -29,7 +29,11 @@ export const setupMiddleware = (app, apolloServer) => {
 
         const accessToken = req.cookies["accessToken"];
         if (accessToken) {
-          user = tokenUtils.verify(accessToken);
+          try {
+            user = tokenUtils.verify(accessToken);
+          } catch {
+            user = null;
+          }
         }
 
         return { user, req, res };
