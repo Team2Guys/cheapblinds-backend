@@ -20,6 +20,10 @@ export const categoryTypeDefs = gql`
     id: ID!
   }
 
+  input GetCategoryByCustomUrlInput {
+    customUrl: String!
+  }
+
   input UpdateCategoryByIdInput {
     id: ID!
     name: String
@@ -55,6 +59,7 @@ export const categoryTypeDefs = gql`
   type Query {
     getCategoryList: CategoryListResponse!
     getCategoryById(input: GetCategoryByIdInput!): CategoryResponse!
+    getCategoryByCustomUrl(input: GetCategoryByCustomUrlInput!): CategoryResponse!
   }
 
   type Mutation {

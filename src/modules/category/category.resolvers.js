@@ -11,6 +11,10 @@ export const categoryResolvers = {
     getCategoryById: handleAsync(async (_parent, { input }) =>
       categoryServices.getCategoryById(input),
     ),
+
+    getCategoryByCustomUrl: handleAsync(async (_parent, { input }) =>
+      categoryServices.getCategoryByCustomUrl(input),
+    ),
   },
 
   Mutation: {
