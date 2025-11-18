@@ -8,13 +8,23 @@ const prisma = new PrismaClient();
 
 export const categoryRepository = {
   read: {
-    categories: () => prisma.category.findMany(),
+    categories: () =>
+      prisma.category.findMany({
+        include: {
+          subcategory: true,
+          products: true,
+        },
+      }),
 
     categoryById: (id) => {
       if (!validateUuid(id)) throw createError(400, "Invalid category id.");
 
       return prisma.category.findUnique({
         where: { id },
+        include: {
+          subcategory: true,
+          products: true,
+        },
       });
     },
   },
