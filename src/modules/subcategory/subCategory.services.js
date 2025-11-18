@@ -37,6 +37,22 @@ export const subcategoryServices = {
     };
   },
 
+  getSubcategoryByUrls: async (input) => {
+    const { subcategoryCustomUrl, categoryCustomUrl } = input;
+
+    const subcategory = await read.subcategoryByUrls(subcategoryCustomUrl, categoryCustomUrl);
+
+    if (!subcategory) {
+      throw createError(404, "Subcategory not found with the provided custom URLs.");
+    }
+
+    return {
+      status: "success",
+      message: "Subcategory retrieved successfully",
+      data: subcategory,
+    };
+  },
+
   updateSubcategoryById: async (input) => {
     const { id, ...rest } = input;
 
