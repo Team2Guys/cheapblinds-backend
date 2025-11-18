@@ -8,12 +8,24 @@ const prisma = new PrismaClient();
 
 export const subcategoryRepository = {
   read: {
-    subcategories: () => prisma.subcategory.findMany(),
+    subcategories: () =>
+      prisma.subcategory.findMany({
+        include: {
+          category: true,
+          products: true,
+        },
+      }),
 
     subcategoryById: (id) => {
       if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
 
-      return prisma.subcategory.findUnique({ where: { id } });
+      return prisma.subcategory.findUnique({
+        where: { id },
+        include: {
+          category: true,
+          products: true,
+        },
+      });
     },
   },
 
