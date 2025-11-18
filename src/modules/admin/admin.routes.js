@@ -8,6 +8,7 @@ const { verifyRole, verifyAccess } = verifications.rest;
 export const adminRoutes = express.Router();
 
 adminRoutes
+  .post("/", verifyAccess, verifyRole(["SUPER_ADMIN"]), adminControllers.createAdmin)
   .get("/", adminControllers.getAdminList)
   .get("/:id", adminControllers.getAdminById)
   .patch("/:id", verifyAccess, verifyRole(["SUPER_ADMIN"]), adminControllers.updateAdminById)

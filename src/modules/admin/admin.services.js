@@ -5,6 +5,22 @@ import { bcryptUtils } from "#utils/index.js";
 const { read, update, remove } = repository;
 
 export const adminServices = {
+  createAdmin: async (input) => {
+    const { email, password, ...rest } = input;
+
+    const existingAdmin = await read.adminByEmail(email);
+    if (existingAdmin) throw createError(400, "Admin already exists.");
+
+    const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
+
+    await write.admin({ email, password: hashedPassword, ...rest });
+
+    return {
+      status: "success",
+      message: "Admin created successfully",
+    };
+  },
+
   getAdminList: async () => {
     const admins = await read.admins();
 

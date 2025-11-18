@@ -3,8 +3,7 @@ import { gql } from "graphql-tag";
 export const adminTypeDefs = gql`
   type Admin {
     id: ID!
-    firstName: String!
-    lastName: String!
+    name: String!
     email: String!
     role: Role!
     permissions: [String!]!
@@ -30,8 +29,7 @@ export const adminTypeDefs = gql`
 
   input UpdateAdminByIdInput {
     id: ID!
-    firstName: String
-    lastName: String
+    name: String
     email: String
     password: String
     permissions: [String!]

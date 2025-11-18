@@ -4,6 +4,12 @@ import { adminServices } from "./admin.services.js";
 const { handleRoutes } = commonUtils;
 
 export const adminControllers = {
+  createAdmin: handleRoutes(async (request, response) => {
+    const requestBody = request.body;
+    const responseBody = await adminServices.createAdmin(requestBody);
+    response.status(201).json(responseBody);
+  }),
+
   getAdminList: handleRoutes(async (_request, response) => {
     const responseBody = await adminServices.getAdminList();
     response.status(200).json(responseBody);
