@@ -30,7 +30,7 @@ export const adminServices = {
   },
 
   updateAdminById: async (input) => {
-    const { id, ...rest } = input;
+    const { id, password, ...rest } = input;
 
     const existingAdmin = await read.adminById(id);
 
