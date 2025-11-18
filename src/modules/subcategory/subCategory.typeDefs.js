@@ -42,25 +42,6 @@ export const subcategoryTypeDefs = gql`
     id: ID!
   }
 
-  type Subcategory {
-    id: ID!
-    categoryId: ID!
-    name: String
-    description: String
-    shortDescription: String
-    customUrl: String
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadCrumb: String
-    thumbnailUrl: String
-    lastEditedBy: String
-    seoSchema: String
-    status: ContentStatus
-    createdAt: DateTime!
-    updatedAt: DateTime!
-  }
-
   type SubcategoryListResponse {
     status: String!
     message: String!

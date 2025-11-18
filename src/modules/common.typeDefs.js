@@ -35,6 +35,43 @@ export const commonTypeDefs = gql`
     ARCHIVED
   }
 
+  type Category {
+    id: ID
+    name: String
+    description: String
+    shortDescription: String
+    customUrl: String!
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadCrumb: String
+    thumbnailUrl: String
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus
+    createdAt: DateTime
+    updatedAt: DateTime
+  }
+
+  type Subcategory {
+    id: ID
+    categoryId: ID
+    name: String
+    description: String
+    shortDescription: String
+    customUrl: String
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadCrumb: String
+    thumbnailUrl: String
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus
+    createdAt: DateTime
+    updatedAt: DateTime
+  }
+
   scalar JSON
   scalar DateTime
 `;

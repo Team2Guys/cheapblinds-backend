@@ -40,24 +40,6 @@ export const categoryTypeDefs = gql`
     id: ID!
   }
 
-  type Category {
-    id: ID!
-    name: String!
-    description: String
-    shortDescription: String
-    customUrl: String!
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadCrumb: String
-    thumbnailUrl: String
-    lastEditedBy: String
-    seoSchema: String
-    status: ContentStatus
-    createdAt: DateTime!
-    updatedAt: DateTime!
-  }
-
   type CategoryListResponse {
     status: String!
     message: String!
