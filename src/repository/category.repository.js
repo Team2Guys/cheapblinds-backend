@@ -32,8 +32,11 @@ export const categoryRepository = {
       prisma.category.findUnique({
         where: { customUrl },
         include: {
-          subcategories: true,
-          products: true,
+          subcategories: {
+            include: {
+              products: true,
+            },
+          },
         },
       }),
   },
