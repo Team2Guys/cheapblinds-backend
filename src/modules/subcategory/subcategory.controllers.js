@@ -4,6 +4,12 @@ import { subcategoryServices } from "./subcategory.services.js";
 const { handleRoutes } = commonUtils;
 
 export const subcategoryControllers = {
+  createSubcategory: handleRoutes(async (request, response) => {
+    const requestBody = request.body;
+    const responseBody = await subcategoryServices.createSubcategory(requestBody);
+    response.status(201).json(responseBody);
+  }),
+
   getSubcategoryList: handleRoutes(async (_request, response) => {
     const responseBody = await subcategoryServices.getSubcategoryList();
     response.status(200).json(responseBody);

@@ -10,6 +10,7 @@ export const categoryRoutes = express.Router();
 categoryRoutes
   .get("/", categoryControllers.getCategoryList)
   .get("/:id", categoryControllers.getCategoryById)
+  .post("/", verifyAccess, verifyRole(["ADMIN", "SUPER_ADMIN"]), categoryControllers.createCategory)
   .patch(
     "/:id",
     verifyAccess,

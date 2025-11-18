@@ -10,6 +10,7 @@ export const productRoutes = express.Router();
 productRoutes
   .get("/", productControllers.getProductList)
   .get("/:id", productControllers.getProductById)
+  .post("/", verifyAccess, verifyRole(["ADMIN", "SUPER_ADMIN"]), productControllers.createProduct)
   .patch(
     "/:id",
     verifyAccess,

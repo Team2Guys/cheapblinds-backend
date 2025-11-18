@@ -4,6 +4,12 @@ import { productServices } from "./product.services.js";
 const { handleRoutes } = commonUtils;
 
 export const productControllers = {
+  createProduct: handleRoutes(async (request, response) => {
+    const requestBody = request.body;
+    const responseBody = await productServices.createProduct(requestBody);
+    response.status(201).json(responseBody);
+  }),
+
   getProductList: handleRoutes(async (_request, response) => {
     const responseBody = await productServices.getProductList();
     response.status(200).json(responseBody);
