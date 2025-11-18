@@ -4,6 +4,12 @@ import { categoryServices } from "./category.services.js";
 const { handleRoutes } = commonUtils;
 
 export const categoryControllers = {
+  createCategory: handleRoutes(async (request, response) => {
+    const requestBody = request.body;
+    const responseBody = await categoryServices.createCategory(requestBody);
+    response.status(201).json(responseBody);
+  }),
+
   getCategoryList: handleRoutes(async (_request, response) => {
     const responseBody = await categoryServices.getCategoryList();
     response.status(200).json(responseBody);

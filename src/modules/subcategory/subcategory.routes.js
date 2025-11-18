@@ -10,6 +10,12 @@ export const subcategoryRoutes = express.Router();
 subcategoryRoutes
   .get("/", subcategoryControllers.getSubcategoryList)
   .get("/:id", subcategoryControllers.getSubcategoryById)
+  .post(
+    "/",
+    verifyAccess,
+    verifyRole(["ADMIN", "SUPER_ADMIN"]),
+    subcategoryControllers.createSubcategory,
+  )
   .patch(
     "/:id",
     verifyAccess,
