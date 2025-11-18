@@ -59,10 +59,10 @@ export const productTypeDefs = gql`
   }
 
   type Product {
-    id: ID!
-    categoryId: ID!
-    subcategoryId: ID!
-    name: String!
+    id: ID
+    categoryId: ID
+    subcategoryId: ID
+    name: String
     description: String
     shortDescription: String
     customUrl: String
@@ -80,8 +80,10 @@ export const productTypeDefs = gql`
     stock: Int
     additionalInfo: [JSON!]
     measuringGuide: [JSON!]
-    createdAt: DateTime!
-    updatedAt: DateTime!
+    category: Category
+    subcategory: Subcategory
+    createdAt: DateTime
+    updatedAt: DateTime
   }
 
   type ProductListResponse {
