@@ -1,15 +1,12 @@
 import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
 
 import { adminTypeDefs, adminResolvers } from "./admin/index.js";
-import { otpTypeDefs, otpResolvers } from "./otp/index.js";
 import { userTypeDefs, userResolvers } from "./user/index.js";
 import { authTypeDefs, authResolvers } from "./auth/index.js";
 import { emailTypeDefs, emailResolvers } from "./email/index.js";
 import { categoryTypeDefs, categoryResolvers } from "./category/index.js";
 import { subcategoryTypeDefs, subcategoryResolvers } from "./subcategory/index.js";
 import { productTypeDefs, productResolvers } from "./product/index.js";
-import { fileUploadTypeDefs, fileUploadResolvers } from "./fileUpload/index.js";
-
 import { commonTypeDefs } from "./common.typeDefs.js";
 
 export const typeDefs = mergeTypeDefs([
@@ -19,10 +16,8 @@ export const typeDefs = mergeTypeDefs([
   categoryTypeDefs,
   subcategoryTypeDefs,
   emailTypeDefs,
-  otpTypeDefs,
   userTypeDefs,
   productTypeDefs,
-  fileUploadTypeDefs,
 ]);
 
 export const resolvers = mergeResolvers([
@@ -31,8 +26,9 @@ export const resolvers = mergeResolvers([
   categoryResolvers,
   subcategoryResolvers,
   emailResolvers,
-  otpResolvers,
   userResolvers,
   productResolvers,
-  fileUploadResolvers,
 ]);
+
+export { authRoutes } from "./auth/index.js";
+export { adminRoutes } from "./admin/index.js";

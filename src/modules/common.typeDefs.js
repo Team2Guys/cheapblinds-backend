@@ -48,6 +48,8 @@ export const commonTypeDefs = gql`
     thumbnailUrl: String
     lastEditedBy: String
     seoSchema: String
+    subcategories: [Subcategory!]
+    products: [Product!]
     status: ContentStatus
     createdAt: DateTime
     updatedAt: DateTime
@@ -67,6 +69,36 @@ export const commonTypeDefs = gql`
     thumbnailUrl: String
     lastEditedBy: String
     seoSchema: String
+    category: Category
+    products: [Product!]
+    status: ContentStatus
+    createdAt: DateTime
+    updatedAt: DateTime
+  }
+
+  type Product {
+    id: ID
+    categoryId: ID
+    subcategoryId: ID
+    name: String
+    description: String
+    shortDescription: String
+    customUrl: String
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadCrumb: String
+    thumbnailUrl: String
+    productImages: [JSON!]
+    lastEditedBy: String
+    seoSchema: String
+    price: Int
+    discountPrice: Int
+    stock: Int
+    additionalInfo: [JSON!]
+    measuringGuide: [JSON!]
+    category: Category
+    subcategory: Subcategory
     status: ContentStatus
     createdAt: DateTime
     updatedAt: DateTime
