@@ -32,6 +32,8 @@ export const productTypeDefs = gql`
 
   input UpdateProductByIdInput {
     id: ID!
+    categoryId: ID!
+    subcategoryId: ID!
     name: String!
     description: String
     shortDescription: String
