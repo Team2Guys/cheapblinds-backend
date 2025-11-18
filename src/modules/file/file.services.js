@@ -1,7 +1,7 @@
 import { cloudinary } from "#config/index.js";
 
-export const fileUploadService = {
-  upload: async (file) => {
+export const fileServices = {
+  uploadFile: async (file) => {
     const { mimetype, createReadStream } = await file;
 
     const isVideo = mimetype.startsWith("video/");
@@ -35,7 +35,7 @@ export const fileUploadService = {
     };
   },
 
-  delete: async (publicId) => {
+  deleteFile: async (publicId) => {
     const result = await cloudinary.uploader.destroy(publicId);
 
     if (result.result !== "ok") {
