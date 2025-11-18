@@ -27,6 +27,15 @@ export const categoryRepository = {
         },
       });
     },
+
+    categoryByCustomUrl: (customUrl) =>
+      prisma.category.findUnique({
+        where: { customUrl },
+        include: {
+          subcategories: true,
+          products: true,
+        },
+      }),
   },
 
   write: {

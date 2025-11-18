@@ -37,6 +37,20 @@ export const categoryServices = {
     };
   },
 
+  getCategoryByCustomUrl: async (input) => {
+    const { customUrl } = input;
+
+    const category = await read.categoryByCustomUrl(customUrl);
+
+    if (!category) throw createError(404, "Category not found.");
+
+    return {
+      status: "success",
+      message: "Category retrieved successfully",
+      data: category,
+    };
+  },
+
   updateCategoryById: async (input) => {
     const { id, ...rest } = input;
 
