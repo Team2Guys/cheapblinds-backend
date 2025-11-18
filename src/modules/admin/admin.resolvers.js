@@ -2,7 +2,7 @@ import { adminServices } from "./admin.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
 const { handleAsync } = commonUtils;
-const { verifyAccess, verifyRole } = verifications;
+const { verifyAccess, verifyRole } = verifications.graphql;
 
 export const adminResolvers = {
   Query: {

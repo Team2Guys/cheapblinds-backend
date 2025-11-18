@@ -58,34 +58,6 @@ export const productTypeDefs = gql`
     id: ID!
   }
 
-  type Product {
-    id: ID
-    categoryId: ID
-    subcategoryId: ID
-    name: String
-    description: String
-    shortDescription: String
-    customUrl: String
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadCrumb: String
-    thumbnailUrl: String
-    productImages: [JSON!]
-    lastEditedBy: String
-    seoSchema: String
-    status: ContentStatus
-    price: Int
-    discountPrice: Int
-    stock: Int
-    additionalInfo: [JSON!]
-    measuringGuide: [JSON!]
-    category: Category
-    subcategory: Subcategory
-    createdAt: DateTime
-    updatedAt: DateTime
-  }
-
   type ProductListResponse {
     status: String!
     message: String!

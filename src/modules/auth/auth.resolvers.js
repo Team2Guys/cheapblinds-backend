@@ -12,10 +12,10 @@ export const authResolvers = {
     signup: handleAsync(async (_parent, { input }) => authServices.signup(input)),
 
     signin: handleAsync(async (_parent, { input }, { res }) => {
-      const responseBody = await authServices.signin(input);
+      const resBody = await authServices.signin(input);
       const {
         data: { accessToken },
-      } = responseBody;
+      } = resBody;
 
       res.cookie("accessToken", accessToken, {
         httpOnly: true, // cannot be read by JS
@@ -24,7 +24,7 @@ export const authResolvers = {
         maxAge: 10 * 60 * 60 * 1000, // 10 hours
       });
 
-      return { ...responseBody, data: { accessToken: undefined, ...responseBody.data } };
+      return { ...resBody, data: { accessToken: undefined, ...resBody.data } };
     }),
 
     signout: handleAsync(async (_parent, _args, { res }) => {

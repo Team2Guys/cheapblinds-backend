@@ -2,6 +2,7 @@ import cors from "cors";
 import xss from "xss-clean";
 import helmet from "helmet";
 import express from "express";
+import morgan from "morgan";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import { expressMiddleware } from "@as-integrations/express4";
@@ -11,34 +12,53 @@ import { logTheme } from "./colors.js";
 import { corsOptions } from "./cors.js";
 import { apiRateLimiter } from "./rate-limiter.js";
 import { tokenUtils } from "#utils/index.js";
+import { invalidRouteHandler } from "./invalikd-route-handler.js";
+import { errorHandler } from "./error-handler.js";
 
-export const setupMiddleware = (app, apolloServer) => {
+export const setupMiddleware = (app, apolloServer, appRouter) => {
+  app.use(morgan("common")); // Log HTTP requests ✅ Always keep
+
   app.use(helmet()); // secure HTTP headers
-  app.use(compression()); // response compression
+
+  app.use(compression()); // res compression
+
   app.use(cookieParser()); // parse cookies
 
-  app.use(
-    "/graphql",
-    cors(corsOptions),
-    apiRateLimiter,
-    express.json({ limit: "10mb" }),
-    xss(), // sanitize input
-    expressMiddleware(apolloServer, {
-      context: async ({ req, res }) => {
-        let user = null;
+  app.use(express.json({ limit: "10mb" }));
 
-        const accessToken = req.cookies["accessToken"];
-        if (accessToken) {
-          try {
-            user = tokenUtils.verify(accessToken);
-          } catch {
-            user = null;
+  app.use(xss()); // sanitize input
+
+  app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+  (app.use(cors(corsOptions)),
+    app.use(
+      "/graphql",
+      cors(corsOptions),
+      apiRateLimiter,
+      express.json({ limit: "10mb" }),
+      xss(), // sanitize input
+      expressMiddleware(apolloServer, {
+        context: async ({ req, res }) => {
+          let user = null;
+
+          const accessToken = req.cookies["accessToken"];
+          if (accessToken) {
+            try {
+              user = tokenUtils.verify(accessToken);
+            } catch {
+              user = null;
+            }
           }
-        }
 
-        return { user, req, res };
-      },
-      csrfPrevention: true, // optional for browser clients
-    }),
-  );
+          return { user, req, res };
+        },
+        csrfPrevention: true, // optional for browser clients
+      }),
+    ));
+
+  app.use(appRouter);
+
+  app.use(invalidRouteHandler);
+
+  app.use(errorHandler);
 };

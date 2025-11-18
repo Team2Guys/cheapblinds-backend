@@ -2,7 +2,7 @@ import { subcategoryServices } from "./subcategory.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
 const { handleAsync } = commonUtils;
-const { verifyAccess, verifyRole } = verifications;
+const { verifyAccess, verifyRole } = verifications.graphql;
 
 export const subcategoryResolvers = {
   Query: {
