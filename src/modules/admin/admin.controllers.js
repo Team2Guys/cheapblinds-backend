@@ -18,7 +18,7 @@ export const adminControllers = {
   updateAdminById: handleRoutes(async (request, response) => {
     const requestParams = request.params;
     const requestBody = request.body;
-    const responseBody = await adminServices.updateAdminById(requestParams, requestBody);
+    const responseBody = await adminServices.updateAdminById({ ...requestParams, ...requestBody });
     response.status(200).json(responseBody);
   }),
 
