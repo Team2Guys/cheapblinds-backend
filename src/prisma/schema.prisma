@@ -139,8 +139,8 @@ model Product {
   price            Float          @default(0)
   discountPrice    Int?           @default(0)
   stock            Int            @default(0)
-  additionalInfo   Json?          @db.JsonB()
-  measuringGuide   Json?          @db.JsonB()
+  additionalInfo   Json[]         @default([]) @db.JsonB()
+  measuringGuide   Json[]         @default([]) @db.JsonB()
   categoryId       String         @db.Uuid
   subcategoryId    String         @db.Uuid
   category         Category       @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
