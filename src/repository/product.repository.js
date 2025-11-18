@@ -7,13 +7,23 @@ const { validateUuid } = commonUtils;
 
 export const productRepository = {
   read: {
-    products: () => prisma.product.findMany(),
+    products: () =>
+      prisma.product.findMany({
+        include: {
+          category: true,
+          subcategory: true,
+        },
+      }),
 
     productById: (id) => {
       if (!validateUuid(id)) throw createError(400, "Invalid product id.");
 
       return prisma.product.findUnique({
         where: { id },
+        include: {
+          category: true,
+          subcategory: true,
+        },
       });
     },
   },

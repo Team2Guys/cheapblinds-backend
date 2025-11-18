@@ -130,7 +130,7 @@ model Product {
   customUrl        String?        @unique @db.VarChar(255)
   metaTitle        String?        @db.VarChar(70)
   metaDescription  String?        @db.VarChar(160)
-  canonicalTag     String         @db.VarChar(255)
+  canonicalTag     String?        @db.VarChar(255)
   breadCrumb       String?        @db.VarChar(255)
   thumbnailUrl     String?        @db.VarChar(512)
   productImages    Json[]         @default([]) @db.JsonB()
