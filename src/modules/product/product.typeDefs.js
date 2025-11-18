@@ -7,33 +7,6 @@ export const productTypeDefs = gql`
     categoryId: ID!
     subcategoryId: ID!
     name: String!
-    description: String!
-    shortDescription: String!
-    customUrl: String!
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadCrumb: String
-    thumbnailUrl: String!
-    lastEditedBy: String
-    seoSchema: String
-    status: ContentStatus!
-    price: Int!
-    stock: Int!
-    discountPrice: Int
-    productImages: [JSON!]!
-    sale: String
-    saleDuration: String
-    saleCounter: String
-  }
-
-  input GetProductByIdInput {
-    id: ID!
-  }
-
-  input UpdateProductByIdInput {
-    id: ID!
-    name: String
     description: String
     shortDescription: String
     customUrl: String
@@ -42,16 +15,41 @@ export const productTypeDefs = gql`
     canonicalTag: String
     breadCrumb: String
     thumbnailUrl: String
+    productImages: [JSON!]
     lastEditedBy: String
     seoSchema: String
     status: ContentStatus
     price: Int
-    stock: Int
     discountPrice: Int
+    stock: Int
+    additionalInfo: [JSON!]
+    measuringGuide: [JSON!]
+  }
+
+  input GetProductByIdInput {
+    id: ID!
+  }
+
+  input UpdateProductByIdInput {
+    id: ID!
+    name: String!
+    description: String
+    shortDescription: String
+    customUrl: String
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadCrumb: String
+    thumbnailUrl: String
     productImages: [JSON!]
-    sale: String
-    saleDuration: String
-    saleCounter: String
+    lastEditedBy: String
+    seoSchema: String
+    status: ContentStatus
+    price: Int
+    discountPrice: Int
+    stock: Int
+    additionalInfo: [JSON!]
+    measuringGuide: [JSON!]
   }
 
   input RemoveProductByIdInput {
@@ -63,24 +61,23 @@ export const productTypeDefs = gql`
     categoryId: ID!
     subcategoryId: ID!
     name: String!
-    description: String!
-    shortDescription: String!
-    customUrl: String!
-    metaTitle: String!
-    metaDescription: String!
+    description: String
+    shortDescription: String
+    customUrl: String
+    metaTitle: String
+    metaDescription: String
     canonicalTag: String
     breadCrumb: String
-    thumbnailUrl: String!
+    thumbnailUrl: String
+    productImages: [JSON!]
     lastEditedBy: String
-    seoSchema: String!
-    status: ContentStatus!
-    price: Int!
-    stock: Int!
+    seoSchema: String
+    status: ContentStatus
+    price: Int
     discountPrice: Int
-    productImages: [JSON!]!
-    sale: String
-    saleDuration: String
-    saleCounter: String
+    stock: Int
+    additionalInfo: [JSON!]
+    measuringGuide: [JSON!]
     createdAt: DateTime!
     updatedAt: DateTime!
   }
