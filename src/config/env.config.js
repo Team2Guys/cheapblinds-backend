@@ -3,8 +3,7 @@ import { cleanEnv, str, port, email, url, testOnly } from "envalid";
 
 import { logger } from "#utils/index.js";
 
-const envFile = `.env.${process.env.NODE_ENV || "development"}`;
-dotenv.config({ path: envFile });
+dotenv.config();
 
 const validators = {
   PORT: port({ devDefault: 3000, desc: "Port number" }),
