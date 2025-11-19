@@ -58,8 +58,6 @@ CREATE TABLE "Category" (
     "canonicalTag" VARCHAR(255),
     "breadCrumb" VARCHAR(255),
     "thumbnailUrl" VARCHAR(512),
-    "thumbnailPublicId" VARCHAR(255),
-    "thumbnailText" VARCHAR(255),
     "lastEditedBy" VARCHAR(255),
     "seoSchema" TEXT,
     "status" "ContentStatus" NOT NULL DEFAULT 'PUBLISHED',
@@ -81,8 +79,6 @@ CREATE TABLE "Subcategory" (
     "canonicalTag" VARCHAR(255),
     "breadCrumb" VARCHAR(255),
     "thumbnailUrl" VARCHAR(512),
-    "thumbnailPublicId" VARCHAR(255),
-    "thumbnailText" VARCHAR(255),
     "lastEditedBy" VARCHAR(255),
     "seoSchema" TEXT,
     "categoryId" UUID NOT NULL,
@@ -96,7 +92,7 @@ CREATE TABLE "Subcategory" (
 -- CreateTable
 CREATE TABLE "Product" (
     "id" UUID NOT NULL,
-    "name" VARCHAR(100) NOT NULL,
+    "name" VARCHAR(100),
     "description" TEXT,
     "shortDescription" VARCHAR(255),
     "customUrl" VARCHAR(255),
@@ -105,15 +101,14 @@ CREATE TABLE "Product" (
     "canonicalTag" VARCHAR(255),
     "breadCrumb" VARCHAR(255),
     "thumbnailUrl" VARCHAR(512),
-    "thumbnailPublicId" VARCHAR(255),
-    "thumbnailText" VARCHAR(255),
-    "productImages" TEXT[],
+    "productImages" JSONB[] DEFAULT ARRAY[]::JSONB[],
     "lastEditedBy" VARCHAR(255),
     "seoSchema" TEXT,
     "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "discountPrice" INTEGER DEFAULT 0,
     "stock" INTEGER NOT NULL DEFAULT 0,
-    "sale" VARCHAR(255),
+    "additionalInfo" JSONB[] DEFAULT ARRAY[]::JSONB[],
+    "measuringGuide" JSONB[] DEFAULT ARRAY[]::JSONB[],
     "categoryId" UUID NOT NULL,
     "subcategoryId" UUID NOT NULL,
     "status" "ContentStatus" DEFAULT 'PUBLISHED',
@@ -165,9 +160,6 @@ CREATE INDEX "Category_name_idx" ON "Category"("name");
 CREATE INDEX "Category_customUrl_idx" ON "Category"("customUrl");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Subcategory_name_key" ON "Subcategory"("name");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Subcategory_customUrl_key" ON "Subcategory"("customUrl");
 
 -- CreateIndex
@@ -175,9 +167,6 @@ CREATE INDEX "Subcategory_categoryId_idx" ON "Subcategory"("categoryId");
 
 -- CreateIndex
 CREATE INDEX "Subcategory_customUrl_idx" ON "Subcategory"("customUrl");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Product_name_key" ON "Product"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Product_customUrl_key" ON "Product"("customUrl");
