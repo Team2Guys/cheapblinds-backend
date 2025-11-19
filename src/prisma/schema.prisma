@@ -111,7 +111,7 @@ model Product {
   canonicalTag     String?        @db.VarChar(255)
   breadCrumb       String?        @db.VarChar(255)
   thumbnailUrl     String?        @db.VarChar(512)
-  productImages    Json[]         @default([]) @db.JsonB()
+  productImages    String[]       @default([])
   lastEditedBy     String?        @db.VarChar(255)
   seoSchema        String?        @db.Text()
   price            Float          @default(0)

@@ -15,7 +15,7 @@ export const productTypeDefs = gql`
     canonicalTag: String
     breadCrumb: String
     thumbnailUrl: String
-    productImages: [JSON!]
+    productImages: [String!]
     lastEditedBy: String
     seoSchema: String
     status: ContentStatus
@@ -43,7 +43,7 @@ export const productTypeDefs = gql`
     canonicalTag: String
     breadCrumb: String
     thumbnailUrl: String
-    productImages: [JSON!]
+    productImages: [String!]
     lastEditedBy: String
     seoSchema: String
     status: ContentStatus

@@ -89,7 +89,7 @@ export const commonTypeDefs = gql`
     canonicalTag: String
     breadCrumb: String
     thumbnailUrl: String
-    productImages: [JSON!]
+    productImages: [String!]
     lastEditedBy: String
     seoSchema: String
     price: Int
