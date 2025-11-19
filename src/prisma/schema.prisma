@@ -8,7 +8,6 @@ datasource db {
 }
 
 // =================== Enums ===================
-
 enum Role {
   USER
   ADMIN
@@ -22,7 +21,6 @@ enum ContentStatus {
 }
 
 // =================== Admin ===================
-
 model Admin {
   id          String   @id @default(uuid()) @db.Uuid
   name        String   @db.VarChar(100)
@@ -37,7 +35,6 @@ model Admin {
 }
 
 // =================== User ===================
-
 model User {
   id                     String   @id @default(uuid()) @db.Uuid
   firstName              String   @db.VarChar(100)
@@ -47,7 +44,6 @@ model User {
   isEmailVerified        Boolean  @default(false)
   isNewsletterSubscribed Boolean  @default(false)
   role                   Role     @default(USER)
-  reviews                Review[] @relation(name: "UserReviews")
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
 
@@ -55,7 +51,6 @@ model User {
 }
 
 // =================== Category ===================
-
 model Category {
   id               String        @id @default(uuid()) @db.Uuid
   name             String        @unique @db.VarChar(100)
@@ -80,7 +75,6 @@ model Category {
 }
 
 // =================== Subcategory ===================
-
 model Subcategory {
   id               String        @id @default(uuid()) @db.Uuid
   name             String        @db.VarChar(100)
@@ -106,7 +100,6 @@ model Subcategory {
 }
 
 // =================== Product ===================
-
 model Product {
   id               String         @id @default(uuid()) @db.Uuid
   name             String?        @db.VarChar(100)
@@ -130,7 +123,6 @@ model Product {
   subcategoryId    String         @db.Uuid
   category         Category       @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
   subcategory      Subcategory    @relation(fields: [subcategoryId], references: [id], name: "SubcategoryProducts", onDelete: Cascade)
-  reviews          Review[]       @relation(name: "ProductReviews")
   status           ContentStatus? @default(PUBLISHED)
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
@@ -140,21 +132,4 @@ model Product {
   @@index([subcategoryId])
   @@index([price])
   @@index([customUrl])
-}
-
-// =================== Review ===================
-
-model Review {
-  id         String   @id @default(uuid()) @db.Uuid
-  review     String   @db.Text()
-  stars      Int      @default(1)
-  userId     String?  @db.Uuid
-  productId  String   @db.Uuid
-  isApproved Boolean  @default(false)
-  user       User?    @relation(fields: [userId], references: [id], name: "UserReviews", onDelete: SetNull)
-  product    Product  @relation(fields: [productId], references: [id], name: "ProductReviews", onDelete: Cascade)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@index([productId])
 }
