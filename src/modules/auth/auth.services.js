@@ -9,47 +9,30 @@ const { FRONTEND_URL, SUPER_ADMIN_ID, SUPER_ADMIN_EMAIL, SUPER_ADMIN_PASSWORD } 
 
 export const authServices = {
   signup: async (input) => {
-    const { email, password, role, permissions } = input;
+    const { email, password } = input;
 
-    // Hash password once
+    const existingUser = await read.userByEmail(email);
+    if (existingUser) throw createError(400, "User already exists.");
+
     const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
-    switch (role) {
-      case "ADMIN": {
-        const existingAdmin = await read.adminByEmail(email);
-        if (existingAdmin) throw createError(400, "Admin already exists.");
+    const newUser = await write.user({ email, password: hashedPassword });
 
-        await write.admin({ ...input, password: hashedPassword, permissions });
-        break;
-      }
+    const verificationToken = tokenUtils.generate({ id: newUser.id }, "verificationToken");
+    if (!verificationToken) throw createError(500, "Failed to generate verification token.");
+    if (!FRONTEND_URL) throw createError(500, "FRONTEND_URL is not defined.");
 
-      default: {
-        // regular user
-        const existingUser = await read.userByEmail(email);
-        if (existingUser) throw createError(400, "User already exists.");
-
-        const newUser = await write.user({ ...input, password: hashedPassword });
-
-        const verificationToken = tokenUtils.generate({ id: newUser.id }, "verificationToken");
-        if (!verificationToken) throw createError(500, "Failed to generate verification token.");
-        if (!FRONTEND_URL) throw createError(500, "FRONTEND_URL is not defined.");
-
-        const sentEmail = await sendEmail("verification-email", {
-          email,
-          subject: "Welcome - Verify your email",
-          FRONTEND_URL,
-          verificationToken,
-        });
-        if (!sentEmail) throw createError(500, "Failed to send welcome email.");
-      }
-    }
+    const sentEmail = await sendEmail("verification-email", {
+      email,
+      subject: "Welcome - Verify your email",
+      FRONTEND_URL,
+      verificationToken,
+    });
+    if (!sentEmail) throw createError(500, "Failed to send welcome email.");
 
     return {
       status: "success",
-      message:
-        role === "USER"
-          ? "Signed up successfully. Check your email to verify your account."
-          : "Signed up successfully.",
+      message: "Signed up successfully. Check your email to verify your account.",
     };
   },
 

@@ -1,7 +1,9 @@
+import { env } from "#config/index.js";
 import { commonUtils } from "#utils/index.js";
 import { authServices } from "./auth.services.js";
 
 const { handleRoutes } = commonUtils;
+const { NODE_ENV } = env;
 
 export const authControllers = {
   signup: handleRoutes(async (req, res) => {
@@ -22,7 +24,7 @@ export const authControllers = {
       .status(200)
       .cookie("accessToken", accessToken, {
         httpOnly: true, // cannot be read by JS
-        secure: process.env.NODE_ENV === "production", // only over HTTPS
+        secure: NODE_ENV === "production", // only over HTTPS
         sameSite: "lax", // protects against CSRF
         maxAge: 10 * 60 * 60 * 1000, // 10 hours
       })
@@ -34,7 +36,7 @@ export const authControllers = {
       .status(200)
       .clearCookie("accessToken", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: NODE_ENV === "production",
         sameSite: "lax",
       })
       .json({ status: "success", message: "Logged out successfully" });
