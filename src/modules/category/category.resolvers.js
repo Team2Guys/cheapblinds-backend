@@ -2,7 +2,7 @@ import { categoryServices } from "./category.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
 const { handleAsync } = commonUtils;
-const { verifyAccess, verifyRole } = verifications.graphql;
+const { verifyAccess, verifyRole } = verifications;
 
 export const categoryResolvers = {
   Query: {

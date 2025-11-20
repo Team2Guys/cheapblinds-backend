@@ -26,9 +26,3 @@ export const resolvers = mergeResolvers([
   productResolvers,
   userResolvers,
 ]);
-
-export { authRoutes } from "./auth/index.js";
-export { adminRoutes } from "./admin/index.js";
-export { categoryRoutes } from "./category/index.js";
-export { subcategoryRoutes } from "./subcategory/index.js";
-export { productRoutes } from "./product/index.js";

@@ -12,10 +12,8 @@ import { logTheme } from "./colors.js";
 import { corsOptions } from "./cors.js";
 import { apiRateLimiter } from "./rate-limiter.js";
 import { tokenUtils } from "#utils/index.js";
-import { invalidRouteHandler } from "./invalikd-route-handler.js";
-import { errorHandler } from "./error-handler.js";
 
-export const setupMiddleware = (app, apolloServer, appRouter) => {
+export const setupMiddleware = (app, apolloServer) => {
   app.use(morgan("common")); // Log HTTP requests ✅ Always keep
 
   app.use(helmet()); // secure HTTP headers
@@ -23,12 +21,6 @@ export const setupMiddleware = (app, apolloServer, appRouter) => {
   app.use(compression()); // res compression
 
   app.use(cookieParser()); // parse cookies
-
-  app.use(express.json({ limit: "10mb" }));
-
-  app.use(xss()); // sanitize input
-
-  app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
   (app.use(cors(corsOptions)),
     app.use(
@@ -55,10 +47,4 @@ export const setupMiddleware = (app, apolloServer, appRouter) => {
         csrfPrevention: true, // optional for browser clients
       }),
     ));
-
-  app.use(appRouter);
-
-  app.use(invalidRouteHandler);
-
-  app.use(errorHandler);
 };

@@ -2,7 +2,7 @@ import { userServices } from "./user.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
 const { handleAsync } = commonUtils;
-const { verifyAccess } = verifications.graphql;
+const { verifyAccess } = verifications;
 
 export const userResolvers = {
   Query: {

@@ -4,7 +4,6 @@ import { apolloServer } from "./apollo.server.js";
 import { logger, commonUtils } from "#utils/index.js";
 import { setupMiddleware } from "#middleware/index.js";
 import { env, connectDatabase } from "#config/index.js";
-import { appRouter } from "./routes/index.js";
 
 const { PORT, BACKEND_URL } = env;
 const { handleAsync } = commonUtils;
@@ -16,7 +15,7 @@ handleAsync(async function main() {
 
   await apolloServer.start();
 
-  setupMiddleware(app, apolloServer, appRouter);
+  setupMiddleware(app, apolloServer);
 
   app.get("/health", (_, res) => {
     res.json({ status: "ok" });

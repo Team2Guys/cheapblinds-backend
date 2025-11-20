@@ -1,3 +1,2 @@
-export * from "./subcategory.typeDefs.js";
-export * from "./subcategory.resolvers.js";
-export * from "./subcategory.routes.js";
+export { subcategoryTypeDefs } from "./subcategory.typeDefs.js";
+export { subcategoryResolvers } from "./subcategory.resolvers.js";

@@ -1,2 +1,2 @@
-export * from "./user.typeDefs.js";
-export * from "./user.resolvers.js";
+export { userTypeDefs } from "./user.typeDefs.js";
+export { userResolvers } from "./user.resolvers.js";

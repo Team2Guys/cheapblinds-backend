@@ -1,3 +1,2 @@
-export * from "./product.typeDefs.js";
-export * from "./product.resolvers.js";
-export * from "./product.routes.js";
+export { productTypeDefs } from "./product.typeDefs.js";
+export { productResolvers } from "./product.resolvers.js";
