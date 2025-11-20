@@ -89,7 +89,7 @@ CREATE TABLE "Product" (
     "canonicalTag" VARCHAR(255),
     "breadCrumb" VARCHAR(255),
     "thumbnailUrl" VARCHAR(512),
-    "productImages" JSONB[] DEFAULT ARRAY[]::JSONB[],
+    "productImages" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "lastEditedBy" VARCHAR(255),
     "seoSchema" TEXT,
     "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
@@ -104,20 +104,6 @@ CREATE TABLE "Product" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Review" (
-    "id" UUID NOT NULL,
-    "review" TEXT NOT NULL,
-    "stars" INTEGER NOT NULL DEFAULT 1,
-    "userId" UUID,
-    "productId" UUID NOT NULL,
-    "isApproved" BOOLEAN NOT NULL DEFAULT false,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Review_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -171,9 +157,6 @@ CREATE INDEX "Product_price_idx" ON "Product"("price");
 -- CreateIndex
 CREATE INDEX "Product_customUrl_idx" ON "Product"("customUrl");
 
--- CreateIndex
-CREATE INDEX "Review_productId_idx" ON "Review"("productId");
-
 -- AddForeignKey
 ALTER TABLE "Subcategory" ADD CONSTRAINT "Subcategory_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -182,9 +165,3 @@ ALTER TABLE "Product" ADD CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("cat
 
 -- AddForeignKey
 ALTER TABLE "Product" ADD CONSTRAINT "Product_subcategoryId_fkey" FOREIGN KEY ("subcategoryId") REFERENCES "Subcategory"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Review" ADD CONSTRAINT "Review_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Review" ADD CONSTRAINT "Review_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE CASCADE ON UPDATE CASCADE;

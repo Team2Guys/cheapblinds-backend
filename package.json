@@ -9,12 +9,12 @@
     "lint:js": "eslint \"./**/*.{js,jsx}\"",
     "format:code": "prettier --write \"./**/*.{js,jsx,html,yaml,env,md,json,txt}\"",
     "format:prisma": "npx prisma format",
-    "db:init": "npx prisma init --schema=src/prisma/schema.prisma",
-    "db:push": "npx prisma db push --schema=src/prisma/schema.prisma",
-    "db:migrate": "npx prisma migrate dev --schema=src/prisma/schema.prisma",
-    "db:generate": "npx prisma generate --schema=src/prisma/schema.prisma",
-    "db:studio": "npx prisma studio --schema=src/prisma/schema.prisma",
-    "db:reset": "npx prisma migrate reset --schema=src/prisma/schema.prisma"
+    "db:init": "npx prisma init",
+    "db:push": "npx prisma db push",
+    "db:migrate": "npx prisma migrate dev",
+    "db:generate": "npx prisma generate",
+    "db:studio": "npx prisma studio",
+    "db:reset": "npx prisma migrate reset"
   },
   "devDependencies": {
     "eslint": "^9.20.0",
