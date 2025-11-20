@@ -31,6 +31,7 @@ const validators = {
 
   SUPER_ADMIN_ID: str({ desc: "Super admin id" }),
   SUPER_ADMIN_EMAIL: email({ desc: "Super admin email" }),
+  SUPER_ADMIN_NAME: str({ desc: "Super admin name" }),
   SUPER_ADMIN_PASSWORD: str({ desc: "Super admin password" }),
 };
 

@@ -5,7 +5,8 @@ import { repository } from "#repository/index.js";
 import { env } from "#config/index.js";
 
 const { write, read, update } = repository;
-const { FRONTEND_URL, SUPER_ADMIN_ID, SUPER_ADMIN_EMAIL, SUPER_ADMIN_PASSWORD } = env;
+const { FRONTEND_URL, SUPER_ADMIN_ID, SUPER_ADMIN_EMAIL, SUPER_ADMIN_NAME, SUPER_ADMIN_PASSWORD } =
+  env;
 
 export const authServices = {
   signup: async (input) => {
@@ -93,6 +94,7 @@ export const authServices = {
       message: "Signed in successfully",
       data: {
         id: role === "SUPER_ADMIN" ? SUPER_ADMIN_ID : user.id,
+        name: role === "SUPER_ADMIN" ? SUPER_ADMIN_NAME : role === "ADMIN" ? user.name : undefined,
         accessToken,
         role,
       },
