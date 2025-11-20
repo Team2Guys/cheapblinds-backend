@@ -2,7 +2,6 @@ import cors from "cors";
 import xss from "xss-clean";
 import helmet from "helmet";
 import express from "express";
-import morgan from "morgan";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import { expressMiddleware } from "@as-integrations/express4";
@@ -14,8 +13,6 @@ import { apiRateLimiter } from "./rate-limiter.js";
 import { tokenUtils } from "#utils/index.js";
 
 export const setupMiddleware = (app, apolloServer) => {
-  app.use(morgan("common")); // Log HTTP requests ✅ Always keep
-
   app.use(helmet()); // secure HTTP headers
 
   app.use(compression()); // res compression

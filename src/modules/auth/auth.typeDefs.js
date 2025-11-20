@@ -20,6 +20,24 @@ export const authTypeDefs = gql`
     resetToken: String!
   }
 
+  type SigninResponseData {
+    id: ID!
+    name: String!
+    role: Role!
+  }
+
+  type SigninResponse {
+    status: String!
+    message: String!
+    data: SigninResponseData!
+  }
+
+  input SigninInput {
+    email: String!
+    password: String!
+    role: Role!
+  }
+
   type Query {
     _empty: String
   }

@@ -1,6 +1,14 @@
 import { gql } from "graphql-tag";
 
 export const adminTypeDefs = gql`
+  input CreateAdminInput {
+    name: String!
+    email: String!
+    password: String!
+    role: Role!
+    permissions: [String!]!
+  }
+
   input GetAdminByIdInput {
     id: ID!
   }
@@ -22,7 +30,8 @@ export const adminTypeDefs = gql`
     name: String!
     email: String!
     password: String!
-    permissions: [String!]
+    permissions: [String!]!
+    role: Role!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -45,8 +54,8 @@ export const adminTypeDefs = gql`
   }
 
   type Mutation {
-    createAdmin(input: CreateAdminInput!): AdminResponse!
-    updateAdminById(input: UpdateAdminByIdInput!): AdminResponse!
+    createAdmin(input: CreateAdminInput!): GenericResponse!
+    updateAdminById(input: UpdateAdminByIdInput!): GenericResponse!
     removeAdminById(input: RemoveAdminByIdInput!): GenericResponse!
   }
 `;

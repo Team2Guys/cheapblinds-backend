@@ -6,23 +6,6 @@ export const commonTypeDefs = gql`
     message: String!
   }
 
-  type SigninResponseData {
-    id: ID!
-    role: Role!
-  }
-
-  type SigninResponse {
-    status: String!
-    message: String!
-    data: SigninResponseData!
-  }
-
-  input SigninInput {
-    email: String!
-    password: String!
-    role: Role!
-  }
-
   enum Role {
     USER
     ADMIN
