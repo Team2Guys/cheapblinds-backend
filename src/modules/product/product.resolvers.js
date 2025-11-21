@@ -1,4 +1,3 @@
-import { GraphQLJSON } from "graphql-type-json";
 import { productServices } from "./product.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
@@ -6,13 +5,15 @@ const { handleAsync } = commonUtils;
 const { verifyAccess, verifyRole } = verifications;
 
 export const productResolvers = {
-  JSON: GraphQLJSON,
-
   Query: {
     getProductList: handleAsync(async () => productServices.getProductList()),
 
     getProductById: handleAsync(async (_parent, { input }) =>
       productServices.getProductById(input),
+    ),
+
+    getProductByUrls: handleAsync(async (_parent, { input }) =>
+      productServices.getProductByUrls(input),
     ),
   },
 

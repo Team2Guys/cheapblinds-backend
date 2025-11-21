@@ -58,6 +58,12 @@ export const productTypeDefs = gql`
     id: ID!
   }
 
+  input GetProductByUrlsInput {
+    categoryCustomUrl: String!
+    subcategoryCustomUrl: String!
+    productCustomUrl: String!
+  }
+
   type ProductListResponse {
     status: String!
     message: String!
@@ -73,6 +79,7 @@ export const productTypeDefs = gql`
   type Query {
     getProductList: ProductListResponse!
     getProductById(input: GetProductByIdInput!): ProductResponse!
+    getProductByUrls(input: GetProductByUrlsInput!): ProductResponse!
   }
 
   type Mutation {

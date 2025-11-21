@@ -28,7 +28,7 @@ export const subcategoryRepository = {
       });
     },
 
-    subcategoryByUrls: (subcategoryCustomUrl, categoryCustomUrl) => {
+    subcategoryByUrls: (categoryCustomUrl, subcategoryCustomUrl) => {
       return prisma.subcategory.findFirst({
         where: {
           customUrl: subcategoryCustomUrl,

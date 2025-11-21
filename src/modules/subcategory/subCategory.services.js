@@ -38,9 +38,9 @@ export const subcategoryServices = {
   },
 
   getSubcategoryByUrls: async (input) => {
-    const { subcategoryCustomUrl, categoryCustomUrl } = input;
+    const { categoryCustomUrl, subcategoryCustomUrl } = input;
 
-    const subcategory = await read.subcategoryByUrls(subcategoryCustomUrl, categoryCustomUrl);
+    const subcategory = await read.subcategoryByUrls(categoryCustomUrl, subcategoryCustomUrl);
 
     if (!subcategory) {
       throw createError(404, "Subcategory not found with the provided custom URLs.");

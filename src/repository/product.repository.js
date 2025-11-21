@@ -26,6 +26,24 @@ export const productRepository = {
         },
       });
     },
+
+    productByUrls: (categoryCustomUrl, subcategoryCustomUrl, productCustomUrl) => {
+      return prisma.product.findFirst({
+        where: {
+          customUrl: productCustomUrl,
+          subcategory: {
+            customUrl: subcategoryCustomUrl,
+            category: {
+              customUrl: categoryCustomUrl,
+            },
+          },
+        },
+        include: {
+          category: true,
+          subcategory: true,
+        },
+      });
+    },
   },
 
   write: {

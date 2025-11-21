@@ -38,6 +38,26 @@ export const productServices = {
     };
   },
 
+  getProductByUrls: async (input) => {
+    const { categoryCustomUrl, subcategoryCustomUrl, productCustomUrl } = input;
+
+    const product = await read.productByUrls(
+      categoryCustomUrl,
+      subcategoryCustomUrl,
+      productCustomUrl,
+    );
+
+    if (!product) {
+      throw createError(404, "Product not found with the provided custom URLs.");
+    }
+
+    return {
+      status: "success",
+      message: "Product retrieved successfully",
+      data: product,
+    };
+  },
+
   updateProductById: async (input) => {
     const { id, ...rest } = input;
 
