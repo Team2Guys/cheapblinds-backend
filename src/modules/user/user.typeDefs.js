@@ -17,35 +17,13 @@ export const userTypeDefs = gql`
     id: ID!
   }
 
-  type User {
-    id: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
-    isEmailVerified: Boolean!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-  }
-
-  type UserListResponse {
-    status: String!
-    message: String!
-    data: [User!]!
-  }
-
-  type UserResponse {
-    status: String!
-    message: String!
-    data: User!
-  }
-
   type Query {
-    getUserList: UserListResponse!
-    getUserById(input: GetUserByIdInput!): UserResponse!
+    getUserList: [User!]!
+    getUserById(input: GetUserByIdInput!): User!
   }
 
   type Mutation {
-    updateUserById(input: UpdateUserByIdInput!): UserResponse!
+    updateUserById(input: UpdateUserByIdInput!): GenericResponse!
     removeUserById(input: RemoveUserByIdInput!): GenericResponse!
   }
 `;

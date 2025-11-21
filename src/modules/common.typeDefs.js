@@ -1,11 +1,6 @@
 import { gql } from "graphql-tag";
 
 export const commonTypeDefs = gql`
-  type GenericResponse {
-    status: String!
-    message: String!
-  }
-
   enum Role {
     USER
     ADMIN
@@ -16,6 +11,31 @@ export const commonTypeDefs = gql`
     DRAFT
     PUBLISHED
     ARCHIVED
+  }
+
+  type GenericResponse {
+    message: String!
+  }
+
+  type Admin {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    permissions: [String!]!
+    role: Role!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+  }
+
+  type User {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    isEmailVerified: Boolean!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type Category {
@@ -75,7 +95,7 @@ export const commonTypeDefs = gql`
     productImages: [String!]
     lastEditedBy: String
     seoSchema: String
-    price: Int
+    price: Float
     discountPrice: Int
     stock: Int
     additionalInfo: [JSON!]

@@ -7,20 +7,13 @@ export const categoryServices = {
   createCategory: async (input) => {
     await write.category(input);
 
-    return {
-      status: "success",
-      message: "Category created successfully",
-    };
+    return { message: "Category created successfully" };
   },
 
   getCategoryList: async () => {
     const categories = await read.categories();
 
-    return {
-      status: "success",
-      message: "Categories retrieved successfully",
-      data: categories,
-    };
+    return categories;
   },
 
   getCategoryById: async (input) => {
@@ -30,11 +23,7 @@ export const categoryServices = {
 
     if (!category) throw createError(404, "Category not found.");
 
-    return {
-      status: "success",
-      message: "Category retrieved successfully",
-      data: category,
-    };
+    return category;
   },
 
   getCategoryByCustomUrl: async (input) => {
@@ -44,11 +33,7 @@ export const categoryServices = {
 
     if (!category) throw createError(404, "Category not found.");
 
-    return {
-      status: "success",
-      message: "Category retrieved successfully",
-      data: category,
-    };
+    return category;
   },
 
   updateCategoryById: async (input) => {
@@ -60,10 +45,7 @@ export const categoryServices = {
 
     await update.categoryById(id, rest);
 
-    return {
-      status: "success",
-      message: "Category updated successfully",
-    };
+    return { message: "Category updated successfully" };
   },
 
   removeCategoryById: async (input) => {
@@ -75,9 +57,6 @@ export const categoryServices = {
 
     await remove.categoryById(id);
 
-    return {
-      status: "success",
-      message: "Category deleted successfully",
-    };
+    return { message: "Category deleted successfully" };
   },
 };

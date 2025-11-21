@@ -31,10 +31,7 @@ export const authServices = {
     });
     if (!sentEmail) throw createError(500, "Failed to send welcome email.");
 
-    return {
-      status: "success",
-      message: "Signed up successfully. Check your email to verify your account.",
-    };
+    return { message: "Signed up successfully. Check your email to verify your account." };
   },
 
   signin: async (input) => {
@@ -90,14 +87,10 @@ export const authServices = {
     if (!accessToken) throw createError(500, "Failed to generate access token.");
 
     return {
-      status: "success",
-      message: "Signed in successfully",
-      data: {
-        id: role === "SUPER_ADMIN" ? SUPER_ADMIN_ID : user.id,
-        name: role === "SUPER_ADMIN" ? SUPER_ADMIN_NAME : role === "ADMIN" ? user.name : undefined,
-        accessToken,
-        role,
-      },
+      id: role === "SUPER_ADMIN" ? SUPER_ADMIN_ID : user.id,
+      name: role === "SUPER_ADMIN" ? SUPER_ADMIN_NAME : role === "ADMIN" ? user.name : undefined,
+      role,
+      accessToken,
     };
   },
 
@@ -121,10 +114,7 @@ export const authServices = {
 
     if (!sentEmail) throw createError(500, "Failed to send reset password email.");
 
-    return {
-      status: "success",
-      message: "Reset password email sent successfully.",
-    };
+    return { message: "Reset password email sent successfully." };
   },
 
   updatePassword: async (input) => {
@@ -144,9 +134,6 @@ export const authServices = {
 
     if (!isPasswordUpdated) throw createError(500, "Failed to update password.");
 
-    return {
-      status: "success",
-      message: "Password updated successfully.",
-    };
+    return { message: "Password updated successfully." };
   },
 };

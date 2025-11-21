@@ -47,22 +47,10 @@ export const subcategoryTypeDefs = gql`
     categoryCustomUrl: String!
   }
 
-  type SubcategoryListResponse {
-    status: String!
-    message: String!
-    data: [Subcategory!]!
-  }
-
-  type SubcategoryResponse {
-    status: String!
-    message: String!
-    data: Subcategory!
-  }
-
   type Query {
-    getSubcategoryList: SubcategoryListResponse!
-    getSubcategoryById(input: GetSubcategoryByIdInput!): SubcategoryResponse!
-    getSubcategoryByUrls(input: GetSubcategoryByUrlsInput!): SubcategoryResponse!
+    getSubcategoryList: [Subcategory!]!
+    getSubcategoryById(input: GetSubcategoryByIdInput!): Subcategory!
+    getSubcategoryByUrls(input: GetSubcategoryByUrlsInput!): Subcategory!
   }
 
   type Mutation {

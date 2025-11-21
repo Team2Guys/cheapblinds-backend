@@ -22,10 +22,7 @@ export const emailServices = {
 
     if (!isUserUpdated) throw createError(500, "Failed to update user email verification.");
 
-    return {
-      status: "success",
-      message: "Email verified successfully",
-    };
+    return { message: "Email verified successfully" };
   },
 
   sendVerificationToken: async (input) => {
@@ -47,9 +44,6 @@ export const emailServices = {
 
     if (!sentEmail) throw createError(500, "Failed to send verification email.");
 
-    return {
-      status: "success",
-      message: "Verification email sent successfully",
-    };
+    return { message: "Verification email sent successfully" };
   },
 };

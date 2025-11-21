@@ -7,20 +7,13 @@ export const subcategoryServices = {
   createSubcategory: async (input) => {
     await write.subcategory(input);
 
-    return {
-      status: "success",
-      message: "Subcategory created successfully",
-    };
+    return { message: "Subcategory created successfully" };
   },
 
   getSubcategoryList: async () => {
     const subcategories = await read.subcategories();
 
-    return {
-      status: "success",
-      message: "Subcategories retrieved successfully",
-      data: subcategories,
-    };
+    return subcategories;
   },
 
   getSubcategoryById: async (input) => {
@@ -30,11 +23,7 @@ export const subcategoryServices = {
 
     if (!subcategory) throw createError(404, "Subcategory not found.");
 
-    return {
-      status: "success",
-      message: "Subcategory retrieved successfully",
-      data: subcategory,
-    };
+    return subcategory;
   },
 
   getSubcategoryByUrls: async (input) => {
@@ -46,11 +35,7 @@ export const subcategoryServices = {
       throw createError(404, "Subcategory not found with the provided custom URLs.");
     }
 
-    return {
-      status: "success",
-      message: "Subcategory retrieved successfully",
-      data: subcategory,
-    };
+    return subcategory;
   },
 
   updateSubcategoryById: async (input) => {
@@ -62,10 +47,7 @@ export const subcategoryServices = {
 
     await update.subcategoryById(id, rest);
 
-    return {
-      status: "success",
-      message: "Subcategory updated successfully",
-    };
+    return { message: "Subcategory updated successfully" };
   },
 
   removeSubcategoryById: async (input) => {
@@ -77,9 +59,6 @@ export const subcategoryServices = {
 
     await remove.subcategoryById(id);
 
-    return {
-      status: "success",
-      message: "Subcategory deleted successfully",
-    };
+    return { message: "Subcategory deleted successfully" };
   },
 };

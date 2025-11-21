@@ -44,22 +44,10 @@ export const categoryTypeDefs = gql`
     id: ID!
   }
 
-  type CategoryListResponse {
-    status: String!
-    message: String!
-    data: [Category!]!
-  }
-
-  type CategoryResponse {
-    status: String!
-    message: String!
-    data: Category!
-  }
-
   type Query {
-    getCategoryList: CategoryListResponse!
-    getCategoryById(input: GetCategoryByIdInput!): CategoryResponse!
-    getCategoryByCustomUrl(input: GetCategoryByCustomUrlInput!): CategoryResponse!
+    getCategoryList: [Category!]!
+    getCategoryById(input: GetCategoryByIdInput!): Category!
+    getCategoryByCustomUrl(input: GetCategoryByCustomUrlInput!): Category!
   }
 
   type Mutation {

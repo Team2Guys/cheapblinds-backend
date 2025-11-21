@@ -15,20 +15,13 @@ export const adminServices = {
 
     await write.admin({ email, password: hashedPassword, ...rest });
 
-    return {
-      status: "success",
-      message: "Admin created successfully",
-    };
+    return { message: "Admin created successfully" };
   },
 
   getAdminList: async () => {
     const admins = await read.admins();
 
-    return {
-      status: "success",
-      message: "Admins retrieved successfully",
-      data: admins,
-    };
+    return admins;
   },
 
   getAdminById: async (input) => {
@@ -38,11 +31,7 @@ export const adminServices = {
 
     if (!admin) throw createError(404, "Admin not found.");
 
-    return {
-      status: "success",
-      message: "Admin retrieved successfully",
-      data: admin,
-    };
+    return admin;
   },
 
   updateAdminById: async (input) => {
@@ -59,10 +48,7 @@ export const adminServices = {
 
     await update.adminById(id, updateData);
 
-    return {
-      status: "success",
-      message: "Admin updated successfully",
-    };
+    return { message: "Admin updated successfully" };
   },
 
   removeAdminById: async (input) => {
@@ -74,9 +60,6 @@ export const adminServices = {
 
     await remove.adminById(id);
 
-    return {
-      status: "success",
-      message: "Admin deleted successfully",
-    };
+    return { message: "Admin deleted successfully" };
   },
 };

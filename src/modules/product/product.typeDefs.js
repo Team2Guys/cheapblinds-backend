@@ -1,8 +1,6 @@
 import { gql } from "graphql-tag";
 
 export const productTypeDefs = gql`
-  scalar JSON
-
   input CreateProductInput {
     categoryId: ID!
     subcategoryId: ID!
@@ -32,9 +30,9 @@ export const productTypeDefs = gql`
 
   input UpdateProductByIdInput {
     id: ID!
-    categoryId: ID!
-    subcategoryId: ID!
-    name: String!
+    categoryId: ID
+    subcategoryId: ID
+    name: String
     description: String
     shortDescription: String
     customUrl: String
@@ -64,22 +62,10 @@ export const productTypeDefs = gql`
     productCustomUrl: String!
   }
 
-  type ProductListResponse {
-    status: String!
-    message: String!
-    data: [Product!]!
-  }
-
-  type ProductResponse {
-    status: String!
-    message: String!
-    data: Product!
-  }
-
   type Query {
-    getProductList: ProductListResponse!
-    getProductById(input: GetProductByIdInput!): ProductResponse!
-    getProductByUrls(input: GetProductByUrlsInput!): ProductResponse!
+    getProductList: [Product!]!
+    getProductById(input: GetProductByIdInput!): Product!
+    getProductByUrls(input: GetProductByUrlsInput!): Product!
   }
 
   type Mutation {

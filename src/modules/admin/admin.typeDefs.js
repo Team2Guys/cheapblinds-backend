@@ -25,32 +25,9 @@ export const adminTypeDefs = gql`
     id: ID!
   }
 
-  type Admin {
-    id: ID!
-    name: String!
-    email: String!
-    password: String!
-    permissions: [String!]!
-    role: Role!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-  }
-
-  type AdminListResponse {
-    status: String!
-    message: String!
-    data: [Admin!]!
-  }
-
-  type AdminResponse {
-    status: String!
-    message: String!
-    data: Admin!
-  }
-
   type Query {
-    getAdminList: AdminListResponse!
-    getAdminById(input: GetAdminByIdInput!): AdminResponse!
+    getAdminList: [Admin!]!
+    getAdminById(input: GetAdminByIdInput!): Admin!
   }
 
   type Mutation {

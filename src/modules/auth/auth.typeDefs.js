@@ -20,16 +20,11 @@ export const authTypeDefs = gql`
     resetToken: String!
   }
 
-  type SigninResponseData {
-    id: ID!
+  type SigninResponse {
+    id: String!
     name: String!
     role: Role!
-  }
-
-  type SigninResponse {
-    status: String!
-    message: String!
-    data: SigninResponseData!
+    accessToken: String!
   }
 
   input SigninInput {
@@ -44,7 +39,7 @@ export const authTypeDefs = gql`
 
   type Mutation {
     signup(input: SignupInput!): GenericResponse!
-    signin(input: SigninInput!): SigninResponse!
+    signin(input: SigninInput!): GenericResponse!
     signout: GenericResponse!
     requestPasswordReset(input: PasswordResetRequestInput!): GenericResponse!
     updatePassword(input: PasswordUpdateInput!): GenericResponse!

@@ -7,21 +7,13 @@ export const productServices = {
   createProduct: async (input) => {
     const product = await write.product(input);
 
-    return {
-      status: "success",
-      message: "Product created successfully",
-      data: product,
-    };
+    return product;
   },
 
   getProductList: async () => {
     const products = await read.products();
 
-    return {
-      status: "success",
-      message: "Products retrieved successfully",
-      data: products,
-    };
+    return products;
   },
 
   getProductById: async (input) => {
@@ -31,11 +23,7 @@ export const productServices = {
 
     if (!product) throw createError(404, "Product not found.");
 
-    return {
-      status: "success",
-      message: "Product retrieved successfully",
-      data: product,
-    };
+    return product;
   },
 
   getProductByUrls: async (input) => {
@@ -51,11 +39,7 @@ export const productServices = {
       throw createError(404, "Product not found with the provided custom URLs.");
     }
 
-    return {
-      status: "success",
-      message: "Product retrieved successfully",
-      data: product,
-    };
+    return product;
   },
 
   updateProductById: async (input) => {
@@ -65,13 +49,9 @@ export const productServices = {
 
     if (!existingProduct) throw createError(404, "Product not found.");
 
-    const updatedProduct = await update.productById(id, rest);
+    await update.productById(id, rest);
 
-    return {
-      status: "success",
-      message: "Product updated successfully",
-      data: updatedProduct,
-    };
+    return { message: "Product updated successfully" };
   },
 
   removeProductById: async (input) => {
@@ -83,9 +63,6 @@ export const productServices = {
 
     await remove.productById(id);
 
-    return {
-      status: "success",
-      message: "Product deleted successfully",
-    };
+    return { message: "Product deleted successfully" };
   },
 };

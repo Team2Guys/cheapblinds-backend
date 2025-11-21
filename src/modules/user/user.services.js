@@ -8,11 +8,7 @@ export const userServices = {
   getUserList: async () => {
     const users = await read.users();
 
-    return {
-      status: "success",
-      message: "Users retrieved successfully",
-      data: users,
-    };
+    return users;
   },
 
   getUserById: async (input) => {
@@ -22,11 +18,7 @@ export const userServices = {
 
     if (!user) throw createError(404, "User not found.");
 
-    return {
-      status: "success",
-      message: "User retrieved successfully",
-      data: user,
-    };
+    return user;
   },
 
   updateUserById: async (input) => {
@@ -38,10 +30,7 @@ export const userServices = {
 
     await update.userById(id, rest);
 
-    return {
-      status: "success",
-      message: "User updated successfully",
-    };
+    return { message: "User updated successfully" };
   },
 
   removeUserById: async (input) => {
@@ -49,9 +38,6 @@ export const userServices = {
 
     await remove.userById(id);
 
-    return {
-      status: "success",
-      message: "User deleted successfully",
-    };
+    return { message: "User deleted successfully" };
   },
 };
