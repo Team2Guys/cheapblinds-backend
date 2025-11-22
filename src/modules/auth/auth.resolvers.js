@@ -1,7 +1,9 @@
+import { env } from "#config/index.js";
 import { commonUtils } from "#utils/index.js";
 import { authServices } from "./auth.services.js";
 
 const { handleAsync } = commonUtils;
+const { NODE_ENV } = env;
 
 export const authResolvers = {
   Query: {
@@ -17,8 +19,8 @@ export const authResolvers = {
 
       res.cookie("accessToken", accessToken, {
         httpOnly: true, // cannot be read by JS
-        secure: process.env.NODE_ENV === "production", // only over HTTPS
-        sameSite: "lax", // protects against CSRF
+        secure: NODE_ENV === "production", // only over HTTPS
+        sameSite: "lax",
         maxAge: 10 * 60 * 60 * 1000, // 10 hours
       });
 
@@ -28,7 +30,7 @@ export const authResolvers = {
     signout: handleAsync(async (_parent, _args, { res }) => {
       res.clearCookie("accessToken", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: NODE_ENV === "production",
         sameSite: "lax",
       });
 

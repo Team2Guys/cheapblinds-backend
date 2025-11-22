@@ -6,9 +6,11 @@ const { verifyAccess } = verifications;
 
 export const adminResolvers = {
   Query: {
-    getAdminList: handleAsync(async () => adminServices.getAdminList()),
+    getAdminList: handleAsync(verifyAccess(async () => adminServices.getAdminList())),
 
-    getAdminById: handleAsync(async (_parent, { input }) => adminServices.getAdminById(input)),
+    getAdminById: handleAsync(
+      verifyAccess(async (_parent, { input }) => adminServices.getAdminById(input)),
+    ),
   },
 
   Mutation: {
