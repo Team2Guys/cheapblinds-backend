@@ -2,26 +2,25 @@ import { gql } from "graphql-tag";
 
 export const productTypeDefs = gql`
   input CreateProductInput {
-    categoryId: ID!
-    subcategoryId: ID!
     name: String!
-    description: String
-    shortDescription: String
-    customUrl: String
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadCrumb: String
-    thumbnailUrl: String
-    productImages: [String!]
-    lastEditedBy: String
-    seoSchema: String
-    status: ContentStatus
-    price: Int
-    discountPrice: Int
-    stock: Int
+    description: String!
+    shortDescription: String!
+    customUrl: String!
+    metaTitle: String!
+    metaDescription: String!
+    canonicalTag: String!
+    breadCrumb: String!
+    thumbnailUrl: String!
+    lastEditedBy: String!
+    seoSchema: String!
+    productImages: [String!]!
+    price: Float!
+    stock: Int!
     additionalInfo: [JSON!]
     measuringGuide: [JSON!]
+    status: ContentStatus!
+    categoryId: ID!
+    subcategoryId: ID!
   }
 
   input GetProductByIdInput {
@@ -30,8 +29,6 @@ export const productTypeDefs = gql`
 
   input UpdateProductByIdInput {
     id: ID!
-    categoryId: ID
-    subcategoryId: ID
     name: String
     description: String
     shortDescription: String
@@ -44,12 +41,14 @@ export const productTypeDefs = gql`
     productImages: [String!]
     lastEditedBy: String
     seoSchema: String
-    status: ContentStatus
-    price: Int
-    discountPrice: Int
+    price: Float
+    discountPrice: Float
     stock: Int
     additionalInfo: [JSON!]
     measuringGuide: [JSON!]
+    status: ContentStatus
+    categoryId: ID
+    subcategoryId: ID
   }
 
   input RemoveProductByIdInput {

@@ -1,6 +1,9 @@
 import { gql } from "graphql-tag";
 
 export const commonTypeDefs = gql`
+  scalar JSON
+  scalar DateTime
+
   enum Role {
     USER
     ADMIN
@@ -33,80 +36,80 @@ export const commonTypeDefs = gql`
     firstName: String!
     lastName: String!
     email: String!
+    password: String!
     isEmailVerified: Boolean!
+    isNewsletterSubscribed: Boolean!
+    role: Role!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
 
   type Category {
-    id: ID
-    name: String
-    description: String
-    shortDescription: String
+    id: ID!
+    name: String!
+    description: String!
+    shortDescription: String!
     customUrl: String!
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadCrumb: String
-    thumbnailUrl: String
-    lastEditedBy: String
-    seoSchema: String
-    subcategories: [Subcategory!]
-    products: [Product!]
-    status: ContentStatus
-    createdAt: DateTime
-    updatedAt: DateTime
+    metaTitle: String!
+    metaDescription: String!
+    canonicalTag: String!
+    breadCrumb: String!
+    thumbnailUrl: String!
+    lastEditedBy: String!
+    seoSchema: String!
+    status: ContentStatus!
+    products: [Product!]!
+    subcategories: [Subcategory!]!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type Subcategory {
-    id: ID
-    categoryId: ID
-    name: String
-    description: String
-    shortDescription: String
-    customUrl: String
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadCrumb: String
-    thumbnailUrl: String
-    lastEditedBy: String
-    seoSchema: String
-    category: Category
-    products: [Product!]
-    status: ContentStatus
-    createdAt: DateTime
-    updatedAt: DateTime
+    id: ID!
+    categoryId: ID!
+    name: String!
+    description: String!
+    shortDescription: String!
+    customUrl: String!
+    metaTitle: String!
+    metaDescription: String!
+    canonicalTag: String!
+    breadCrumb: String!
+    thumbnailUrl: String!
+    lastEditedBy: String!
+    seoSchema: String!
+    status: ContentStatus!
+    category: Category!
+    products: [Product!]!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type Product {
-    id: ID
-    categoryId: ID
-    subcategoryId: ID
-    name: String
-    description: String
-    shortDescription: String
-    customUrl: String
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadCrumb: String
-    thumbnailUrl: String
-    productImages: [String!]
-    lastEditedBy: String
-    seoSchema: String
-    price: Float
-    discountPrice: Int
-    stock: Int
-    additionalInfo: [JSON!]
-    measuringGuide: [JSON!]
-    category: Category
-    subcategory: Subcategory
-    status: ContentStatus
-    createdAt: DateTime
-    updatedAt: DateTime
+    id: ID!
+    categoryId: ID!
+    subcategoryId: ID!
+    name: String!
+    description: String!
+    shortDescription: String!
+    customUrl: String!
+    metaTitle: String!
+    metaDescription: String!
+    canonicalTag: String!
+    breadCrumb: String!
+    thumbnailUrl: String!
+    productImages: [String!]!
+    lastEditedBy: String!
+    seoSchema: String!
+    price: Float!
+    discountPrice: Float!
+    stock: Int!
+    additionalInfo: [JSON!]!
+    measuringGuide: [JSON!]!
+    category: Category!
+    subcategory: Subcategory!
+    status: ContentStatus!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
-
-  scalar JSON
-  scalar DateTime
 `;

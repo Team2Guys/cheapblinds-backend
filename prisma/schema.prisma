@@ -26,8 +26,8 @@ model Admin {
   name        String   @db.VarChar(100)
   email       String   @unique @db.VarChar(255)
   password    String   @db.VarChar(255)
-  role        Role     @default(ADMIN)
   permissions String[] @default([])
+  role        Role     @default(ADMIN)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -89,9 +89,9 @@ model Subcategory {
   lastEditedBy     String?       @db.VarChar(255)
   seoSchema        String?       @db.Text()
   categoryId       String        @db.Uuid
+  status           ContentStatus @default(PUBLISHED)
   category         Category      @relation(fields: [categoryId], references: [id], name: "CategorySubcategories", onDelete: Cascade)
   products         Product[]     @relation("SubcategoryProducts")
-  status           ContentStatus @default(PUBLISHED)
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
@@ -111,9 +111,9 @@ model Product {
   canonicalTag     String?        @db.VarChar(255)
   breadCrumb       String?        @db.VarChar(255)
   thumbnailUrl     String?        @db.VarChar(512)
-  productImages    String[]       @default([])
   lastEditedBy     String?        @db.VarChar(255)
   seoSchema        String?        @db.Text()
+  productImages    String[]       @default([])
   price            Float          @default(0)
   discountPrice    Int?           @default(0)
   stock            Int            @default(0)
@@ -121,9 +121,9 @@ model Product {
   measuringGuide   Json[]         @default([]) @db.JsonB()
   categoryId       String         @db.Uuid
   subcategoryId    String         @db.Uuid
+  status           ContentStatus? @default(PUBLISHED)
   category         Category       @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
   subcategory      Subcategory    @relation(fields: [subcategoryId], references: [id], name: "SubcategoryProducts", onDelete: Cascade)
-  status           ContentStatus? @default(PUBLISHED)
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
 

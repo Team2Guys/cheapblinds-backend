@@ -7,7 +7,7 @@ export const authTypeDefs = gql`
     email: String!
     password: String!
     role: Role!
-    isNewsletterSubscribed: Boolean
+    isNewsletterSubscribed: Boolean!
     permissions: [String!]
   }
 
@@ -24,7 +24,6 @@ export const authTypeDefs = gql`
     id: String!
     name: String!
     role: Role!
-    accessToken: String!
   }
 
   input SigninInput {
@@ -39,7 +38,7 @@ export const authTypeDefs = gql`
 
   type Mutation {
     signup(input: SignupInput!): GenericResponse!
-    signin(input: SigninInput!): GenericResponse!
+    signin(input: SigninInput!): SigninResponse!
     signout: GenericResponse!
     requestPasswordReset(input: PasswordResetRequestInput!): GenericResponse!
     updatePassword(input: PasswordUpdateInput!): GenericResponse!
