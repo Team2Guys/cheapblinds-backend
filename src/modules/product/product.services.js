@@ -1,68 +1,37 @@
 import createError from "http-errors";
 import { repository } from "#repository/index.js";
+import { commonUtils } from "#utils/index.js";
 
 const { write, read, update, remove } = repository;
+const { validateUuid } = commonUtils;
 
 export const productServices = {
   createProduct: async (input) => {
-    const product = await write.product(input);
-
-    return product;
+    return await write.product(input);
   },
 
   getProductList: async () => {
-    const products = await read.products();
-
-    return products;
+    return await read.products();
   },
 
-  getProductById: async (input) => {
-    const { id } = input;
-
-    const product = await read.productById(id);
-
-    if (!product) throw createError(404, "Product not found.");
-
-    return product;
+  getProductById: async (id) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid product id.");
+    return await read.productById(id);
   },
 
   getProductByUrls: async (input) => {
     const { categoryCustomUrl, subcategoryCustomUrl, productCustomUrl } = input;
-
-    const product = await read.productByUrls(
-      categoryCustomUrl,
-      subcategoryCustomUrl,
-      productCustomUrl,
-    );
-
-    if (!product) {
-      throw createError(404, "Product not found with the provided custom URLs.");
-    }
-
-    return product;
+    return await read.productByUrls(categoryCustomUrl, subcategoryCustomUrl, productCustomUrl);
   },
 
-  updateProductById: async (input) => {
-    const { id, ...rest } = input;
-
-    const existingProduct = await read.productById(id);
-
-    if (!existingProduct) throw createError(404, "Product not found.");
-
-    await update.productById(id, rest);
-
-    return { message: "Product updated successfully" };
+  updateProductById: async (id, input) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid product id.");
+    return await update.productById(id, input);
   },
 
-  removeProductById: async (input) => {
-    const { id } = input;
-
-    const existingProduct = await read.productById(id);
-
-    if (!existingProduct) throw createError(404, "Product not found.");
-
+  removeProductById: async (id) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid product id.");
     await remove.productById(id);
-
     return { message: "Product deleted successfully" };
   },
 };

@@ -1,9 +1,5 @@
-import createError from "http-errors";
 import { PrismaClient } from "@prisma/client";
 
-import { commonUtils } from "#utils/index.js";
-
-const { validateUuid } = commonUtils;
 const prisma = new PrismaClient();
 
 export const categoryRepository = {
@@ -16,19 +12,16 @@ export const categoryRepository = {
         },
       }),
 
-    categoryById: (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid category id.");
-
-      return prisma.category.findUnique({
+    categoryById: (id) =>
+      prisma.category.findUnique({
         where: { id },
         include: {
           subcategories: true,
           products: true,
         },
-      });
-    },
+      }),
 
-    categoryByCustomUrl: (customUrl) =>
+    categoryByUrl: (customUrl) =>
       prisma.category.findUnique({
         where: { customUrl },
         include: {

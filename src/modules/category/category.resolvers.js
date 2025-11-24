@@ -8,12 +8,10 @@ export const categoryResolvers = {
   Query: {
     getCategoryList: handleAsync(async () => categoryServices.getCategoryList()),
 
-    getCategoryById: handleAsync(async (_parent, { input }) =>
-      categoryServices.getCategoryById(input),
-    ),
+    getCategoryById: handleAsync(async (_parent, { id }) => categoryServices.getCategoryById(id)),
 
-    getCategoryByCustomUrl: handleAsync(async (_parent, { input }) =>
-      categoryServices.getCategoryByCustomUrl(input),
+    getCategoryByUrl: handleAsync(async (_parent, { input }) =>
+      categoryServices.getCategoryByUrl(input),
     ),
   },
 
@@ -28,16 +26,16 @@ export const categoryResolvers = {
 
     updateCategoryById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
-          categoryServices.updateCategoryById(input),
+        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { id, input }) =>
+          categoryServices.updateCategoryById(id, input),
         ),
       ),
     ),
 
     removeCategoryById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
-          categoryServices.removeCategoryById(input),
+        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { id }) =>
+          categoryServices.removeCategoryById(id),
         ),
       ),
     ),

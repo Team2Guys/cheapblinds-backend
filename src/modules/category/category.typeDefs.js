@@ -16,16 +16,7 @@ export const categoryTypeDefs = gql`
     status: ContentStatus!
   }
 
-  input GetCategoryByIdInput {
-    id: ID!
-  }
-
-  input GetCategoryByCustomUrlInput {
-    customUrl: String!
-  }
-
   input UpdateCategoryByIdInput {
-    id: ID!
     name: String
     description: String
     shortDescription: String
@@ -40,19 +31,19 @@ export const categoryTypeDefs = gql`
     status: ContentStatus
   }
 
-  input RemoveCategoryByIdInput {
-    id: ID!
+  input GetCategoryByUrlInput {
+    customUrl: String!
   }
 
   type Query {
     getCategoryList: [Category!]!
-    getCategoryById(input: GetCategoryByIdInput!): Category!
-    getCategoryByCustomUrl(input: GetCategoryByCustomUrlInput!): Category!
+    getCategoryById(id: ID!): Category!
+    getCategoryByUrl(input: GetCategoryByUrlInput!): Category!
   }
 
   type Mutation {
-    createCategory(input: CreateCategoryInput!): GenericResponse!
-    updateCategoryById(input: UpdateCategoryByIdInput!): GenericResponse!
-    removeCategoryById(input: RemoveCategoryByIdInput!): GenericResponse!
+    createCategory(input: CreateCategoryInput!): Category!
+    updateCategoryById(id: ID!, input: UpdateCategoryByIdInput!): Category!
+    removeCategoryById(id: ID!): GenericResponse!
   }
 `;

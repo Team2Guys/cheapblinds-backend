@@ -1,43 +1,28 @@
 import createError from "http-errors";
-
 import { repository } from "#repository/index.js";
+import { commonUtils } from "#utils/index.js";
 
 const { read, update, remove } = repository;
+const { validateUuid } = commonUtils;
 
 export const userServices = {
   getUserList: async () => {
-    const users = await read.users();
-
-    return users;
+    return await read.users();
   },
 
-  getUserById: async (input) => {
-    const { id } = input;
-
-    const user = await read.userById(id);
-
-    if (!user) throw createError(404, "User not found.");
-
-    return user;
+  getUserById: async (id) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid user id.");
+    return await read.userById(id);
   },
 
-  updateUserById: async (input) => {
-    const { id, ...rest } = input;
-
-    const existingUser = await read.userById(id);
-
-    if (!existingUser) throw createError(404, "User not found.");
-
-    await update.userById(id, rest);
-
-    return { message: "User updated successfully" };
+  updateUserById: async (id, input) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid user id.");
+    return await update.userById(id, input);
   },
 
-  removeUserById: async (input) => {
-    const { id } = input;
-
+  removeUserById: async (id) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid user id.");
     await remove.userById(id);
-
     return { message: "User deleted successfully" };
   },
 };

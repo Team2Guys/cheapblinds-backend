@@ -1,9 +1,5 @@
-import createError from "http-errors";
 import { PrismaClient } from "@prisma/client";
 
-import { commonUtils } from "#utils/index.js";
-
-const { validateUuid } = commonUtils;
 const prisma = new PrismaClient();
 
 export const subcategoryRepository = {
@@ -16,20 +12,17 @@ export const subcategoryRepository = {
         },
       }),
 
-    subcategoryById: (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
-
-      return prisma.subcategory.findUnique({
+    subcategoryById: (id) =>
+      prisma.subcategory.findUnique({
         where: { id },
         include: {
           category: true,
           products: true,
         },
-      });
-    },
+      }),
 
-    subcategoryByUrls: (categoryCustomUrl, subcategoryCustomUrl) => {
-      return prisma.subcategory.findFirst({
+    subcategoryByUrls: (categoryCustomUrl, subcategoryCustomUrl) =>
+      prisma.subcategory.findFirst({
         where: {
           customUrl: subcategoryCustomUrl,
           category: {
@@ -40,8 +33,7 @@ export const subcategoryRepository = {
           category: true,
           products: true,
         },
-      });
-    },
+      }),
   },
 
   write: {

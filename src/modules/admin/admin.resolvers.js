@@ -9,7 +9,7 @@ export const adminResolvers = {
     getAdminList: handleAsync(verifyAccess(async () => adminServices.getAdminList())),
 
     getAdminById: handleAsync(
-      verifyAccess(async (_parent, { input }) => adminServices.getAdminById(input)),
+      verifyAccess(async (_parent, { id }) => adminServices.getAdminById(id)),
     ),
   },
 
@@ -23,7 +23,7 @@ export const adminResolvers = {
     ),
 
     removeAdminById: handleAsync(
-      verifyAccess(async (_parent, { input }) => adminServices.removeAdminById(input)),
+      verifyAccess(async (_parent, { id }) => adminServices.removeAdminById(id)),
     ),
   },
 };

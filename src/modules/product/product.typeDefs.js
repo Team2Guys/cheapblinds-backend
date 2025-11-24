@@ -23,12 +23,7 @@ export const productTypeDefs = gql`
     subcategoryId: ID!
   }
 
-  input GetProductByIdInput {
-    id: ID!
-  }
-
   input UpdateProductByIdInput {
-    id: ID!
     name: String
     description: String
     shortDescription: String
@@ -51,10 +46,6 @@ export const productTypeDefs = gql`
     subcategoryId: ID
   }
 
-  input RemoveProductByIdInput {
-    id: ID!
-  }
-
   input GetProductByUrlsInput {
     categoryCustomUrl: String!
     subcategoryCustomUrl: String!
@@ -63,13 +54,13 @@ export const productTypeDefs = gql`
 
   type Query {
     getProductList: [Product!]!
-    getProductById(input: GetProductByIdInput!): Product!
+    getProductById(id: ID!): Product!
     getProductByUrls(input: GetProductByUrlsInput!): Product!
   }
 
   type Mutation {
-    createProduct(input: CreateProductInput!): GenericResponse!
-    updateProductById(input: UpdateProductByIdInput!): GenericResponse!
-    removeProductById(input: RemoveProductByIdInput!): GenericResponse!
+    createProduct(input: CreateProductInput!): Product!
+    updateProductById(id: ID!, input: UpdateProductByIdInput!): Product!
+    removeProductById(id: ID!): GenericResponse!
   }
 `;

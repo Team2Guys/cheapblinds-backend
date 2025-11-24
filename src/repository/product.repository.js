@@ -1,9 +1,6 @@
-import createError from "http-errors";
 import { PrismaClient } from "@prisma/client";
-import { commonUtils } from "#utils/index.js";
 
 const prisma = new PrismaClient();
-const { validateUuid } = commonUtils;
 
 export const productRepository = {
   read: {
@@ -15,20 +12,17 @@ export const productRepository = {
         },
       }),
 
-    productById: (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid product id.");
-
-      return prisma.product.findUnique({
+    productById: (id) =>
+      prisma.product.findUnique({
         where: { id },
         include: {
           category: true,
           subcategory: true,
         },
-      });
-    },
+      }),
 
-    productByUrls: (categoryCustomUrl, subcategoryCustomUrl, productCustomUrl) => {
-      return prisma.product.findFirst({
+    productByUrls: (categoryCustomUrl, subcategoryCustomUrl, productCustomUrl) =>
+      prisma.product.findFirst({
         where: {
           customUrl: productCustomUrl,
           subcategory: {
@@ -42,8 +36,7 @@ export const productRepository = {
           category: true,
           subcategory: true,
         },
-      });
-    },
+      }),
   },
 
   write: {

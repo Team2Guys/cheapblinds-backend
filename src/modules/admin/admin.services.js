@@ -1,7 +1,8 @@
 import createError from "http-errors";
 import { repository } from "#repository/index.js";
-import { bcryptUtils } from "#utils/index.js";
+import { bcryptUtils, commonUtils } from "#utils/index.js";
 
+const { validateUuid } = commonUtils;
 const { write, read, update, remove } = repository;
 
 export const adminServices = {
@@ -13,53 +14,26 @@ export const adminServices = {
 
     const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
-    await write.admin({ email, password: hashedPassword, ...rest });
-
-    return { message: "Admin created successfully" };
+    return await write.admin({ email, password: hashedPassword, ...rest });
   },
 
   getAdminList: async () => {
-    const admins = await read.admins();
-
-    return admins;
+    return await read.admins();
   },
 
-  getAdminById: async (input) => {
-    const { id } = input;
-
-    const admin = await read.adminById(id);
-
-    if (!admin) throw createError(404, "Admin not found.");
-
-    return admin;
+  getAdminById: async (id) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid admin id.");
+    return await read.adminById(id);
   },
 
   updateAdminById: async (id, input) => {
-    const { password, ...rest } = input;
-
-    const existingAdmin = await read.adminById(id);
-
-    if (!existingAdmin) throw createError(400, "Admin not found.");
-
-    const updateData = {
-      ...rest,
-      ...(password && { password: await bcryptUtils.hash(password, { rounds: 12 }) }),
-    };
-
-    await update.adminById(id, updateData);
-
-    return { message: "Admin updated successfully" };
+    if (!validateUuid(id)) throw createError(400, "Invalid admin id.");
+    return await update.adminById(id, input);
   },
 
-  removeAdminById: async (input) => {
-    const { id } = input;
-
-    const existingAdmin = await read.adminById(id);
-
-    if (!existingAdmin) throw createError(400, "Admin not found.");
-
+  removeAdminById: async (id) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid admin id.");
     await remove.adminById(id);
-
     return { message: "Admin deleted successfully" };
   },
 };

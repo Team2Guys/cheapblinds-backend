@@ -8,9 +8,7 @@ export const productResolvers = {
   Query: {
     getProductList: handleAsync(async () => productServices.getProductList()),
 
-    getProductById: handleAsync(async (_parent, { input }) =>
-      productServices.getProductById(input),
-    ),
+    getProductById: handleAsync(async (_parent, { id }) => productServices.getProductById(id)),
 
     getProductByUrls: handleAsync(async (_parent, { input }) =>
       productServices.getProductByUrls(input),
@@ -28,16 +26,16 @@ export const productResolvers = {
 
     updateProductById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
-          productServices.updateProductById(input),
+        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { id, input }) =>
+          productServices.updateProductById(id, input),
         ),
       ),
     ),
 
     removeProductById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
-          productServices.removeProductById(input),
+        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { id }) =>
+          productServices.removeProductById(id),
         ),
       ),
     ),

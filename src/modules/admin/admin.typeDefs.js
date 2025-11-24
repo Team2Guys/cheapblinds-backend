@@ -9,29 +9,21 @@ export const adminTypeDefs = gql`
     permissions: [String!]!
   }
 
-  input GetAdminByIdInput {
-    id: ID!
-  }
-
   input UpdateAdminByIdInput {
     name: String
     email: String
-    password: String
+    role: Role
     permissions: [String!]
-  }
-
-  input RemoveAdminByIdInput {
-    id: ID!
   }
 
   type Query {
     getAdminList: [Admin!]!
-    getAdminById(input: GetAdminByIdInput!): Admin!
+    getAdminById(id: ID!): Admin!
   }
 
   type Mutation {
-    createAdmin(input: CreateAdminInput!): GenericResponse!
-    updateAdminById(id: ID!, input: UpdateAdminByIdInput!): GenericResponse!
-    removeAdminById(input: RemoveAdminByIdInput!): GenericResponse!
+    createAdmin(input: CreateAdminInput!): Admin!
+    updateAdminById(id: ID!, input: UpdateAdminByIdInput!): Admin!
+    removeAdminById(id: ID!): GenericResponse!
   }
 `;

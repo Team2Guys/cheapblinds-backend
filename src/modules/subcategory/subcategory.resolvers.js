@@ -8,8 +8,8 @@ export const subcategoryResolvers = {
   Query: {
     getSubcategoryList: handleAsync(async () => subcategoryServices.getSubcategoryList()),
 
-    getSubcategoryById: handleAsync(async (_parent, { input }) =>
-      subcategoryServices.getSubcategoryById(input),
+    getSubcategoryById: handleAsync(async (_parent, { id }) =>
+      subcategoryServices.getSubcategoryById(id),
     ),
 
     getSubcategoryByUrls: handleAsync(async (_parent, { input }) =>
@@ -28,16 +28,16 @@ export const subcategoryResolvers = {
 
     updateSubcategoryById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
-          subcategoryServices.updateSubcategoryById(input),
+        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { id, input }) =>
+          subcategoryServices.updateSubcategoryById(id, input),
         ),
       ),
     ),
 
     removeSubcategoryById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
-          subcategoryServices.removeSubcategoryById(input),
+        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { id }) =>
+          subcategoryServices.removeSubcategoryById(id),
         ),
       ),
     ),

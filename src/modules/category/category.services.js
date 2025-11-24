@@ -1,62 +1,37 @@
 import createError from "http-errors";
 import { repository } from "#repository/index.js";
+import { commonUtils } from "#utils/index.js";
 
 const { write, read, update, remove } = repository;
+const { validateUuid } = commonUtils;
 
 export const categoryServices = {
   createCategory: async (input) => {
-    await write.category(input);
-
-    return { message: "Category created successfully" };
+    return await write.category(input);
   },
 
   getCategoryList: async () => {
-    const categories = await read.categories();
-
-    return categories;
+    return await read.categories();
   },
 
-  getCategoryById: async (input) => {
-    const { id } = input;
-
-    const category = await read.categoryById(id);
-
-    if (!category) throw createError(404, "Category not found.");
-
-    return category;
+  getCategoryById: async (id) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid category id.");
+    return await read.categoryById(id);
   },
 
-  getCategoryByCustomUrl: async (input) => {
+  getCategoryByUrl: async (input) => {
     const { customUrl } = input;
-
-    const category = await read.categoryByCustomUrl(customUrl);
-
-    if (!category) throw createError(404, "Category not found.");
-
-    return category;
+    return await read.categoryByUrl(customUrl);
   },
 
-  updateCategoryById: async (input) => {
-    const { id, ...rest } = input;
-
-    const existingCategory = await read.categoryById(id);
-
-    if (!existingCategory) throw createError(404, "Category not found.");
-
-    await update.categoryById(id, rest);
-
-    return { message: "Category updated successfully" };
+  updateCategoryById: async (id, input) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid category id.");
+    return await update.categoryById(id, input);
   },
 
-  removeCategoryById: async (input) => {
-    const { id } = input;
-
-    const existingCategory = await read.categoryById(id);
-
-    if (!existingCategory) throw createError(404, "Category not found.");
-
+  removeCategoryById: async (id) => {
+    if (!validateUuid(id)) throw createError(400, "Invalid category id.");
     await remove.categoryById(id);
-
     return { message: "Category deleted successfully" };
   },
 };

@@ -1,9 +1,5 @@
-import createError from "http-errors";
 import { PrismaClient } from "@prisma/client";
 
-import { commonUtils } from "#utils/index.js";
-
-const { validateUuid } = commonUtils;
 const prisma = new PrismaClient();
 
 export const userRepository = {
@@ -21,10 +17,8 @@ export const userRepository = {
         },
       }),
 
-    userById: (id) => {
-      if (!validateUuid(id)) throw createError(400, "Invalid user id.");
-
-      return prisma.user.findUnique({
+    userById: (id) =>
+      prisma.user.findUnique({
         where: { id },
         select: {
           id: true,
@@ -35,8 +29,7 @@ export const userRepository = {
           createdAt: true,
           updatedAt: true,
         },
-      });
-    },
+      }),
 
     userByEmail: (email) =>
       prisma.user.findUnique({
