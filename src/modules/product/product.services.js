@@ -10,9 +10,7 @@ export const productServices = {
     return await write.product(input);
   },
 
-  getProductList: async () => {
-    return await read.products();
-  },
+  getProductList: async () => await read.products(),
 
   getProductById: async (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid product id.");

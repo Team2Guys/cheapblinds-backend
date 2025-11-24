@@ -10,9 +10,7 @@ export const categoryServices = {
     return await write.category(input);
   },
 
-  getCategoryList: async () => {
-    return await read.categories();
-  },
+  getCategoryList: async () => await read.categories(),
 
   getCategoryById: async (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid category id.");

@@ -11,9 +11,7 @@ export const subcategoryServices = {
     return { message: "Subcategory created successfully" };
   },
 
-  getSubcategoryList: async () => {
-    return await read.subcategories();
-  },
+  getSubcategoryList: async () => await read.subcategories(),
 
   getSubcategoryById: async (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");

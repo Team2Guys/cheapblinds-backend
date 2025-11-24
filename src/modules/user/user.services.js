@@ -6,9 +6,7 @@ const { read, update, remove } = repository;
 const { validateUuid } = commonUtils;
 
 export const userServices = {
-  getUserList: async () => {
-    return await read.users();
-  },
+  getUserList: async () => await read.users(),
 
   getUserById: async (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid user id.");

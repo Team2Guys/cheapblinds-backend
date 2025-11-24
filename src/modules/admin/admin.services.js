@@ -17,9 +17,7 @@ export const adminServices = {
     return await write.admin({ email, password: hashedPassword, ...rest });
   },
 
-  getAdminList: async () => {
-    return await read.admins();
-  },
+  getAdminList: async () => await read.admins(),
 
   getAdminById: async (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid admin id.");

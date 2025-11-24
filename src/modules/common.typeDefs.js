@@ -26,6 +26,7 @@ export const commonTypeDefs = gql`
     email: String!
     permissions: [String!]!
     role: Role!
+    lastEditedBy: String!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -54,8 +55,8 @@ export const commonTypeDefs = gql`
     canonicalTag: String!
     breadCrumb: String!
     thumbnailUrl: String!
-    lastEditedBy: String!
     seoSchema: String!
+    lastEditedBy: String!
     status: ContentStatus!
     products: [Product!]!
     subcategories: [Subcategory!]!
@@ -75,8 +76,8 @@ export const commonTypeDefs = gql`
     canonicalTag: String!
     breadCrumb: String!
     thumbnailUrl: String!
-    lastEditedBy: String!
     seoSchema: String!
+    lastEditedBy: String!
     status: ContentStatus!
     category: Category!
     products: [Product!]!
@@ -98,13 +99,13 @@ export const commonTypeDefs = gql`
     breadCrumb: String!
     thumbnailUrl: String!
     productImages: [String!]!
-    lastEditedBy: String!
     seoSchema: String!
     price: Float!
     discountPrice: Float!
     stock: Int!
     additionalInfo: [JSON!]!
     measuringGuide: [JSON!]!
+    lastEditedBy: String!
     category: Category!
     subcategory: Subcategory!
     status: ContentStatus!

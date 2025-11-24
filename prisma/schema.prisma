@@ -22,14 +22,15 @@ enum ContentStatus {
 
 // =================== Admin ===================
 model Admin {
-  id          String   @id @default(uuid()) @db.Uuid
-  name        String   @db.VarChar(100)
-  email       String   @unique @db.VarChar(255)
-  password    String   @db.VarChar(255)
-  permissions String[] @default([])
-  role        Role     @default(ADMIN)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String   @db.VarChar(100)
+  email        String   @unique @db.VarChar(255)
+  password     String   @db.VarChar(255)
+  permissions  String[] @default([])
+  lastEditedBy String?  @db.VarChar(255)
+  role         Role     @default(ADMIN)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@index([email])
 }
@@ -62,8 +63,8 @@ model Category {
   canonicalTag     String?       @db.VarChar(255)
   breadCrumb       String?       @db.VarChar(255)
   thumbnailUrl     String?       @db.VarChar(512)
-  lastEditedBy     String?       @db.VarChar(255)
   seoSchema        String?       @db.Text()
+  lastEditedBy     String?       @db.VarChar(255)
   status           ContentStatus @default(PUBLISHED)
   products         Product[]     @relation("CategoryProducts")
   subcategories    Subcategory[] @relation("CategorySubcategories")
@@ -86,9 +87,9 @@ model Subcategory {
   canonicalTag     String?       @db.VarChar(255)
   breadCrumb       String?       @db.VarChar(255)
   thumbnailUrl     String?       @db.VarChar(512)
-  lastEditedBy     String?       @db.VarChar(255)
   seoSchema        String?       @db.Text()
   categoryId       String        @db.Uuid
+  lastEditedBy     String?       @db.VarChar(255)
   status           ContentStatus @default(PUBLISHED)
   category         Category      @relation(fields: [categoryId], references: [id], name: "CategorySubcategories", onDelete: Cascade)
   products         Product[]     @relation("SubcategoryProducts")
@@ -111,7 +112,6 @@ model Product {
   canonicalTag     String?        @db.VarChar(255)
   breadCrumb       String?        @db.VarChar(255)
   thumbnailUrl     String?        @db.VarChar(512)
-  lastEditedBy     String?        @db.VarChar(255)
   seoSchema        String?        @db.Text()
   productImages    String[]       @default([])
   price            Float          @default(0)
@@ -121,6 +121,7 @@ model Product {
   measuringGuide   Json[]         @default([]) @db.JsonB()
   categoryId       String         @db.Uuid
   subcategoryId    String         @db.Uuid
+  lastEditedBy     String?        @db.VarChar(255)
   status           ContentStatus? @default(PUBLISHED)
   category         Category       @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
   subcategory      Subcategory    @relation(fields: [subcategoryId], references: [id], name: "SubcategoryProducts", onDelete: Cascade)
