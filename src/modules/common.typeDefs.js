@@ -79,8 +79,8 @@ export const commonTypeDefs = gql`
     seoSchema: String!
     lastEditedBy: String!
     status: ContentStatus!
-    category: Category!
-    products: [Product!]!
+    category: Category
+    products: [Product!]
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -106,8 +106,8 @@ export const commonTypeDefs = gql`
     additionalInfo: [JSON!]!
     measuringGuide: [JSON!]!
     lastEditedBy: String!
-    category: Category!
-    subcategory: Subcategory!
+    category: Category
+    subcategory: Subcategory
     status: ContentStatus!
     createdAt: DateTime!
     updatedAt: DateTime!
