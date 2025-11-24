@@ -117,8 +117,8 @@ model Product {
   price            Float          @default(0)
   discountPrice    Int?           @default(0)
   stock            Int            @default(0)
-  additionalInfo   Json[]         @default([]) @db.JsonB()
-  measuringGuide   Json[]         @default([]) @db.JsonB()
+  additionalInfo   String?        @db.Text()
+  measuringGuide   String?        @db.Text()
   categoryId       String         @db.Uuid
   subcategoryId    String         @db.Uuid
   lastEditedBy     String?        @db.VarChar(255)

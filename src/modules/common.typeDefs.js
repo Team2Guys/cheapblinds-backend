@@ -103,8 +103,8 @@ export const commonTypeDefs = gql`
     price: Float!
     discountPrice: Float!
     stock: Int!
-    additionalInfo: [JSON!]!
-    measuringGuide: [JSON!]!
+    additionalInfo: String
+    measuringGuide: String
     lastEditedBy: String!
     category: Category
     subcategory: Subcategory

@@ -11,13 +11,14 @@ export const productTypeDefs = gql`
     canonicalTag: String!
     breadCrumb: String!
     thumbnailUrl: String!
-    lastEditedBy: String!
-    seoSchema: String!
     productImages: [String!]!
+    seoSchema: String!
     price: Float!
+    discountPrice: Float!
     stock: Int!
-    additionalInfo: [JSON!]
-    measuringGuide: [JSON!]
+    additionalInfo: String
+    measuringGuide: String
+    lastEditedBy: String!
     status: ContentStatus!
     categoryId: ID!
     subcategoryId: ID!
@@ -34,13 +35,13 @@ export const productTypeDefs = gql`
     breadCrumb: String
     thumbnailUrl: String
     productImages: [String!]
-    lastEditedBy: String
     seoSchema: String
     price: Float
     discountPrice: Float
     stock: Int
-    additionalInfo: [JSON!]
-    measuringGuide: [JSON!]
+    additionalInfo: String
+    measuringGuide: String
+    lastEditedBy: String
     status: ContentStatus
     categoryId: ID
     subcategoryId: ID
