@@ -7,8 +7,9 @@ const { validateUuid } = commonUtils;
 
 export const subcategoryServices = {
   createSubcategory: async (input) => {
-    await write.subcategory(input);
-    return { message: "Subcategory created successfully" };
+    const subcategory = await write.subcategory(input);
+    console.log("Subcategory created:", subcategory);
+    return subcategory;
   },
 
   getSubcategoryList: async () => await read.subcategories(),
