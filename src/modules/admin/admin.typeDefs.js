@@ -14,7 +14,6 @@ export const adminTypeDefs = gql`
   }
 
   input UpdateAdminByIdInput {
-    id: ID!
     name: String
     email: String
     password: String
@@ -32,7 +31,7 @@ export const adminTypeDefs = gql`
 
   type Mutation {
     createAdmin(input: CreateAdminInput!): GenericResponse!
-    updateAdminById(input: UpdateAdminByIdInput!): GenericResponse!
+    updateAdminById(id: ID!, input: UpdateAdminByIdInput!): GenericResponse!
     removeAdminById(input: RemoveAdminByIdInput!): GenericResponse!
   }
 `;

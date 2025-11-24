@@ -34,8 +34,8 @@ export const adminServices = {
     return admin;
   },
 
-  updateAdminById: async (input) => {
-    const { id, password, ...rest } = input;
+  updateAdminById: async (id, input) => {
+    const { password, ...rest } = input;
 
     const existingAdmin = await read.adminById(id);
 

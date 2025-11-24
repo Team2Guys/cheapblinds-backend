@@ -19,7 +19,7 @@ export const adminResolvers = {
     ),
 
     updateAdminById: handleAsync(
-      verifyAccess(async (_parent, { input }) => adminServices.updateAdminById(input)),
+      verifyAccess(async (_parent, { id, input }) => adminServices.updateAdminById(id, input)),
     ),
 
     removeAdminById: handleAsync(

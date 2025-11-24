@@ -24,7 +24,6 @@ export const commonTypeDefs = gql`
     id: ID!
     name: String!
     email: String!
-    password: String!
     permissions: [String!]!
     role: Role!
     createdAt: DateTime!
