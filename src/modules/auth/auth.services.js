@@ -10,14 +10,14 @@ const { FRONTEND_URL, SUPER_ADMIN_ID, SUPER_ADMIN_EMAIL, SUPER_ADMIN_NAME, SUPER
 
 export const authServices = {
   signup: async (input) => {
-    const { email, password } = input;
+    const { email, password, ...rest } = input;
 
     const existingUser = await read.userByEmail(email);
     if (existingUser) throw createError(400, "User already exists.");
 
     const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
-    const newUser = await write.user({ email, password: hashedPassword });
+    const newUser = await write.user({ email, password: hashedPassword, ...rest });
 
     const verificationToken = tokenUtils.generate({ id: newUser.id }, "verificationToken");
     if (!verificationToken) throw createError(500, "Failed to generate verification token.");
