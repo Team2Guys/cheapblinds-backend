@@ -5,16 +5,21 @@ export const productTypeDefs = gql`
     name: String!
     description: String!
     shortDescription: String!
-    customUrl: String!
+    slug: String!
     metaTitle: String!
     metaDescription: String!
     canonicalTag: String!
-    breadCrumb: String!
+    breadcrumb: String!
     posterImageUrl: String!
     productImages: [String!]!
     seoSchema: String!
     price: Float!
     discountPrice: Float!
+    width: Float!
+    height: Float!
+    color: String!
+    pattern: String!
+    composition: String!
     stock: Int!
     additionalInfo: String
     measuringGuide: String
@@ -28,17 +33,22 @@ export const productTypeDefs = gql`
     name: String
     description: String
     shortDescription: String
-    customUrl: String
+    slug: String
     metaTitle: String
     metaDescription: String
     canonicalTag: String
-    breadCrumb: String
+    breadcrumb: String
     posterImageUrl: String
     productImages: [String!]
     seoSchema: String
     price: Float
     discountPrice: Float
     stock: Int
+    width: Float
+    height: Float
+    color: String
+    pattern: String
+    composition: String
     additionalInfo: String
     measuringGuide: String
     lastEditedBy: String
@@ -48,9 +58,9 @@ export const productTypeDefs = gql`
   }
 
   input GetProductByUrlsInput {
-    categoryCustomUrl: String!
-    subcategoryCustomUrl: String!
-    productCustomUrl: String!
+    categorySlug: String!
+    subcategorySlug: String!
+    productSlug: String!
   }
 
   type Query {

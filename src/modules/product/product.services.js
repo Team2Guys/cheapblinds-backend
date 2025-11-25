@@ -18,8 +18,8 @@ export const productServices = {
   },
 
   getProductByUrls: async (input) => {
-    const { categoryCustomUrl, subcategoryCustomUrl, productCustomUrl } = input;
-    return await read.productByUrls(categoryCustomUrl, subcategoryCustomUrl, productCustomUrl);
+    const { categorySlug, subcategorySlug, productSlug } = input;
+    return await read.productByUrls(categorySlug, subcategorySlug, productSlug);
   },
 
   updateProductById: async (id, input) => {

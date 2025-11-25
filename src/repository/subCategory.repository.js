@@ -21,12 +21,12 @@ export const subcategoryRepository = {
         },
       }),
 
-    subcategoryByUrls: (categoryCustomUrl, subcategoryCustomUrl) =>
+    subcategoryByUrls: (categorySlug, subcategorySlug) =>
       prisma.subcategory.findFirst({
         where: {
-          customUrl: subcategoryCustomUrl,
+          slug: subcategorySlug,
           category: {
-            customUrl: categoryCustomUrl,
+            slug: categorySlug,
           },
         },
         include: {

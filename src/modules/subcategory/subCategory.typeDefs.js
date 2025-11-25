@@ -5,11 +5,11 @@ export const subcategoryTypeDefs = gql`
     name: String!
     description: String!
     shortDescription: String!
-    customUrl: String!
+    slug: String!
     metaTitle: String!
     metaDescription: String!
     canonicalTag: String!
-    breadCrumb: String!
+    breadcrumb: String!
     posterImageUrl: String!
     lastEditedBy: String!
     seoSchema: String!
@@ -22,11 +22,11 @@ export const subcategoryTypeDefs = gql`
     name: String
     description: String
     shortDescription: String
-    customUrl: String
+    slug: String
     metaTitle: String
     metaDescription: String
     canonicalTag: String
-    breadCrumb: String
+    breadcrumb: String
     posterImageUrl: String
     lastEditedBy: String
     seoSchema: String
@@ -35,8 +35,8 @@ export const subcategoryTypeDefs = gql`
   }
 
   input GetSubcategoryByUrlsInput {
-    subcategoryCustomUrl: String!
-    categoryCustomUrl: String!
+    subcategorySlug: String!
+    categorySlug: String!
   }
 
   type Query {

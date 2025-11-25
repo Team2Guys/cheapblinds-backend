@@ -49,11 +49,11 @@ export const commonTypeDefs = gql`
     name: String!
     description: String!
     shortDescription: String!
-    customUrl: String!
+    slug: String!
     metaTitle: String!
     metaDescription: String!
     canonicalTag: String!
-    breadCrumb: String!
+    breadcrumb: String!
     posterImageUrl: String!
     seoSchema: String!
     lastEditedBy: String!
@@ -70,11 +70,11 @@ export const commonTypeDefs = gql`
     name: String!
     description: String!
     shortDescription: String!
-    customUrl: String!
+    slug: String!
     metaTitle: String!
     metaDescription: String!
     canonicalTag: String!
-    breadCrumb: String!
+    breadcrumb: String!
     posterImageUrl: String!
     seoSchema: String!
     lastEditedBy: String!
@@ -90,24 +90,30 @@ export const commonTypeDefs = gql`
     categoryId: ID!
     subcategoryId: ID!
     name: String!
-    description: String!
-    shortDescription: String!
-    customUrl: String!
-    metaTitle: String!
-    metaDescription: String!
-    canonicalTag: String!
-    breadCrumb: String!
+    description: String
+    shortDescription: String
+    slug: String!
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadcrumb: String
     posterImageUrl: String!
     productImages: [String!]!
-    seoSchema: String!
+    seoSchema: String
     price: Float!
-    discountPrice: Float!
+    discountPrice: Float
     stock: Int!
+    width: Float
+    height: Float
+    weight: Float
+    color: String
+    pattern: String
+    composition: String
     additionalInfo: String
     measuringGuide: String
-    lastEditedBy: String!
-    category: Category
-    subcategory: Subcategory
+    lastEditedBy: String
+    category: Category!
+    subcategory: Subcategory!
     status: ContentStatus!
     createdAt: DateTime!
     updatedAt: DateTime!

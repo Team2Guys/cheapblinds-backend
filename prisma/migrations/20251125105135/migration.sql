@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Product" ADD COLUMN     "color" VARCHAR(100),
+ADD COLUMN     "composition" VARCHAR(255),
+ADD COLUMN     "height" DOUBLE PRECISION DEFAULT 0,
+ADD COLUMN     "pattern" VARCHAR(100),
+ADD COLUMN     "width" DOUBLE PRECISION DEFAULT 0;

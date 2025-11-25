@@ -18,8 +18,8 @@ export const categoryServices = {
   },
 
   getCategoryByUrl: async (input) => {
-    const { customUrl } = input;
-    return await read.categoryByUrl(customUrl);
+    const { slug } = input;
+    return await read.categoryByUrl(slug);
   },
 
   updateCategoryById: async (id, input) => {

@@ -22,7 +22,9 @@ export const authTypeDefs = gql`
 
   type SigninResponse {
     id: String!
-    name: String!
+    name: String
+    firstName: String
+    lastName: String
     role: Role!
   }
 
