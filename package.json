@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
+    "db:studio": "npx prisma studio",
     "lint:js": "eslint \"./**/*.{js,jsx}\"",
     "format:code": "prettier --write \"./**/*.{js,jsx,html,yaml,env,md,json,txt}\"",
     "format:prisma": "npx prisma format",
@@ -13,7 +14,6 @@
     "db:push": "npx prisma db push",
     "db:migrate": "npx prisma migrate dev",
     "db:generate": "npx prisma generate",
-    "db:studio": "npx prisma studio",
     "db:reset": "npx prisma migrate reset"
   },
   "devDependencies": {

@@ -1,7 +1,0 @@
--- AlterTable
-ALTER TABLE "Product" ALTER COLUMN "additionalInfo" DROP NOT NULL,
-ALTER COLUMN "additionalInfo" DROP DEFAULT,
-ALTER COLUMN "additionalInfo" SET DATA TYPE TEXT,
-ALTER COLUMN "measuringGuide" DROP NOT NULL,
-ALTER COLUMN "measuringGuide" DROP DEFAULT,
-ALTER COLUMN "measuringGuide" SET DATA TYPE TEXT;
