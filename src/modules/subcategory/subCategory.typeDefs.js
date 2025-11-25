@@ -10,7 +10,7 @@ export const subcategoryTypeDefs = gql`
     metaDescription: String!
     canonicalTag: String!
     breadCrumb: String!
-    thumbnailUrl: String!
+    posterImageUrl: String!
     lastEditedBy: String!
     seoSchema: String!
     status: ContentStatus!
@@ -27,7 +27,7 @@ export const subcategoryTypeDefs = gql`
     metaDescription: String
     canonicalTag: String
     breadCrumb: String
-    thumbnailUrl: String
+    posterImageUrl: String
     lastEditedBy: String
     seoSchema: String
     status: ContentStatus

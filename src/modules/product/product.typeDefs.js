@@ -10,7 +10,7 @@ export const productTypeDefs = gql`
     metaDescription: String!
     canonicalTag: String!
     breadCrumb: String!
-    thumbnailUrl: String!
+    posterImageUrl: String!
     productImages: [String!]!
     seoSchema: String!
     price: Float!
@@ -33,7 +33,7 @@ export const productTypeDefs = gql`
     metaDescription: String
     canonicalTag: String
     breadCrumb: String
-    thumbnailUrl: String
+    posterImageUrl: String
     productImages: [String!]
     seoSchema: String
     price: Float

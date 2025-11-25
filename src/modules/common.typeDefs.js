@@ -54,7 +54,7 @@ export const commonTypeDefs = gql`
     metaDescription: String!
     canonicalTag: String!
     breadCrumb: String!
-    thumbnailUrl: String!
+    posterImageUrl: String!
     seoSchema: String!
     lastEditedBy: String!
     status: ContentStatus!
@@ -75,7 +75,7 @@ export const commonTypeDefs = gql`
     metaDescription: String!
     canonicalTag: String!
     breadCrumb: String!
-    thumbnailUrl: String!
+    posterImageUrl: String!
     seoSchema: String!
     lastEditedBy: String!
     status: ContentStatus!
@@ -97,7 +97,7 @@ export const commonTypeDefs = gql`
     metaDescription: String!
     canonicalTag: String!
     breadCrumb: String!
-    thumbnailUrl: String!
+    posterImageUrl: String!
     productImages: [String!]!
     seoSchema: String!
     price: Float!
