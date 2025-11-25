@@ -51,7 +51,7 @@ export const authServices = {
         user = await read.adminByEmail(email);
         if (!user) throw createError(404, "Invalid credentials.");
 
-        if (!bcryptUtils.validateValue(password, user.password))
+        if (!bcryptUtils.compare(password, user.password))
           throw createError(401, "Invalid credentials.");
 
         accessToken = tokenUtils.generate({ id: user.id, role: "ADMIN" }, "accessToken");
