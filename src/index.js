@@ -17,10 +17,6 @@ handleAsync(async function main() {
 
   setupMiddleware(app, apolloServer);
 
-  app.get("/health", (_, res) => {
-    res.json({ status: "ok" });
-  });
-
   app.listen(PORT || 5000, () => {
     logger.info(`[connected] Backend (url: ${BACKEND_URL})`.server);
   });
