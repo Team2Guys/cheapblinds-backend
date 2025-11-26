@@ -17,6 +17,7 @@ export const productTypeDefs = gql`
     discountPrice: Float!
     width: Float!
     height: Float!
+    weight: Float!
     color: String!
     pattern: String!
     composition: String!
@@ -46,6 +47,7 @@ export const productTypeDefs = gql`
     stock: Int
     width: Float
     height: Float
+    weight: Float!
     color: String
     pattern: String
     composition: String
