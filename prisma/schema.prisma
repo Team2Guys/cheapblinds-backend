@@ -122,6 +122,7 @@ model Product {
   color            String?       @db.VarChar(100)
   pattern          String?       @db.VarChar(100)
   composition      String?       @db.VarChar(255)
+  isMotorized      Boolean       @default(false)
   additionalInfo   String?       @db.Text()
   measuringGuide   String?       @db.Text()
   categoryId       String        @db.Uuid

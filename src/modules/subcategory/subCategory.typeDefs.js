@@ -34,7 +34,7 @@ export const subcategoryTypeDefs = gql`
     categoryId: ID
   }
 
-  input GetSubcategoryByUrlsInput {
+  input GetSubcategoryBySlugsInput {
     subcategorySlug: String!
     categorySlug: String!
   }
@@ -42,12 +42,12 @@ export const subcategoryTypeDefs = gql`
   type Query {
     getSubcategoryList: [Subcategory!]!
     getSubcategoryById(id: ID!): Subcategory
-    getSubcategoryByUrls(input: GetSubcategoryByUrlsInput!): Subcategory
+    getSubcategoryBySlugs(input: GetSubcategoryBySlugsInput!): Subcategory
   }
 
   type Mutation {
     createSubcategory(input: CreateSubcategoryInput!): Subcategory
     updateSubcategoryById(id: ID!, input: UpdateSubcategoryByIdInput!): Subcategory
-    removeSubcategoryById(id: ID!): GenericResponse!
+    removeSubcategoryById(id: ID!): Subcategory
   }
 `;

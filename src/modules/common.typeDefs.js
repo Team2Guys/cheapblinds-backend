@@ -109,6 +109,7 @@ export const commonTypeDefs = gql`
     color: String
     pattern: String
     composition: String
+    isMotorized: Boolean
     additionalInfo: String
     measuringGuide: String
     lastEditedBy: String!
