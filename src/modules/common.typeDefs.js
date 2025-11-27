@@ -47,19 +47,19 @@ export const commonTypeDefs = gql`
   type Category {
     id: ID!
     name: String!
-    description: String!
-    shortDescription: String!
-    slug: String!
-    metaTitle: String!
-    metaDescription: String!
-    canonicalTag: String!
-    breadcrumb: String!
-    posterImageUrl: String!
-    seoSchema: String!
+    description: String
+    shortDescription: String
+    slug: String
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadcrumb: String
+    posterImageUrl: String
+    seoSchema: String
     lastEditedBy: String!
     status: ContentStatus!
-    products: [Product!]
-    subcategories: [Subcategory!]
+    products: [Product!]!
+    subcategories: [Subcategory!]!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -68,15 +68,15 @@ export const commonTypeDefs = gql`
     id: ID!
     categoryId: ID!
     name: String!
-    description: String!
-    shortDescription: String!
-    slug: String!
-    metaTitle: String!
-    metaDescription: String!
-    canonicalTag: String!
-    breadcrumb: String!
-    posterImageUrl: String!
-    seoSchema: String!
+    description: String
+    shortDescription: String
+    slug: String
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadcrumb: String
+    posterImageUrl: String
+    seoSchema: String
     lastEditedBy: String!
     status: ContentStatus!
     category: Category
@@ -92,12 +92,12 @@ export const commonTypeDefs = gql`
     name: String!
     description: String
     shortDescription: String
-    slug: String!
+    slug: String
     metaTitle: String
     metaDescription: String
     canonicalTag: String
     breadcrumb: String
-    posterImageUrl: String!
+    posterImageUrl: String
     productImages: [String!]!
     seoSchema: String
     price: Float!
@@ -111,7 +111,7 @@ export const commonTypeDefs = gql`
     composition: String
     additionalInfo: String
     measuringGuide: String
-    lastEditedBy: String
+    lastEditedBy: String!
     category: Category!
     subcategory: Subcategory!
     status: ContentStatus!

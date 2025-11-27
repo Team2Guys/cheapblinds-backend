@@ -37,13 +37,13 @@ export const categoryTypeDefs = gql`
 
   type Query {
     getCategoryList: [Category!]!
-    getCategoryById(id: ID!): Category!
-    getCategoryByUrl(input: GetCategoryByUrlInput!): Category!
+    getCategoryById(id: ID!): Category
+    getCategoryByUrl(input: GetCategoryByUrlInput!): Category
   }
 
   type Mutation {
-    createCategory(input: CreateCategoryInput!): Category!
-    updateCategoryById(id: ID!, input: UpdateCategoryByIdInput!): Category!
+    createCategory(input: CreateCategoryInput!): Category
+    updateCategoryById(id: ID!, input: UpdateCategoryByIdInput!): Category
     removeCategoryById(id: ID!): GenericResponse!
   }
 `;

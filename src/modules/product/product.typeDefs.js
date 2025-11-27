@@ -67,13 +67,13 @@ export const productTypeDefs = gql`
 
   type Query {
     getProductList: [Product!]!
-    getProductById(id: ID!): Product!
-    getProductByUrls(input: GetProductByUrlsInput!): Product!
+    getProductById(id: ID!): Product
+    getProductByUrls(input: GetProductByUrlsInput!): Product
   }
 
   type Mutation {
-    createProduct(input: CreateProductInput!): Product!
-    updateProductById(id: ID!, input: UpdateProductByIdInput!): Product!
+    createProduct(input: CreateProductInput!): Product
+    updateProductById(id: ID!, input: UpdateProductByIdInput!): Product
     removeProductById(id: ID!): GenericResponse!
   }
 `;
