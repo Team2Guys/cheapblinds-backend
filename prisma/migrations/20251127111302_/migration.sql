@@ -101,6 +101,7 @@ CREATE TABLE "Product" (
     "color" VARCHAR(100),
     "pattern" VARCHAR(100),
     "composition" VARCHAR(255),
+    "isMotorized" BOOLEAN NOT NULL DEFAULT false,
     "additionalInfo" TEXT,
     "measuringGuide" TEXT,
     "categoryId" UUID NOT NULL,
