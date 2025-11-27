@@ -19,9 +19,9 @@ export const subcategoryServices = {
     return await read.subcategoryById(id);
   },
 
-  getSubcategoryByUrls: async (input) => {
+  getSubcategoryBySlugs: async (input) => {
     const { categorySlug, subcategorySlug } = input;
-    return await read.subcategoryByUrls(categorySlug, subcategorySlug);
+    return await read.subcategoryBySlugs(categorySlug, subcategorySlug);
   },
 
   updateSubcategoryById: async (id, input) => {

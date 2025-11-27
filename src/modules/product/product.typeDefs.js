@@ -59,7 +59,7 @@ export const productTypeDefs = gql`
     subcategoryId: ID
   }
 
-  input GetProductByUrlsInput {
+  input GetProductBySlugsInput {
     categorySlug: String!
     subcategorySlug: String!
     productSlug: String!
@@ -68,7 +68,7 @@ export const productTypeDefs = gql`
   type Query {
     getProductList: [Product!]!
     getProductById(id: ID!): Product
-    getProductByUrls(input: GetProductByUrlsInput!): Product
+    getProductBySlugs(input: GetProductBySlugsInput!): Product
   }
 
   type Mutation {

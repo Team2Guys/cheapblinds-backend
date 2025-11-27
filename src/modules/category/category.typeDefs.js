@@ -31,14 +31,14 @@ export const categoryTypeDefs = gql`
     status: ContentStatus
   }
 
-  input GetCategoryByUrlInput {
+  input GetCategoryBySlugInput {
     slug: String!
   }
 
   type Query {
     getCategoryList: [Category!]!
     getCategoryById(id: ID!): Category
-    getCategoryByUrl(input: GetCategoryByUrlInput!): Category
+    getCategoryBySlug(input: GetCategoryBySlugInput!): Category
   }
 
   type Mutation {
