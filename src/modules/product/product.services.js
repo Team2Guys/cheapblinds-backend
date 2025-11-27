@@ -19,11 +19,19 @@ export const productServices = {
 
   updateProductById: async (id, input) => {
     if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+
+    const existingProduct = await read.productById(id);
+    if (!existingProduct) throw createError(404, "Product does not exist.");
+
     return await update.productById(id, input);
   },
 
-  removeProductById: (id) => {
+  removeProductById: async (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+
+    const existingProduct = await read.productById(id);
+    if (!existingProduct) throw createError(404, "Product does not exist.");
+
     return remove.productById(id);
   },
 };

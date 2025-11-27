@@ -76,6 +76,6 @@ export const productTypeDefs = gql`
   type Mutation {
     createProduct(input: CreateProductInput!): Product
     updateProductById(id: ID!, input: UpdateProductByIdInput!): Product
-    removeProductById(id: ID!): GenericResponse!
+    removeProductById(id: ID!): Product
   }
 `;

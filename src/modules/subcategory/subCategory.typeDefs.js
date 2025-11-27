@@ -48,6 +48,6 @@ export const subcategoryTypeDefs = gql`
   type Mutation {
     createSubcategory(input: CreateSubcategoryInput!): Subcategory
     updateSubcategoryById(id: ID!, input: UpdateSubcategoryByIdInput!): Subcategory
-    removeSubcategoryById(id: ID!): GenericResponse!
+    removeSubcategoryById(id: ID!): Subcategory
   }
 `;

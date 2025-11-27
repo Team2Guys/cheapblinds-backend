@@ -44,6 +44,6 @@ export const categoryTypeDefs = gql`
   type Mutation {
     createCategory(input: CreateCategoryInput!): Category
     updateCategoryById(id: ID!, input: UpdateCategoryByIdInput!): Category
-    removeCategoryById(id: ID!): GenericResponse!
+    removeCategoryById(id: ID!): Category
   }
 `;

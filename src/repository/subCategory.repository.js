@@ -21,7 +21,7 @@ export const subcategoryRepository = {
         },
       }),
 
-    subcategoryBySlugs: (categorySlug, subcategorySlug) =>
+    subcategoryBySlugs: ({ categorySlug, subcategorySlug }) =>
       prisma.subcategory.findFirst({
         where: {
           slug: subcategorySlug,
