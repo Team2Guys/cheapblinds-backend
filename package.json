@@ -12,8 +12,8 @@
     "format:prisma": "npx prisma format",
     "db:init": "npx prisma init",
     "db:push": "npx prisma db push",
-    "db:migrate": "npx prisma migrate dev",
     "db:generate": "npx prisma generate",
+    "db:migrate": "npx prisma migrate dev",
     "db:reset": "npx prisma migrate reset"
   },
   "devDependencies": {
