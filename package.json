@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "license": "ISC",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon src/main.js",
     "db:studio": "npx prisma studio",
     "lint:js": "eslint \"./**/*.{js,jsx}\"",
     "format:code": "prettier --write \"./**/*.{js,jsx,html,yaml,env,md,json,txt}\"",
