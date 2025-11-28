@@ -22,6 +22,7 @@ export const productTypeDefs = gql`
     pattern: String!
     composition: String!
     isMotorized: Boolean!
+    motorPrice: Float!
     stock: Int!
     additionalInfo: String
     measuringGuide: String
@@ -52,7 +53,8 @@ export const productTypeDefs = gql`
     color: String
     pattern: String
     composition: String
-    isMotorized: Boolean!
+    isMotorized: Boolean
+    motorPrice: Float
     additionalInfo: String
     measuringGuide: String
     lastEditedBy: String

@@ -124,6 +124,7 @@ model Product {
   pattern          String?       @db.VarChar(100)
   composition      String?       @db.VarChar(255)
   isMotorized      Boolean       @default(false)
+  motorPrice       Decimal       @default(0)
   additionalInfo   String?       @db.Text()
   measuringGuide   String?       @db.Text()
   categoryId       String        @db.Uuid

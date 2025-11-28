@@ -110,6 +110,7 @@ export const commonTypeDefs = gql`
     pattern: String
     composition: String
     isMotorized: Boolean
+    motorPrice: Float
     additionalInfo: String
     measuringGuide: String
     lastEditedBy: String!
