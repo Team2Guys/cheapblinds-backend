@@ -19,29 +19,28 @@ export const setupMiddleware = (app, apolloServer) => {
 
   app.use(cookieParser()); // parse cookies
 
-  (app.use(cors(corsOptions)),
-    app.use(
-      "/graphql",
-      cors(corsOptions),
-      apiRateLimiter,
-      express.json({ limit: "10mb" }),
-      xss(), // sanitize input
-      expressMiddleware(apolloServer, {
-        context: ({ req, res }) => {
-          let user = null;
+  app.use(
+    "/graphql",
+    cors(corsOptions),
+    apiRateLimiter,
+    express.json({ limit: "10mb" }),
+    xss(), // sanitize input
+    expressMiddleware(apolloServer, {
+      context: ({ req, res }) => {
+        let user = null;
 
-          const accessToken = req.cookies["accessToken"];
-          if (accessToken) {
-            try {
-              user = tokenUtils.verify(accessToken);
-            } catch {
-              user = null;
-            }
+        const accessToken = req.cookies["accessToken"];
+        if (accessToken) {
+          try {
+            user = tokenUtils.verify(accessToken);
+          } catch {
+            user = null;
           }
+        }
 
-          return { user, req, res };
-        },
-        csrfPrevention: true, // optional for browser clients
-      }),
-    ));
+        return { user, req, res };
+      },
+      csrfPrevention: true, // optional for browser clients
+    }),
+  );
 };
