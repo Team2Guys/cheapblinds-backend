@@ -22,7 +22,7 @@ export const categoryRepository = {
       }),
 
     categoryBySlug: ({ slug }) =>
-      prisma.category.findFirst({
+      prisma.category.findUnique({
         where: { slug },
         include: {
           subcategories: {

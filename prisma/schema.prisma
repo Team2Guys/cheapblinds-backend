@@ -20,14 +20,21 @@ enum ContentStatus {
   ARCHIVED
 }
 
-// enum OrderStatus {
-//   PENDING
-//   PAID
-//   CANCELED
-//   FAILED
-//   SHIPPED
-//   COMPLETED
-// }
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELED
+  FAILED
+  SHIPPED
+  COMPLETED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  CANCELED
+  FAILED
+}
 
 // =================== Admin ===================
 model Admin {
@@ -40,8 +47,6 @@ model Admin {
   lastEditedBy String?  @db.VarChar(255)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-
-  @@index([email])
 }
 
 // =================== User ===================
@@ -54,11 +59,9 @@ model User {
   role                   Role     @default(USER)
   isEmailVerified        Boolean  @default(false)
   isNewsletterSubscribed Boolean  @default(false)
-  // orders                 Order[]  @relation(name: "UserOrders")
+  orders                 Order[]  @relation(name: "UserOrders")
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
-
-  @@index([email])
 }
 
 // =================== Category ===================
@@ -67,7 +70,7 @@ model Category {
   name             String        @unique @db.VarChar(100)
   description      String?       @db.Text()
   shortDescription String?       @db.VarChar(255)
-  slug             String?       @db.VarChar(255)
+  slug             String?       @unique @db.VarChar(255)
   metaTitle        String?       @db.VarChar(70)
   metaDescription  String?       @db.VarChar(160)
   canonicalTag     String?       @db.VarChar(255)
@@ -80,9 +83,6 @@ model Category {
   subcategories    Subcategory[] @relation(name: "CategorySubcategories")
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
-
-  @@index([name])
-  @@index([slug])
 }
 
 // =================== Subcategory ===================
@@ -92,7 +92,7 @@ model Subcategory {
   name             String        @db.VarChar(100)
   description      String?       @db.Text()
   shortDescription String?       @db.VarChar(255)
-  slug             String?       @db.VarChar(255)
+  slug             String?       @unique @db.VarChar(255)
   metaTitle        String?       @db.VarChar(70)
   metaDescription  String?       @db.VarChar(160)
   canonicalTag     String?       @db.VarChar(255)
@@ -105,9 +105,6 @@ model Subcategory {
   products         Product[]     @relation(name: "SubcategoryProducts")
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
-
-  @@index([categoryId])
-  @@index([slug])
 }
 
 // =================== Product ===================
@@ -118,7 +115,7 @@ model Product {
   name             String        @db.VarChar(100)
   description      String?       @db.Text()
   shortDescription String?       @db.VarChar(255)
-  slug             String        @db.VarChar(255)
+  slug             String?       @unique @db.VarChar(255)
   metaTitle        String?       @db.VarChar(120)
   metaDescription  String?       @db.VarChar(160)
   canonicalTag     String?       @db.VarChar(255)
@@ -142,56 +139,45 @@ model Product {
   status           ContentStatus @default(PUBLISHED)
   category         Category      @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
   subcategory      Subcategory   @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
-  // orderItems       OrderItem[]   @relation(name: "ProductOrderItems")
+  orderItems       OrderItem[]   @relation(name: "ProductOrderItems")
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
-
-  @@index([name])
-  @@index([categoryId])
-  @@index([subcategoryId])
-  @@index([price])
-  @@index([slug])
 }
 
-// // =================== Order ===================
-// model Order {
-//   id             String      @id @default(uuid()) @db.Uuid
-//   userId         String      @db.Uuid
-//   firstName      String      @db.VarChar(100)
-//   lastName       String      @db.VarChar(100)
-//   email          String      @db.VarChar(255)
-//   phone          String      @db.VarChar(20)
-//   city           String      @db.VarChar(100)
-//   country        String      @db.VarChar(100)
-//   address        String?     @db.Text()
-//   emirate        String      @db.VarChar(100)
-//   totalAmount    Decimal     @default(0)
-//   shippingCost   Decimal     @default(0)
-//   paymentStatus  Boolean     @default(false)
-//   shippingMethod Json?       @db.Json
-//   lastEditedBy   String?     @db.VarChar(255)
-//   status         OrderStatus @default(PENDING)
-//   user           User        @relation(name: "UserOrders", fields: [userId], references: [id], onDelete: Restrict)
-//   items          OrderItem[] @relation(name: "OrderItems")
-//   createdAt      DateTime    @default(now())
-//   updatedAt      DateTime    @default(now()) @updatedAt
-// }
+// =================== Order ===================
+model Order {
+  id            String        @id @default(uuid()) @db.Uuid
+  userId        String        @db.Uuid
+  firstName     String        @db.VarChar(100)
+  lastName      String        @db.VarChar(100)
+  email         String        @db.VarChar(255)
+  phone         String        @db.VarChar(20)
+  city          String        @db.VarChar(100)
+  country       String        @db.VarChar(100)
+  address       String?       @db.Text()
+  state         String        @db.VarChar(100)
+  totalAmount   Decimal       @default(0)
+  shippingCost  Decimal       @default(0)
+  lastEditedBy  String?       @db.VarChar(255)
+  paymentStatus PaymentStatus @default(PENDING)
+  status        OrderStatus   @default(PENDING)
+  user          User          @relation(name: "UserOrders", fields: [userId], references: [id], onDelete: Restrict)
+  items         OrderItem[]   @relation(name: "OrderItems")
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @default(now()) @updatedAt
+}
 
-// // =================== OrderItem ===================
-// model OrderItem {
-//   id           String   @id @default(uuid()) @db.Uuid
-//   orderId      String   @db.Uuid
-//   productId    String   @db.Uuid
-//   productName  String   @db.VarChar(255)
-//   productImage String?  @db.VarChar(512)
-//   quantity     Int      @default(1)
-//   price        Decimal  @default(0)
-//   lastEditedBy String?  @db.VarChar(255)
-//   order        Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
-//   product      Product  @relation(name: "ProductOrderItems", fields: [productId], references: [id])
-//   createdAt    DateTime @default(now())
-//   updatedAt    DateTime @updatedAt
-
-//   @@index([orderId])
-//   @@index([productId])
-// }
+// =================== OrderItem ===================
+model OrderItem {
+  id           String   @id @default(uuid()) @db.Uuid
+  orderId      String   @db.Uuid
+  productId    String   @db.Uuid
+  productName  String   @db.VarChar(255)
+  posterImage  String?  @db.VarChar(512)
+  quantity     Int      @default(1)
+  price        Decimal  @default(0)
+  lastEditedBy String?  @db.VarChar(255)
+  order        Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
+  product      Product  @relation(name: "ProductOrderItems", fields: [productId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+}
