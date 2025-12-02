@@ -28,8 +28,6 @@ export const productTypeDefs = gql`
     additionalInfo: String
     measuringGuide: String
     lastEditedBy: String!
-    category: Category!
-    subcategory: Subcategory!
     status: ContentStatus!
   }
 
@@ -60,8 +58,6 @@ export const productTypeDefs = gql`
     additionalInfo: String
     measuringGuide: String
     lastEditedBy: String!
-    category: Category!
-    subcategory: Subcategory!
     status: ContentStatus!
   }
 
