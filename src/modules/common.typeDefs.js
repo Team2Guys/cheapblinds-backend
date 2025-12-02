@@ -102,15 +102,14 @@ export const commonTypeDefs = gql`
     seoSchema: String
     price: Float!
     discountPrice: Float
-    stock: Int!
+    motorPrice: Float
     width: Float
     height: Float
-    weight: Float
+    stock: Int
     color: String
     pattern: String
     composition: String
     isMotorized: Boolean
-    motorPrice: Float
     additionalInfo: String
     measuringGuide: String
     lastEditedBy: String!

@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL") // points to your .env DATABASE_URL
+  url      = env("DATABASE_URL")
 }
 
 // =================== Enums ===================
@@ -20,6 +20,15 @@ enum ContentStatus {
   ARCHIVED
 }
 
+// enum OrderStatus {
+//   PENDING
+//   PAID
+//   CANCELED
+//   FAILED
+//   SHIPPED
+//   COMPLETED
+// }
+
 // =================== Admin ===================
 model Admin {
   id           String   @id @default(uuid()) @db.Uuid
@@ -27,8 +36,8 @@ model Admin {
   email        String   @unique @db.VarChar(255)
   password     String   @db.VarChar(255)
   permissions  String[] @default([])
-  lastEditedBy String?  @db.VarChar(255)
   role         Role     @default(ADMIN)
+  lastEditedBy String?  @db.VarChar(255)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -42,9 +51,10 @@ model User {
   lastName               String   @db.VarChar(100)
   email                  String   @unique @db.VarChar(255)
   password               String   @db.VarChar(255)
+  role                   Role     @default(USER)
   isEmailVerified        Boolean  @default(false)
   isNewsletterSubscribed Boolean  @default(false)
-  role                   Role     @default(USER)
+  // orders                 Order[]  @relation(name: "UserOrders")
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
 
@@ -66,8 +76,8 @@ model Category {
   seoSchema        String?       @db.Text()
   lastEditedBy     String?       @db.VarChar(255)
   status           ContentStatus @default(PUBLISHED)
-  products         Product[]     @relation("CategoryProducts")
-  subcategories    Subcategory[] @relation("CategorySubcategories")
+  products         Product[]     @relation(name: "CategoryProducts")
+  subcategories    Subcategory[] @relation(name: "CategorySubcategories")
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
@@ -78,6 +88,7 @@ model Category {
 // =================== Subcategory ===================
 model Subcategory {
   id               String        @id @default(uuid()) @db.Uuid
+  categoryId       String        @db.Uuid
   name             String        @db.VarChar(100)
   description      String?       @db.Text()
   shortDescription String?       @db.VarChar(255)
@@ -88,11 +99,10 @@ model Subcategory {
   breadcrumb       String?       @db.VarChar(255)
   posterImageUrl   String?       @db.VarChar(512)
   seoSchema        String?       @db.Text()
-  categoryId       String        @db.Uuid
   lastEditedBy     String?       @db.VarChar(255)
   status           ContentStatus @default(PUBLISHED)
-  category         Category      @relation(fields: [categoryId], references: [id], name: "CategorySubcategories", onDelete: Cascade)
-  products         Product[]     @relation("SubcategoryProducts")
+  category         Category      @relation(name: "CategorySubcategories", fields: [categoryId], references: [id], onDelete: Cascade)
+  products         Product[]     @relation(name: "SubcategoryProducts")
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
@@ -103,6 +113,8 @@ model Subcategory {
 // =================== Product ===================
 model Product {
   id               String        @id @default(uuid()) @db.Uuid
+  categoryId       String        @db.Uuid
+  subcategoryId    String        @db.Uuid
   name             String        @db.VarChar(100)
   description      String?       @db.Text()
   shortDescription String?       @db.VarChar(255)
@@ -116,23 +128,21 @@ model Product {
   productImages    String[]      @default([])
   price            Decimal       @default(0)
   discountPrice    Decimal?      @default(0)
+  motorPrice       Decimal?      @default(0)
   stock            Int           @default(0)
   height           Decimal?      @default(0)
   width            Decimal?      @default(0)
-  weight           Decimal?      @default(0)
   color            String?       @db.VarChar(100)
   pattern          String?       @db.VarChar(100)
   composition      String?       @db.VarChar(255)
   isMotorized      Boolean       @default(false)
-  motorPrice       Decimal       @default(0)
   additionalInfo   String?       @db.Text()
   measuringGuide   String?       @db.Text()
-  categoryId       String        @db.Uuid
-  subcategoryId    String        @db.Uuid
   lastEditedBy     String?       @db.VarChar(255)
   status           ContentStatus @default(PUBLISHED)
-  category         Category      @relation(fields: [categoryId], references: [id], name: "CategoryProducts", onDelete: Cascade)
-  subcategory      Subcategory   @relation(fields: [subcategoryId], references: [id], name: "SubcategoryProducts", onDelete: Cascade)
+  category         Category      @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
+  subcategory      Subcategory   @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
+  // orderItems       OrderItem[]   @relation(name: "ProductOrderItems")
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
@@ -142,3 +152,46 @@ model Product {
   @@index([price])
   @@index([slug])
 }
+
+// // =================== Order ===================
+// model Order {
+//   id             String      @id @default(uuid()) @db.Uuid
+//   userId         String      @db.Uuid
+//   firstName      String      @db.VarChar(100)
+//   lastName       String      @db.VarChar(100)
+//   email          String      @db.VarChar(255)
+//   phone          String      @db.VarChar(20)
+//   city           String      @db.VarChar(100)
+//   country        String      @db.VarChar(100)
+//   address        String?     @db.Text()
+//   emirate        String      @db.VarChar(100)
+//   totalAmount    Decimal     @default(0)
+//   shippingCost   Decimal     @default(0)
+//   paymentStatus  Boolean     @default(false)
+//   shippingMethod Json?       @db.Json
+//   lastEditedBy   String?     @db.VarChar(255)
+//   status         OrderStatus @default(PENDING)
+//   user           User        @relation(name: "UserOrders", fields: [userId], references: [id], onDelete: Restrict)
+//   items          OrderItem[] @relation(name: "OrderItems")
+//   createdAt      DateTime    @default(now())
+//   updatedAt      DateTime    @default(now()) @updatedAt
+// }
+
+// // =================== OrderItem ===================
+// model OrderItem {
+//   id           String   @id @default(uuid()) @db.Uuid
+//   orderId      String   @db.Uuid
+//   productId    String   @db.Uuid
+//   productName  String   @db.VarChar(255)
+//   productImage String?  @db.VarChar(512)
+//   quantity     Int      @default(1)
+//   price        Decimal  @default(0)
+//   lastEditedBy String?  @db.VarChar(255)
+//   order        Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
+//   product      Product  @relation(name: "ProductOrderItems", fields: [productId], references: [id])
+//   createdAt    DateTime @default(now())
+//   updatedAt    DateTime @updatedAt
+
+//   @@index([orderId])
+//   @@index([productId])
+// }
