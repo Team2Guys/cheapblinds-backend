@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// =================== Enums ===================
 enum Role {
   USER
   ADMIN
@@ -37,6 +36,17 @@ enum PaymentStatus {
   FAILED
 }
 
+enum InquiryType {
+  EMAIL
+  PHONE
+}
+
+enum InquiryStatus {
+  NEW
+  READ
+  RESOLVED
+}
+
 enum Permissions {
   ADD_PRODUCTS
   EDIT_PRODUCTS
@@ -54,7 +64,6 @@ enum Permissions {
   VIEW_TOTAL_CATEGORIES
 }
 
-// =================== Admin ===================
 model Admin {
   id           String        @id @default(uuid()) @db.Uuid
   name         String        @db.VarChar(100)
@@ -67,7 +76,6 @@ model Admin {
   updatedAt    DateTime      @updatedAt
 }
 
-// =================== User ===================
 model User {
   id                     String   @id @default(uuid()) @db.Uuid
   firstName              String   @db.VarChar(100)
@@ -82,7 +90,6 @@ model User {
   updatedAt              DateTime @updatedAt
 }
 
-// =================== Category ===================
 model Category {
   id               String        @id @default(uuid()) @db.Uuid
   name             String        @unique @db.VarChar(100)
@@ -103,7 +110,6 @@ model Category {
   updatedAt        DateTime      @updatedAt
 }
 
-// =================== Subcategory ===================
 model Subcategory {
   id               String        @id @default(uuid()) @db.Uuid
   categoryId       String        @db.Uuid
@@ -125,7 +131,6 @@ model Subcategory {
   updatedAt        DateTime      @updatedAt
 }
 
-// =================== Product ===================
 model Product {
   id               String        @id @default(uuid()) @db.Uuid
   categoryId       String        @db.Uuid
@@ -161,7 +166,6 @@ model Product {
   updatedAt        DateTime      @updatedAt
 }
 
-// =================== Order ===================
 model Order {
   id            String        @id @default(uuid()) @db.Uuid
   userId        String        @db.Uuid
@@ -181,6 +185,18 @@ model Order {
   paymentStatus PaymentStatus @default(PENDING)
   orderStatus   OrderStatus   @default(PENDING)
   user          User          @relation(name: "UserOrders", fields: [userId], references: [id], onDelete: Restrict)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Inquiry {
+  id            String        @id @default(uuid()) @db.Uuid
+  name          String        @db.VarChar(100)
+  email         String        @db.VarChar(255)
+  phone         String        @db.VarChar(20)
+  message       String?       @db.Text()
+  contactType   InquiryType
+  inquiryStatus InquiryStatus @default(NEW)
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 }

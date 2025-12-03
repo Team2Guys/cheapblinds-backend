@@ -2,28 +2,38 @@ import { adminServices } from "./admin.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
 const { handleAsync } = commonUtils;
-const { verifyAccess } = verifications;
+const { verifyAccess, verifyRole } = verifications;
 
 export const adminResolvers = {
   Query: {
-    getAdminList: handleAsync(verifyAccess(async () => adminServices.getAdminList())),
+    getAdminList: handleAsync(
+      verifyRole(["ADMIN", "SUPER_ADMIN"])(verifyAccess(async () => adminServices.getAdminList())),
+    ),
 
     getAdminById: handleAsync(
-      verifyAccess(async (_parent, { id }) => adminServices.getAdminById(id)),
+      verifyRole(["ADMIN", "SUPER_ADMIN"])(
+        verifyAccess(async (_parent, { id }) => adminServices.getAdminById(id)),
+      ),
     ),
   },
 
   Mutation: {
     createAdmin: handleAsync(
-      verifyAccess(async (_parent, { input }) => adminServices.createAdmin(input)),
+      verifyRole(["ADMIN", "SUPER_ADMIN"])(
+        verifyAccess(async (_parent, { input }) => adminServices.createAdmin(input)),
+      ),
     ),
 
     updateAdminById: handleAsync(
-      verifyAccess(async (_parent, { id, input }) => adminServices.updateAdminById(id, input)),
+      verifyRole(["ADMIN", "SUPER_ADMIN"])(
+        verifyAccess(async (_parent, { id, input }) => adminServices.updateAdminById(id, input)),
+      ),
     ),
 
     removeAdminById: handleAsync(
-      verifyAccess(async (_parent, { id }) => adminServices.removeAdminById(id)),
+      verifyRole(["ADMIN", "SUPER_ADMIN"])(
+        verifyAccess(async (_parent, { id }) => adminServices.removeAdminById(id)),
+      ),
     ),
   },
 };
