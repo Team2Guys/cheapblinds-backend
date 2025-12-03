@@ -7,7 +7,8 @@ const { validateUuid } = commonUtils;
 
 export const orderServices = {
   createOrder: async (input) => write.order(input),
-  getOrderList: () => read.orders(),
+
+  getOrderList: () => read.orderList(),
 
   getOrderById: (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");

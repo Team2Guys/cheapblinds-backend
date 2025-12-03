@@ -158,4 +158,16 @@ export const commonTypeDefs = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
   }
+
+  type Inquiry {
+    id: ID!
+    name: String!
+    email: String!
+    phone: String!
+    message: String!
+    inquiryType: String!
+    inquiryStatus: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+  }
 `;

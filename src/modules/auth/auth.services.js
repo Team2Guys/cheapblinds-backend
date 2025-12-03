@@ -88,7 +88,12 @@ export const authServices = {
 
     return {
       id: role === "SUPER_ADMIN" ? SUPER_ADMIN_ID : user.id,
-      name: role === "SUPER_ADMIN" ? SUPER_ADMIN_NAME : role === "ADMIN" ? user.name : undefined,
+      name:
+        role === "SUPER_ADMIN"
+          ? SUPER_ADMIN_NAME
+          : role === "ADMIN"
+            ? user.name
+            : `${user.firstName} ${user.lastName}`,
       role,
       accessToken,
     };
