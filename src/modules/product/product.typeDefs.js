@@ -2,38 +2,9 @@ import { gql } from "graphql-tag";
 
 export const productTypeDefs = gql`
   input CreateProductInput {
-    name: String!
-    description: String!
-    shortDescription: String!
-    slug: String!
-    metaTitle: String!
-    metaDescription: String!
-    canonicalTag: String!
-    breadcrumb: String!
-    posterImageUrl: String!
-    productImages: [String!]!
-    seoSchema: String!
-    price: Float!
-    discountPrice: Float!
-    width: Float!
-    height: Float!
-    weight: Float!
-    color: String!
-    pattern: String!
-    composition: String!
-    isMotorized: Boolean!
-    motorPrice: Float!
-    stock: Int!
-    additionalInfo: String
-    measuringGuide: String
-    lastEditedBy: String!
-    status: ContentStatus!
     categoryId: ID!
     subcategoryId: ID!
-  }
-
-  input UpdateProductByIdInput {
-    name: String
+    name: String!
     description: String
     shortDescription: String
     slug: String
@@ -42,25 +13,52 @@ export const productTypeDefs = gql`
     canonicalTag: String
     breadcrumb: String
     posterImageUrl: String
-    productImages: [String!]
+    productImages: [String!]!
     seoSchema: String
-    price: Float
+    price: Float!
     discountPrice: Float
-    stock: Int
+    motorPrice: Float
     width: Float
     height: Float
-    weight: Float!
+    stock: Int
     color: String
     pattern: String
     composition: String
     isMotorized: Boolean
-    motorPrice: Float
     additionalInfo: String
     measuringGuide: String
-    lastEditedBy: String
-    status: ContentStatus
-    categoryId: ID
-    subcategoryId: ID
+    lastEditedBy: String!
+    status: ContentStatus!
+  }
+
+  input UpdateProductByIdInput {
+    categoryId: ID!
+    subcategoryId: ID!
+    name: String!
+    description: String
+    shortDescription: String
+    slug: String
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadcrumb: String
+    posterImageUrl: String
+    productImages: [String!]!
+    seoSchema: String
+    price: Float!
+    discountPrice: Float
+    motorPrice: Float
+    width: Float
+    height: Float
+    stock: Int
+    color: String
+    pattern: String
+    composition: String
+    isMotorized: Boolean
+    additionalInfo: String
+    measuringGuide: String
+    lastEditedBy: String!
+    status: ContentStatus!
   }
 
   input GetProductBySlugsInput {

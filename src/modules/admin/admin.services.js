@@ -18,7 +18,7 @@ export const adminServices = {
     return write.admin({ email, password: hashedPassword, ...rest });
   },
 
-  getAdminList: () => read.admins(),
+  getAdminList: () => read.adminList(),
 
   getAdminById: (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");

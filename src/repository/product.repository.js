@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const productRepository = {
   read: {
-    products: () =>
+    productList: () =>
       prisma.product.findMany({
         include: {
           category: true,
@@ -22,7 +22,7 @@ export const productRepository = {
       }),
 
     productBySlugs: ({ categorySlug, subcategorySlug, productSlug }) =>
-      prisma.product.findFirst({
+      prisma.product.findUnique({
         where: {
           slug: productSlug,
           subcategory: {

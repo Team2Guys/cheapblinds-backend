@@ -8,7 +8,7 @@ const { validateUuid } = commonUtils;
 export const subcategoryServices = {
   createSubcategory: (input) => write.subcategory(input),
 
-  getSubcategoryList: () => read.subcategories(),
+  getSubcategoryList: () => read.subcategoryList(),
 
   getSubcategoryById: (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");

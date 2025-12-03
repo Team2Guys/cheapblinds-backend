@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const userRepository = {
   read: {
-    users: () =>
+    userList: () =>
       prisma.user.findMany({
         select: {
           id: true,

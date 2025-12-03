@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const categoryRepository = {
   read: {
-    categories: () =>
+    categoryList: () =>
       prisma.category.findMany({
         include: {
           subcategories: true,
@@ -22,7 +22,7 @@ export const categoryRepository = {
       }),
 
     categoryBySlug: ({ slug }) =>
-      prisma.category.findFirst({
+      prisma.category.findUnique({
         where: { slug },
         include: {
           subcategories: {
