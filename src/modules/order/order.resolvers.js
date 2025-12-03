@@ -6,24 +6,22 @@ const { verifyAccess } = verifications;
 
 export const orderResolvers = {
   Query: {
-    getOrderList: handleAsync(verifyAccess(async () => orderServices.getOrderList())),
+    getOrderList: handleAsync(verifyAccess(() => orderServices.getOrderList())),
 
-    getOrderById: handleAsync(
-      verifyAccess(async (_parent, { id }) => orderServices.getOrderById(id)),
-    ),
+    getOrderById: handleAsync(verifyAccess((_parent, { id }) => orderServices.getOrderById(id))),
   },
 
   Mutation: {
     createOrder: handleAsync(
-      verifyAccess(async (_parent, { input }) => orderServices.createOrder(input)),
+      verifyAccess((_parent, { input }) => orderServices.createOrder(input)),
     ),
 
     updateOrderById: handleAsync(
-      verifyAccess(async (_parent, { id, input }) => orderServices.updateOrderById(id, input)),
+      verifyAccess((_parent, { id, input }) => orderServices.updateOrderById(id, input)),
     ),
 
     removeOrderById: handleAsync(
-      verifyAccess(async (_parent, { id }) => orderServices.removeOrderById(id)),
+      verifyAccess((_parent, { id }) => orderServices.removeOrderById(id)),
     ),
   },
 };

@@ -6,11 +6,11 @@ const { verifyAccess, verifyRole } = verifications;
 
 export const categoryResolvers = {
   Query: {
-    getCategoryList: handleAsync(async () => categoryServices.getCategoryList()),
+    getCategoryList: handleAsync(() => categoryServices.getCategoryList()),
 
-    getCategoryById: handleAsync(async (_parent, { id }) => categoryServices.getCategoryById(id)),
+    getCategoryById: handleAsync((_parent, { id }) => categoryServices.getCategoryById(id)),
 
-    getCategoryBySlug: handleAsync(async (_parent, { input }) =>
+    getCategoryBySlug: handleAsync((_parent, { input }) =>
       categoryServices.getCategoryBySlug(input),
     ),
   },
@@ -18,7 +18,7 @@ export const categoryResolvers = {
   Mutation: {
     createCategory: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
+        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { input }) =>
           categoryServices.createCategory(input),
         ),
       ),
@@ -26,7 +26,7 @@ export const categoryResolvers = {
 
     updateCategoryById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { id, input }) =>
+        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id, input }) =>
           categoryServices.updateCategoryById(id, input),
         ),
       ),
@@ -34,7 +34,7 @@ export const categoryResolvers = {
 
     removeCategoryById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { id }) =>
+        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id }) =>
           categoryServices.removeCategoryById(id),
         ),
       ),

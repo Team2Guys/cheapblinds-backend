@@ -6,11 +6,11 @@ const { verifyAccess, verifyRole } = verifications;
 
 export const productResolvers = {
   Query: {
-    getProductList: handleAsync(async () => productServices.getProductList()),
+    getProductList: handleAsync(() => productServices.getProductList()),
 
-    getProductById: handleAsync(async (_parent, { id }) => productServices.getProductById(id)),
+    getProductById: handleAsync((_parent, { id }) => productServices.getProductById(id)),
 
-    getProductBySlugs: handleAsync(async (_parent, { input }) =>
+    getProductBySlugs: handleAsync((_parent, { input }) =>
       productServices.getProductBySlugs(input),
     ),
   },
@@ -18,7 +18,7 @@ export const productResolvers = {
   Mutation: {
     createProduct: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { input }) =>
+        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { input }) =>
           productServices.createProduct(input),
         ),
       ),
@@ -26,7 +26,7 @@ export const productResolvers = {
 
     updateProductById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { id, input }) =>
+        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id, input }) =>
           productServices.updateProductById(id, input),
         ),
       ),
@@ -34,7 +34,7 @@ export const productResolvers = {
 
     removeProductById: handleAsync(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])(async (_parent, { id }) =>
+        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id }) =>
           productServices.removeProductById(id),
         ),
       ),

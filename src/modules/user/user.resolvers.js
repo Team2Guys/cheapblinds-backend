@@ -6,18 +6,16 @@ const { verifyAccess } = verifications;
 
 export const userResolvers = {
   Query: {
-    getUserList: handleAsync(async () => userServices.getUserList()),
+    getUserList: handleAsync(() => userServices.getUserList()),
 
-    getUserById: handleAsync(async (_parent, { id }) => userServices.getUserById(id)),
+    getUserById: handleAsync((_parent, { id }) => userServices.getUserById(id)),
   },
 
   Mutation: {
     updateUserById: handleAsync(
-      verifyAccess(async (_parent, { id, input }) => userServices.updateUserById(id, input)),
+      verifyAccess((_parent, { id, input }) => userServices.updateUserById(id, input)),
     ),
 
-    removeUserById: handleAsync(
-      verifyAccess(async (_parent, { id }) => userServices.removeUserById(id)),
-    ),
+    removeUserById: handleAsync(verifyAccess((_parent, { id }) => userServices.removeUserById(id))),
   },
 };
