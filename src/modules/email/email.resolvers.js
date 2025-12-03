@@ -9,11 +9,11 @@ export const emailResolvers = {
   },
 
   Mutation: {
-    checkVerificationToken: handleAsync(async (_parent, { input }) =>
+    checkVerificationToken: handleAsync((_parent, { input }) =>
       emailServices.checkVerificationToken(input),
     ),
 
-    sendVerificationToken: handleAsync(async (_parent, { input }) =>
+    sendVerificationToken: handleAsync((_parent, { input }) =>
       emailServices.sendVerificationToken(input),
     ),
   },

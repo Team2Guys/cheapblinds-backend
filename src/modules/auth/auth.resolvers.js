@@ -11,7 +11,7 @@ export const authResolvers = {
   },
 
   Mutation: {
-    signup: handleAsync(async (_parent, { input }) => authServices.signup(input)),
+    signup: handleAsync((_parent, { input }) => authServices.signup(input)),
 
     signin: handleAsync(async (_parent, { input }, { res }) => {
       const resBody = await authServices.signin(input);
@@ -27,7 +27,7 @@ export const authResolvers = {
       return { ...resBody, accessToken: undefined };
     }),
 
-    signout: handleAsync(async (_parent, _args, { res }) => {
+    signout: handleAsync((_parent, _args, { res }) => {
       res.clearCookie("accessToken", {
         httpOnly: true,
         secure: NODE_ENV === "production",
@@ -37,10 +37,10 @@ export const authResolvers = {
       return { status: "success", message: "Logged out successfully" };
     }),
 
-    requestPasswordReset: handleAsync(async (_parent, { input }) =>
+    requestPasswordReset: handleAsync((_parent, { input }) =>
       authServices.requestPasswordReset(input),
     ),
 
-    updatePassword: handleAsync(async (_parent, { input }) => authServices.updatePassword(input)),
+    updatePassword: handleAsync((_parent, { input }) => authServices.updatePassword(input)),
   },
 };

@@ -5,18 +5,18 @@ const { handleAsync } = commonUtils;
 
 export const orderResolvers = {
   Query: {
-    getInquiryList: handleAsync(async () => orderServices.getInquiryList()),
+    getInquiryList: handleAsync(() => orderServices.getInquiryList()),
 
-    getInquiryById: handleAsync(async (_parent, { id }) => orderServices.getInquiryById(id)),
+    getInquiryById: handleAsync((_parent, { id }) => orderServices.getInquiryById(id)),
   },
 
   Mutation: {
-    createInquiry: handleAsync(async (_parent, { input }) => orderServices.createInquiry(input)),
+    createInquiry: handleAsync((_parent, { input }) => orderServices.createInquiry(input)),
 
-    updateInquiryById: handleAsync(async (_parent, { id, input }) =>
+    updateInquiryById: handleAsync((_parent, { id, input }) =>
       orderServices.updateInquiryById(id, input),
     ),
 
-    removeInquiryById: handleAsync(async (_parent, { id }) => orderServices.removeInquiryById(id)),
+    removeInquiryById: handleAsync((_parent, { id }) => orderServices.removeInquiryById(id)),
   },
 };
