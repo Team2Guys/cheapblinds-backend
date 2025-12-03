@@ -10,6 +10,23 @@ export const commonTypeDefs = gql`
     SUPER_ADMIN
   }
 
+  enum Permissions {
+    ADD_PRODUCTS
+    EDIT_PRODUCTS
+    DELETE_PRODUCTS
+    ADD_CATEGORY
+    DELETE_CATEGORY
+    EDIT_CATEGORY
+    CHECK_PROFIT
+    CHECK_REVENUE
+    CHECK_VISITORS
+    VIEW_USERS
+    VIEW_SALES
+    VIEW_ADMINS
+    VIEW_TOTAL_PRODUCTS
+    VIEW_TOTAL_CATEGORIES
+  }
+
   enum ContentStatus {
     DRAFT
     PUBLISHED
@@ -24,7 +41,7 @@ export const commonTypeDefs = gql`
     id: ID!
     name: String!
     email: String!
-    permissions: [String!]!
+    permissions: [Permissions!]!
     role: Role!
     lastEditedBy: String!
     createdAt: DateTime!
