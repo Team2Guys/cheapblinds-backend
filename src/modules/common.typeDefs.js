@@ -119,4 +119,26 @@ export const commonTypeDefs = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
   }
+
+  type Order {
+    id: ID!
+    userId: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String!
+    country: String!
+    state: String!
+    city: String!
+    address: String!
+    totalAmount: Float!
+    shippingCost: Float!
+    notes: String!
+    items: [JSON!]!
+    lastEditedBy: String!
+    paymentStatus: String!
+    orderStatus: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+  }
 `;

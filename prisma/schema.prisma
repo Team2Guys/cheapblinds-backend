@@ -30,23 +30,41 @@ enum OrderStatus {
 }
 
 enum PaymentStatus {
+  FREE
   PENDING
   PAID
   CANCELED
   FAILED
 }
 
+enum Permissions {
+  ADD_PRODUCTS
+  EDIT_PRODUCTS
+  DELETE_PRODUCTS
+  ADD_CATEGORY
+  DELETE_CATEGORY
+  EDIT_CATEGORY
+  CHECK_PROFIT
+  CHECK_REVENUE
+  CHECK_VISITORS
+  VIEW_USERS
+  VIEW_SALES
+  VIEW_ADMINS
+  VIEW_TOTAL_PRODUCTS
+  VIEW_TOTAL_CATEGORIES
+}
+
 // =================== Admin ===================
 model Admin {
-  id           String   @id @default(uuid()) @db.Uuid
-  name         String   @db.VarChar(100)
-  email        String   @unique @db.VarChar(255)
-  password     String   @db.VarChar(255)
-  permissions  String[] @default([])
-  role         Role     @default(ADMIN)
-  lastEditedBy String?  @db.VarChar(255)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id           String        @id @default(uuid()) @db.Uuid
+  name         String        @db.VarChar(100)
+  email        String        @unique @db.VarChar(255)
+  password     String        @db.VarChar(255)
+  permissions  Permissions[] @default([])
+  role         Role          @default(ADMIN)
+  lastEditedBy String?       @db.VarChar(255)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }
 
 // =================== User ===================
@@ -70,7 +88,7 @@ model Category {
   name             String        @unique @db.VarChar(100)
   description      String?       @db.Text()
   shortDescription String?       @db.VarChar(255)
-  slug             String?       @unique @db.VarChar(255)
+  slug             String        @unique @db.VarChar(255)
   metaTitle        String?       @db.VarChar(70)
   metaDescription  String?       @db.VarChar(160)
   canonicalTag     String?       @db.VarChar(255)
@@ -92,7 +110,7 @@ model Subcategory {
   name             String        @db.VarChar(100)
   description      String?       @db.Text()
   shortDescription String?       @db.VarChar(255)
-  slug             String?       @unique @db.VarChar(255)
+  slug             String        @unique @db.VarChar(255)
   metaTitle        String?       @db.VarChar(70)
   metaDescription  String?       @db.VarChar(160)
   canonicalTag     String?       @db.VarChar(255)
@@ -115,7 +133,7 @@ model Product {
   name             String        @db.VarChar(100)
   description      String?       @db.Text()
   shortDescription String?       @db.VarChar(255)
-  slug             String?       @unique @db.VarChar(255)
+  slug             String        @unique @db.VarChar(255)
   metaTitle        String?       @db.VarChar(120)
   metaDescription  String?       @db.VarChar(160)
   canonicalTag     String?       @db.VarChar(255)
@@ -124,11 +142,11 @@ model Product {
   seoSchema        String?       @db.Text()
   productImages    String[]      @default([])
   price            Decimal       @default(0)
-  discountPrice    Decimal?      @default(0)
-  motorPrice       Decimal?      @default(0)
+  discountPrice    Decimal       @default(0)
+  motorPrice       Decimal       @default(0)
   stock            Int           @default(0)
-  height           Decimal?      @default(0)
-  width            Decimal?      @default(0)
+  height           Decimal       @default(0)
+  width            Decimal       @default(0)
   color            String?       @db.VarChar(100)
   pattern          String?       @db.VarChar(100)
   composition      String?       @db.VarChar(255)
@@ -139,7 +157,6 @@ model Product {
   status           ContentStatus @default(PUBLISHED)
   category         Category      @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
   subcategory      Subcategory   @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
-  orderItems       OrderItem[]   @relation(name: "ProductOrderItems")
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 }
@@ -152,32 +169,18 @@ model Order {
   lastName      String        @db.VarChar(100)
   email         String        @db.VarChar(255)
   phone         String        @db.VarChar(20)
-  city          String        @db.VarChar(100)
   country       String        @db.VarChar(100)
-  address       String?       @db.Text()
   state         String        @db.VarChar(100)
+  city          String        @db.VarChar(100)
+  address       String        @db.Text()
   totalAmount   Decimal       @default(0)
   shippingCost  Decimal       @default(0)
+  items         Json[]
+  notes         String?       @db.Text()
   lastEditedBy  String?       @db.VarChar(255)
   paymentStatus PaymentStatus @default(PENDING)
-  status        OrderStatus   @default(PENDING)
+  orderStatus   OrderStatus   @default(PENDING)
   user          User          @relation(name: "UserOrders", fields: [userId], references: [id], onDelete: Restrict)
-  items         OrderItem[]   @relation(name: "OrderItems")
   createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @default(now()) @updatedAt
-}
-
-// =================== OrderItem ===================
-model OrderItem {
-  id           String   @id @default(uuid()) @db.Uuid
-  orderId      String   @db.Uuid
-  productId    String   @db.Uuid
-  productName  String   @db.VarChar(255)
-  posterImage  String?  @db.VarChar(512)
-  quantity     Int      @default(1)
-  price        Decimal  @default(0)
-  lastEditedBy String?  @db.VarChar(255)
-  order        Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
-  product      Product  @relation(name: "ProductOrderItems", fields: [productId], references: [id], onDelete: Cascade)
-  createdAt    DateTime @default(now())
+  updatedAt     DateTime      @updatedAt
 }

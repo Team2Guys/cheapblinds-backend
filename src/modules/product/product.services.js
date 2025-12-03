@@ -8,7 +8,7 @@ const { validateUuid } = commonUtils;
 export const productServices = {
   createProduct: (input) => write.product(input),
 
-  getProductList: () => read.products(),
+  getProductList: () => read.productList(),
 
   getProductById: (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");

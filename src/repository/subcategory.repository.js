@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const subcategoryRepository = {
   read: {
-    subcategories: () =>
+    subcategoryList: () =>
       prisma.subcategory.findMany({
         include: {
           category: true,

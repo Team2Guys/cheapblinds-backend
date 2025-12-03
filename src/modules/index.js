@@ -4,6 +4,7 @@ import { adminTypeDefs, adminResolvers } from "./admin/index.js";
 import { userTypeDefs, userResolvers } from "./user/index.js";
 import { authTypeDefs, authResolvers } from "./auth/index.js";
 import { emailTypeDefs, emailResolvers } from "./email/index.js";
+import { orderTypeDefs, orderResolvers } from "./order/index.js";
 import { categoryTypeDefs, categoryResolvers } from "./category/index.js";
 import { subcategoryTypeDefs, subcategoryResolvers } from "./subcategory/index.js";
 import { productTypeDefs, productResolvers } from "./product/index.js";
@@ -14,6 +15,7 @@ export const typeDefs = mergeTypeDefs([
   authTypeDefs,
   categoryTypeDefs,
   emailTypeDefs,
+  orderTypeDefs,
   subcategoryTypeDefs,
   productTypeDefs,
   userTypeDefs,
@@ -25,6 +27,7 @@ export const resolvers = mergeResolvers([
   authResolvers,
   categoryResolvers,
   emailResolvers,
+  orderResolvers,
   subcategoryResolvers,
   productResolvers,
   userResolvers,

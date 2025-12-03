@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const productRepository = {
   read: {
-    products: () =>
+    productList: () =>
       prisma.product.findMany({
         include: {
           category: true,

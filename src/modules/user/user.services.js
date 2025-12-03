@@ -6,7 +6,7 @@ const { read, update, remove } = repository;
 const { validateUuid } = commonUtils;
 
 export const userServices = {
-  getUserList: () => read.users(),
+  getUserList: () => read.userList(),
 
   getUserById: (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");

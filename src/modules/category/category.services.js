@@ -8,7 +8,7 @@ const { validateUuid } = commonUtils;
 export const categoryServices = {
   createCategory: (input) => write.category(input),
 
-  getCategoryList: () => read.categories(),
+  getCategoryList: () => read.categoryList(),
 
   getCategoryById: (id) => {
     if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
