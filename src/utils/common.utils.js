@@ -4,6 +4,11 @@ import { repository } from "#repository/index.js";
 const { read } = repository;
 
 export const commonUtils = {
+  /**
+   * Wrapper to handle promise rejections and throw HTTP errors
+   * @param {Function} fn - async function to wrap
+   * @returns {Function} - wrapped function
+   */
   handlePromise:
     (fn) =>
     (...args) => {
@@ -14,6 +19,11 @@ export const commonUtils = {
       }
     },
 
+  /**
+   * Validate UUID
+   * @param {string} id - UUID
+   * @returns {void}
+   */
   validateUuid: (id) => {
     if (!id) throw createError(400, "Invalid Uuid.");
 

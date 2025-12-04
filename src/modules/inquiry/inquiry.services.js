@@ -7,7 +7,7 @@ const { ensureResourceExists } = commonUtils;
 export const inquiryServices = {
   createInquiry: (input) => write.inquiry(input),
 
-  getInquiryList: read.inquiryList,
+  getInquiryList: () => read.inquiryList,
 
   getInquiryById: async (id) => {
     await ensureResourceExists("inquiry", id);
