@@ -14,6 +14,7 @@ export const commonTypeDefs = gql`
     EMAIL
     PHONE
     WHATSAPP
+    OTHER
   }
 
   enum Permissions {

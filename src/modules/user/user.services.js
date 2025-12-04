@@ -1,9 +1,8 @@
-import createError from "http-errors";
 import { repository } from "#repository/index.js";
 import { commonUtils } from "#utils/index.js";
 
 const { read, update, remove } = repository;
-const { validateUuid } = commonUtils;
+const { validateUuid, ensureResourceExists } = commonUtils;
 
 export const userServices = {
   getUserList: () => read.userList(),
@@ -14,20 +13,12 @@ export const userServices = {
   },
 
   updateUserById: async (id, input) => {
-    validateUuid(id);
-
-    const existingUser = await read.userById(id);
-    if (!existingUser) throw createError(404, "User does not exist.");
-
+    await ensureResourceExists("user", id);
     return update.userById(id, input);
   },
 
   removeUserById: async (id) => {
-    validateUuid(id);
-
-    const existingUser = await read.userById(id);
-    if (!existingUser) throw createError(404, "User does not exist.");
-
+    await ensureResourceExists("user", id);
     return remove.userById(id);
   },
 };

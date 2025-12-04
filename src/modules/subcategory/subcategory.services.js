@@ -1,9 +1,8 @@
-import createError from "http-errors";
 import { repository } from "#repository/index.js";
 import { commonUtils } from "#utils/index.js";
 
 const { write, read, update, remove } = repository;
-const { validateUuid } = commonUtils;
+const { validateUuid, ensureResourceExists } = commonUtils;
 
 export const subcategoryServices = {
   createSubcategory: (input) => write.subcategory(input),
@@ -11,7 +10,7 @@ export const subcategoryServices = {
   getSubcategoryList: () => read.subcategoryList(),
 
   getSubcategoryById: (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
+    validateUuid(id);
     return read.subcategoryById(id);
   },
 
@@ -20,20 +19,12 @@ export const subcategoryServices = {
   },
 
   updateSubcategoryById: async (id, input) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
-
-    const existingSubcategory = await read.subcategoryById(id);
-    if (!existingSubcategory) throw createError(404, "Subcategory does not exist.");
-
+    await ensureResourceExists("subcategory", id);
     return await update.subcategoryById(id, input);
   },
 
   removeSubcategoryById: async (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid subcategory id.");
-
-    const existingSubcategory = await read.subcategoryById(id);
-    if (!existingSubcategory) throw createError(404, "Subcategory does not exist.");
-
+    await ensureResourceExists("subcategory", id);
     return remove.subcategoryById(id);
   },
 };

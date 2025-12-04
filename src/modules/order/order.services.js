@@ -1,9 +1,8 @@
-import createError from "http-errors";
 import { repository } from "#repository/index.js";
 import { commonUtils } from "#utils/index.js";
 
 const { write, read, update, remove } = repository;
-const { validateUuid } = commonUtils;
+const { validateUuid, ensureResourceExists } = commonUtils;
 
 export const orderServices = {
   createOrder: (input) => write.order(input),
@@ -16,20 +15,12 @@ export const orderServices = {
   },
 
   updateOrderById: async (id, input) => {
-    validateUuid(id);
-
-    const existingOrder = await read.orderById(id);
-    if (!existingOrder) throw createError(404, "Order does not exist.");
-
+    await ensureResourceExists("order", id);
     return update.orderById(id, input);
   },
 
   removeOrderById: async (id) => {
-    validateUuid(id);
-
-    const existingOrder = await read.orderById(id);
-    if (!existingOrder) throw createError(404, "Order does not exist.");
-
+    await ensureResourceExists("order", id);
     return remove.orderById(id);
   },
 };
