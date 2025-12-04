@@ -5,6 +5,14 @@ import { commonUtils } from "#utils/index.js";
 const { write, read, update, remove } = repository;
 const { validateUuid } = commonUtils;
 
+// Helper to validate UUID and ensure the record exists
+async function ensureInquireExistance(id) {
+  validateUuid(id);
+  const inquiry = await read.inquiryById(id);
+  if (!inquiry) throw createError(404, "Inquiry does not exist.");
+  return inquiry;
+}
+
 export const inquiryServices = {
   createInquiry: (input) => write.inquiry(input),
 
@@ -16,20 +24,12 @@ export const inquiryServices = {
   },
 
   updateInquiryById: async (id, input) => {
-    validateUuid(id);
-
-    const existingInquiry = await read.inquiryById(id);
-    if (!existingInquiry) throw createError(404, "Inquiry does not exist.");
-
+    await ensureInquireExistance(id);
     return update.inquiryById(id, input);
   },
 
   removeInquiryById: async (id) => {
-    validateUuid(id);
-
-    const existingInquiry = await read.inquiryById(id);
-    if (!existingInquiry) throw createError(404, "Inquiry does not exist.");
-
+    await ensureInquireExistance(id);
     return remove.inquiryById(id);
   },
 };
