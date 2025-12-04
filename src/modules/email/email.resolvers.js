@@ -1,7 +1,7 @@
 import { commonUtils } from "#utils/index.js";
 import { emailServices } from "./email.services.js";
 
-const { handleAsync } = commonUtils;
+const { handlePromise } = commonUtils;
 
 export const emailResolvers = {
   Query: {
@@ -9,11 +9,11 @@ export const emailResolvers = {
   },
 
   Mutation: {
-    checkVerificationToken: handleAsync((_parent, { input }) =>
+    checkVerificationToken: handlePromise((_parent, { input }) =>
       emailServices.checkVerificationToken(input),
     ),
 
-    sendVerificationToken: handleAsync((_parent, { input }) =>
+    sendVerificationToken: handlePromise((_parent, { input }) =>
       emailServices.sendVerificationToken(input),
     ),
   },

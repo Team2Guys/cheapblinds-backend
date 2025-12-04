@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const inquiryRepository = {
   read: {
-    inquiryList: () => prisma.inquiry.findMany(),
+    inquiryList: prisma.inquiry.findMany(),
 
     inquiryById: (id) =>
       prisma.inquiry.findUnique({

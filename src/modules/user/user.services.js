@@ -9,12 +9,12 @@ export const userServices = {
   getUserList: () => read.userList(),
 
   getUserById: (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
     return read.userById(id);
   },
 
   updateUserById: async (id, input) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
 
     const existingUser = await read.userById(id);
     if (!existingUser) throw createError(404, "User does not exist.");
@@ -23,7 +23,7 @@ export const userServices = {
   },
 
   removeUserById: async (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
 
     const existingUser = await read.userById(id);
     if (!existingUser) throw createError(404, "User does not exist.");

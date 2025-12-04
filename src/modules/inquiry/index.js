@@ -1,2 +1,2 @@
-export { orderTypeDefs } from "./order.typeDefs.js";
-export { orderResolvers } from "./order.resolvers.js";
+export { inquiryTypeDefs } from "./inquiry.typeDefs.js";
+export { inquiryResolvers } from "./inquiry.resolvers.js";

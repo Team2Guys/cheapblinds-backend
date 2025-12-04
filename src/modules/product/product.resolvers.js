@@ -1,22 +1,22 @@
 import { productServices } from "./product.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
-const { handleAsync } = commonUtils;
+const { handlePromise } = commonUtils;
 const { verifyAccess, verifyRole } = verifications;
 
 export const productResolvers = {
   Query: {
-    getProductList: handleAsync(() => productServices.getProductList()),
+    getProductList: handlePromise(() => productServices.getProductList()),
 
-    getProductById: handleAsync((_parent, { id }) => productServices.getProductById(id)),
+    getProductById: handlePromise((_parent, { id }) => productServices.getProductById(id)),
 
-    getProductBySlugs: handleAsync((_parent, { input }) =>
+    getProductBySlugs: handlePromise((_parent, { input }) =>
       productServices.getProductBySlugs(input),
     ),
   },
 
   Mutation: {
-    createProduct: handleAsync(
+    createProduct: handlePromise(
       verifyAccess(
         verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { input }) =>
           productServices.createProduct(input),
@@ -24,7 +24,7 @@ export const productResolvers = {
       ),
     ),
 
-    updateProductById: handleAsync(
+    updateProductById: handlePromise(
       verifyAccess(
         verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id, input }) =>
           productServices.updateProductById(id, input),
@@ -32,7 +32,7 @@ export const productResolvers = {
       ),
     ),
 
-    removeProductById: handleAsync(
+    removeProductById: handlePromise(
       verifyAccess(
         verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id }) =>
           productServices.removeProductById(id),

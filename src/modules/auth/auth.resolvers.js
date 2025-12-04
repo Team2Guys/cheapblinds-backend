@@ -2,7 +2,7 @@ import { env } from "#config/index.js";
 import { commonUtils } from "#utils/index.js";
 import { authServices } from "./auth.services.js";
 
-const { handleAsync } = commonUtils;
+const { handlePromise } = commonUtils;
 const { NODE_ENV } = env;
 
 export const authResolvers = {
@@ -11,9 +11,9 @@ export const authResolvers = {
   },
 
   Mutation: {
-    signup: handleAsync((_parent, { input }) => authServices.signup(input)),
+    signup: handlePromise((_parent, { input }) => authServices.signup(input)),
 
-    signin: handleAsync(async (_parent, { input }, { res }) => {
+    signin: handlePromise(async (_parent, { input }, { res }) => {
       const resBody = await authServices.signin(input);
       const { accessToken } = resBody;
 
@@ -27,7 +27,7 @@ export const authResolvers = {
       return { ...resBody, accessToken: undefined };
     }),
 
-    signout: handleAsync((_parent, _args, { res }) => {
+    signout: handlePromise((_parent, _args, { res }) => {
       res.clearCookie("accessToken", {
         httpOnly: true,
         secure: NODE_ENV === "production",
@@ -37,10 +37,10 @@ export const authResolvers = {
       return { status: "success", message: "Logged out successfully" };
     }),
 
-    requestPasswordReset: handleAsync((_parent, { input }) =>
+    requestPasswordReset: handlePromise((_parent, { input }) =>
       authServices.requestPasswordReset(input),
     ),
 
-    updatePassword: handleAsync((_parent, { input }) => authServices.updatePassword(input)),
+    updatePassword: handlePromise((_parent, { input }) => authServices.updatePassword(input)),
   },
 };
