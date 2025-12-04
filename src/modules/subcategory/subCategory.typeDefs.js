@@ -40,9 +40,9 @@ export const subcategoryTypeDefs = gql`
   }
 
   type Query {
-    getSubcategoryList: [Subcategory!]!
-    getSubcategoryById(id: ID!): Subcategory
-    getSubcategoryBySlugs(input: GetSubcategoryBySlugsInput!): Subcategory
+    subcategoryList: [Subcategory!]!
+    subcategoryById(id: ID!): Subcategory
+    subcategoryBySlugs(input: GetSubcategoryBySlugsInput!): Subcategory
   }
 
   type Mutation {

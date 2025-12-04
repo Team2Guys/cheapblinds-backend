@@ -6,11 +6,11 @@ const { verifyAccess, verifyRole } = verifications;
 
 export const adminResolvers = {
   Query: {
-    getAdminList: handlePromise(
+    adminList: handlePromise(
       verifyRole(["ADMIN", "SUPER_ADMIN"])(verifyAccess(() => adminServices.getAdminList())),
     ),
 
-    getAdminById: handlePromise(
+    adminById: handlePromise(
       verifyRole(["ADMIN", "SUPER_ADMIN"])(
         verifyAccess((_parent, { id }) => adminServices.getAdminById(id)),
       ),

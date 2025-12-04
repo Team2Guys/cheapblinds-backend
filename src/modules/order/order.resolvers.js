@@ -6,13 +6,13 @@ const { verifyAccess } = verifications;
 
 export const orderResolvers = {
   Query: {
-    getOrderList: handlePromise(verifyAccess(() => orderServices.getOrderList())),
+    orderList: handlePromise(verifyAccess(() => orderServices.getOrderList())),
 
-    getOrderListByUserId: handlePromise(
+    orderListByUserId: handlePromise(
       verifyAccess((_parent, { id }) => orderServices.getOrderListByUserId(id)),
     ),
 
-    getOrderById: handlePromise(verifyAccess((_parent, { id }) => orderServices.getOrderById(id))),
+    orderById: handlePromise(verifyAccess((_parent, { id }) => orderServices.getOrderById(id))),
   },
 
   Mutation: {

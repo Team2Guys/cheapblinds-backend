@@ -6,13 +6,11 @@ const { verifyAccess, verifyRole } = verifications;
 
 export const productResolvers = {
   Query: {
-    getProductList: handlePromise(() => productServices.getProductList()),
+    productList: handlePromise(() => productServices.getProductList()),
 
-    getProductById: handlePromise((_parent, { id }) => productServices.getProductById(id)),
+    productById: handlePromise((_parent, { id }) => productServices.getProductById(id)),
 
-    getProductBySlugs: handlePromise((_parent, { input }) =>
-      productServices.getProductBySlugs(input),
-    ),
+    productBySlugs: handlePromise((_parent, { input }) => productServices.getProductBySlugs(input)),
   },
 
   Mutation: {

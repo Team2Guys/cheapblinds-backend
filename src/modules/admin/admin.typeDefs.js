@@ -19,8 +19,8 @@ export const adminTypeDefs = gql`
   }
 
   type Query {
-    getAdminList: [Admin!]!
-    getAdminById(id: ID!): Admin
+    adminList: [Admin!]!
+    adminById(id: ID!): Admin
   }
 
   type Mutation {

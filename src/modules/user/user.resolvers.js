@@ -6,9 +6,9 @@ const { verifyAccess } = verifications;
 
 export const userResolvers = {
   Query: {
-    getUserList: handlePromise(() => userServices.getUserList()),
+    userList: handlePromise(() => userServices.getUserList()),
 
-    getUserById: handlePromise((_parent, { id }) => userServices.getUserById(id)),
+    userById: handlePromise((_parent, { id }) => userServices.getUserById(id)),
   },
 
   Mutation: {

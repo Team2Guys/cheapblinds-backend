@@ -14,8 +14,8 @@ export const inquiryTypeDefs = gql`
   }
 
   type Query {
-    getInquiryList: [Inquiry!]!
-    getInquiryById(id: ID!): Inquiry
+    inquiryList: [Inquiry!]!
+    inquiryById(id: ID!): Inquiry
   }
 
   type Mutation {

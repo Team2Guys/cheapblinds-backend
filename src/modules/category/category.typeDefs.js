@@ -36,9 +36,9 @@ export const categoryTypeDefs = gql`
   }
 
   type Query {
-    getCategoryList: [Category!]!
-    getCategoryById(id: ID!): Category
-    getCategoryBySlug(input: GetCategoryBySlugInput!): Category
+    categoryList: [Category!]!
+    categoryById(id: ID!): Category
+    categoryBySlug(input: GetCategoryBySlugInput!): Category
   }
 
   type Mutation {

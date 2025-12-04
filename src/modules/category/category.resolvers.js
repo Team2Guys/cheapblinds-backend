@@ -6,11 +6,11 @@ const { verifyAccess, verifyRole } = verifications;
 
 export const categoryResolvers = {
   Query: {
-    getCategoryList: handlePromise(() => categoryServices.getCategoryList()),
+    categoryList: handlePromise(() => categoryServices.getCategoryList()),
 
-    getCategoryById: handlePromise((_parent, { id }) => categoryServices.getCategoryById(id)),
+    categoryById: handlePromise((_parent, { id }) => categoryServices.getCategoryById(id)),
 
-    getCategoryBySlug: handlePromise((_parent, { input }) =>
+    categoryBySlug: handlePromise((_parent, { input }) =>
       categoryServices.getCategoryBySlug(input),
     ),
   },
