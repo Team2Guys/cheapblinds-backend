@@ -5,7 +5,7 @@ const { read, update, remove } = repository;
 const { ensureResourceExists } = commonUtils;
 
 export const userServices = {
-  getUserList: () => read.userList,
+  getUserList: () => read.userList(),
 
   getUserById: async (id) => {
     await ensureResourceExists("user", id);

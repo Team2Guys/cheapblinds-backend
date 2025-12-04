@@ -7,7 +7,7 @@ const { ensureResourceExists } = commonUtils;
 export const productServices = {
   createProduct: (input) => write.product(input),
 
-  getProductList: () => read.productList,
+  getProductList: () => read.productList(),
 
   getProductById: async (id) => {
     await ensureResourceExists("product", id);

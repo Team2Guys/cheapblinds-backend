@@ -18,7 +18,7 @@ export const adminServices = {
     return write.admin({ email, password: hashedPassword, ...rest });
   },
 
-  getAdminList: () => read.adminList,
+  getAdminList: () => read.adminList(),
 
   getAdminById: async (id) => {
     await ensureResourceExists("admin", id);
