@@ -6,7 +6,7 @@ const { verifyAccess, verifyRole } = verifications;
 
 export const subcategoryResolvers = {
   Query: {
-    getSubcategoryList: handlePromise(subcategoryServices.getSubcategoryList),
+    getSubcategoryList: handlePromise(() => subcategoryServices.getSubcategoryList),
 
     getSubcategoryById: handlePromise((_parent, { id }) =>
       subcategoryServices.getSubcategoryById(id),

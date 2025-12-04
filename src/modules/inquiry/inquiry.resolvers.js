@@ -5,7 +5,7 @@ const { handlePromise } = commonUtils;
 
 export const inquiryResolvers = {
   Query: {
-    getInquiryList: handlePromise(inquiryServices.getInquiryList),
+    getInquiryList: handlePromise(() => inquiryServices.getInquiryList),
 
     getInquiryById: handlePromise((_parent, { id }) => inquiryServices.getInquiryById(id)),
   },

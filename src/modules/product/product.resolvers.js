@@ -6,7 +6,7 @@ const { verifyAccess, verifyRole } = verifications;
 
 export const productResolvers = {
   Query: {
-    getProductList: handlePromise(productServices.getProductList),
+    getProductList: handlePromise(() => productServices.getProductList),
 
     getProductById: handlePromise((_parent, { id }) => productServices.getProductById(id)),
 
