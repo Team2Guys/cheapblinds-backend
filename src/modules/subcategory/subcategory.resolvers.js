@@ -6,13 +6,11 @@ const { verifyAccess, verifyRole } = verifications;
 
 export const subcategoryResolvers = {
   Query: {
-    getSubcategoryList: handlePromise(() => subcategoryServices.getSubcategoryList()),
+    subcategoryList: handlePromise(() => subcategoryServices.getSubcategoryList()),
 
-    getSubcategoryById: handlePromise((_parent, { id }) =>
-      subcategoryServices.getSubcategoryById(id),
-    ),
+    subcategoryById: handlePromise((_parent, { id }) => subcategoryServices.getSubcategoryById(id)),
 
-    getSubcategoryBySlugs: handlePromise((_parent, { input }) =>
+    subcategoryBySlugs: handlePromise((_parent, { input }) =>
       subcategoryServices.getSubcategoryBySlugs(input),
     ),
   },

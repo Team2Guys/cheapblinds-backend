@@ -9,8 +9,8 @@ export const userTypeDefs = gql`
   }
 
   type Query {
-    getUserList: [User!]!
-    getUserById(id: ID!): User
+    userList: [User!]!
+    userById(id: ID!): User
   }
 
   type Mutation {

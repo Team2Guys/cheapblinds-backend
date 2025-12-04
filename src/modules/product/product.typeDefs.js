@@ -68,9 +68,9 @@ export const productTypeDefs = gql`
   }
 
   type Query {
-    getProductList: [Product!]!
-    getProductById(id: ID!): Product
-    getProductBySlugs(input: GetProductBySlugsInput!): Product
+    productList: [Product!]!
+    productById(id: ID!): Product
+    productBySlugs(input: GetProductBySlugsInput!): Product
   }
 
   type Mutation {
