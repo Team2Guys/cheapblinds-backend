@@ -6,7 +6,7 @@ const { write, read, update, remove } = repository;
 const { validateUuid } = commonUtils;
 
 export const inquiryServices = {
-  createInquiry: async (input) => write.inquiry(input),
+  createInquiry: (input) => write.inquiry(input),
 
   getInquiryList: () => read.inquiryList(),
 
