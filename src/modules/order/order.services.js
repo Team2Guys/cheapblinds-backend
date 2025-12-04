@@ -9,6 +9,11 @@ export const orderServices = {
 
   getOrderList: () => read.orderList(),
 
+  getOrderListByUserId: async (id) => {
+    await ensureResourceExists("user", id);
+    return read.orderListByUserId(id);
+  },
+
   getOrderById: async (id) => {
     await ensureResourceExists("order", id);
     return read.orderById(id);

@@ -6,6 +6,11 @@ export const orderRepository = {
   read: {
     orderList: () => prisma.order.findMany(),
 
+    orderListByUserId: (id) =>
+      prisma.order.findMany({
+        where: { userId: id },
+      }),
+
     orderById: (id) =>
       prisma.order.findUnique({
         where: { id },
