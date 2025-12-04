@@ -7,7 +7,7 @@ const { ensureResourceExists } = commonUtils;
 export const orderServices = {
   createOrder: (input) => write.order(input),
 
-  getOrderList: () => read.orderList(),
+  getOrderList: read.orderList,
 
   getOrderById: async (id) => {
     await ensureResourceExists("order", id);

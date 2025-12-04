@@ -4,20 +4,19 @@ const prisma = new PrismaClient();
 
 export const userRepository = {
   read: {
-    userList: () =>
-      prisma.user.findMany({
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
-          email: true,
-          role: true,
-          isEmailVerified: true,
-          isNewsletterSubscribed: true,
-          createdAt: true,
-          updatedAt: true,
-        },
-      }),
+    userList: prisma.user.findMany({
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        role: true,
+        isEmailVerified: true,
+        isNewsletterSubscribed: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    }),
 
     userById: (id) =>
       prisma.user.findUnique({
