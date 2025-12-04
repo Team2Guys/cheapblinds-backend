@@ -26,7 +26,7 @@ export const commonUtils = {
    * @returns {Promise<Object>} - the resource
    */
   ensureResourceExists: async (resourceName, id) => {
-    validateUuid(id);
+    commonUtils.validateUuid(id);
 
     const getter = read[`${resourceName}ById`];
     if (!getter) throw new Error(`Unknown resource type: ${resourceName}`);

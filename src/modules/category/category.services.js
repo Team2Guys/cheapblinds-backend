@@ -2,15 +2,15 @@ import { repository } from "#repository/index.js";
 import { commonUtils } from "#utils/index.js";
 
 const { write, read, update, remove } = repository;
-const { validateUuid, ensureResourceExists } = commonUtils;
+const { ensureResourceExists } = commonUtils;
 
 export const categoryServices = {
   createCategory: (input) => write.category(input),
 
   getCategoryList: read.categoryList,
 
-  getCategoryById: (id) => {
-    validateUuid(id);
+  getCategoryById: async (id) => {
+    await ensureResourceExists("category", id);
     return read.categoryById(id);
   },
 

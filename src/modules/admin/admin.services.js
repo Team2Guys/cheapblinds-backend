@@ -4,7 +4,7 @@ import { bcryptUtils } from "#utils/index.js";
 import { commonUtils } from "#utils/index.js";
 
 const { write, read, update, remove } = repository;
-const { validateUuid, ensureResourceExists } = commonUtils;
+const { ensureResourceExists } = commonUtils;
 
 export const adminServices = {
   createAdmin: async (input) => {
@@ -20,8 +20,8 @@ export const adminServices = {
 
   getAdminList: read.adminList,
 
-  getAdminById: (id) => {
-    validateUuid(id);
+  getAdminById: async (id) => {
+    await ensureResourceExists("admin", id);
     return read.adminById(id);
   },
 

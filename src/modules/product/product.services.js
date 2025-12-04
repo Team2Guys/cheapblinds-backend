@@ -1,17 +1,16 @@
-import createError from "http-errors";
 import { repository } from "#repository/index.js";
 import { commonUtils } from "#utils/index.js";
 
 const { write, read, update, remove } = repository;
-const { validateUuid, ensureResourceExists } = commonUtils;
+const { ensureResourceExists } = commonUtils;
 
 export const productServices = {
   createProduct: (input) => write.product(input),
 
   getProductList: () => read.productList(),
 
-  getProductById: (id) => {
-    validateUuid(id);
+  getProductById: async (id) => {
+    await ensureResourceExists("product", id);
     return read.productById(id);
   },
 
