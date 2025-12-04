@@ -39,6 +39,8 @@ enum PaymentStatus {
 enum InquiryType {
   EMAIL
   PHONE
+  WHATSAPP
+  OTHER
 }
 
 enum InquiryStatus {

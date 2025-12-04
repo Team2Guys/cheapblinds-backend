@@ -1,17 +1,8 @@
-import createError from "http-errors";
 import { repository } from "#repository/index.js";
 import { commonUtils } from "#utils/index.js";
 
 const { write, read, update, remove } = repository;
-const { validateUuid } = commonUtils;
-
-// Helper to validate UUID and ensure the record exists
-async function ensureInquireExistance(id) {
-  validateUuid(id);
-  const inquiry = await read.inquiryById(id);
-  if (!inquiry) throw createError(404, "Inquiry does not exist.");
-  return inquiry;
-}
+const { validateUuid, ensureResourceExists } = commonUtils;
 
 export const inquiryServices = {
   createInquiry: (input) => write.inquiry(input),
@@ -24,12 +15,12 @@ export const inquiryServices = {
   },
 
   updateInquiryById: async (id, input) => {
-    await ensureInquireExistance(id);
+    await ensureResourceExists("inquiry", id);
     return update.inquiryById(id, input);
   },
 
   removeInquiryById: async (id) => {
-    await ensureInquireExistance(id);
+    await ensureResourceExists("inquiry", id);
     return remove.inquiryById(id);
   },
 };

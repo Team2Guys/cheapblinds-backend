@@ -18,4 +18,21 @@ export const commonUtils = {
 
     if (!uuidRegex.test(id)) throw createError(400, "Invalid Uuid.");
   },
+
+  /**
+   * Generic helper to validate UUID and ensure a resource exists
+   * @param {string} resourceName - the key in the repository (e.g., "inquiry", "admin")
+   * @param {string} id - resource ID
+   * @returns {Promise<Object>} - the resource
+   */
+  ensureResourceExists: async (resourceName, id) => {
+    validateUuid(id);
+
+    const getter = read[`${resourceName}ById`];
+    if (!getter) throw new Error(`Unknown resource type: ${resourceName}`);
+
+    const resource = await getter(id);
+    if (!resource) throw createError(404, `${resourceName} does not exist.`);
+    return resource;
+  },
 };
