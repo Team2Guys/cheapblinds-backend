@@ -42,6 +42,7 @@ export const orderTypeDefs = gql`
 
   type Query {
     getOrderList: [Order!]!
+    getOrderListByUserId(id: ID!): [Order!]!
     getOrderById(id: ID!): Order
   }
 

@@ -8,6 +8,10 @@ export const orderResolvers = {
   Query: {
     getOrderList: handlePromise(verifyAccess(() => orderServices.getOrderList())),
 
+    getOrderListByUserId: handlePromise(
+      verifyAccess((_parent, { id }) => orderServices.getOrderListByUserId(id)),
+    ),
+
     getOrderById: handlePromise(verifyAccess((_parent, { id }) => orderServices.getOrderById(id))),
   },
 
