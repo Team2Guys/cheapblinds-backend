@@ -1,22 +1,22 @@
 import { categoryServices } from "./category.services.js";
 import { verifications, commonUtils } from "#utils/index.js";
 
-const { handleAsync } = commonUtils;
+const { handlePromise } = commonUtils;
 const { verifyAccess, verifyRole } = verifications;
 
 export const categoryResolvers = {
   Query: {
-    getCategoryList: handleAsync(() => categoryServices.getCategoryList()),
+    getCategoryList: handlePromise(categoryServices.getCategoryList),
 
-    getCategoryById: handleAsync((_parent, { id }) => categoryServices.getCategoryById(id)),
+    getCategoryById: handlePromise((_parent, { id }) => categoryServices.getCategoryById(id)),
 
-    getCategoryBySlug: handleAsync((_parent, { input }) =>
+    getCategoryBySlug: handlePromise((_parent, { input }) =>
       categoryServices.getCategoryBySlug(input),
     ),
   },
 
   Mutation: {
-    createCategory: handleAsync(
+    createCategory: handlePromise(
       verifyAccess(
         verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { input }) =>
           categoryServices.createCategory(input),
@@ -24,7 +24,7 @@ export const categoryResolvers = {
       ),
     ),
 
-    updateCategoryById: handleAsync(
+    updateCategoryById: handlePromise(
       verifyAccess(
         verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id, input }) =>
           categoryServices.updateCategoryById(id, input),
@@ -32,7 +32,7 @@ export const categoryResolvers = {
       ),
     ),
 
-    removeCategoryById: handleAsync(
+    removeCategoryById: handlePromise(
       verifyAccess(
         verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id }) =>
           categoryServices.removeCategoryById(id),

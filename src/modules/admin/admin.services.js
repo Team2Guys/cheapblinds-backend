@@ -18,15 +18,15 @@ export const adminServices = {
     return write.admin({ email, password: hashedPassword, ...rest });
   },
 
-  getAdminList: () => read.adminList(),
+  getAdminList: read.adminList,
 
   getAdminById: (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
     return read.adminById(id);
   },
 
   updateAdminById: async (id, input) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
 
     const existingAdmin = await read.adminById(id);
     if (!existingAdmin) throw createError(404, "Admin does not exist.");
@@ -35,7 +35,7 @@ export const adminServices = {
   },
 
   removeAdminById: async (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
 
     const existingAdmin = await read.adminById(id);
     if (!existingAdmin) throw createError(404, "Admin does not exist.");

@@ -1,22 +1,22 @@
-import { orderServices } from "./inquiry.services.js";
+import { inquiryServices } from "./inquiry.services.js";
 import { commonUtils } from "#utils/index.js";
 
-const { handleAsync } = commonUtils;
+const { handlePromise } = commonUtils;
 
-export const orderResolvers = {
+export const inquiryResolvers = {
   Query: {
-    getInquiryList: handleAsync(() => orderServices.getInquiryList()),
+    getInquiryList: handlePromise(inquiryServices.getInquiryList),
 
-    getInquiryById: handleAsync((_parent, { id }) => orderServices.getInquiryById(id)),
+    getInquiryById: handlePromise((_parent, { id }) => inquiryServices.getInquiryById(id)),
   },
 
   Mutation: {
-    createInquiry: handleAsync((_parent, { input }) => orderServices.createInquiry(input)),
+    createInquiry: handlePromise((_parent, { input }) => inquiryServices.createInquiry(input)),
 
-    updateInquiryById: handleAsync((_parent, { id, input }) =>
-      orderServices.updateInquiryById(id, input),
+    updateInquiryById: handlePromise((_parent, { id, input }) =>
+      inquiryServices.updateInquiryById(id, input),
     ),
 
-    removeInquiryById: handleAsync((_parent, { id }) => orderServices.removeInquiryById(id)),
+    removeInquiryById: handlePromise((_parent, { id }) => inquiryServices.removeInquiryById(id)),
   },
 };

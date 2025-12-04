@@ -11,12 +11,12 @@ export const orderServices = {
   getOrderList: () => read.orderList(),
 
   getOrderById: (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
     return read.orderById(id);
   },
 
   updateOrderById: async (id, input) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
 
     const existingOrder = await read.orderById(id);
     if (!existingOrder) throw createError(404, "Order does not exist.");
@@ -25,7 +25,7 @@ export const orderServices = {
   },
 
   removeOrderById: async (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
 
     const existingOrder = await read.orderById(id);
     if (!existingOrder) throw createError(404, "Order does not exist.");

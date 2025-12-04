@@ -6,9 +6,9 @@ import { logger, commonUtils } from "#utils/index.js";
 const prisma = new PrismaClient();
 
 const { DATABASE_URL } = env;
-const { handleAsync } = commonUtils;
+const { handlePromise } = commonUtils;
 
-export const connectDatabase = handleAsync(async () => {
+export const connectDatabase = handlePromise(async () => {
   await prisma.$connect();
   logger.info(`[connected] Database (url: ${DATABASE_URL})`.service);
 });

@@ -11,14 +11,14 @@ export const productServices = {
   getProductList: () => read.productList(),
 
   getProductById: (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
     return read.productById(id);
   },
 
   getProductBySlugs: (input) => read.productBySlugs(input),
 
   updateProductById: async (id, input) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
 
     const existingProduct = await read.productById(id);
     if (!existingProduct) throw createError(404, "Product does not exist.");
@@ -27,7 +27,7 @@ export const productServices = {
   },
 
   removeProductById: async (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
 
     const existingProduct = await read.productById(id);
     if (!existingProduct) throw createError(404, "Product does not exist.");

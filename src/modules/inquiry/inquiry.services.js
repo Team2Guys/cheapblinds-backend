@@ -8,15 +8,15 @@ const { validateUuid } = commonUtils;
 export const inquiryServices = {
   createInquiry: (input) => write.inquiry(input),
 
-  getInquiryList: () => read.inquiryList(),
+  getInquiryList: read.inquiryList,
 
   getInquiryById: (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
     return read.inquiryById(id);
   },
 
   updateInquiryById: async (id, input) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
 
     const existingInquiry = await read.inquiryById(id);
     if (!existingInquiry) throw createError(404, "Inquiry does not exist.");
@@ -25,7 +25,7 @@ export const inquiryServices = {
   },
 
   removeInquiryById: async (id) => {
-    if (!validateUuid(id)) throw createError(400, "Invalid Uuid.");
+    validateUuid(id);
 
     const existingInquiry = await read.inquiryById(id);
     if (!existingInquiry) throw createError(404, "Inquiry does not exist.");
