@@ -1,4 +1,7 @@
 import createError from "http-errors";
+import { repository } from "#repository/index.js";
+
+const { read } = repository;
 
 export const commonUtils = {
   handlePromise:
