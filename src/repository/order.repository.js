@@ -4,19 +4,11 @@ const prisma = new PrismaClient();
 
 export const orderRepository = {
   read: {
-    orderList: () =>
-      prisma.order.findMany({
-        include: {
-          items: true,
-        },
-      }),
+    orderList: () => prisma.order.findMany(),
 
     orderById: (id) =>
       prisma.order.findUnique({
         where: { id },
-        include: {
-          items: true,
-        },
       }),
   },
 

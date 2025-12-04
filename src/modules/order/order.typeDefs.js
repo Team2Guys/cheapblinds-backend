@@ -21,6 +21,7 @@ export const orderTypeDefs = gql`
   }
 
   input UpdateOrderByIdInput {
+    id: ID!
     userId: ID
     firstName: String
     lastName: String
@@ -30,9 +31,9 @@ export const orderTypeDefs = gql`
     state: String
     city: String
     address: String
+    totalAmount: Float!
+    shippingCost: Float!
     notes: String
-    totalAmount: Float
-    shippingCost: Float
     items: [JSON!]
     lastEditedBy: String
     paymentStatus: String
