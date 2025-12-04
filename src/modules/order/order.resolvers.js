@@ -6,7 +6,7 @@ const { verifyAccess } = verifications;
 
 export const orderResolvers = {
   Query: {
-    getOrderList: handlePromise(verifyAccess(orderServices.getOrderList)),
+    getOrderList: handlePromise(verifyAccess(() => orderServices.getOrderList)),
 
     getOrderById: handlePromise(verifyAccess((_parent, { id }) => orderServices.getOrderById(id))),
   },
