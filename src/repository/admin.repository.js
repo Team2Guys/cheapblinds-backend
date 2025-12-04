@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const adminRepository = {
   read: {
-    adminList: prisma.admin.findMany(),
+    adminList: () => prisma.admin.findMany(),
 
     adminById: (id) => prisma.admin.findUnique({ where: { id } }),
 

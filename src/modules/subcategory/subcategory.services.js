@@ -7,7 +7,7 @@ const { ensureResourceExists } = commonUtils;
 export const subcategoryServices = {
   createSubcategory: (input) => write.subcategory(input),
 
-  getSubcategoryList: () => read.subcategoryList,
+  getSubcategoryList: () => read.subcategoryList(),
 
   getSubcategoryById: async (id) => {
     await ensureResourceExists("subcategory", id);
