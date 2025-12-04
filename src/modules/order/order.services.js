@@ -6,7 +6,7 @@ const { write, read, update, remove } = repository;
 const { validateUuid } = commonUtils;
 
 export const orderServices = {
-  createOrder: async (input) => write.order(input),
+  createOrder: (input) => write.order(input),
 
   getOrderList: () => read.orderList(),
 

@@ -10,6 +10,12 @@ export const commonTypeDefs = gql`
     SUPER_ADMIN
   }
 
+  enum InquiryType {
+    EMAIL
+    PHONE
+    WHATSAPP
+  }
+
   enum Permissions {
     ADD_PRODUCTS
     EDIT_PRODUCTS

@@ -1,12 +1,6 @@
 import { gql } from "graphql-tag";
 
 export const inquiryTypeDefs = gql`
-  enum InquiryType {
-    EMAIL
-    PHONE
-    WHATSAPP
-  }
-
   input CreateInquiryInput {
     name: String!
     email: String!
