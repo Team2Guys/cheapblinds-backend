@@ -4,13 +4,12 @@ const prisma = new PrismaClient();
 
 export const subcategoryRepository = {
   read: {
-    subcategoryList: () =>
-      prisma.subcategory.findMany({
-        include: {
-          category: true,
-          products: true,
-        },
-      }),
+    subcategoryList: prisma.subcategory.findMany({
+      include: {
+        category: true,
+        products: true,
+      },
+    }),
 
     subcategoryById: (id) =>
       prisma.subcategory.findUnique({

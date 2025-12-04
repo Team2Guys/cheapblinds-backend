@@ -2,13 +2,13 @@ import { repository } from "#repository/index.js";
 import { commonUtils } from "#utils/index.js";
 
 const { read, update, remove } = repository;
-const { validateUuid, ensureResourceExists } = commonUtils;
+const { ensureResourceExists } = commonUtils;
 
 export const userServices = {
-  getUserList: () => read.userList(),
+  getUserList: read.userList,
 
-  getUserById: (id) => {
-    validateUuid(id);
+  getUserById: async (id) => {
+    await ensureResourceExists("user", id);
     return read.userById(id);
   },
 
