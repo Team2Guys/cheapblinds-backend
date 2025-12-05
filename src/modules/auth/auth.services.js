@@ -10,7 +10,7 @@ const { FRONTEND_URL, SUPER_ADMIN_ID, SUPER_ADMIN_EMAIL, SUPER_ADMIN_NAME, SUPER
 
 export const authServices = {
   signup: async (input) => {
-    const { email, password, ...rest } = input;
+    const { email, password, isNewsletterSubscribed, ...rest } = input;
 
     const existingUser = await read.userByEmail(email);
     if (existingUser) throw createError(400, "User already exists.");
@@ -18,6 +18,20 @@ export const authServices = {
     const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
     const newUser = await write.user({ email, password: hashedPassword, ...rest });
+
+    const existingNewsletterSubscriber = await read.newsletterSubscriberByEmail(email);
+    if (existingNewsletterSubscriber) {
+      await update.newsletterSubscriberById(existingNewsletterSubscriber.id, {
+        isActive: isNewsletterSubscribed,
+      });
+    } else {
+      const newNewsletterSubscriber = await write.newsletterSubscriber({
+        email,
+        isActive: isNewsletterSubscribed,
+      });
+      if (!newNewsletterSubscriber)
+        throw createError(500, "Failed to create newsletter subscriber.");
+    }
 
     const verificationToken = tokenUtils.generate({ id: newUser.id }, "verificationToken");
     if (!verificationToken) throw createError(500, "Failed to generate verification token.");

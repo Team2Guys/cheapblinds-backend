@@ -38,7 +38,7 @@ const createTransporter = () => {
 const transporter = createTransporter();
 
 // Supported email types
-const SUPPORTED_HTML_TEMPLATES = ["verification-email", "reset-email"];
+const SUPPORTED_HTML_TEMPLATES = ["verification-email", "reset-email", "newsletter-email"];
 
 // In-memory template cache
 const templateCache = new Map();
