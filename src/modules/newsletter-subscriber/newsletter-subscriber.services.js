@@ -5,7 +5,13 @@ const { write, read, update } = repository;
 const { ensureResourceExists } = commonUtils;
 
 export const newsletterSubscriberServices = {
-  createNewsletterSubscriber: (input) => write.newsletterSubscriber(input),
+  createNewsletterSubscriber: (input) => {
+    const existingNewsletterSubscriber = read.newsletterSubscriberByEmail(input.email);
+    if (existingNewsletterSubscriber)
+      throw createError(400, "Newsletter subscriber already exists.");
+
+    return write.newsletterSubscriber(input);
+  },
 
   getNewsletterSubscriberList: () => read.newsletterSubscriberList(),
 
