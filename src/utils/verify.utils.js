@@ -1,6 +1,6 @@
 import createError from "http-errors";
 
-export const verifications = {
+export const verificationUtils = {
   verifyAccess: (resolver) => (parent, args, context, info) => {
     if (!context.user) throw createError(401, "Missing access token.");
     return resolver(parent, args, context, info);

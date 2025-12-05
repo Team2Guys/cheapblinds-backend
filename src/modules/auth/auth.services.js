@@ -31,7 +31,7 @@ export const authServices = {
     });
     if (!sentEmail) throw createError(500, "Failed to send welcome email.");
 
-    return { message: "Signed up successfully. Check your email to verify your account." };
+    return { message: "Registered successfully. Check your email to verify your account." };
   },
 
   signin: async (input) => {
