@@ -46,22 +46,31 @@ export const emailServices = {
   sendNewsletterEmail: async (input) => {
     const { recipientList } = input;
 
+    let sentCount = 0;
+
     await Promise.all(
       recipientList.map(async (email) => {
         try {
-          await sendEmail("newsletter-email", {
+          const existingNewsletterSubscriber = await read.newsletterSubscriberByEmail(email);
+          if (!existingNewsletterSubscriber) return;
+
+          const sent = await sendEmail("newsletter-email", {
             email,
             subject: "Newsletter",
             FRONTEND_URL,
           });
-          return { email, status: "success" };
+
+          if (sent) sentCount++;
         } catch (err) {
           console.error(`Newsletter failed for ${email}: ${err.message}`);
-          // return { email, status: "failed", error: err.message };
         }
       }),
     );
 
-    return { message: "Newsletter emails sent successfully" };
+    const total = recipientList.length;
+
+    return {
+      message: `Newsletter emails sent ${sentCount} out of ${total}`,
+    };
   },
 };

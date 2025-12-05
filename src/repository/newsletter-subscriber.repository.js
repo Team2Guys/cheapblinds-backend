@@ -10,6 +10,11 @@ export const newsletterSubscriberRepository = {
       prisma.newsletterSubscriber.findUnique({
         where: { id },
       }),
+
+    newsletterSubscriberByEmail: (email) =>
+      prisma.newsletterSubscriber.findUnique({
+        where: { email },
+      }),
   },
 
   write: {
