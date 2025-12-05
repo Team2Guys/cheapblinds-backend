@@ -1,15 +1,41 @@
-import { readFile, access, constants } from "fs/promises";
-import path, { dirname, join } from "path";
-import createError from "http-errors";
+import nodemailer from "nodemailer";
 import { fileURLToPath } from "url";
+import createError from "http-errors";
+import path, { dirname, join } from "path";
+import { readFile, access, constants } from "fs/promises";
 
-import { env, transporter } from "#config/index.js";
+import { logger } from "./logger.utils.js";
+import { env } from "#config/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const VIEWS_DIRECTORY = path.join(__dirname, "../views");
-const { USER_EMAIL, NODE_ENV } = env;
+const { NODE_ENV, EMAIL_HOST, EMAIL_PORT, USER_EMAIL, USER_PASSWORD } = env;
+
+const createTransporter = () => {
+  const transporter = nodemailer.createTransport({
+    host: EMAIL_HOST,
+    port: Number(EMAIL_PORT),
+    secure: Number(EMAIL_PORT) === 465, // Set true for SSL (465), false for TLS (587)
+    auth: { user: USER_EMAIL, pass: USER_PASSWORD },
+    connectionTimeout: 60000,
+    greetingTimeout: 30000,
+    sendTimeout: 30000,
+  });
+
+  transporter.verify((error) => {
+    if (error) {
+      logger.error(`[connection_failed] Mail (error: ${error.message})`.error);
+    } else {
+      logger.info(`[connected] Nodemailer (host: ${EMAIL_HOST}, port: ${EMAIL_PORT})`.service);
+    }
+  });
+
+  return transporter;
+};
+
+const transporter = createTransporter();
 
 // Supported email types
 const SUPPORTED_HTML_TEMPLATES = ["verification-email", "reset-email"];
@@ -27,31 +53,30 @@ const escapeHtml = (str) =>
     .replace(/'/g, "&#039;");
 
 // Read template with caching
-const getEmailTemplate = async (type, templateName = "index.html") => {
-  const cacheKey = `${type}/${templateName}`;
+const getEmailTemplate = async (type) => {
+  const cacheKey = `${type}/index.html`;
   if (templateCache.has(cacheKey)) return templateCache.get(cacheKey);
 
-  const filePath = join(VIEWS_DIRECTORY, type, templateName);
+  const filePath = join(VIEWS_DIRECTORY, type, "index.html");
   try {
     await access(filePath, constants.R_OK);
     const template = await readFile(filePath, "utf-8");
     templateCache.set(cacheKey, template);
     return template;
   } catch (error) {
-    throw createError(
-      500,
-      `Failed to load email template "${type}/${templateName}": ${error.message}`,
-    );
+    throw createError(500, `Failed to load email template "${type}/index.html": ${error.message}`);
   }
 };
 
 // Replace variables in template
 const processTemplate = (template, variables) => {
-  return Object.entries(variables).reduce(
-    (processed, [key, value]) =>
-      processed.replace(new RegExp(`\\$\\{${key}\\}`, "g"), escapeHtml(String(value))),
-    template,
-  );
+  let processed = template;
+  for (const [key, value] of Object.entries(variables)) {
+    processed = processed.replace(new RegExp(`\\$\\{${key}\\}`, "g"), escapeHtml(String(value)));
+  }
+  const unmatched = processed.match(/\$\{.+?\}/g);
+  if (unmatched) console.warn("Unmatched template variables:", unmatched);
+  return processed;
 };
 
 // Send email via transporter
@@ -64,11 +89,7 @@ const sendMail = async ({ to, subject, html }) => {
   }
 };
 
-/**
- * Send an email
- * @param {string} type - Template folder type (must be in SUPPORTED_HTML_TEMPLATES)
- * @param {object} options - { email, subject, ...variables }
- */
+// Main function to send email
 export const sendEmail = async (type, options) => {
   if (!SUPPORTED_HTML_TEMPLATES.includes(type)) {
     throw createError(

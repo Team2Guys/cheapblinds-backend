@@ -8,7 +8,6 @@ export const authTypeDefs = gql`
     password: String!
     role: Role!
     isNewsletterSubscribed: Boolean!
-    permissions: [String!]
   }
 
   input PasswordResetRequestInput {

@@ -1,8 +1,8 @@
 import { subcategoryServices } from "./subcategory.services.js";
-import { verifications, commonUtils } from "#utils/index.js";
+import { verificationUtils, commonUtils } from "#utils/index.js";
 
 const { handlePromise } = commonUtils;
-const { verifyAccess, verifyRole } = verifications;
+const { verifyAccess, verifyRole } = verificationUtils;
 
 export const subcategoryResolvers = {
   Query: {
