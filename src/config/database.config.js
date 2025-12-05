@@ -12,5 +12,3 @@ export const connectDatabase = handlePromise(async () => {
   await prisma.$connect();
   logger.info(`[connected] Database (url: ${DATABASE_URL})`.service);
 });
-
-export { prisma };
