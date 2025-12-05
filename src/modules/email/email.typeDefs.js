@@ -9,6 +9,10 @@ export const emailTypeDefs = gql`
     email: String!
   }
 
+  input SendNewsletterEmailInput {
+    recipientList: [String!]!
+  }
+
   type Query {
     _empty: String
   }
@@ -16,5 +20,6 @@ export const emailTypeDefs = gql`
   type Mutation {
     checkVerificationToken(input: CheckVerificationTokenInput!): GenericResponse!
     sendVerificationToken(input: SendVerificationTokenInput!): GenericResponse!
+    sendNewsletterEmail(input: SendNewsletterEmailInput!): GenericResponse!
   }
 `;

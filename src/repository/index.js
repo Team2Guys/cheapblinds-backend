@@ -1,6 +1,7 @@
 import { adminRepository } from "./admin.repository.js";
 import { categoryRepository } from "./category.repository.js";
 import { inquiryRepository } from "./inquiry.repository.js";
+import { newsletterSubscriberRepository } from "./newsletter-subscriber.repository.js";
 import { orderRepository } from "./order.repository.js";
 import { productRepository } from "./product.repository.js";
 import { subcategoryRepository } from "./subcategory.repository.js";
@@ -11,6 +12,7 @@ export const repository = {
     ...adminRepository.read,
     ...categoryRepository.read,
     ...inquiryRepository.read,
+    ...newsletterSubscriberRepository.read,
     ...orderRepository.read,
     ...userRepository.read,
     ...subcategoryRepository.read,
@@ -21,6 +23,7 @@ export const repository = {
     ...adminRepository.write,
     ...categoryRepository.write,
     ...inquiryRepository.write,
+    ...newsletterSubscriberRepository.write,
     ...orderRepository.write,
     ...userRepository.write,
     ...subcategoryRepository.write,
@@ -31,6 +34,7 @@ export const repository = {
     ...adminRepository.update,
     ...categoryRepository.update,
     ...inquiryRepository.update,
+    ...newsletterSubscriberRepository.update,
     ...orderRepository.update,
     ...userRepository.update,
     ...subcategoryRepository.update,

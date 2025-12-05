@@ -2,8 +2,10 @@ import createError from "http-errors";
 
 import { tokenUtils, sendEmail } from "#utils/index.js";
 import { repository } from "#repository/index.js";
+import { env } from "#config/index.js";
 
 const { read, update } = repository;
+const { FRONTEND_URL } = env;
 
 export const emailServices = {
   checkVerificationToken: async (input) => {
@@ -39,5 +41,27 @@ export const emailServices = {
     if (!sentEmail) throw createError(500, "Failed to send verification email.");
 
     return { message: "Verification email sent successfully" };
+  },
+
+  sendNewsletterEmail: async (input) => {
+    const { recipientList } = input;
+
+    await Promise.all(
+      recipientList.map(async (email) => {
+        try {
+          await sendEmail("newsletter-email", {
+            email,
+            subject: "Newsletter",
+            FRONTEND_URL,
+          });
+          return { email, status: "success" };
+        } catch (err) {
+          console.error(`Newsletter failed for ${email}: ${err.message}`);
+          // return { email, status: "failed", error: err.message };
+        }
+      }),
+    );
+
+    return { message: "Newsletter emails sent successfully" };
   },
 };

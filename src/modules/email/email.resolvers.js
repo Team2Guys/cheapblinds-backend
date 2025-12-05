@@ -16,5 +16,9 @@ export const emailResolvers = {
     sendVerificationToken: handlePromise((_parent, { input }) =>
       emailServices.sendVerificationToken(input),
     ),
+
+    sendNewsletterEmail: handlePromise((_parent, { input }) =>
+      emailServices.sendNewsletterEmail(input),
+    ),
   },
 };

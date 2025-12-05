@@ -177,4 +177,12 @@ export const commonTypeDefs = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
   }
+
+  type NewsletterSubscriber {
+    id: ID!
+    email: String!
+    isActive: Boolean!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+  }
 `;
