@@ -1,5 +1,6 @@
 import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
 
+import { addressTypeDefs, addressResolvers } from "./address/index.js";
 import { adminTypeDefs, adminResolvers } from "./admin/index.js";
 import { userTypeDefs, userResolvers } from "./user/index.js";
 import { authTypeDefs, authResolvers } from "./auth/index.js";
@@ -16,6 +17,7 @@ import { productTypeDefs, productResolvers } from "./product/index.js";
 import { commonTypeDefs } from "./common.typeDefs.js";
 
 export const typeDefs = mergeTypeDefs([
+  addressTypeDefs,
   adminTypeDefs,
   authTypeDefs,
   categoryTypeDefs,
@@ -30,6 +32,7 @@ export const typeDefs = mergeTypeDefs([
 ]);
 
 export const resolvers = mergeResolvers([
+  addressResolvers,
   adminResolvers,
   authResolvers,
   categoryResolvers,

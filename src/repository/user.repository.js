@@ -13,7 +13,7 @@ export const userRepository = {
           email: true,
           role: true,
           isEmailVerified: true,
-          isNewsletterSubscribed: true,
+          addresses: true,
           createdAt: true,
           updatedAt: true,
         },
@@ -29,7 +29,7 @@ export const userRepository = {
           email: true,
           role: true,
           isEmailVerified: true,
-          isNewsletterSubscribed: true,
+          addresses: true,
           createdAt: true,
           updatedAt: true,
         },
@@ -38,6 +38,18 @@ export const userRepository = {
     userByEmail: (email) =>
       prisma.user.findUnique({
         where: { email },
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          email: true,
+          password: true,
+          role: true,
+          isEmailVerified: true,
+          addresses: true,
+          createdAt: true,
+          updatedAt: true,
+        },
       }),
   },
 

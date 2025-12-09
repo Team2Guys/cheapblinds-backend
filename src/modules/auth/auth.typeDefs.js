@@ -31,10 +31,6 @@ export const authTypeDefs = gql`
     role: Role!
   }
 
-  type Query {
-    _empty: String
-  }
-
   type Mutation {
     signup(input: SignupInput!): GenericResponse!
     signin(input: SigninInput!): SigninResponse!

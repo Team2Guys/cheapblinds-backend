@@ -1,3 +1,4 @@
+import { addressRepository } from "./address.repository.js";
 import { adminRepository } from "./admin.repository.js";
 import { categoryRepository } from "./category.repository.js";
 import { inquiryRepository } from "./inquiry.repository.js";
@@ -9,6 +10,7 @@ import { userRepository } from "./user.repository.js";
 
 export const repository = {
   read: {
+    ...addressRepository.read,
     ...adminRepository.read,
     ...categoryRepository.read,
     ...inquiryRepository.read,
@@ -20,6 +22,7 @@ export const repository = {
   },
 
   write: {
+    ...addressRepository.write,
     ...adminRepository.write,
     ...categoryRepository.write,
     ...inquiryRepository.write,
@@ -31,6 +34,7 @@ export const repository = {
   },
 
   update: {
+    ...addressRepository.update,
     ...adminRepository.update,
     ...categoryRepository.update,
     ...inquiryRepository.update,
@@ -42,6 +46,7 @@ export const repository = {
   },
 
   remove: {
+    ...addressRepository.remove,
     ...adminRepository.remove,
     ...categoryRepository.remove,
     ...inquiryRepository.remove,

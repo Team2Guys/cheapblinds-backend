@@ -42,7 +42,7 @@ export const commonUtils = {
     commonUtils.validateUuid(id);
 
     const existingResource = read[`${resourceName}ById`];
-    if (!existingResource) throw new Error(`Unknown resource type: ${resourceName}`);
+    if (!existingResource) throw createError(404, `Unknown resource type: ${resourceName}`);
 
     const resource = await existingResource(id);
     if (!resource) throw createError(404, `${resourceName} does not exist.`);
