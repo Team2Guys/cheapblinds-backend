@@ -6,6 +6,8 @@ export const userTypeDefs = gql`
     lastName: String
     email: String
     password: String
+    defaultShippingAddressId: ID
+    defaultBillingAddressId: ID
   }
 
   type Query {
