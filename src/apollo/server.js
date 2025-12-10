@@ -1,7 +1,7 @@
 import depthLimit from "graphql-depth-limit";
 
 import { ApolloServer } from "@apollo/server";
-import { typeDefs, resolvers } from "#modules/index.js";
+import { typeDefs, resolvers } from "../api/index.js";
 
 const requestLoggerPlugin = {
   requestDidStart(requestContext) {

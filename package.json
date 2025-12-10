@@ -47,10 +47,9 @@
     "xss-clean": "^0.1.4"
   },
   "imports": {
+    "#modules/*": "./src/api/modules/*",
     "#config/*": "./src/config/*",
     "#middleware/*": "./src/middleware/*",
-    "#modules/*": "./src/modules/*",
-    "#repository/*": "./src/repository/*",
     "#utils/*": "./src/utils/*"
   }
 }
