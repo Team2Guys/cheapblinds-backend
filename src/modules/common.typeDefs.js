@@ -61,9 +61,24 @@ export const commonTypeDefs = gql`
     lastName: String!
     email: String!
     password: String!
+    addresses: [JSON!]!
     isEmailVerified: Boolean!
-    isNewsletterSubscribed: Boolean!
     role: Role!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+  }
+
+  type Address {
+    id: ID!
+    userId: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String!
+    country: String!
+    city: String!
+    address: String!
+    addressType: String!
     createdAt: DateTime!
     updatedAt: DateTime!
   }

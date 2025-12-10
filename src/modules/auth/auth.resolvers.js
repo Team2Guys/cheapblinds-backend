@@ -6,10 +6,6 @@ const { handlePromise } = commonUtils;
 const { NODE_ENV } = env;
 
 export const authResolvers = {
-  Query: {
-    _empty: () => "This is a placeholder",
-  },
-
   Mutation: {
     signup: handlePromise((_parent, { input }) => authServices.signup(input)),
 

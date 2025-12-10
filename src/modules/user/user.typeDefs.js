@@ -5,7 +5,7 @@ export const userTypeDefs = gql`
     firstName: String
     lastName: String
     email: String
-    isNewsletterSubscribed: Boolean
+    password: String
   }
 
   type Query {
