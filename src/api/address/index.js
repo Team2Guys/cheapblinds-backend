@@ -1,2 +1,2 @@
-export { addressTypeDefs } from "./address.typeDef.js";
-export { addressResolvers } from "./address.resolver.js";
+export { addressTypeDefs } from './address.typeDef.js';
+export { addressResolvers } from './address.resolver.js';

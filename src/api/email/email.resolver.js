@@ -1,16 +1,16 @@
-import { commonUtils } from "#utils/index.js";
-import { emailServices } from "./email.service.js";
+import { commonUtils } from '#utils/index.js';
+import { emailServices } from './email.service.js';
 
 const { handlePromise } = commonUtils;
 
 export const emailResolvers = {
   Mutation: {
     checkVerificationToken: handlePromise((_parent, { input }) =>
-      emailServices.checkVerificationToken(input),
+      emailServices.checkVerificationToken(input)
     ),
 
     sendVerificationToken: handlePromise((_parent, { input }) =>
-      emailServices.sendVerificationToken(input),
-    ),
-  },
+      emailServices.sendVerificationToken(input)
+    )
+  }
 };

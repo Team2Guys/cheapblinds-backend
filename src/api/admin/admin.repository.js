@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -8,18 +8,18 @@ export const adminRepository = {
 
     adminById: (id) => prisma.admin.findUnique({ where: { id } }),
 
-    adminByEmail: (email) => prisma.admin.findUnique({ where: { email } }),
+    adminByEmail: (email) => prisma.admin.findUnique({ where: { email } })
   },
 
   write: {
-    admin: (data) => prisma.admin.create({ data }),
+    admin: (data) => prisma.admin.create({ data })
   },
 
   update: {
-    adminById: (id, data) => prisma.admin.update({ where: { id }, data }),
+    adminById: (id, data) => prisma.admin.update({ where: { id }, data })
   },
 
   remove: {
-    adminById: (id) => prisma.admin.delete({ where: { id } }),
-  },
+    adminById: (id) => prisma.admin.delete({ where: { id } })
+  }
 };

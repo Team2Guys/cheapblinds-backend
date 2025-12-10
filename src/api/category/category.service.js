@@ -1,4 +1,4 @@
-import { categoryRepository } from "./category.repository.js";
+import { categoryRepository } from './category.repository.js';
 
 const { write, read, update, remove } = categoryRepository;
 
@@ -13,5 +13,5 @@ export const categoryServices = {
 
   updateCategoryById: (id, input) => update.categoryById(id, input),
 
-  removeCategoryById: (id) => remove.categoryById(id),
+  removeCategoryById: (id) => remove.categoryById(id)
 };

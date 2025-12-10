@@ -1,4 +1,4 @@
-import { gql } from "graphql-tag";
+import { gql } from 'graphql-tag';
 
 export const subcategoryTypeDefs = gql`
   input CreateSubcategoryInput {
@@ -47,7 +47,10 @@ export const subcategoryTypeDefs = gql`
 
   type Mutation {
     createSubcategory(input: CreateSubcategoryInput!): Subcategory
-    updateSubcategoryById(id: ID!, input: UpdateSubcategoryByIdInput!): Subcategory
+    updateSubcategoryById(
+      id: ID!
+      input: UpdateSubcategoryByIdInput!
+    ): Subcategory
     removeSubcategoryById(id: ID!): Subcategory
   }
 `;

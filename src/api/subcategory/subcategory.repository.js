@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -8,8 +8,8 @@ export const subcategoryRepository = {
       prisma.subcategory.findMany({
         include: {
           category: true,
-          products: true,
-        },
+          products: true
+        }
       }),
 
     subcategoryById: (id) =>
@@ -17,8 +17,8 @@ export const subcategoryRepository = {
         where: { id },
         include: {
           category: true,
-          products: true,
-        },
+          products: true
+        }
       }),
 
     subcategoryBySlugs: ({ categorySlug, subcategorySlug }) =>
@@ -26,25 +26,26 @@ export const subcategoryRepository = {
         where: {
           slug: subcategorySlug,
           category: {
-            slug: categorySlug,
-          },
+            slug: categorySlug
+          }
         },
         include: {
           category: true,
-          products: true,
-        },
-      }),
+          products: true
+        }
+      })
   },
 
   write: {
-    subcategory: (data) => prisma.subcategory.create({ data }),
+    subcategory: (data) => prisma.subcategory.create({ data })
   },
 
   update: {
-    subcategoryById: (id, data) => prisma.subcategory.update({ where: { id }, data }),
+    subcategoryById: (id, data) =>
+      prisma.subcategory.update({ where: { id }, data })
   },
 
   remove: {
-    subcategoryById: (id) => prisma.subcategory.delete({ where: { id } }),
-  },
+    subcategoryById: (id) => prisma.subcategory.delete({ where: { id } })
+  }
 };

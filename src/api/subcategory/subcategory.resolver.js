@@ -1,43 +1,47 @@
-import { subcategoryServices } from "./subcategory.service.js";
-import { verificationUtils, commonUtils } from "#utils/index.js";
+import { subcategoryServices } from './subcategory.service.js';
+import { verificationUtils, commonUtils } from '#utils/index.js';
 
 const { handlePromise } = commonUtils;
 const { verifyAccess, verifyRole } = verificationUtils;
 
 export const subcategoryResolvers = {
   Query: {
-    subcategoryList: handlePromise(() => subcategoryServices.getSubcategoryList()),
+    subcategoryList: handlePromise(() =>
+      subcategoryServices.getSubcategoryList()
+    ),
 
-    subcategoryById: handlePromise((_parent, { id }) => subcategoryServices.getSubcategoryById(id)),
+    subcategoryById: handlePromise((_parent, { id }) =>
+      subcategoryServices.getSubcategoryById(id)
+    ),
 
     subcategoryBySlugs: handlePromise((_parent, { input }) =>
-      subcategoryServices.getSubcategoryBySlugs(input),
-    ),
+      subcategoryServices.getSubcategoryBySlugs(input)
+    )
   },
 
   Mutation: {
     createSubcategory: handlePromise(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { input }) =>
-          subcategoryServices.createSubcategory(input),
-        ),
-      ),
+        verifyRole(['ADMIN', 'SUPER_ADMIN'])((_parent, { input }) =>
+          subcategoryServices.createSubcategory(input)
+        )
+      )
     ),
 
     updateSubcategoryById: handlePromise(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id, input }) =>
-          subcategoryServices.updateSubcategoryById(id, input),
-        ),
-      ),
+        verifyRole(['ADMIN', 'SUPER_ADMIN'])((_parent, { id, input }) =>
+          subcategoryServices.updateSubcategoryById(id, input)
+        )
+      )
     ),
 
     removeSubcategoryById: handlePromise(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id }) =>
-          subcategoryServices.removeSubcategoryById(id),
-        ),
-      ),
-    ),
-  },
+        verifyRole(['ADMIN', 'SUPER_ADMIN'])((_parent, { id }) =>
+          subcategoryServices.removeSubcategoryById(id)
+        )
+      )
+    )
+  }
 };

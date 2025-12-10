@@ -1,4 +1,4 @@
-import { subcategoryRepository } from "./subcategory.repository.js";
+import { subcategoryRepository } from './subcategory.repository.js';
 
 const { write, read, update, remove } = subcategoryRepository;
 
@@ -13,5 +13,5 @@ export const subcategoryServices = {
 
   updateSubcategoryById: (id, input) => update.subcategoryById(id, input),
 
-  removeSubcategoryById: (id) => remove.subcategoryById(id),
+  removeSubcategoryById: (id) => remove.subcategoryById(id)
 };

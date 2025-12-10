@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -8,29 +8,29 @@ export const inquiryRepository = {
 
     inquiryById: (id) =>
       prisma.inquiry.findUnique({
-        where: { id },
-      }),
+        where: { id }
+      })
   },
 
   write: {
     inquiry: (data) =>
       prisma.inquiry.create({
-        data,
-      }),
+        data
+      })
   },
 
   update: {
     inquiryById: (id, data) =>
       prisma.inquiry.update({
         where: { id },
-        data,
-      }),
+        data
+      })
   },
 
   remove: {
     inquiryById: (id) =>
       prisma.inquiry.delete({
-        where: { id },
-      }),
-  },
+        where: { id }
+      })
+  }
 };

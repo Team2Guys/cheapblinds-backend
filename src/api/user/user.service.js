@@ -1,5 +1,5 @@
-import { userRepository } from "./user.repository.js";
-import { bcryptUtils } from "#utils/index.js";
+import { userRepository } from './user.repository.js';
+import { bcryptUtils } from '#utils/index.js';
 
 const { read, update, remove } = userRepository;
 
@@ -16,5 +16,5 @@ export const userServices = {
     return update.userById(id, input);
   },
 
-  removeUserById: (id) => remove.userById(id),
+  removeUserById: (id) => remove.userById(id)
 };

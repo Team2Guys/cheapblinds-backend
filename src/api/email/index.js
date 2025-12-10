@@ -1,2 +1,2 @@
-export * from "./email.typeDef.js";
-export * from "./email.resolver.js";
+export * from './email.typeDef.js';
+export * from './email.resolver.js';

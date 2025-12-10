@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -8,34 +8,34 @@ export const orderRepository = {
 
     orderListByUserId: (id) =>
       prisma.order.findMany({
-        where: { userId: id },
+        where: { userId: id }
       }),
 
     orderById: (id) =>
       prisma.order.findUnique({
-        where: { id },
-      }),
+        where: { id }
+      })
   },
 
   write: {
     order: (data) =>
       prisma.order.create({
-        data,
-      }),
+        data
+      })
   },
 
   update: {
     orderById: (id, data) =>
       prisma.order.update({
         where: { id },
-        data,
-      }),
+        data
+      })
   },
 
   remove: {
     orderById: (id) =>
       prisma.order.delete({
-        where: { id },
-      }),
-  },
+        where: { id }
+      })
+  }
 };

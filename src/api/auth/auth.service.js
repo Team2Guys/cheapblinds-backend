@@ -1,37 +1,53 @@
-import createError from "http-errors";
+import createError from 'http-errors';
 
-import { tokenUtils, sendEmail, bcryptUtils } from "#utils/index.js";
-import { userRepository } from "../user/user.repository.js";
-import { env } from "#config/index.js";
+import { tokenUtils, sendEmail, bcryptUtils } from '#utils/index.js';
+import { userRepository } from '../user/user.repository.js';
+import { env } from '#config/index.js';
 
 const { write, read, update } = userRepository;
-const { FRONTEND_URL, SUPER_ADMIN_ID, SUPER_ADMIN_EMAIL, SUPER_ADMIN_NAME, SUPER_ADMIN_PASSWORD } =
-  env;
+const {
+  FRONTEND_URL,
+  SUPER_ADMIN_ID,
+  SUPER_ADMIN_EMAIL,
+  SUPER_ADMIN_NAME,
+  SUPER_ADMIN_PASSWORD
+} = env;
 
 export const authServices = {
   signup: async (input) => {
     const { email, password, ...rest } = input;
 
     const existingUser = await read.userByEmail(email);
-    if (existingUser) throw createError(400, "User already exists.");
+    if (existingUser) throw createError(400, 'User already exists.');
 
     const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
-    const newUser = await write.user({ email, password: hashedPassword, ...rest });
-
-    const verificationToken = tokenUtils.generate({ id: newUser.id }, "verificationToken");
-    if (!verificationToken) throw createError(500, "Failed to generate verification token.");
-    if (!FRONTEND_URL) throw createError(500, "FRONTEND_URL is not defined.");
-
-    const sentEmail = await sendEmail("verification-email", {
+    const newUser = await write.user({
       email,
-      subject: "Welcome - Verify your email",
-      FRONTEND_URL,
-      verificationToken,
+      password: hashedPassword,
+      ...rest
     });
-    if (!sentEmail) throw createError(500, "Failed to send welcome email.");
 
-    return { message: "Registered successfully. Check your email to verify your account." };
+    const verificationToken = tokenUtils.generate(
+      { id: newUser.id },
+      'verificationToken'
+    );
+    if (!verificationToken)
+      throw createError(500, 'Failed to generate verification token.');
+    if (!FRONTEND_URL) throw createError(500, 'FRONTEND_URL is not defined.');
+
+    const sentEmail = await sendEmail('verification-email', {
+      email,
+      subject: 'Welcome - Verify your email',
+      FRONTEND_URL,
+      verificationToken
+    });
+    if (!sentEmail) throw createError(500, 'Failed to send welcome email.');
+
+    return {
+      message:
+        'Registered successfully. Check your email to verify your account.'
+    };
   },
 
   signin: async (input) => {
@@ -40,62 +56,78 @@ export const authServices = {
     let accessToken;
 
     switch (role) {
-      case "SUPER_ADMIN":
+      case 'SUPER_ADMIN':
         if (email !== SUPER_ADMIN_EMAIL || password !== SUPER_ADMIN_PASSWORD)
-          throw createError(401, "Invalid credentials.");
+          throw createError(401, 'Invalid credentials.');
 
-        accessToken = tokenUtils.generate({ id: SUPER_ADMIN_ID, role }, "accessToken");
+        accessToken = tokenUtils.generate(
+          { id: SUPER_ADMIN_ID, role },
+          'accessToken'
+        );
         break;
 
-      case "ADMIN":
+      case 'ADMIN':
         user = await read.adminByEmail(email);
-        if (!user) throw createError(404, "Invalid credentials.");
+        if (!user) throw createError(404, 'Invalid credentials.');
 
         if (!bcryptUtils.compare(password, user.password))
-          throw createError(401, "Invalid credentials.");
+          throw createError(401, 'Invalid credentials.');
 
-        accessToken = tokenUtils.generate({ id: user.id, role: "ADMIN" }, "accessToken");
+        accessToken = tokenUtils.generate(
+          { id: user.id, role: 'ADMIN' },
+          'accessToken'
+        );
         break;
 
       default: // regular user
         user = await read.userByEmail(email);
-        if (!user) throw createError(401, "Invalid credentials.");
+        if (!user) throw createError(401, 'Invalid credentials.');
 
         if (!user.isEmailVerified) {
-          const verificationToken = tokenUtils.generate({ id: user.id }, "verificationToken");
-          if (!verificationToken) throw createError(500, "Failed to generate verification token.");
-          if (!FRONTEND_URL) throw createError(500, "FRONTEND_URL is not defined.");
+          const verificationToken = tokenUtils.generate(
+            { id: user.id },
+            'verificationToken'
+          );
+          if (!verificationToken)
+            throw createError(500, 'Failed to generate verification token.');
+          if (!FRONTEND_URL)
+            throw createError(500, 'FRONTEND_URL is not defined.');
 
-          const sentEmail = await sendEmail("verification-email", {
+          const sentEmail = await sendEmail('verification-email', {
             email,
-            subject: "Welcome - Please, verify your email",
+            subject: 'Welcome - Please, verify your email',
             FRONTEND_URL,
-            verificationToken,
+            verificationToken
           });
 
-          if (!sentEmail) throw createError(500, "Failed to send verification email.");
+          if (!sentEmail)
+            throw createError(500, 'Failed to send verification email.');
 
-          throw createError(403, "Email not verified. A new verification link has been sent.");
+          throw createError(
+            403,
+            'Email not verified. A new verification link has been sent.'
+          );
         }
 
         if (!(await bcryptUtils.compare(password, user.password)))
-          throw createError(401, "Invalid credentials.");
+          throw createError(401, 'Invalid credentials.');
 
-        accessToken = tokenUtils.generate({ id: user.id }, "accessToken");
+        accessToken = tokenUtils.generate({ id: user.id }, 'accessToken');
     }
 
-    if (!accessToken) throw createError(500, "Failed to generate access token.");
+    if (!accessToken)
+      throw createError(500, 'Failed to generate access token.');
 
     return {
-      id: role === "SUPER_ADMIN" ? SUPER_ADMIN_ID : user.id,
+      id: role === 'SUPER_ADMIN' ? SUPER_ADMIN_ID : user.id,
       name:
-        role === "SUPER_ADMIN"
+        role === 'SUPER_ADMIN'
           ? SUPER_ADMIN_NAME
-          : role === "ADMIN"
+          : role === 'ADMIN'
             ? user.name
             : `${user.firstName} ${user.lastName}`,
       role,
-      accessToken,
+      accessToken
     };
   },
 
@@ -103,20 +135,24 @@ export const authServices = {
     const { email } = input;
 
     const existingUser = await read.userByEmail(email);
-    if (!existingUser) throw createError(404, "User does not exist.");
+    if (!existingUser) throw createError(404, 'User does not exist.');
 
-    const resetToken = tokenUtils.generate({ id: existingUser.id }, "passwordResetToken");
-    if (!resetToken) throw createError(500, "Failed to generate reset token.");
+    const resetToken = tokenUtils.generate(
+      { id: existingUser.id },
+      'passwordResetToken'
+    );
+    if (!resetToken) throw createError(500, 'Failed to generate reset token.');
 
-    const sentEmail = await sendEmail("reset-email", {
+    const sentEmail = await sendEmail('reset-email', {
       email,
-      subject: "Reset your password",
+      subject: 'Reset your password',
       resetToken,
-      FRONTEND_URL,
+      FRONTEND_URL
     });
-    if (!sentEmail) throw createError(500, "Failed to send reset password email.");
+    if (!sentEmail)
+      throw createError(500, 'Failed to send reset password email.');
 
-    return { message: "Reset password email sent successfully." };
+    return { message: 'Reset password email sent successfully.' };
   },
 
   updatePassword: async (input) => {
@@ -125,15 +161,16 @@ export const authServices = {
     const { id } = tokenUtils.verify(resetToken);
 
     const existingUser = await read.userById(id);
-    if (!existingUser) throw createError(404, "User does not exist.");
+    if (!existingUser) throw createError(404, 'User does not exist.');
 
     const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
     const isPasswordUpdated = await update.userById(id, {
-      password: hashedPassword,
+      password: hashedPassword
     });
-    if (!isPasswordUpdated) throw createError(500, "Failed to update password.");
+    if (!isPasswordUpdated)
+      throw createError(500, 'Failed to update password.');
 
-    return { message: "Password updated successfully." };
-  },
+    return { message: 'Password updated successfully.' };
+  }
 };

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -8,27 +8,27 @@ export const newsletterSubscriberRepository = {
 
     newsletterSubscriberById: (id) =>
       prisma.newsletterSubscriber.findUnique({
-        where: { id },
+        where: { id }
       }),
 
     newsletterSubscriberByEmail: (email) =>
       prisma.newsletterSubscriber.findUnique({
-        where: { email },
-      }),
+        where: { email }
+      })
   },
 
   write: {
     newsletterSubscriber: (data) =>
       prisma.newsletterSubscriber.create({
-        data,
-      }),
+        data
+      })
   },
 
   update: {
     newsletterSubscriberById: (id, data) =>
       prisma.newsletterSubscriber.update({
         where: { id },
-        data,
-      }),
-  },
+        data
+      })
+  }
 };

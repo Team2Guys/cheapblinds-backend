@@ -1,4 +1,4 @@
-import { inquiryRepository } from "./inquiry.repository.js";
+import { inquiryRepository } from './inquiry.repository.js';
 
 const { write, read, update, remove } = inquiryRepository;
 
@@ -11,5 +11,5 @@ export const inquiryServices = {
 
   updateInquiryById: (id, input) => update.inquiryById(id, input),
 
-  removeInquiryById: (id) => remove.inquiryById(id),
+  removeInquiryById: (id) => remove.inquiryById(id)
 };

@@ -1,6 +1,6 @@
-import createError from "http-errors";
-import { adminRepository } from "./admin.repository.js";
-import { bcryptUtils } from "#utils/index.js";
+import createError from 'http-errors';
+import { adminRepository } from './admin.repository.js';
+import { bcryptUtils } from '#utils/index.js';
 
 const { write, read, update, remove } = adminRepository;
 
@@ -9,7 +9,7 @@ export const adminServices = {
     const { email, password, ...rest } = input;
 
     const existingAdmin = await read.adminByEmail(email);
-    if (existingAdmin) throw createError(400, "Admin already exists.");
+    if (existingAdmin) throw createError(400, 'Admin already exists.');
 
     const hashedPassword = await bcryptUtils.hash(password, { rounds: 12 });
 
@@ -22,5 +22,5 @@ export const adminServices = {
 
   updateAdminById: (id, input) => update.adminById(id, input),
 
-  removeAdminById: (id) => remove.adminById(id),
+  removeAdminById: (id) => remove.adminById(id)
 };

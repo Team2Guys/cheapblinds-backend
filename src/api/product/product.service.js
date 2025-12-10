@@ -1,4 +1,4 @@
-import { productRepository } from "./product.repository.js";
+import { productRepository } from './product.repository.js';
 
 const { write, read, update, remove } = productRepository;
 
@@ -13,5 +13,5 @@ export const productServices = {
 
   updateProductById: (id, input) => update.productById(id, input),
 
-  removeProductById: (id) => remove.productById(id),
+  removeProductById: (id) => remove.productById(id)
 };

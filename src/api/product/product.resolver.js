@@ -1,5 +1,5 @@
-import { productServices } from "./product.service.js";
-import { verificationUtils, commonUtils } from "#utils/index.js";
+import { productServices } from './product.service.js';
+import { verificationUtils, commonUtils } from '#utils/index.js';
 
 const { handlePromise } = commonUtils;
 const { verifyAccess, verifyRole } = verificationUtils;
@@ -8,34 +8,38 @@ export const productResolvers = {
   Query: {
     productList: handlePromise(() => productServices.getProductList()),
 
-    productById: handlePromise((_parent, { id }) => productServices.getProductById(id)),
+    productById: handlePromise((_parent, { id }) =>
+      productServices.getProductById(id)
+    ),
 
-    productBySlugs: handlePromise((_parent, { input }) => productServices.getProductBySlugs(input)),
+    productBySlugs: handlePromise((_parent, { input }) =>
+      productServices.getProductBySlugs(input)
+    )
   },
 
   Mutation: {
     createProduct: handlePromise(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { input }) =>
-          productServices.createProduct(input),
-        ),
-      ),
+        verifyRole(['ADMIN', 'SUPER_ADMIN'])((_parent, { input }) =>
+          productServices.createProduct(input)
+        )
+      )
     ),
 
     updateProductById: handlePromise(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id, input }) =>
-          productServices.updateProductById(id, input),
-        ),
-      ),
+        verifyRole(['ADMIN', 'SUPER_ADMIN'])((_parent, { id, input }) =>
+          productServices.updateProductById(id, input)
+        )
+      )
     ),
 
     removeProductById: handlePromise(
       verifyAccess(
-        verifyRole(["ADMIN", "SUPER_ADMIN"])((_parent, { id }) =>
-          productServices.removeProductById(id),
-        ),
-      ),
-    ),
-  },
+        verifyRole(['ADMIN', 'SUPER_ADMIN'])((_parent, { id }) =>
+          productServices.removeProductById(id)
+        )
+      )
+    )
+  }
 };

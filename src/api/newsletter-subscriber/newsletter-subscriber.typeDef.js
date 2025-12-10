@@ -1,4 +1,4 @@
-import { gql } from "graphql-tag";
+import { gql } from 'graphql-tag';
 
 export const newsletterSubscriberTypeDefs = gql`
   input CreateNewsletterSubscriberInput {
@@ -16,7 +16,9 @@ export const newsletterSubscriberTypeDefs = gql`
   }
 
   type Mutation {
-    createNewsletterSubscriber(input: CreateNewsletterSubscriberInput!): NewsletterSubscriber
+    createNewsletterSubscriber(
+      input: CreateNewsletterSubscriberInput!
+    ): NewsletterSubscriber
     updateNewsletterSubscriberById(
       id: ID!
       input: UpdateNewsletterSubscriberByIdInput!

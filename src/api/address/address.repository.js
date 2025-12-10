@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -6,34 +6,34 @@ export const addressRepository = {
   read: {
     addressListByUserId: (userId) =>
       prisma.address.findMany({
-        where: { userId },
+        where: { userId }
       }),
 
     addressById: (id) =>
       prisma.address.findUnique({
-        where: { id },
-      }),
+        where: { id }
+      })
   },
 
   write: {
     address: (data) =>
       prisma.address.create({
-        data,
-      }),
+        data
+      })
   },
 
   update: {
     addressById: (id, data) =>
       prisma.address.update({
         where: { id },
-        data,
-      }),
+        data
+      })
   },
 
   remove: {
     addressById: (id) =>
       prisma.address.delete({
-        where: { id },
-      }),
-  },
+        where: { id }
+      })
+  }
 };

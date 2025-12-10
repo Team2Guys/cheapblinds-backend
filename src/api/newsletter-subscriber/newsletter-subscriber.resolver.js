@@ -1,30 +1,30 @@
-import { newsletterSubscriberServices } from "./newsletter-subscriber.service.js";
-import { commonUtils } from "#utils/index.js";
+import { newsletterSubscriberServices } from './newsletter-subscriber.service.js';
+import { commonUtils } from '#utils/index.js';
 
 const { handlePromise } = commonUtils;
 
 export const newsletterSubscriberResolvers = {
   Query: {
     newsletterSubscriberList: handlePromise(() =>
-      newsletterSubscriberServices.getNewsletterSubscriberList(),
+      newsletterSubscriberServices.getNewsletterSubscriberList()
     ),
 
     newsletterSubscriberById: handlePromise((_parent, { id }) =>
-      newsletterSubscriberServices.getNewsletterSubscriberById(id),
-    ),
+      newsletterSubscriberServices.getNewsletterSubscriberById(id)
+    )
   },
 
   Mutation: {
     createNewsletterSubscriber: handlePromise((_parent, { input }) =>
-      newsletterSubscriberServices.createNewsletterSubscriber(input),
+      newsletterSubscriberServices.createNewsletterSubscriber(input)
     ),
 
     updateNewsletterSubscriberById: handlePromise((_parent, { id, input }) =>
-      newsletterSubscriberServices.updateNewsletterSubscriberById(id, input),
+      newsletterSubscriberServices.updateNewsletterSubscriberById(id, input)
     ),
 
     sendNewsletterEmail: handlePromise((_parent, { input }) =>
-      emailServices.sendNewsletterEmail(input),
-    ),
-  },
+      emailServices.sendNewsletterEmail(input)
+    )
+  }
 };

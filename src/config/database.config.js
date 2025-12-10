@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-import { env } from "./env.config.js";
-import { logger, commonUtils } from "#utils/index.js";
+import { env } from './env.config.js';
+import { logger, commonUtils } from '#utils/index.js';
 
 const prisma = new PrismaClient();
 

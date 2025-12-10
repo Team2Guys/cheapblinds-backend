@@ -1,4 +1,4 @@
-import { orderRepository } from "./order.repository.js";
+import { orderRepository } from './order.repository.js';
 
 const { write, read, update, remove } = orderRepository;
 
@@ -13,5 +13,5 @@ export const orderServices = {
 
   updateOrderById: (id, input) => update.orderById(id, input),
 
-  removeOrderById: (id) => remove.orderById(id),
+  removeOrderById: (id) => remove.orderById(id)
 };

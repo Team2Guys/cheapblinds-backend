@@ -2,5 +2,5 @@
   "watch": ["src", "prisma", ".env", ".env.example"],
   "ext": "js,json",
   "ignore": ["node_modules"],
-  "exec": "node ./src/main.js"
+  "exec": "node ./src/app.js"
 }

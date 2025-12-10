@@ -1,19 +1,25 @@
-import createError from "http-errors";
-import bcrypt from "bcryptjs";
+import createError from 'http-errors';
+import bcrypt from 'bcryptjs';
 
 export const bcryptUtils = {
   hashSync: (value, options = {}) => {
     const { rounds = 12 } = options;
 
-    if (!value) throw createError(400, "Password is required for hashing");
+    if (!value) throw createError(400, 'Password is required for hashing');
 
-    if (Buffer.byteLength(value, "utf8") > 72)
-      throw createError(400, "Password exceeds maximum length of 72 UTF-8 bytes");
+    if (Buffer.byteLength(value, 'utf8') > 72)
+      throw createError(
+        400,
+        'Password exceeds maximum length of 72 UTF-8 bytes'
+      );
 
     try {
       return bcrypt.hashSync(password, rounds);
     } catch (error) {
-      throw createError(500, `Failed to hash the provided value: ${error.message}`);
+      throw createError(
+        500,
+        `Failed to hash the provided value: ${error.message}`
+      );
     }
   },
 
@@ -21,11 +27,14 @@ export const bcryptUtils = {
     const { rounds = 12 } = options;
 
     if (!password) {
-      throw createError(400, "Password is required for hashing");
+      throw createError(400, 'Password is required for hashing');
     }
 
-    if (Buffer.byteLength(password, "utf8") > 72) {
-      throw createError(400, "Password exceeds maximum length of 72 UTF-8 bytes");
+    if (Buffer.byteLength(password, 'utf8') > 72) {
+      throw createError(
+        400,
+        'Password exceeds maximum length of 72 UTF-8 bytes'
+      );
     }
 
     try {
@@ -38,11 +47,11 @@ export const bcryptUtils = {
 
   compareSync: (password, hash) => {
     if (!password) {
-      throw createError(400, "Password is required for comparison");
+      throw createError(400, 'Password is required for comparison');
     }
 
     if (!hash) {
-      throw createError(400, "Hash is required for comparison");
+      throw createError(400, 'Hash is required for comparison');
     }
 
     try {
@@ -54,11 +63,11 @@ export const bcryptUtils = {
 
   compare: async (password, hash) => {
     if (!password) {
-      throw createError(400, "Password is required for comparison");
+      throw createError(400, 'Password is required for comparison');
     }
 
     if (!hash) {
-      throw createError(400, "Hash is required for comparison");
+      throw createError(400, 'Hash is required for comparison');
     }
 
     try {
@@ -86,7 +95,7 @@ export const bcryptUtils = {
 
   getHashInfo: (hash) => {
     if (!hash) {
-      throw createError(400, "Hash is required");
+      throw createError(400, 'Hash is required');
     }
 
     try {
@@ -96,7 +105,7 @@ export const bcryptUtils = {
       return {
         hash,
         rounds,
-        salt,
+        salt
       };
     } catch (error) {
       throw createError(400, `Invalid hash format: ${error.message}`);
@@ -108,47 +117,47 @@ export const bcryptUtils = {
       return false;
     }
 
-    return Buffer.byteLength(password, "utf8") > 72;
+    return Buffer.byteLength(password, 'utf8') > 72;
   },
 
   validateValue: (password) => {
     const errors = [];
 
     if (!password) {
-      errors.push("Password is required");
+      errors.push('Password is required');
     } else {
       if (password.length < 8) {
-        errors.push("Password must be at least 8 characters long");
+        errors.push('Password must be at least 8 characters long');
       }
 
       if (password.length > 128) {
-        errors.push("Password must not exceed 128 characters");
+        errors.push('Password must not exceed 128 characters');
       }
 
-      if (Buffer.byteLength(password, "utf8") > 72) {
-        errors.push("Password exceeds maximum length of 72 UTF-8 bytes");
+      if (Buffer.byteLength(password, 'utf8') > 72) {
+        errors.push('Password exceeds maximum length of 72 UTF-8 bytes');
       }
 
       if (!/[A-Z]/.test(password)) {
-        errors.push("Password must contain at least one uppercase letter");
+        errors.push('Password must contain at least one uppercase letter');
       }
 
       if (!/[a-z]/.test(password)) {
-        errors.push("Password must contain at least one lowercase letter");
+        errors.push('Password must contain at least one lowercase letter');
       }
 
       if (!/\d/.test(password)) {
-        errors.push("Password must contain at least one number");
+        errors.push('Password must contain at least one number');
       }
 
       if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
-        errors.push("Password must contain at least one special character");
+        errors.push('Password must contain at least one special character');
       }
     }
 
     return {
       isValid: errors.length === 0,
-      errors,
+      errors
     };
-  },
+  }
 };

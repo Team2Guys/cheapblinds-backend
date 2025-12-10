@@ -1,4 +1,4 @@
-import { addressRepository } from "./address.repository.js";
+import { addressRepository } from './address.repository.js';
 
 const { read, write, update, remove } = addressRepository;
 
@@ -11,5 +11,5 @@ export const addressServices = {
 
   updateAddressById: (id, input) => update.addressById(id, input),
 
-  removeAddressById: (id) => remove.addressById(id),
+  removeAddressById: (id) => remove.addressById(id)
 };

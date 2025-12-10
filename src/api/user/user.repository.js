@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -15,8 +15,8 @@ export const userRepository = {
           isEmailVerified: true,
           addresses: true,
           createdAt: true,
-          updatedAt: true,
-        },
+          updatedAt: true
+        }
       }),
 
     userById: (id) =>
@@ -31,8 +31,8 @@ export const userRepository = {
           isEmailVerified: true,
           addresses: true,
           createdAt: true,
-          updatedAt: true,
-        },
+          updatedAt: true
+        }
       }),
 
     userByEmail: (email) =>
@@ -48,30 +48,30 @@ export const userRepository = {
           isEmailVerified: true,
           addresses: true,
           createdAt: true,
-          updatedAt: true,
-        },
-      }),
+          updatedAt: true
+        }
+      })
   },
 
   write: {
     user: (data) =>
       prisma.user.create({
-        data,
-      }),
+        data
+      })
   },
 
   update: {
     userById: (id, data) =>
       prisma.user.update({
         where: { id },
-        data,
-      }),
+        data
+      })
   },
 
   remove: {
     userById: (id) =>
       prisma.user.delete({
-        where: { id },
-      }),
-  },
+        where: { id }
+      })
+  }
 };

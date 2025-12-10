@@ -1,4 +1,4 @@
-import { gql } from "graphql-tag";
+import { gql } from 'graphql-tag';
 
 export const emailTypeDefs = gql`
   input CheckVerificationTokenInput {
@@ -14,7 +14,9 @@ export const emailTypeDefs = gql`
   }
 
   type Mutation {
-    checkVerificationToken(input: CheckVerificationTokenInput!): GenericResponse!
+    checkVerificationToken(
+      input: CheckVerificationTokenInput!
+    ): GenericResponse!
     sendVerificationToken(input: SendVerificationTokenInput!): GenericResponse!
   }
 `;
