@@ -75,6 +75,7 @@ export const commonTypeDefs = gql`
     lastName: String!
     email: String!
     phone: String!
+    state: String!
     country: String!
     city: String!
     address: String!
@@ -166,8 +167,8 @@ export const commonTypeDefs = gql`
     lastName: String!
     email: String!
     phone: String!
-    country: String!
     state: String!
+    country: String!
     city: String!
     address: String!
     totalAmount: Float!

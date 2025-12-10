@@ -13,6 +13,7 @@ export const addressTypeDefs = gql`
     lastName: String!
     email: String!
     phone: String!
+    state: String!
     country: String!
     city: String!
     address: String!
@@ -25,6 +26,7 @@ export const addressTypeDefs = gql`
     lastName: String
     email: String
     phone: String
+    state: String
     country: String
     city: String
     address: String
