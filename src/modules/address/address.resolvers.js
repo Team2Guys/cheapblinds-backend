@@ -5,6 +5,16 @@ const { handlePromise } = commonUtils;
 const { verifyAccess } = verificationUtils;
 
 export const addressResolvers = {
+  Query: {
+    addressListByUserId: handlePromise(
+      verifyAccess((_parent, { userId }) => addressServices.getAddressListByUserId(userId)),
+    ),
+
+    addressById: handlePromise(
+      verifyAccess((_parent, { id }) => addressServices.getAddressById(id)),
+    ),
+  },
+
   Mutation: {
     createAddress: handlePromise(
       verifyAccess((_parent, { input }) => addressServices.createAddress(input)),
