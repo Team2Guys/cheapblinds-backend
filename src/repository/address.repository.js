@@ -4,8 +4,13 @@ const prisma = new PrismaClient();
 
 export const addressRepository = {
   read: {
-    addressById: (id) =>
+    addressListByUserId: (userId) =>
       prisma.address.findMany({
+        where: { userId },
+      }),
+
+    addressById: (id) =>
+      prisma.address.findUnique({
         where: { id },
       }),
   },

@@ -1,10 +1,20 @@
 import { repository } from "#repository/index.js";
 import { commonUtils } from "#utils/index.js";
 
-const { write, update, remove } = repository;
+const { read, write, update, remove } = repository;
 const { ensureResourceExists } = commonUtils;
 
 export const addressServices = {
+  getAddressListByUserId: async (userId) => {
+    await ensureResourceExists("user", userId);
+    return read.addressListByUserId(userId);
+  },
+
+  getAddressById: async (id) => {
+    await ensureResourceExists("address", id);
+    return read.addressById(id);
+  },
+
   createAddress: (input) => write.address(input),
 
   updateAddressById: async (id, input) => {

@@ -31,6 +31,11 @@ export const addressTypeDefs = gql`
     addressType: AddressType
   }
 
+  type Query {
+    addressListByUserId(userId: ID!): [Address!]!
+    addressById(Id: ID!): Address
+  }
+
   type Mutation {
     createAddress(input: CreateAddressInput!): Address
     updateAddressById(id: ID!, input: UpdateAddressByIdInput!): Address
