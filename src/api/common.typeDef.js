@@ -89,15 +89,15 @@ export const commonTypeDefs = gql`
   type Category {
     id: ID!
     name: String!
-    description: String
-    shortDescription: String
-    slug: String
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadcrumb: String
-    posterImageUrl: String
-    seoSchema: String
+    description: String!
+    shortDescription: String!
+    slug: String!
+    metaTitle: String!
+    metaDescription: String!
+    canonicalTag: String!
+    breadcrumb: String!
+    posterImageUrl: String!
+    seoSchema: String!
     lastEditedBy: String!
     status: ContentStatus!
     products: [Product!]!
@@ -155,6 +155,7 @@ export const commonTypeDefs = gql`
     additionalInfo: String
     measuringGuide: String
     lastEditedBy: String!
+    status: ContentStatus!
     category: Category!
     subcategory: Subcategory!
     status: ContentStatus!
