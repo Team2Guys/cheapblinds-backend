@@ -17,7 +17,7 @@ import {
   subcategoryResolvers
 } from './subcategory/index.js';
 import { productTypeDefs, productResolvers } from './product/index.js';
-import { commonTypeDefs } from './common.typeDefs.js';
+import { commonTypeDefs } from './common.typeDef.js';
 
 export const typeDefs = mergeTypeDefs([
   addressTypeDefs,
