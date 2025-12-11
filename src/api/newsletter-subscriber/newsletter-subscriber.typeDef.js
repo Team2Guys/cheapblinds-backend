@@ -13,6 +13,7 @@ export const newsletterSubscriberTypeDefs = gql`
   type Query {
     newsletterSubscriberList: [NewsletterSubscriber!]!
     newsletterSubscriberById(id: ID!): NewsletterSubscriber
+    newsletterSubscriberByEmail(email: String!): NewsletterSubscriber
   }
 
   type Mutation {
