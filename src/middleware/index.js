@@ -1,16 +1,16 @@
-import cors from "cors";
-import xss from "xss-clean";
-import helmet from "helmet";
-import express from "express";
-import compression from "compression";
-import cookieParser from "cookie-parser";
-import { expressMiddleware } from "@as-integrations/express4";
+import cors from 'cors';
+import xss from 'xss-clean';
+import helmet from 'helmet';
+import express from 'express';
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
+import { expressMiddleware } from '@as-integrations/express4';
 
 // eslint-disable-next-line no-unused-vars
-import { logTheme } from "./colors.js";
-import { corsOptions } from "./cors.js";
-import { tokenUtils } from "#utils/index.js";
-import { apiRateLimiter } from "./rate-limiter.js";
+import { logTheme } from './colors.js';
+import { corsOptions } from './cors.js';
+import { tokenUtils } from '#utils/index.js';
+import { apiRateLimiter } from './rate-limiter.js';
 
 export const setupMiddleware = (app, apolloServer) => {
   app.use(helmet()); // secure HTTP headers
@@ -20,16 +20,16 @@ export const setupMiddleware = (app, apolloServer) => {
   app.use(cookieParser()); // parse cookies
 
   app.use(
-    "/graphql",
+    '/graphql',
     cors(corsOptions),
     apiRateLimiter,
-    express.json({ limit: "10mb" }),
+    express.json({ limit: '10mb' }),
     xss(), // sanitize input
     expressMiddleware(apolloServer, {
       context: ({ req, res }) => {
         let user = null;
 
-        const accessToken = req.cookies["accessToken"];
+        const accessToken = req.cookies['accessToken'];
         if (accessToken) {
           try {
             user = tokenUtils.verify(accessToken);
@@ -40,7 +40,7 @@ export const setupMiddleware = (app, apolloServer) => {
 
         return { user, req, res };
       },
-      csrfPrevention: true, // optional for browser clients
-    }),
+      csrfPrevention: true // optional for browser clients
+    })
   );
 };
