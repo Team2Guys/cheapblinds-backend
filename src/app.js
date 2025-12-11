@@ -1,9 +1,9 @@
 import express from 'express';
 
 import { apolloServer } from './apollo/server.js';
-import { logger, commonUtils } from '#utils/index.js';
+import { logger, commonUtils, logDatabaseConnection } from '#utils/index.js';
 import { setupMiddleware } from './middleware/index.js';
-import { env, logDatabaseConnection } from '#config/index.js';
+import { env } from '#config/index.js';
 
 const { PORT, BACKEND_URL } = env;
 const { handlePromise } = commonUtils;
