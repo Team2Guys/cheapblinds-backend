@@ -3,7 +3,7 @@ import { cleanEnv, str, port, email, url, testOnly } from 'envalid';
 
 import { logger } from '#utils/logger.utils.js';
 
-const envFile = `.env.${process.env.NODE_ENV || 'development'}`;
+const envFile = process.env.NODE_ENV;
 dotenv.config({ path: envFile });
 
 const validators = {

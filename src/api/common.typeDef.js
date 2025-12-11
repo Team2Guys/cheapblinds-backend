@@ -60,10 +60,9 @@ export const commonTypeDefs = gql`
     firstName: String!
     lastName: String!
     email: String!
-    password: String!
-    addresses: [JSON!]!
-    isEmailVerified: Boolean!
     role: Role!
+    isEmailVerified: Boolean!
+    addresses: [JSON!]!
     defaultShippingAddressId: ID!
     defaultBillingAddressId: ID!
     createdAt: DateTime!
@@ -89,15 +88,15 @@ export const commonTypeDefs = gql`
   type Category {
     id: ID!
     name: String!
-    description: String
-    shortDescription: String
-    slug: String
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadcrumb: String
-    posterImageUrl: String
-    seoSchema: String
+    description: String!
+    shortDescription: String!
+    slug: String!
+    metaTitle: String!
+    metaDescription: String!
+    canonicalTag: String!
+    breadcrumb: String!
+    posterImageUrl: String!
+    seoSchema: String!
     lastEditedBy: String!
     status: ContentStatus!
     products: [Product!]!

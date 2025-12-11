@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '#config/index.js';
 
 export const userRepository = {
   read: {
@@ -14,6 +12,8 @@ export const userRepository = {
           role: true,
           isEmailVerified: true,
           addresses: true,
+          defaultBillingAddressId: true,
+          defaultShippingAddressId: true,
           createdAt: true,
           updatedAt: true
         }
@@ -30,6 +30,8 @@ export const userRepository = {
           role: true,
           isEmailVerified: true,
           addresses: true,
+          defaultBillingAddressId: true,
+          defaultShippingAddressId: true,
           createdAt: true,
           updatedAt: true
         }
@@ -43,10 +45,11 @@ export const userRepository = {
           firstName: true,
           lastName: true,
           email: true,
-          password: true,
           role: true,
           isEmailVerified: true,
           addresses: true,
+          defaultBillingAddressId: true,
+          defaultShippingAddressId: true,
           createdAt: true,
           updatedAt: true
         }
