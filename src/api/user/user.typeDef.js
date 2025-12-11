@@ -5,7 +5,6 @@ export const userTypeDefs = gql`
     firstName: String
     lastName: String
     email: String
-    password: String
     defaultShippingAddressId: ID
     defaultBillingAddressId: ID
   }
