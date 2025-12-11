@@ -1,6 +1,7 @@
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../../generated/prisma/client.ts';
-import { logger, commonUtils } from '#utils/index.js';
+import { logger } from '#utils/logger.utils.js';
+import { commonUtils } from '#utils/common.utils.js';
 
 const { handlePromise } = commonUtils;
 
