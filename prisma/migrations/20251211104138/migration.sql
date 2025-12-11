@@ -19,6 +19,9 @@ CREATE TYPE "InquiryStatus" AS ENUM ('NEW', 'READ', 'RESOLVED');
 -- CreateEnum
 CREATE TYPE "Permissions" AS ENUM ('ADD_PRODUCTS', 'EDIT_PRODUCTS', 'DELETE_PRODUCTS', 'ADD_CATEGORY', 'DELETE_CATEGORY', 'EDIT_CATEGORY', 'CHECK_PROFIT', 'CHECK_REVENUE', 'CHECK_VISITORS', 'VIEW_USERS', 'VIEW_SALES', 'VIEW_ADMINS', 'VIEW_TOTAL_PRODUCTS', 'VIEW_TOTAL_CATEGORIES');
 
+-- CreateEnum
+CREATE TYPE "AddressType" AS ENUM ('HOME', 'OFFICE', 'OTHER');
+
 -- CreateTable
 CREATE TABLE "Admin" (
     "id" UUID NOT NULL,
@@ -39,15 +42,46 @@ CREATE TABLE "User" (
     "id" UUID NOT NULL,
     "firstName" VARCHAR(100) NOT NULL,
     "lastName" VARCHAR(100) NOT NULL,
-    "email" VARCHAR(255) NOT NULL,
+    "email" TEXT NOT NULL,
     "password" VARCHAR(255) NOT NULL,
     "role" "Role" NOT NULL DEFAULT 'USER',
     "isEmailVerified" BOOLEAN NOT NULL DEFAULT false,
-    "isNewsletterSubscribed" BOOLEAN NOT NULL DEFAULT false,
+    "defaultShippingAddressId" TEXT DEFAULT '',
+    "defaultBillingAddressId" TEXT DEFAULT '',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Address" (
+    "id" UUID NOT NULL,
+    "userId" UUID NOT NULL,
+    "firstName" VARCHAR(100) NOT NULL,
+    "lastName" VARCHAR(100) NOT NULL,
+    "email" VARCHAR(255) NOT NULL,
+    "phone" VARCHAR(20) NOT NULL,
+    "state" VARCHAR(100) NOT NULL,
+    "country" VARCHAR(100) NOT NULL,
+    "city" VARCHAR(100) NOT NULL,
+    "address" VARCHAR(255) NOT NULL,
+    "addressType" "AddressType" NOT NULL DEFAULT 'HOME',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Address_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "NewsletterSubscriber" (
+    "id" UUID NOT NULL,
+    "email" VARCHAR(255) NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "NewsletterSubscriber_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -137,8 +171,8 @@ CREATE TABLE "Order" (
     "lastName" VARCHAR(100) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
     "phone" VARCHAR(20) NOT NULL,
-    "country" VARCHAR(100) NOT NULL,
     "state" VARCHAR(100) NOT NULL,
+    "country" VARCHAR(100) NOT NULL,
     "city" VARCHAR(100) NOT NULL,
     "address" TEXT NOT NULL,
     "totalAmount" DECIMAL(65,30) NOT NULL DEFAULT 0,
@@ -161,23 +195,12 @@ CREATE TABLE "Inquiry" (
     "email" VARCHAR(255) NOT NULL,
     "phone" VARCHAR(20) NOT NULL,
     "message" TEXT,
-    "inquiryType" "InquiryType" NOT NULL,
+    "inquiryType" "InquiryType" NOT NULL DEFAULT 'OTHER',
     "inquiryStatus" "InquiryStatus" NOT NULL DEFAULT 'NEW',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Inquiry_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "NewsletterSubscriber" (
-    "id" UUID NOT NULL,
-    "email" VARCHAR(255) NOT NULL,
-    "isActive" BOOLEAN NOT NULL DEFAULT true,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "NewsletterSubscriber_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -187,13 +210,16 @@ CREATE UNIQUE INDEX "Admin_email_key" ON "Admin"("email");
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "NewsletterSubscriber_email_key" ON "NewsletterSubscriber"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Category_slug_key" ON "Category"("slug");
 
--- CreateIndex
-CREATE UNIQUE INDEX "NewsletterSubscriber_email_key" ON "NewsletterSubscriber"("email");
+-- AddForeignKey
+ALTER TABLE "Address" ADD CONSTRAINT "Address_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Subcategory" ADD CONSTRAINT "Subcategory_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -1,14 +1,18 @@
-import { PrismaClient } from '@prisma/client';
-
-import { env } from './env.config.js';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaClient } from '../../generated/prisma/client.ts';
 import { logger, commonUtils } from '#utils/index.js';
 
-const prisma = new PrismaClient();
-
-const { DATABASE_URL } = env;
 const { handlePromise } = commonUtils;
 
-export const connectDatabase = handlePromise(async () => {
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL
+});
+
+export const prisma = new PrismaClient({ adapter });
+
+export const logDatabaseConnection = handlePromise(async () => {
   await prisma.$connect();
-  logger.info(`[connected] Database (url: ${DATABASE_URL})`.service);
+  logger.info(
+    `[connected] Database (url: ${process.env.DATABASE_URL})`.service
+  );
 });

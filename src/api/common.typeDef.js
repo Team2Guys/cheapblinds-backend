@@ -155,7 +155,6 @@ export const commonTypeDefs = gql`
     additionalInfo: String
     measuringGuide: String
     lastEditedBy: String!
-    status: ContentStatus!
     category: Category!
     subcategory: Subcategory!
     status: ContentStatus!
