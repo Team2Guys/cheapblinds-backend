@@ -45,6 +45,7 @@ export const userRepository = {
           firstName: true,
           lastName: true,
           email: true,
+          password: true,
           role: true,
           isEmailVerified: true,
           addresses: true,
