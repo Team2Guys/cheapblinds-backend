@@ -21,7 +21,7 @@ export const addressTypeDefs = gql`
   }
 
   input UpdateAddressByIdInput {
-    id: ID!
+    userId: ID
     firstName: String
     lastName: String
     email: String
