@@ -126,6 +126,7 @@ export const authServices = {
           : role === 'ADMIN'
             ? user.name
             : `${user.firstName} ${user.lastName}`,
+      email,
       role,
       accessToken
     };

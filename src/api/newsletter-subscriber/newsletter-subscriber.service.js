@@ -19,6 +19,9 @@ export const newsletterSubscriberServices = {
 
   getNewsletterSubscriberById: (id) => read.newsletterSubscriberById(id),
 
+  getNewsletterSubscriberByEmail: (email) =>
+    read.newsletterSubscriberByEmail(email),
+
   updateNewsletterSubscriberById: (id, input) =>
     update.newsletterSubscriberById(id, input),
 

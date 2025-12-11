@@ -11,6 +11,10 @@ export const newsletterSubscriberResolvers = {
 
     newsletterSubscriberById: handlePromise((_parent, { id }) =>
       newsletterSubscriberServices.getNewsletterSubscriberById(id)
+    ),
+
+    newsletterSubscriberByEmail: handlePromise((_parent, { email }) =>
+      newsletterSubscriberServices.getNewsletterSubscriberByEmail(email)
     )
   },
 
