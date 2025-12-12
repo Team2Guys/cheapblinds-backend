@@ -51,6 +51,6 @@
     "#modules/*": "./src/api/modules/*",
     "#config/*": "./src/config/*",
     "#middleware/*": "./src/middleware/*",
-    "#utils/*": "./src/utils/*"
+    "#lib/*": "./src/lib/*"
   }
 }

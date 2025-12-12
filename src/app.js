@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { apolloServer } from './apollo/server.js';
-import { logger, commonUtils, logDatabaseConnection } from '#utils/index.js';
+import { logger, commonUtils, logDatabaseConnection } from '#lib/index.js';
 import { setupMiddleware } from './middleware/index.js';
 import { env } from '#config/index.js';
 

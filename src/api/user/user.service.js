@@ -1,5 +1,5 @@
 import { userRepository } from './user.repository.js';
-import { bcryptUtils } from '#utils/index.js';
+import { bcryptUtils } from '#lib/index.js';
 
 const { read, update, remove } = userRepository;
 

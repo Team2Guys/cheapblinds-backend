@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { cleanEnv, str, port, email, url, testOnly } from 'envalid';
 
-import { logger } from '#utils/index.js';
+import { logger } from '#lib/index.js';
 
 const envFile = process.env.NODE_ENV;
 dotenv.config({ path: envFile });

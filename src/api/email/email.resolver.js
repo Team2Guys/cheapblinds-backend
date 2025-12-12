@@ -1,4 +1,4 @@
-import { commonUtils } from '#utils/index.js';
+import { commonUtils } from '#lib/index.js';
 import { emailServices } from './email.service.js';
 
 const { handlePromise } = commonUtils;

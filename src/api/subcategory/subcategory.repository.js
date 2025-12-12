@@ -1,4 +1,4 @@
-import { prisma } from '#utils/index.js';
+import { prisma } from '#lib/index.js';
 
 export const subcategoryRepository = {
   read: {

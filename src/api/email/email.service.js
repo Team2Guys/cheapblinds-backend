@@ -1,6 +1,6 @@
 import createError from 'http-errors';
 
-import { tokenUtils, sendEmail } from '#utils/index.js';
+import { tokenUtils, sendEmail } from '#lib/index.js';
 import { userRepository } from '../user/user.repository.js';
 
 const { read, update } = userRepository;
