@@ -51,6 +51,7 @@ export const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   formatError,
+  introspection: true,
   allowBatchedHttpRequests: true,
   validationRules: [depthLimit(5)], // prevent very deep queries
   plugins: [requestLoggerPlugin]
