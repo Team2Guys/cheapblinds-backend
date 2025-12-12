@@ -20,6 +20,8 @@ handlePromise(async function main() {
   app.listen(PORT || 5000, () => {
     logger.info(`[connected] Backend (url: ${BACKEND_URL})`.server);
   });
+
+  app.get('/', (_req, res) => res.json({ status: 'OK' }));
 })();
 
 export default app;
