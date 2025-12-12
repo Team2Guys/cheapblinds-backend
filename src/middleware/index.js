@@ -9,7 +9,7 @@ import { expressMiddleware } from '@as-integrations/express4';
 // eslint-disable-next-line no-unused-vars
 import { logTheme } from './colors.js';
 import { corsOptions } from './cors.js';
-import { tokenUtils } from '#utils/index.js';
+import { tokenUtils } from '#lib/index.js';
 import { apiRateLimiter } from './rate-limiter.js';
 
 export const setupMiddleware = (app, apolloServer) => {
@@ -18,6 +18,8 @@ export const setupMiddleware = (app, apolloServer) => {
   app.use(compression()); // res compression
 
   app.use(cookieParser()); // parse cookies
+
+  app.options('/graphql', cors(corsOptions));
 
   app.use(
     '/graphql',

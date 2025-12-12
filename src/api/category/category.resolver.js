@@ -1,5 +1,5 @@
 import { categoryServices } from './category.service.js';
-import { verificationUtils, commonUtils } from '#utils/index.js';
+import { verificationUtils, commonUtils } from '#lib/index.js';
 
 const { handlePromise } = commonUtils;
 const { verifyAccess, verifyRole } = verificationUtils;

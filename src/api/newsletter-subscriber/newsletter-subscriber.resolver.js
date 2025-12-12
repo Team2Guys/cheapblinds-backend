@@ -1,5 +1,5 @@
 import { newsletterSubscriberServices } from './newsletter-subscriber.service.js';
-import { commonUtils } from '#utils/index.js';
+import { commonUtils } from '#lib/index.js';
 
 const { handlePromise } = commonUtils;
 

@@ -1,5 +1,5 @@
 import { inquiryServices } from './inquiry.service.js';
-import { commonUtils } from '#utils/index.js';
+import { commonUtils } from '#lib/index.js';
 
 const { handlePromise } = commonUtils;
 

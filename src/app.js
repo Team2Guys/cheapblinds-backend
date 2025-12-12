@@ -1,9 +1,9 @@
 import express from 'express';
 
 import { apolloServer } from './apollo/server.js';
-import { logger, commonUtils } from '#utils/index.js';
+import { logger, commonUtils, logDatabaseConnection } from '#lib/index.js';
 import { setupMiddleware } from './middleware/index.js';
-import { env, logDatabaseConnection } from '#config/index.js';
+import { env } from '#config/index.js';
 
 const { PORT, BACKEND_URL } = env;
 const { handlePromise } = commonUtils;
@@ -20,6 +20,8 @@ handlePromise(async function main() {
   app.listen(PORT || 5000, () => {
     logger.info(`[connected] Backend (url: ${BACKEND_URL})`.server);
   });
+
+  app.get('/', (_req, res) => res.json({ status: 'OK' }));
 })();
 
 export default app;

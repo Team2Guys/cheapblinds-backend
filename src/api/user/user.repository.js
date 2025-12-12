@@ -1,4 +1,4 @@
-import { prisma } from '#config/index.js';
+import { prisma } from '#lib/index.js';
 
 export const userRepository = {
   read: {

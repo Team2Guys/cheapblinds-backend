@@ -1,5 +1,5 @@
 import { env } from '#config/index.js';
-import { commonUtils } from '#utils/index.js';
+import { commonUtils } from '#lib/index.js';
 import { authServices } from './auth.service.js';
 
 const { handlePromise } = commonUtils;

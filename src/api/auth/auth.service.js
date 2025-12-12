@@ -1,6 +1,6 @@
 import createError from 'http-errors';
 
-import { tokenUtils, sendEmail, bcryptUtils } from '#utils/index.js';
+import { tokenUtils, sendEmail, bcryptUtils } from '#lib/index.js';
 import { userRepository } from '../user/user.repository.js';
 import { env } from '#config/index.js';
 

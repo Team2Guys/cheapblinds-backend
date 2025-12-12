@@ -1,5 +1,5 @@
 import { userServices } from './user.service.js';
-import { verificationUtils, commonUtils } from '#utils/index.js';
+import { verificationUtils, commonUtils } from '#lib/index.js';
 
 const { handlePromise } = commonUtils;
 const { verifyAccess } = verificationUtils;

@@ -1,6 +1,6 @@
 import createError from 'http-errors';
 import { adminRepository } from './admin.repository.js';
-import { bcryptUtils } from '#utils/index.js';
+import { bcryptUtils } from '#lib/index.js';
 
 const { write, read, update, remove } = adminRepository;
 
