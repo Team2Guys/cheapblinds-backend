@@ -1,7 +1,7 @@
 import { env } from '#config/index.js';
-import { prisma } from './prisma.utils.js';
-import { logger } from './logger.utils.js';
-import { commonUtils } from './common.utils.js';
+import { prisma } from './prisma.lib.js';
+import { logger } from './logger.lib.js';
+import { commonUtils } from './common.lib.js';
 
 const { handlePromise } = commonUtils;
 const { DATABASE_URL } = env;

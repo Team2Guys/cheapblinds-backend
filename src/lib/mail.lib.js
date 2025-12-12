@@ -4,7 +4,7 @@ import createError from 'http-errors';
 import path, { dirname, join } from 'path';
 import { readFile, access, constants } from 'fs/promises';
 
-import { logger } from './logger.utils.js';
+import { logger } from './logger.lib.js';
 import { env } from '#config/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
