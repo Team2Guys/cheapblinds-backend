@@ -19,6 +19,8 @@ export const setupMiddleware = (app, apolloServer) => {
 
   app.use(cookieParser()); // parse cookies
 
+  app.options('/graphql', cors(corsOptions));
+
   app.use(
     '/graphql',
     cors(corsOptions),
