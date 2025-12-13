@@ -7,6 +7,10 @@ const { JWT_SECRET } = env;
 
 export const tokenUtils = {
   generate: (payload, tokenType) => {
+    const options = {
+      algorithm: 'HS256'
+    };
+
     switch (tokenType) {
       case 'verificationToken':
         options.expiresIn = '5m';
