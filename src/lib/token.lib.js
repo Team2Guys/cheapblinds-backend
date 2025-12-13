@@ -7,10 +7,6 @@ const { JWT_SECRET } = env;
 
 export const tokenUtils = {
   generate: (payload, tokenType) => {
-    const options = {
-      algorithm: 'HS256'
-    };
-
     switch (tokenType) {
       case 'verificationToken':
         options.expiresIn = '5m';
@@ -29,7 +25,13 @@ export const tokenUtils = {
       throw createError(500, 'JWT secret key is undefined');
     }
 
-    return jwt.sign(payload, JWT_SECRET, options);
+    return jwt.sign(payload, JWT_SECRET, options, (err, token) => {
+      if (err) {
+        throw createError(401, 'Failed to generate token');
+      }
+
+      return token;
+    });
   },
 
   verify: (token) => {

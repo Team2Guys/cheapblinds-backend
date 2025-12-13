@@ -32,8 +32,6 @@ export const authServices = {
       { id: newUser.id },
       'verificationToken'
     );
-    if (!verificationToken)
-      throw createError(500, 'Failed to generate verification token.');
     if (!FRONTEND_URL) throw createError(500, 'FRONTEND_URL is not defined.');
 
     const sentEmail = await sendEmail('verification-email', {
