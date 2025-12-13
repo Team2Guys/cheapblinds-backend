@@ -12,10 +12,10 @@ const createLogger = () => {
       new winston.transports.Console({
         format: winston.format.combine(
           winston.format.colorize(),
-          winston.format.timestamp({ format: 'DD/MMM/YYYY:HH:mm:ss' }),
+          winston.format.timestamp({ format: 'HH:mm:ss' }),
           winston.format.printf(
             ({ level, message, timestamp }) =>
-              `[${timestamp}] [${level}] - ${message}`
+              `${timestamp}`.gray + ` [${level}]` + `${message}`
           )
         ),
         handleExceptions: true

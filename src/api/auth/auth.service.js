@@ -107,11 +107,6 @@ export const authServices = {
           );
         }
 
-        console.log('user:', user);
-
-        console.log('password:', password);
-        console.log('user.password:', user.password);
-
         if (!(await bcryptUtils.compare(password, user.password)))
           throw createError(401, 'Invalid credentials.');
 
