@@ -16,7 +16,7 @@ export const authResolvers = {
       res.cookie('accessToken', accessToken, {
         httpOnly: true, // cannot be read by JS
         secure: NODE_ENV === 'production', // only over HTTPS
-        sameSite: 'none',
+        sameSite: NODE_ENV === 'production' ? 'none' : 'lax', // CSRF protection
         maxAge: 10 * 60 * 60 * 1000 // 10 hours
       });
 
@@ -27,7 +27,7 @@ export const authResolvers = {
       res.clearCookie('accessToken', {
         httpOnly: true,
         secure: NODE_ENV === 'production',
-        sameSite: 'lax'
+        sameSite: NODE_ENV === 'production' ? 'none' : 'lax' // CSRF protection
       });
 
       return { status: 'success', message: 'Logged out successfully' };
