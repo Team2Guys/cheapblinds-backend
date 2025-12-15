@@ -16,7 +16,7 @@ export const authResolvers = {
       res.cookie('accessToken', accessToken, {
         httpOnly: true, // cannot be read by JS
         secure: NODE_ENV === 'production', // only over HTTPS
-        sameSite: 'lax',
+        sameSite: 'none',
         maxAge: 10 * 60 * 60 * 1000 // 10 hours
       });
 
