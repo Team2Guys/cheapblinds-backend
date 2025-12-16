@@ -7,8 +7,8 @@ import { prisma } from '#lib/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const FILE_PATH = path.join(__dirname, 'data', 'categories.xlsx');
-const SHEET_NAME = 'Categories';
+const FILE_PATH = path.join(__dirname, 'data', 'data.xlsx');
+const SHEET_NAME = 'categories';
 
 export async function seedCategories() {
   console.log('🌱 Seeding categories...');
