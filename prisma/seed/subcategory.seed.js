@@ -103,43 +103,46 @@ export async function seedSubcategories() {
      PHASE 4 — INSERT (STRICT)
   ────────────────────────────── */
 
-  await prisma.$transaction(async (tx) => {
-    for (const [index, row] of resolvedRows.entries()) {
-      console.log(`➡️ [${index + 1}] ${row.name} → ${row.categoryName}`);
+  await prisma.$transaction(
+    async (tx) => {
+      for (const [index, row] of resolvedRows.entries()) {
+        console.log(`➡️ [${index + 1}] ${row.name} → ${row.categoryName}`);
 
-      // Enforce @@unique([slug, categoryId])
-      const duplicate = await tx.subcategory.findFirst({
-        where: {
-          slug: row.slug,
-          categoryId: row.categoryId
+        // Enforce @@unique([slug, categoryId])
+        const duplicate = await tx.subcategory.findFirst({
+          where: {
+            slug: row.slug,
+            categoryId: row.categoryId
+          }
+        });
+
+        if (duplicate) {
+          throw new Error(
+            `❌ Duplicate subcategory "${row.slug}" under "${row.categoryName}"`
+          );
         }
-      });
 
-      if (duplicate) {
-        throw new Error(
-          `❌ Duplicate subcategory "${row.slug}" under "${row.categoryName}"`
-        );
+        await tx.subcategory.create({
+          data: {
+            categoryId: row.categoryId,
+            name: row.name,
+            description: row.description,
+            shortDescription: row.shortDescription,
+            slug: row.slug,
+            metaTitle: row.metaTitle,
+            metaDescription: row.metaDescription,
+            canonicalTag: row.canonicalTag,
+            breadcrumb: row.breadcrumb,
+            posterImageUrl: row.posterImageUrl,
+            seoSchema: row.seoSchema,
+            status: row.status,
+            lastEditedBy: row.lastEditedBy
+          }
+        });
       }
-
-      await tx.subcategory.create({
-        data: {
-          categoryId: row.categoryId,
-          name: row.name,
-          description: row.description,
-          shortDescription: row.shortDescription,
-          slug: row.slug,
-          metaTitle: row.metaTitle,
-          metaDescription: row.metaDescription,
-          canonicalTag: row.canonicalTag,
-          breadcrumb: row.breadcrumb,
-          posterImageUrl: row.posterImageUrl,
-          seoSchema: row.seoSchema,
-          status: row.status,
-          lastEditedBy: row.lastEditedBy
-        }
-      });
-    }
-  });
+    },
+    { timeout: 300000 }
+  );
 
   console.log('✅ Subcategories seeded successfully');
 
