@@ -1,11 +1,16 @@
 import { prisma } from '#lib/index.js';
-import { seedCategories, seedSubcategories } from './seed/index.js';
+import {
+  seedCategories,
+  seedProducts,
+  seedSubcategories
+} from './seed/index.js';
 
 async function main() {
   console.log('🚀 Prisma seed started');
 
   await seedCategories();
   await seedSubcategories();
+  await seedProducts();
 
   console.log('🏁 Prisma seed finished');
 }
