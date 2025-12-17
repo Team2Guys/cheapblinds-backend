@@ -96,51 +96,57 @@ export async function seedProducts() {
   /** --------------------------------------------
    * PHASE 3: Insert products
    * ------------------------------------------- */
-  await prisma.$transaction(async (tx) => {
-    for (const [index, row] of rows.entries()) {
-      try {
-        await tx.product.create({
-          data: {
-            name: row.name,
-            slug: row.slug || slugify(row.name, { lower: true }),
-            breadcrumb: row.breadcrumb,
-            description: row.description,
-            shortDescription: row.shortDescription,
-            categoryId: row.categoryId,
-            subcategoryId: row.subcategoryId,
-            posterImageUrl: row.posterImageUrl,
-            productImages: parsePgArray(
-              row.productImages,
-              index + 2,
-              'productImages'
-            ),
-            price: Number(row.price),
-            discountPrice: row.discountPrice ? Number(row.discountPrice) : null,
-            isMotorized: row.isMotorized === true || row.isMotorized === 'TRUE',
-            motorPrice: Number(row.motorPrice || 0),
-            stock: Number(row.stock),
-            width: Number(row.width),
-            height: Number(row.height),
-            pattern: row.pattern,
-            composition: row.composition,
-            color: row.color,
-            additionalInfo: row.additionalInfo,
-            measuringGuide: row.measuringGuide,
-            metaTitle: row.metaTitle,
-            metaDescription: row.metaDescription,
-            canonicalTag: row.canonicalTag,
-            seoSchema: row.seoSchema,
-            status: row.status,
-            lastEditedBy: row.lastEditedBy || 'seed-script'
-          }
-        });
-      } catch (err) {
-        throw new Error(
-          `❌ Product insert failed at row ${index + 2}: ${err.message}`
-        );
+  await prisma.$transaction(
+    async (tx) => {
+      for (const [index, row] of rows.entries()) {
+        try {
+          await tx.product.create({
+            data: {
+              name: row.name,
+              slug: row.slug || slugify(row.name, { lower: true }),
+              breadcrumb: row.breadcrumb,
+              description: row.description,
+              shortDescription: row.shortDescription,
+              categoryId: row.categoryId,
+              subcategoryId: row.subcategoryId,
+              posterImageUrl: row.posterImageUrl,
+              productImages: parsePgArray(
+                row.productImages,
+                index + 2,
+                'productImages'
+              ),
+              price: Number(row.price),
+              discountPrice: row.discountPrice
+                ? Number(row.discountPrice)
+                : null,
+              isMotorized:
+                row.isMotorized === true || row.isMotorized === 'TRUE',
+              motorPrice: Number(row.motorPrice || 0),
+              stock: Number(row.stock),
+              width: Number(row.width),
+              height: Number(row.height),
+              pattern: row.pattern,
+              composition: row.composition,
+              color: row.color,
+              additionalInfo: row.additionalInfo,
+              measuringGuide: row.measuringGuide,
+              metaTitle: row.metaTitle,
+              metaDescription: row.metaDescription,
+              canonicalTag: row.canonicalTag,
+              seoSchema: row.seoSchema,
+              status: row.status,
+              lastEditedBy: row.lastEditedBy || 'seed-script'
+            }
+          });
+        } catch (err) {
+          throw new Error(
+            `❌ Product insert failed at row ${index + 2}: ${err.message}`
+          );
+        }
       }
-    }
-  });
+    },
+    { timeout: 300000 }
+  );
 
   console.log('✅ Products seeded successfully');
 }
