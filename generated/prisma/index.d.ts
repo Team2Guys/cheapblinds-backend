@@ -74,7 +74,6 @@ export type Inquiry = $Result.DefaultSelection<Prisma.$InquiryPayload>
  */
 export namespace $Enums {
   export const AdminRole: {
-  USER: 'USER',
   ADMIN: 'ADMIN',
   SUPER_ADMIN: 'SUPER_ADMIN'
 };
@@ -16199,7 +16198,7 @@ export namespace Prisma {
     OR?: ProductVariantWhereInput[]
     NOT?: ProductVariantWhereInput | ProductVariantWhereInput[]
     id?: UuidFilter<"ProductVariant"> | string
-    productId?: StringFilter<"ProductVariant"> | string
+    productId?: UuidFilter<"ProductVariant"> | string
     sku?: StringFilter<"ProductVariant"> | string
     width?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     height?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
@@ -16243,7 +16242,7 @@ export namespace Prisma {
     AND?: ProductVariantWhereInput | ProductVariantWhereInput[]
     OR?: ProductVariantWhereInput[]
     NOT?: ProductVariantWhereInput | ProductVariantWhereInput[]
-    productId?: StringFilter<"ProductVariant"> | string
+    productId?: UuidFilter<"ProductVariant"> | string
     width?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     height?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     color?: StringNullableFilter<"ProductVariant"> | string | null
@@ -16288,7 +16287,7 @@ export namespace Prisma {
     OR?: ProductVariantScalarWhereWithAggregatesInput[]
     NOT?: ProductVariantScalarWhereWithAggregatesInput | ProductVariantScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"ProductVariant"> | string
-    productId?: StringWithAggregatesFilter<"ProductVariant"> | string
+    productId?: UuidWithAggregatesFilter<"ProductVariant"> | string
     sku?: StringWithAggregatesFilter<"ProductVariant"> | string
     width?: DecimalWithAggregatesFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     height?: DecimalWithAggregatesFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
@@ -20933,7 +20932,7 @@ export namespace Prisma {
     OR?: ProductVariantScalarWhereInput[]
     NOT?: ProductVariantScalarWhereInput | ProductVariantScalarWhereInput[]
     id?: UuidFilter<"ProductVariant"> | string
-    productId?: StringFilter<"ProductVariant"> | string
+    productId?: UuidFilter<"ProductVariant"> | string
     sku?: StringFilter<"ProductVariant"> | string
     width?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     height?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string

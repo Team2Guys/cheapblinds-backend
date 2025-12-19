@@ -8,7 +8,6 @@ datasource db {
 }
 
 enum AdminRole {
-  USER
   ADMIN
   SUPER_ADMIN
 }
@@ -204,7 +203,7 @@ model Product {
 
 model ProductVariant {
   id             String   @id @default(uuid()) @db.Uuid
-  productId      String
+  productId      String   @db.Uuid
   sku            String   @unique
   width          Decimal
   height         Decimal

@@ -8,7 +8,6 @@ datasource db {
 }
 
 enum AdminRole {
-  USER
   ADMIN
   SUPER_ADMIN
 }
