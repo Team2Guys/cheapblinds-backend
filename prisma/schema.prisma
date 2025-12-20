@@ -95,10 +95,10 @@ model User {
   createdAt                DateTime @default(now())
   updatedAt                DateTime @updatedAt
 
-  addresses              Address[] @relation("UserAddresses")
-  orders                 Order[]   @relation("UserOrders")
-  defaultShippingAddress Address?  @relation("DefaultShipping", fields: [defaultShippingAddressId], references: [id])
-  defaultBillingAddress  Address?  @relation("DefaultBilling", fields: [defaultBillingAddressId], references: [id])
+  addresses              Address[] @relation(name: "UserAddresses")
+  orders                 Order[]   @relation(name: "UserOrders")
+  defaultShippingAddress Address?  @relation(name: "DefaultShipping", fields: [defaultShippingAddressId], references: [id])
+  defaultBillingAddress  Address?  @relation(name: "DefaultBilling", fields: [defaultBillingAddressId], references: [id])
 }
 
 model Address {
@@ -116,9 +116,9 @@ model Address {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
-  user               User  @relation("UserAddresses", fields: [userId], references: [id], onDelete: Cascade)
-  defaultShippingFor User? @relation("DefaultShipping")
-  defaultBillingFor  User? @relation("DefaultBilling")
+  user               User  @relation(name: "UserAddresses", fields: [userId], references: [id], onDelete: Cascade)
+  defaultShippingFor User? @relation(name: "DefaultShipping")
+  defaultBillingFor  User? @relation(name: "DefaultBilling")
 }
 
 model NewsletterSubscriber {
