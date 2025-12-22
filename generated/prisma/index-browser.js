@@ -134,14 +134,13 @@ exports.Prisma.AdminScalarFieldEnum = {
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
+  defaultShippingAddressId: 'defaultShippingAddressId',
+  defaultBillingAddressId: 'defaultBillingAddressId',
   firstName: 'firstName',
   lastName: 'lastName',
   email: 'email',
   password: 'password',
-  role: 'role',
   isEmailVerified: 'isEmailVerified',
-  defaultShippingAddressId: 'defaultShippingAddressId',
-  defaultBillingAddressId: 'defaultBillingAddressId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -222,20 +221,26 @@ exports.Prisma.ProductScalarFieldEnum = {
   posterImageUrl: 'posterImageUrl',
   seoSchema: 'seoSchema',
   productImages: 'productImages',
+  lastEditedBy: 'lastEditedBy',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductVariantScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  sku: 'sku',
+  width: 'width',
+  height: 'height',
+  color: 'color',
+  pattern: 'pattern',
+  isMotorized: 'isMotorized',
   price: 'price',
   discountPrice: 'discountPrice',
   motorPrice: 'motorPrice',
   stock: 'stock',
-  height: 'height',
-  width: 'width',
-  color: 'color',
-  pattern: 'pattern',
-  composition: 'composition',
-  isMotorized: 'isMotorized',
-  additionalInfo: 'additionalInfo',
-  measuringGuide: 'measuringGuide',
-  lastEditedBy: 'lastEditedBy',
-  status: 'status',
+  posterImageUrl: 'posterImageUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -253,13 +258,25 @@ exports.Prisma.OrderScalarFieldEnum = {
   address: 'address',
   totalAmount: 'totalAmount',
   shippingCost: 'shippingCost',
-  items: 'items',
   notes: 'notes',
   lastEditedBy: 'lastEditedBy',
   paymentStatus: 'paymentStatus',
   orderStatus: 'orderStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderItemScalarFieldEnum = {
+  id: 'id',
+  productVariantId: 'productVariantId',
+  orderId: 'orderId',
+  productId: 'productId',
+  categoryUrl: 'categoryUrl',
+  subcategoryUrl: 'subcategoryUrl',
+  price: 'price',
+  color: 'color',
+  pattern: 'pattern',
+  posterImageUrl: 'posterImageUrl'
 };
 
 exports.Prisma.InquiryScalarFieldEnum = {
@@ -288,8 +305,7 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.Role = exports.$Enums.Role = {
-  USER: 'USER',
+exports.AdminRole = exports.$Enums.AdminRole = {
   ADMIN: 'ADMIN',
   SUPER_ADMIN: 'SUPER_ADMIN'
 };
@@ -361,7 +377,9 @@ exports.Prisma.ModelName = {
   Category: 'Category',
   Subcategory: 'Subcategory',
   Product: 'Product',
+  ProductVariant: 'ProductVariant',
   Order: 'Order',
+  OrderItem: 'OrderItem',
   Inquiry: 'Inquiry'
 };
 

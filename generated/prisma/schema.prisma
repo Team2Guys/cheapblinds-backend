@@ -7,8 +7,7 @@ datasource db {
   provider = "postgresql"
 }
 
-enum Role {
-  USER
+enum AdminRole {
   ADMIN
   SUPER_ADMIN
 }
@@ -78,7 +77,7 @@ model Admin {
   email        String        @unique
   password     String
   permissions  Permissions[] @default([])
-  role         Role          @default(ADMIN)
+  role         AdminRole     @default(ADMIN)
   lastEditedBy String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
@@ -86,19 +85,20 @@ model Admin {
 
 model User {
   id                       String   @id @default(uuid()) @db.Uuid
+  defaultShippingAddressId String?  @unique @db.Uuid
+  defaultBillingAddressId  String?  @unique @db.Uuid
   firstName                String
   lastName                 String
   email                    String   @unique
   password                 String
-  role                     Role     @default(USER)
   isEmailVerified          Boolean  @default(false)
-  defaultShippingAddressId String?  @default("")
-  defaultBillingAddressId  String?  @default("")
   createdAt                DateTime @default(now())
   updatedAt                DateTime @updatedAt
 
-  addresses Address[] @relation(name: "UserAddresses")
-  orders    Order[]   @relation(name: "UserOrders")
+  addresses              Address[] @relation(name: "UserAddresses")
+  orders                 Order[]   @relation(name: "UserOrders")
+  defaultShippingAddress Address?  @relation(name: "DefaultShipping", fields: [defaultShippingAddressId], references: [id])
+  defaultBillingAddress  Address?  @relation(name: "DefaultBilling", fields: [defaultBillingAddressId], references: [id])
 }
 
 model Address {
@@ -116,7 +116,9 @@ model Address {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
-  user User @relation(name: "UserAddresses", fields: [userId], references: [id], onDelete: Cascade)
+  user               User  @relation(name: "UserAddresses", fields: [userId], references: [id], onDelete: Cascade)
+  defaultShippingFor User? @relation(name: "DefaultShipping")
+  defaultBillingFor  User? @relation(name: "DefaultBilling")
 }
 
 model NewsletterSubscriber {
@@ -187,27 +189,37 @@ model Product {
   posterImageUrl   String
   seoSchema        String?       @db.Text()
   productImages    String[]      @default([])
-  price            Decimal       @default(0)
-  discountPrice    Decimal       @default(0)
-  motorPrice       Decimal       @default(0)
-  stock            Int           @default(0)
-  height           Decimal       @default(0)
-  width            Decimal       @default(0)
-  color            String?
-  pattern          String?
-  composition      String?
-  isMotorized      Boolean       @default(false)
-  additionalInfo   String?       @db.Text()
-  measuringGuide   String?       @db.Text()
   lastEditedBy     String?
   status           ContentStatus @default(PUBLISHED)
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
-  category    Category    @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
-  subcategory Subcategory @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
+  category    Category         @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
+  subcategory Subcategory      @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
+  variants    ProductVariant[] @relation(name: "ProductVariants")
 
   @@unique([subcategoryId, slug])
+}
+
+model ProductVariant {
+  id             String   @id @default(uuid()) @db.Uuid
+  productId      String   @db.Uuid
+  sku            String   @unique
+  width          Decimal
+  height         Decimal
+  color          String?
+  pattern        String?
+  isMotorized    Boolean  @default(false)
+  price          Decimal
+  discountPrice  Decimal  @default(0)
+  motorPrice     Decimal  @default(0)
+  stock          Int      @default(0)
+  posterImageUrl String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  product    Product     @relation(name: "ProductVariants", fields: [productId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[] @relation(name: "OrderItemProductVariant")
 }
 
 model Order {
@@ -223,7 +235,6 @@ model Order {
   address       String        @db.Text()
   totalAmount   Decimal       @default(0)
   shippingCost  Decimal       @default(0)
-  items         Json[]
   notes         String?       @db.Text()
   lastEditedBy  String?
   paymentStatus PaymentStatus @default(PENDING)
@@ -231,7 +242,24 @@ model Order {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
-  user User @relation(name: "UserOrders", fields: [userId], references: [id], onDelete: Restrict)
+  user       User        @relation(name: "UserOrders", fields: [userId], references: [id], onDelete: Restrict)
+  orderItems OrderItem[] @relation(name: "OrderItems")
+}
+
+model OrderItem {
+  id               String  @id @default(uuid())
+  productVariantId String  @db.Uuid
+  orderId          String  @db.Uuid
+  productId        String
+  categoryUrl      String
+  subcategoryUrl   String
+  price            Decimal
+  color            String?
+  pattern          String?
+  posterImageUrl   String
+
+  order          Order           @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
+  productVariant ProductVariant? @relation(name: "OrderItemProductVariant", fields: [productVariantId], references: [id])
 }
 
 model Inquiry {

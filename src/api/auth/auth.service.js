@@ -2,9 +2,12 @@ import createError from 'http-errors';
 
 import { tokenUtils, sendEmail, bcryptUtils } from '#lib/index.js';
 import { userRepository } from '../user/user.repository.js';
+import { adminRepository } from '../admin/admin.repository.js';
 import { env } from '#config/index.js';
 
 const { write, read, update } = userRepository;
+const { read: _read } = adminRepository;
+
 const {
   FRONTEND_URL,
   SUPER_ADMIN_ID,
@@ -65,7 +68,7 @@ export const authServices = {
         break;
 
       case 'ADMIN':
-        user = await read.adminByEmail(email);
+        user = await _read.adminByEmail(email);
         if (!user) throw createError(404, 'Invalid credentials.');
 
         if (!bcryptUtils.compare(password, user.password))
