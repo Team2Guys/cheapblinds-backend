@@ -84,21 +84,21 @@ model Admin {
 }
 
 model User {
-  id                       String    @id @default(uuid()) @db.Uuid
-  defaultShippingAddressId String?   @unique @db.Uuid
-  defaultBillingAddressId  String?   @unique @db.Uuid
+  id                       String   @id @default(uuid()) @db.Uuid
+  defaultShippingAddressId String?  @unique @db.Uuid
+  defaultBillingAddressId  String?  @unique @db.Uuid
   firstName                String
   lastName                 String
-  email                    String    @unique
+  email                    String   @unique
   password                 String
-  isEmailVerified          Boolean   @default(false)
-  createdAt                DateTime  @default(now())
-  updatedAt                DateTime  @updatedAt
-  addresses                Address[] @relation(name: "UserAddresses")
-  orders                   Order[]   @relation(name: "UserOrders")
+  isEmailVerified          Boolean  @default(false)
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
 
-  defaultShippingAddress Address? @relation(name: "DefaultShipping", fields: [defaultShippingAddressId], references: [id])
-  defaultBillingAddress  Address? @relation(name: "DefaultBilling", fields: [defaultBillingAddressId], references: [id])
+  addresses              Address[] @relation(name: "UserAddresses")
+  orders                 Order[]   @relation(name: "UserOrders")
+  defaultShippingAddress Address?  @relation(name: "DefaultShipping", fields: [defaultShippingAddressId], references: [id])
+  defaultBillingAddress  Address?  @relation(name: "DefaultBilling", fields: [defaultBillingAddressId], references: [id])
 }
 
 model Address {
@@ -178,6 +178,7 @@ model Product {
   id               String        @id @default(uuid()) @db.Uuid
   categoryId       String        @db.Uuid
   subcategoryId    String        @db.Uuid
+  sku              String        @unique
   name             String
   slug             String
   shortDescription String?
@@ -188,8 +189,10 @@ model Product {
   discountPrice    Decimal       @default(0)
   motorPrice       Decimal       @default(0)
   stock            Int           @default(0)
-  height           Decimal       @default(0)
-  width            Decimal       @default(0)
+  minHeight        Decimal       @default(0)
+  maxHeight        Decimal       @default(1)
+  minWidth         Decimal       @default(0)
+  maxWidth         Decimal       @default(1)
   color            String?
   pattern          String?
   composition      String?
@@ -208,6 +211,7 @@ model Product {
 
   category    Category    @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
   subcategory Subcategory @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
+  orderItems  OrderItem[] @relation(name: "ProductOrderItems")
 
   @@unique([subcategoryId, slug])
 }
@@ -239,6 +243,8 @@ model Order {
 model OrderItem {
   id             String  @id @default(uuid())
   orderId        String  @db.Uuid
+  productId      String? @db.Uuid
+  sku            String
   name           String
   slug           String
   categoryUrl    String
@@ -254,7 +260,8 @@ model OrderItem {
   composition    String?
   posterImageUrl String?
 
-  order Order @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
+  order   Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
+  product Product? @relation(name: "ProductOrderItems", fields: [productId], references: [id], onDelete: SetNull)
 }
 
 model Inquiry {
