@@ -189,37 +189,27 @@ model Product {
   posterImageUrl   String
   seoSchema        String?       @db.Text()
   productImages    String[]      @default([])
+  price            Decimal       @default(0)
+  discountPrice    Decimal       @default(0)
+  motorPrice       Decimal       @default(0)
+  stock            Int           @default(0)
+  height           Decimal       @default(0)
+  width            Decimal       @default(0)
+  color            String?
+  pattern          String?
+  composition      String?
+  isMotorized      Boolean       @default(false)
+  additionalInfo   String?       @db.Text()
+  measuringGuide   String?       @db.Text()
   lastEditedBy     String?
   status           ContentStatus @default(PUBLISHED)
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
-  category    Category         @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
-  subcategory Subcategory      @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
-  variants    ProductVariant[] @relation(name: "ProductVariants")
+  category    Category    @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
+  subcategory Subcategory @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
 
   @@unique([subcategoryId, slug])
-}
-
-model ProductVariant {
-  id             String   @id @default(uuid()) @db.Uuid
-  productId      String   @db.Uuid
-  sku            String   @unique
-  width          Decimal
-  height         Decimal
-  color          String?
-  pattern        String?
-  isMotorized    Boolean  @default(false)
-  price          Decimal
-  discountPrice  Decimal  @default(0)
-  motorPrice     Decimal  @default(0)
-  stock          Int      @default(0)
-  posterImageUrl String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  product    Product     @relation(name: "ProductVariants", fields: [productId], references: [id], onDelete: Cascade)
-  orderItems OrderItem[] @relation(name: "OrderItemProductVariant")
 }
 
 model Order {
@@ -247,19 +237,24 @@ model Order {
 }
 
 model OrderItem {
-  id               String  @id @default(uuid())
-  productVariantId String  @db.Uuid
-  orderId          String  @db.Uuid
-  productId        String
-  categoryUrl      String
-  subcategoryUrl   String
-  price            Decimal
-  color            String?
-  pattern          String?
-  posterImageUrl   String
+  id             String  @id @default(uuid())
+  orderId        String  @db.Uuid
+  categoryUrl    String
+  subcategoryUrl String
+  slug           String
+  price          Decimal
+  discountPrice  Decimal @default(0)
+  height         Decimal @default(0)
+  width          Decimal @default(0)
+  isMotorized    Boolean @default(false)
+  motorPrice     Decimal @default(0)
+  pattern        String?
+  name           String
+  color          String?
+  composition    String?
+  posterImageUrl String?
 
-  order          Order           @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
-  productVariant ProductVariant? @relation(name: "OrderItemProductVariant", fields: [productVariantId], references: [id])
+  order Order @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
 }
 
 model Inquiry {
