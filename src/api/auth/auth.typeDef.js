@@ -6,7 +6,6 @@ export const authTypeDefs = gql`
     lastName: String!
     email: String!
     password: String!
-    role: Role!
   }
 
   input PasswordResetRequestInput {
@@ -22,13 +21,13 @@ export const authTypeDefs = gql`
     id: String!
     name: String!
     email: String!
-    role: Role!
+    role: AdminRole
   }
 
   input SigninInput {
     email: String!
     password: String!
-    role: Role!
+    role: AdminRole
   }
 
   type Mutation {

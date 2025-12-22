@@ -5,7 +5,7 @@ export const adminTypeDefs = gql`
     name: String!
     email: String!
     password: String!
-    role: Role!
+    role: AdminRole!
     permissions: [String!]!
     lastEditedBy: String!
   }
@@ -13,7 +13,7 @@ export const adminTypeDefs = gql`
   input UpdateAdminByIdInput {
     name: String
     email: String
-    role: Role
+    role: AdminRole
     permissions: [String!]
     lastEditedBy: String
   }

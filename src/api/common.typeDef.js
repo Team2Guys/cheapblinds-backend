@@ -4,8 +4,7 @@ export const commonTypeDefs = gql`
   scalar JSON
   scalar DateTime
 
-  enum Role {
-    USER
+  enum AdminRole {
     ADMIN
     SUPER_ADMIN
   }
@@ -49,7 +48,7 @@ export const commonTypeDefs = gql`
     name: String!
     email: String!
     permissions: [Permissions!]!
-    role: Role!
+    role: AdminRole!
     lastEditedBy: String!
     createdAt: DateTime!
     updatedAt: DateTime!
@@ -60,11 +59,10 @@ export const commonTypeDefs = gql`
     firstName: String!
     lastName: String!
     email: String!
-    role: Role!
     isEmailVerified: Boolean!
     addresses: [JSON!]!
-    defaultShippingAddressId: ID!
-    defaultBillingAddressId: ID!
+    defaultShippingAddress: Address!
+    defaultBillingAddress: Address!
     createdAt: DateTime!
     updatedAt: DateTime!
   }

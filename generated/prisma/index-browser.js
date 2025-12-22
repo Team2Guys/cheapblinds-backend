@@ -134,14 +134,13 @@ exports.Prisma.AdminScalarFieldEnum = {
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
+  defaultShippingAddressId: 'defaultShippingAddressId',
+  defaultBillingAddressId: 'defaultBillingAddressId',
   firstName: 'firstName',
   lastName: 'lastName',
   email: 'email',
   password: 'password',
-  role: 'role',
   isEmailVerified: 'isEmailVerified',
-  defaultShippingAddressId: 'defaultShippingAddressId',
-  defaultBillingAddressId: 'defaultBillingAddressId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -253,13 +252,31 @@ exports.Prisma.OrderScalarFieldEnum = {
   address: 'address',
   totalAmount: 'totalAmount',
   shippingCost: 'shippingCost',
-  items: 'items',
   notes: 'notes',
   lastEditedBy: 'lastEditedBy',
   paymentStatus: 'paymentStatus',
   orderStatus: 'orderStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  categoryUrl: 'categoryUrl',
+  subcategoryUrl: 'subcategoryUrl',
+  slug: 'slug',
+  price: 'price',
+  discountPrice: 'discountPrice',
+  height: 'height',
+  width: 'width',
+  isMotorized: 'isMotorized',
+  motorPrice: 'motorPrice',
+  pattern: 'pattern',
+  name: 'name',
+  color: 'color',
+  composition: 'composition',
+  posterImageUrl: 'posterImageUrl'
 };
 
 exports.Prisma.InquiryScalarFieldEnum = {
@@ -288,8 +305,7 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.Role = exports.$Enums.Role = {
-  USER: 'USER',
+exports.AdminRole = exports.$Enums.AdminRole = {
   ADMIN: 'ADMIN',
   SUPER_ADMIN: 'SUPER_ADMIN'
 };
@@ -362,6 +378,7 @@ exports.Prisma.ModelName = {
   Subcategory: 'Subcategory',
   Product: 'Product',
   Order: 'Order',
+  OrderItem: 'OrderItem',
   Inquiry: 'Inquiry'
 };
 
