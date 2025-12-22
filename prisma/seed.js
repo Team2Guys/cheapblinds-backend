@@ -1,3 +1,4 @@
+// main.js
 import { prisma } from '#lib/index.js';
 import {
   seedCategories,
@@ -23,7 +24,6 @@ async function main() {
   console.timeEnd('Seeding products');
 
   console.timeEnd('Total seed time');
-
   console.log('🏁 Prisma seed finished');
 }
 
