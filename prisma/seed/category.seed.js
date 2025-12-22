@@ -1,3 +1,4 @@
+// seedCategories.js
 import xlsx from 'xlsx';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -17,30 +18,17 @@ export async function seedCategories() {
   const workbook = xlsx.readFile(FILE_PATH);
   const sheet = workbook.Sheets[SHEET_NAME];
 
-  if (!sheet) {
-    throw new Error(`❌ Sheet "${SHEET_NAME}" not found`);
-  }
+  if (!sheet) throw new Error(`❌ Sheet "${SHEET_NAME}" not found`);
 
   const rows = xlsx.utils.sheet_to_json(sheet, { defval: null });
-
   console.log(`📄 Rows found: ${rows.length}`);
-
-  if (!rows.length) {
+  if (!rows.length)
     throw new Error('❌ Excel file loaded but contains ZERO rows');
-  }
 
   for (const [index, row] of rows.entries()) {
-    if (!row.name) {
-      throw new Error(`❌ Row ${index + 1}: name is required`);
-    }
+    if (!row.name) throw new Error(`❌ Row ${index + 1}: name is required`);
 
-    const slug =
-      row.slug ??
-      slugify(row.name, {
-        lower: true,
-        strict: true
-      });
-
+    const slug = row.slug ?? slugify(row.name, { lower: true, strict: true });
     console.log(`➡️ [${index + 1}] ${row.name}`);
 
     await prisma.category.upsert({
