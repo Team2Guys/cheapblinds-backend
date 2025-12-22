@@ -41,21 +41,7 @@ export const userRepository = {
 
     userByEmail: (email) =>
       prisma.user.findUnique({
-        where: { email },
-        select: {
-          id: true,
-          defaultBillingAddressId: true,
-          defaultShippingAddressId: true,
-          firstName: true,
-          lastName: true,
-          email: true,
-          isEmailVerified: true,
-          addresses: true,
-          defaultShippingAddress: true,
-          defaultBillingAddress: true,
-          createdAt: true,
-          updatedAt: true
-        }
+        where: { email }
       })
   },
 
