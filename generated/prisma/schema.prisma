@@ -76,29 +76,29 @@ model Admin {
   name         String
   email        String        @unique
   password     String
-  permissions  Permissions[] @default([])
   role         AdminRole     @default(ADMIN)
+  permissions  Permissions[] @default([])
   lastEditedBy String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 }
 
 model User {
-  id                       String   @id @default(uuid()) @db.Uuid
-  defaultShippingAddressId String?  @unique @db.Uuid
-  defaultBillingAddressId  String?  @unique @db.Uuid
+  id                       String    @id @default(uuid()) @db.Uuid
+  defaultShippingAddressId String?   @unique @db.Uuid
+  defaultBillingAddressId  String?   @unique @db.Uuid
   firstName                String
   lastName                 String
-  email                    String   @unique
+  email                    String    @unique
   password                 String
-  isEmailVerified          Boolean  @default(false)
-  createdAt                DateTime @default(now())
-  updatedAt                DateTime @updatedAt
+  isEmailVerified          Boolean   @default(false)
+  createdAt                DateTime  @default(now())
+  updatedAt                DateTime  @updatedAt
+  addresses                Address[] @relation(name: "UserAddresses")
+  orders                   Order[]   @relation(name: "UserOrders")
 
-  addresses              Address[] @relation(name: "UserAddresses")
-  orders                 Order[]   @relation(name: "UserOrders")
-  defaultShippingAddress Address?  @relation(name: "DefaultShipping", fields: [defaultShippingAddressId], references: [id])
-  defaultBillingAddress  Address?  @relation(name: "DefaultBilling", fields: [defaultBillingAddressId], references: [id])
+  defaultShippingAddress Address? @relation(name: "DefaultShipping", fields: [defaultShippingAddressId], references: [id])
+  defaultBillingAddress  Address? @relation(name: "DefaultBilling", fields: [defaultBillingAddressId], references: [id])
 }
 
 model Address {
@@ -108,10 +108,10 @@ model Address {
   lastName    String
   email       String
   phone       String
+  address     String
+  city        String
   state       String
   country     String
-  city        String
-  address     String
   addressType AddressType @default(HOME)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
@@ -132,17 +132,17 @@ model NewsletterSubscriber {
 model Category {
   id               String        @id @default(uuid()) @db.Uuid
   name             String        @unique
-  description      String?       @db.Text()
-  shortDescription String?
   slug             String        @unique
+  shortDescription String?
+  description      String?       @db.Text()
   metaTitle        String?
   metaDescription  String?
   canonicalTag     String?
   breadcrumb       String?
   posterImageUrl   String?
   seoSchema        String?       @db.Text()
-  lastEditedBy     String?
   status           ContentStatus @default(PUBLISHED)
+  lastEditedBy     String?
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
@@ -154,17 +154,17 @@ model Subcategory {
   id               String        @id @default(uuid()) @db.Uuid
   categoryId       String        @db.Uuid
   name             String
-  description      String?       @db.Text()
-  shortDescription String?
   slug             String
+  shortDescription String?
+  description      String?       @db.Text()
   metaTitle        String?
   metaDescription  String?
   canonicalTag     String?
   breadcrumb       String?
   posterImageUrl   String?
   seoSchema        String?       @db.Text()
-  lastEditedBy     String?
   status           ContentStatus @default(PUBLISHED)
+  lastEditedBy     String?
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
@@ -178,36 +178,40 @@ model Product {
   id               String        @id @default(uuid()) @db.Uuid
   categoryId       String        @db.Uuid
   subcategoryId    String        @db.Uuid
+  sku              String        @unique
   name             String
-  description      String?       @db.Text()
-  shortDescription String?
   slug             String
-  metaTitle        String?
-  metaDescription  String?
-  canonicalTag     String?
-  breadcrumb       String?
+  shortDescription String?
+  description      String?       @db.Text()
   posterImageUrl   String
-  seoSchema        String?       @db.Text()
   productImages    String[]      @default([])
   price            Decimal       @default(0)
   discountPrice    Decimal       @default(0)
   motorPrice       Decimal       @default(0)
   stock            Int           @default(0)
-  height           Decimal       @default(0)
-  width            Decimal       @default(0)
+  minHeight        Decimal       @default(0)
+  maxHeight        Decimal       @default(1)
+  minWidth         Decimal       @default(0)
+  maxWidth         Decimal       @default(1)
   color            String?
   pattern          String?
   composition      String?
   isMotorized      Boolean       @default(false)
   additionalInfo   String?       @db.Text()
   measuringGuide   String?       @db.Text()
-  lastEditedBy     String?
+  metaTitle        String?
+  metaDescription  String?
+  canonicalTag     String?
+  breadcrumb       String?
+  seoSchema        String?       @db.Text()
   status           ContentStatus @default(PUBLISHED)
+  lastEditedBy     String?
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
   category    Category    @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
   subcategory Subcategory @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
+  orderItems  OrderItem[] @relation(name: "ProductOrderItems")
 
   @@unique([subcategoryId, slug])
 }
@@ -219,16 +223,16 @@ model Order {
   lastName      String
   email         String
   phone         String
+  address       String        @db.Text()
+  city          String
   state         String
   country       String
-  city          String
-  address       String        @db.Text()
   totalAmount   Decimal       @default(0)
   shippingCost  Decimal       @default(0)
   notes         String?       @db.Text()
-  lastEditedBy  String?
   paymentStatus PaymentStatus @default(PENDING)
   orderStatus   OrderStatus   @default(PENDING)
+  lastEditedBy  String?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
@@ -239,22 +243,25 @@ model Order {
 model OrderItem {
   id             String  @id @default(uuid())
   orderId        String  @db.Uuid
+  productId      String? @db.Uuid
+  sku            String
+  name           String
+  slug           String
   categoryUrl    String
   subcategoryUrl String
-  slug           String
   price          Decimal
   discountPrice  Decimal @default(0)
   height         Decimal @default(0)
   width          Decimal @default(0)
   isMotorized    Boolean @default(false)
   motorPrice     Decimal @default(0)
-  pattern        String?
-  name           String
   color          String?
+  pattern        String?
   composition    String?
   posterImageUrl String?
 
-  order Order @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
+  order   Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
+  product Product? @relation(name: "ProductOrderItems", fields: [productId], references: [id], onDelete: SetNull)
 }
 
 model Inquiry {
