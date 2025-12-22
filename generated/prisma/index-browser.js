@@ -221,26 +221,20 @@ exports.Prisma.ProductScalarFieldEnum = {
   posterImageUrl: 'posterImageUrl',
   seoSchema: 'seoSchema',
   productImages: 'productImages',
-  lastEditedBy: 'lastEditedBy',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.ProductVariantScalarFieldEnum = {
-  id: 'id',
-  productId: 'productId',
-  sku: 'sku',
-  width: 'width',
-  height: 'height',
-  color: 'color',
-  pattern: 'pattern',
-  isMotorized: 'isMotorized',
   price: 'price',
   discountPrice: 'discountPrice',
   motorPrice: 'motorPrice',
   stock: 'stock',
-  posterImageUrl: 'posterImageUrl',
+  height: 'height',
+  width: 'width',
+  color: 'color',
+  pattern: 'pattern',
+  composition: 'composition',
+  isMotorized: 'isMotorized',
+  additionalInfo: 'additionalInfo',
+  measuringGuide: 'measuringGuide',
+  lastEditedBy: 'lastEditedBy',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -268,14 +262,20 @@ exports.Prisma.OrderScalarFieldEnum = {
 
 exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
-  productVariantId: 'productVariantId',
   orderId: 'orderId',
-  productId: 'productId',
   categoryUrl: 'categoryUrl',
   subcategoryUrl: 'subcategoryUrl',
+  slug: 'slug',
   price: 'price',
-  color: 'color',
+  discountPrice: 'discountPrice',
+  height: 'height',
+  width: 'width',
+  isMotorized: 'isMotorized',
+  motorPrice: 'motorPrice',
   pattern: 'pattern',
+  name: 'name',
+  color: 'color',
+  composition: 'composition',
   posterImageUrl: 'posterImageUrl'
 };
 
@@ -377,7 +377,6 @@ exports.Prisma.ModelName = {
   Category: 'Category',
   Subcategory: 'Subcategory',
   Product: 'Product',
-  ProductVariant: 'ProductVariant',
   Order: 'Order',
   OrderItem: 'OrderItem',
   Inquiry: 'Inquiry'
