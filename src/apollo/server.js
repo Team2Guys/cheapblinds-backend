@@ -6,38 +6,6 @@ import { env } from '#config/index.js';
 
 const { NODE_ENV } = env;
 
-const requestLoggerPlugin = {
-  requestDidStart(requestContext) {
-    const { request } = requestContext;
-    const operationName = request.operationName || 'Unnamed';
-    const query = request.query
-      ? request.query.replace(/\s+/g, ' ').trim()
-      : '';
-    const variables = request.variables || {};
-    const hasInlineArgs =
-      query.includes('{') && Object.keys(variables).length === 0;
-
-    console.group(`[GraphQL Request] ${operationName}`);
-    console.log('Query:', query);
-    if (Object.keys(variables).length > 0) {
-      console.log('Variables:', JSON.stringify(variables, null, 2));
-    } else if (hasInlineArgs) {
-      console.log('Variables: None (inline arguments used)');
-    }
-    console.groupEnd();
-
-    return {
-      willSendResponse({ response }) {
-        const status = response.http?.status || 'OK';
-        const payload = response.body?.singleResult || response.body || {};
-        console.group(`[GraphQL Response] ${operationName}: ${status}`);
-        console.log('Response:', JSON.stringify(payload, null, 2));
-        console.groupEnd();
-      }
-    };
-  }
-};
-
 const formatError = (error) => {
   console.error('GraphQL Error:', {
     message: error.message,
@@ -57,7 +25,6 @@ export const apolloServer = new ApolloServer({
   cache: 'bounded',
   nodeEnv: NODE_ENV,
   introspection: true,
-  plugins: [requestLoggerPlugin],
   allowBatchedHttpRequests: true,
   validationRules: [depthLimit(5)] // prevent very deep queries
 });

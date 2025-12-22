@@ -168,6 +168,8 @@ model Subcategory {
 
   category Category  @relation(name: "CategorySubcategories", fields: [categoryId], references: [id], onDelete: Cascade)
   products Product[] @relation(name: "SubcategoryProducts")
+
+  @@unique([categoryId, slug])
 }
 
 model Product {
@@ -204,6 +206,8 @@ model Product {
 
   category    Category    @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
   subcategory Subcategory @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
+
+  @@unique([subcategoryId, slug])
 }
 
 model Order {

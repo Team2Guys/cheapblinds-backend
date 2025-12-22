@@ -13315,6 +13315,7 @@ export namespace Prisma {
 
   export type SubcategoryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    categoryId_slug?: SubcategoryCategoryIdSlugCompoundUniqueInput
     AND?: SubcategoryWhereInput | SubcategoryWhereInput[]
     OR?: SubcategoryWhereInput[]
     NOT?: SubcategoryWhereInput | SubcategoryWhereInput[]
@@ -13335,7 +13336,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Subcategory"> | Date | string
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
     products?: ProductListRelationFilter
-  }, "id">
+  }, "id" | "categoryId_slug">
 
   export type SubcategoryOrderByWithAggregationInput = {
     id?: SortOrder
@@ -13456,6 +13457,7 @@ export namespace Prisma {
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    subcategoryId_slug?: ProductSubcategoryIdSlugCompoundUniqueInput
     AND?: ProductWhereInput | ProductWhereInput[]
     OR?: ProductWhereInput[]
     NOT?: ProductWhereInput | ProductWhereInput[]
@@ -13490,7 +13492,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Product"> | Date | string
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
     subcategory?: XOR<SubcategoryScalarRelationFilter, SubcategoryWhereInput>
-  }, "id">
+  }, "id" | "subcategoryId_slug">
 
   export type ProductOrderByWithAggregationInput = {
     id?: SortOrder
@@ -15305,6 +15307,11 @@ export namespace Prisma {
     isNot?: CategoryWhereInput
   }
 
+  export type SubcategoryCategoryIdSlugCompoundUniqueInput = {
+    categoryId: string
+    slug: string
+  }
+
   export type SubcategoryCountOrderByAggregateInput = {
     id?: SortOrder
     categoryId?: SortOrder
@@ -15395,6 +15402,11 @@ export namespace Prisma {
   export type SubcategoryScalarRelationFilter = {
     is?: SubcategoryWhereInput
     isNot?: SubcategoryWhereInput
+  }
+
+  export type ProductSubcategoryIdSlugCompoundUniqueInput = {
+    subcategoryId: string
+    slug: string
   }
 
   export type ProductCountOrderByAggregateInput = {

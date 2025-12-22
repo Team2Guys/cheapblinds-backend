@@ -2,21 +2,11 @@ import { prisma } from '#lib/index.js';
 
 export const productRepository = {
   read: {
-    productList: () =>
-      prisma.product.findMany({
-        include: {
-          category: true,
-          subcategory: true
-        }
-      }),
+    productList: () => prisma.product.findMany(),
 
     productById: (id) =>
       prisma.product.findUnique({
-        where: { id },
-        include: {
-          category: true,
-          subcategory: true
-        }
+        where: { id }
       }),
 
     productBySlugs: ({ categorySlug, subcategorySlug, productSlug }) =>
@@ -29,10 +19,6 @@ export const productRepository = {
               slug: categorySlug
             }
           }
-        },
-        include: {
-          category: true,
-          subcategory: true
         }
       })
   },
