@@ -56,13 +56,15 @@ export const commonTypeDefs = gql`
 
   type User {
     id: ID!
+    defaultShippingAddressId: ID
+    defaultBillingAddressId: ID
     firstName: String!
     lastName: String!
     email: String!
     isEmailVerified: Boolean!
-    addresses: [JSON!]!
-    defaultShippingAddress: Address!
-    defaultBillingAddress: Address!
+    addresses: [JSON!]
+    defaultShippingAddress: Address
+    defaultBillingAddress: Address
     createdAt: DateTime!
     updatedAt: DateTime!
   }
