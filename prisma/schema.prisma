@@ -186,9 +186,7 @@ model Product {
   posterImageUrl   String
   productImages    String[]      @default([])
   price            Decimal       @default(0)
-  discountPrice    Decimal       @default(0)
   motorPrice       Decimal       @default(0)
-  stock            Int           @default(0)
   minHeight        Decimal       @default(0)
   maxHeight        Decimal       @default(1)
   minWidth         Decimal       @default(0)
@@ -250,7 +248,6 @@ model OrderItem {
   categoryUrl    String
   subcategoryUrl String
   price          Decimal
-  discountPrice  Decimal @default(0)
   height         Decimal @default(0)
   width          Decimal @default(0)
   isMotorized    Boolean @default(false)
