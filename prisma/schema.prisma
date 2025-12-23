@@ -187,7 +187,6 @@ model Product {
   productImages    String[]      @default([])
   price            Decimal       @default(0)
   motorPrice       Decimal       @default(0)
-  stock            Int           @default(0)
   minHeight        Decimal       @default(0)
   maxHeight        Decimal       @default(1)
   minWidth         Decimal       @default(0)
