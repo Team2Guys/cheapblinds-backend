@@ -80,7 +80,8 @@ export async function seedProducts() {
             data: {
               sku: row.sku,
               name: row.name,
-              slug: row.slug || slugify(row.name, { lower: true }),
+              slug: slugify(row.name, { lower: true }),
+              // slug: row.slug || slugify(row.name, { lower: true }),
               breadcrumb: row.breadcrumb,
               description: row.description,
               shortDescription: row.shortDescription,
@@ -93,13 +94,9 @@ export async function seedProducts() {
                 'productImages'
               ),
               price: Number(row.price),
-              discountPrice: row.discountPrice
-                ? Number(row.discountPrice)
-                : null,
               isMotorized:
                 row.isMotorized === true || row.isMotorized === 'TRUE',
               motorPrice: Number(row.motorPrice || 0),
-              stock: Number(row.stock),
               maxWidth: Number(row.maxWidth),
               minWidth: Number(row.minWidth),
               maxHeight: Number(row.maxHeight),
