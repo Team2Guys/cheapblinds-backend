@@ -219,7 +219,6 @@ exports.Prisma.ProductScalarFieldEnum = {
   productImages: 'productImages',
   price: 'price',
   motorPrice: 'motorPrice',
-  stock: 'stock',
   minHeight: 'minHeight',
   maxHeight: 'maxHeight',
   minWidth: 'minWidth',
