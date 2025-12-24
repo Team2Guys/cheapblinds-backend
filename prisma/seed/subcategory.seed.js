@@ -24,10 +24,12 @@ export async function seedSubcategories() {
   console.log(`📄 Rows found: ${rows.length}`);
   if (!rows.length) throw new Error('❌ Subcategories sheet is empty');
 
+  // Fetch categories and build a lookup map
   const categories = await prisma.category.findMany({
     select: { id: true, name: true }
   });
   if (!categories.length) throw new Error('❌ No categories found in DB');
+
   const categoryMap = new Map(
     categories.map((c) => [c.name.trim().toLowerCase(), c.id])
   );
@@ -38,67 +40,48 @@ export async function seedSubcategories() {
     if (!row.categoryName)
       throw new Error(`❌ Row ${rowNum}: categoryName is required`);
 
-    const categoryKey = row.categoryName.trim().toLowerCase();
-    const categoryId = categoryMap.get(categoryKey);
+    const categoryId = categoryMap.get(row.categoryName.trim().toLowerCase());
     if (!categoryId)
       throw new Error(
         `❌ Row ${rowNum}: Category "${row.categoryName}" not found in DB`
       );
 
+    const slug = slugify(row.name, { lower: true, strict: true });
+
     return {
       categoryId,
-      categoryName: row.categoryName,
       name: row.name,
-      description: row.description ?? null,
-      shortDescription: row.shortDescription ?? null,
-      slug: row.slug ?? slugify(row.name, { lower: true, strict: true }),
-      metaTitle: row.metaTitle ?? null,
-      metaDescription: row.metaDescription ?? null,
-      canonicalTag: row.canonicalTag ?? null,
-      breadcrumb: row.breadcrumb ?? null,
-      posterImageUrl: row.posterImageUrl ?? null,
-      seoSchema: row.seoSchema ?? null,
-      status: (row.status ?? 'PUBLISHED').toUpperCase(),
-      lastEditedBy: row.lastEditedBy ?? 'seed-script'
+      slug,
+      description: row.description || '',
+      shortDescription: row.shortDescription || '',
+      metaTitle: row.metaTitle || row.name,
+      metaDescription: row.metaDescription || '',
+      canonicalTag: row.canonicalTag || '',
+      breadcrumb: row.breadcrumb || '',
+      posterImageUrl: row.posterImageUrl || '',
+      seoSchema: row.seoSchema || '',
+      status: (row.status || 'PUBLISHED').toUpperCase(),
+      lastEditedBy: row.lastEditedBy || 'seed-script'
     };
   });
 
   console.log('✅ Category names resolved → categoryId');
 
-  await prisma.$transaction(
-    async (tx) => {
-      for (const [index, row] of resolvedRows.entries()) {
-        console.log(`➡️ [${index + 1}] ${row.name} → ${row.categoryName}`);
+  // Upsert each subcategory
+  for (const [index, row] of resolvedRows.entries()) {
+    console.log(`➡️ [${index + 1}] ${row.name} → categoryId ${row.categoryId}`);
 
-        const duplicate = await tx.subcategory.findFirst({
-          where: { slug: row.slug, categoryId: row.categoryId }
-        });
-        if (duplicate)
-          throw new Error(
-            `❌ Duplicate subcategory "${row.slug}" under "${row.categoryName}"`
-          );
-
-        await tx.subcategory.create({
-          data: {
-            categoryId: row.categoryId,
-            name: row.name,
-            description: row.description,
-            shortDescription: row.shortDescription,
-            slug: row.slug,
-            metaTitle: row.metaTitle,
-            metaDescription: row.metaDescription,
-            canonicalTag: row.canonicalTag,
-            breadcrumb: row.breadcrumb,
-            posterImageUrl: row.posterImageUrl,
-            seoSchema: row.seoSchema,
-            status: row.status,
-            lastEditedBy: row.lastEditedBy
-          }
-        });
-      }
-    },
-    { timeout: 300000 }
-  );
+    await prisma.subcategory.upsert({
+      where: {
+        categoryId_slug: {
+          slug: row.slug,
+          categoryId: row.categoryId
+        }
+      },
+      update: { ...row },
+      create: { ...row }
+    });
+  }
 
   console.log('✅ Subcategories seeded successfully');
 

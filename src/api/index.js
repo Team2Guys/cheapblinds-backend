@@ -11,6 +11,7 @@ import {
   newsletterSubscriberResolvers
 } from './newsletter-subscriber/index.js';
 import { orderTypeDefs, orderResolvers } from './order/index.js';
+import { priceTypeDefs, priceResolvers } from './price/index.js';
 import { categoryTypeDefs, categoryResolvers } from './category/index.js';
 import {
   subcategoryTypeDefs,
@@ -28,6 +29,7 @@ export const typeDefs = mergeTypeDefs([
   inquiryTypeDefs,
   newsletterSubscriberTypeDefs,
   orderTypeDefs,
+  priceTypeDefs,
   subcategoryTypeDefs,
   productTypeDefs,
   userTypeDefs,
@@ -43,6 +45,7 @@ export const resolvers = mergeResolvers([
   inquiryResolvers,
   newsletterSubscriberResolvers,
   orderResolvers,
+  priceResolvers,
   subcategoryResolvers,
   productResolvers,
   userResolvers
