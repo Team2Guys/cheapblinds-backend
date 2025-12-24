@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 import { cleanEnv, str, port, email, url, testOnly } from 'envalid';
 
-import { logger } from '#lib/index.js';
-
 const envFile = process.env.NODE_ENV;
 dotenv.config({ path: envFile });
 
@@ -33,14 +31,26 @@ const validators = {
   SUPER_ADMIN_ID: str({ desc: 'Super admin id' }),
   SUPER_ADMIN_EMAIL: email({ desc: 'Super admin email' }),
   SUPER_ADMIN_NAME: str({ desc: 'Super admin name' }),
-  SUPER_ADMIN_PASSWORD: str({ desc: 'Super admin password' })
+  SUPER_ADMIN_PASSWORD: str({ desc: 'Super admin password' }),
+
+  ILLUMIN8S_BASE_URL: url({ desc: 'Illumin8s API URL' }),
+  ILLUMIN8S_FABRIC_PRICE_ENDPOINT: str({
+    desc: 'Illumin8s Fabric Price Endpoint'
+  }),
+  ILLUMIN8S_OPTIONS_PRICE_ENDPOINT: str({
+    desc: 'Illumin8s Option Price Endpoint'
+  }),
+  ILLUMIN8S_API_KEY: str({ desc: 'Illumin8s API Key' }),
+  ILLUMIN8S_RETAILER_ID: str({ desc: 'Illumin8s Retailer ID' }),
+  ILLUMIN8S_RETAILER_MASTER_ID: str({ desc: 'Illumin8s Retailer Master ID' }),
+  ILLUMIN8S_MEASURE_ID: str({ desc: 'Illumin8s Measure ID' })
 };
 
 export const env = cleanEnv(process.env, validators, {
   reporter: ({ errors }) => {
     const invalidVars = Object.keys(errors);
     if (invalidVars.length > 0) {
-      logger.error(`Invalid ENV variables: ${invalidVars}`);
+      console.error(`Invalid ENV variables: ${invalidVars}`);
       process.exit(1);
     }
   }
