@@ -51,7 +51,7 @@ export async function seedSubcategories() {
       name: row.name,
       description: row.description ?? null,
       shortDescription: row.shortDescription ?? null,
-      slug: row.slug ?? slugify(row.name, { lower: true, strict: true }),
+      slug: slugify(row.name, { lower: true, strict: true }),
       metaTitle: row.metaTitle ?? null,
       metaDescription: row.metaDescription ?? null,
       canonicalTag: row.canonicalTag ?? null,

@@ -81,7 +81,6 @@ export async function seedProducts() {
               sku: row.sku,
               name: row.name,
               slug: slugify(row.name, { lower: true }),
-              // slug: row.slug || slugify(row.name, { lower: true }),
               breadcrumb: row.breadcrumb,
               description: row.description,
               shortDescription: row.shortDescription,
