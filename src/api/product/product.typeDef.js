@@ -4,6 +4,8 @@ export const productTypeDefs = gql`
   input CreateProductInput {
     categoryId: ID!
     subcategoryId: ID!
+    fabricId: Int!
+    blindTypeId: Int!
     name: String!
     description: String
     shortDescription: String
@@ -34,6 +36,8 @@ export const productTypeDefs = gql`
   input UpdateProductByIdInput {
     categoryId: ID!
     subcategoryId: ID!
+    fabricId: Int!
+    blindTypeId: Int!
     name: String!
     description: String
     shortDescription: String

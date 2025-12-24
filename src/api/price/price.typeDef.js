@@ -4,8 +4,8 @@ export const priceTypeDefs = gql`
   input getFabricPriceInput {
     drop: Float!
     width: Float!
-    fabricId: String!
-    blindTypeId: String!
+    fabricId: Int!
+    blindTypeId: Int!
   }
 
   type FabricPrice {
