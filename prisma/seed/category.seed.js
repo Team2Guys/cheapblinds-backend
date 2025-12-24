@@ -28,10 +28,11 @@ export async function seedCategories() {
   for (const [index, row] of rows.entries()) {
     if (!row.name) throw new Error(`❌ Row ${index + 1}: name is required`);
 
+    const slug = slugify(row.name, { lower: true, strict: true });
     console.log(`➡️ [${index + 1}] ${row.name}`);
 
     await prisma.category.upsert({
-      where: { name },
+      where: { slug },
       update: {
         name: row.name,
         description: row.description ?? '',
@@ -49,7 +50,7 @@ export async function seedCategories() {
         name: row.name,
         description: row.description ?? '',
         shortDescription: row.shortDescription ?? '',
-        slug: slugify(row.name, { lower: true, strict: true }),
+        slug,
         metaTitle: row.metaTitle ?? row.name,
         metaDescription: row.metaDescription ?? '',
         canonicalTag: row.canonicalTag ?? '',
