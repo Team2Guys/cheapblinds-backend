@@ -10,7 +10,6 @@ const __dirname = path.dirname(__filename);
 
 const EXCEL_PATH = path.join(__dirname, 'data', 'cheapblinds_data.xlsx');
 const SHEET_NAME = 'products';
-const WRITE_BACK_TO_EXCEL = true;
 
 export async function seedProducts() {
   console.log('🌱 Seeding products...');
@@ -45,10 +44,12 @@ export async function seedProducts() {
   // Resolve categoryId and subcategoryId for each row
   const resolvedRows = rows.map((row, index) => {
     const rowNum = index + 2;
-    if (!row.categoryName || !row.subcategoryName)
+
+    if (!row.categoryName || !row.subcategoryName) {
       throw new Error(
         `❌ Row ${rowNum}: categoryName or subcategoryName missing`
       );
+    }
 
     const categoryId = categoryMap.get(row.categoryName.trim().toLowerCase());
     if (!categoryId)
@@ -102,19 +103,6 @@ export async function seedProducts() {
 
   console.log('✅ Category & subcategory IDs resolved');
 
-  if (WRITE_BACK_TO_EXCEL) {
-    const updatedSheet = xlsx.utils.json_to_sheet(
-      resolvedRows.map((r) => ({
-        ...r,
-        categoryId: r.categoryId,
-        subcategoryId: r.subcategoryId
-      }))
-    );
-    workbook.Sheets[SHEET_NAME] = updatedSheet;
-    xlsx.writeFile(workbook, EXCEL_PATH);
-    console.log('📝 categoryId & subcategoryId written back to Excel');
-  }
-
   // Upsert each product
   for (const row of resolvedRows) {
     try {
@@ -145,11 +133,13 @@ export function parsePgArray(value, rowNum, fieldName) {
   if (Array.isArray(value)) return value;
   if (typeof value !== 'string')
     throw new Error(`❌ Row ${rowNum}: ${fieldName} must be a string or array`);
+
   const trimmed = value.trim();
   if (!trimmed.startsWith('{') || !trimmed.endsWith('}'))
     throw new Error(
       `❌ Row ${rowNum}: ${fieldName} is not a valid array format`
     );
+
   return trimmed
     .slice(1, -1)
     .split(',')
