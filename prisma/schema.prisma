@@ -178,6 +178,8 @@ model Product {
   id               String        @id @default(uuid()) @db.Uuid
   categoryId       String        @db.Uuid
   subcategoryId    String        @db.Uuid
+  fabricId         Int
+  blindTypeId      Int
   sku              String        @unique
   name             String
   slug             String
@@ -187,10 +189,10 @@ model Product {
   productImages    String[]      @default([])
   price            Decimal       @default(0)
   motorPrice       Decimal       @default(0)
-  minHeight        Decimal       @default(0)
-  maxHeight        Decimal       @default(1)
-  minWidth         Decimal       @default(0)
-  maxWidth         Decimal       @default(1)
+  minHeight        Int           @default(0)
+  maxHeight        Int           @default(1)
+  minWidth         Int           @default(0)
+  maxWidth         Int           @default(1)
   color            String?
   pattern          String?
   composition      String?

@@ -24,6 +24,7 @@ export async function seedProducts() {
   console.log(`📄 Rows found: ${rows.length}`);
   if (!rows.length) throw new Error('❌ Products sheet is empty');
 
+  // Fetch categories and subcategories
   const categories = await prisma.category.findMany({
     select: { id: true, name: true }
   });
@@ -32,100 +33,114 @@ export async function seedProducts() {
   });
 
   const categoryMap = new Map(
-    categories.map((c) => [c.name.trim().toLowerCase(), c])
+    categories.map((c) => [c.name.trim().toLowerCase(), c.id])
   );
   const subcategoryMap = new Map(
     subcategories.map((sc) => [
       `${sc.name.trim().toLowerCase()}__${sc.categoryId}`,
-      sc
+      sc.id
     ])
   );
 
-  for (const [index, row] of rows.entries()) {
+  // Resolve categoryId and subcategoryId for each row
+  const resolvedRows = rows.map((row, index) => {
     const rowNum = index + 2;
     if (!row.categoryName || !row.subcategoryName)
       throw new Error(
         `❌ Row ${rowNum}: categoryName or subcategoryName missing`
       );
 
-    const category = categoryMap.get(row.categoryName.trim().toLowerCase());
-    if (!category)
+    const categoryId = categoryMap.get(row.categoryName.trim().toLowerCase());
+    if (!categoryId)
       throw new Error(
         `❌ Row ${rowNum}: Category "${row.categoryName}" not found`
       );
 
-    const subcategoryKey = `${row.subcategoryName.trim().toLowerCase()}__${category.id}`;
-    const subcategory = subcategoryMap.get(subcategoryKey);
-    if (!subcategory)
+    const subcategoryKey = `${row.subcategoryName.trim().toLowerCase()}__${categoryId}`;
+    const subcategoryId = subcategoryMap.get(subcategoryKey);
+    if (!subcategoryId)
       throw new Error(
         `❌ Row ${rowNum}: Subcategory "${row.subcategoryName}" not found under category "${row.categoryName}"`
       );
 
-    row.categoryId = category.id;
-    row.subcategoryId = subcategory.id;
-  }
+    const slug = slugify(row.name, { lower: true, strict: true });
+
+    return {
+      rowNum,
+      categoryId,
+      subcategoryId,
+      sku: row.sku || '',
+      name: row.name,
+      slug,
+      breadcrumb: row.breadcrumb || '',
+      description: row.description || '',
+      shortDescription: row.shortDescription || '',
+      posterImageUrl: row.posterImageUrl || '',
+      productImages: parsePgArray(row.productImages, rowNum, 'productImages'),
+      fabricId: row.fabricId || null,
+      blindTypeId: row.blindTypeId || null,
+      price: Number(row.price || 0),
+      isMotorized: row.isMotorized === true || row.isMotorized === 'TRUE',
+      motorPrice: Number(row.motorPrice || 0),
+      maxWidth: Number(row.maxWidth || 0),
+      minWidth: Number(row.minWidth || 0),
+      maxHeight: Number(row.maxHeight || 0),
+      minHeight: Number(row.minHeight || 0),
+      pattern: row.pattern || '',
+      composition: row.composition || '',
+      color: row.color || '',
+      additionalInfo: row.additionalInfo || '',
+      measuringGuide: row.measuringGuide || '',
+      metaTitle: row.metaTitle || row.name,
+      metaDescription: row.metaDescription || '',
+      canonicalTag: row.canonicalTag || '',
+      seoSchema: row.seoSchema || '',
+      status: (row.status || 'PUBLISHED').toUpperCase(),
+      lastEditedBy: row.lastEditedBy || 'seed-script'
+    };
+  });
+
+  console.log('✅ Category & subcategory IDs resolved');
 
   if (WRITE_BACK_TO_EXCEL) {
-    const updatedSheet = xlsx.utils.json_to_sheet(rows);
+    const updatedSheet = xlsx.utils.json_to_sheet(
+      resolvedRows.map((r) => ({
+        ...r,
+        categoryId: r.categoryId,
+        subcategoryId: r.subcategoryId
+      }))
+    );
     workbook.Sheets[SHEET_NAME] = updatedSheet;
     xlsx.writeFile(workbook, EXCEL_PATH);
     console.log('📝 categoryId & subcategoryId written back to Excel');
   }
 
-  await prisma.$transaction(
-    async (tx) => {
-      for (const [index, row] of rows.entries()) {
-        try {
-          await tx.product.create({
-            data: {
-              sku: row.sku,
-              name: row.name,
-              slug: slugify(row.name, { lower: true }),
-              breadcrumb: row.breadcrumb,
-              description: row.description,
-              shortDescription: row.shortDescription,
-              categoryId: row.categoryId,
-              subcategoryId: row.subcategoryId,
-              posterImageUrl: row.posterImageUrl,
-              productImages: parsePgArray(
-                row.productImages,
-                index + 2,
-                'productImages'
-              ),
-              price: Number(row.price),
-              isMotorized:
-                row.isMotorized === true || row.isMotorized === 'TRUE',
-              motorPrice: Number(row.motorPrice || 0),
-              maxWidth: Number(row.maxWidth),
-              minWidth: Number(row.minWidth),
-              maxHeight: Number(row.maxHeight),
-              minHeight: Number(row.minHeight),
-              pattern: row.pattern,
-              composition: row.composition,
-              color: row.color,
-              additionalInfo: row.additionalInfo,
-              measuringGuide: row.measuringGuide,
-              metaTitle: row.metaTitle,
-              metaDescription: row.metaDescription,
-              canonicalTag: row.canonicalTag,
-              seoSchema: row.seoSchema,
-              status: row.status,
-              lastEditedBy: row.lastEditedBy || 'seed-script'
-            }
-          });
-        } catch (err) {
-          throw new Error(
-            `❌ Product insert failed at row ${index + 2}: ${err.message}`
-          );
-        }
-      }
-    },
-    { timeout: 300000 }
-  );
+  // Upsert each product
+  for (const row of resolvedRows) {
+    try {
+      await prisma.product.upsert({
+        where: {
+          subcategoryId_slug: {
+            subcategoryId: row.subcategoryId,
+            slug: row.slug
+          }
+        },
+        update: { ...row, rowNum: undefined },
+        create: { ...row, rowNum: undefined }
+      });
+
+      console.log(`➡️ [Row ${row.rowNum}] ${row.name} upserted successfully`);
+    } catch (err) {
+      throw new Error(
+        `❌ Product upsert failed at row ${row.rowNum}: ${err.message}`
+      );
+    }
+  }
 
   console.log('✅ Products seeded successfully');
 }
 
+// Helper to parse Postgres array string
 export function parsePgArray(value, rowNum, fieldName) {
   if (Array.isArray(value)) return value;
   if (typeof value !== 'string')

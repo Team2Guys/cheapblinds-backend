@@ -130,33 +130,36 @@ export const commonTypeDefs = gql`
     id: ID!
     categoryId: ID!
     subcategoryId: ID!
+    fabricId: Int!
+    blindTypeId: Int!
+    sku: String!
     name: String!
-    description: String
-    shortDescription: String
     slug: String
-    metaTitle: String
-    metaDescription: String
-    canonicalTag: String
-    breadcrumb: String
+    shortDescription: String
+    description: String
     posterImageUrl: String
     productImages: [String!]!
-    seoSchema: String
     price: Float!
-    discountPrice: Float
     motorPrice: Float
-    width: Float
-    height: Float
-    stock: Int
+    minHeight: Float
+    maxHeight: Float
+    minWidth: Float
+    maxWidth: Float
     color: String
     pattern: String
     composition: String
     isMotorized: Boolean
     additionalInfo: String
     measuringGuide: String
+    metaTitle: String
+    metaDescription: String
+    canonicalTag: String
+    breadcrumb: String
+    seoSchema: String
+    status: ContentStatus!
     lastEditedBy: String!
     category: Category!
     subcategory: Subcategory!
-    status: ContentStatus!
     createdAt: DateTime!
     updatedAt: DateTime!
   }

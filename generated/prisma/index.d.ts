@@ -8923,27 +8923,33 @@ export namespace Prisma {
   }
 
   export type ProductAvgAggregateOutputType = {
+    fabricId: number | null
+    blindTypeId: number | null
     price: Decimal | null
     motorPrice: Decimal | null
-    minHeight: Decimal | null
-    maxHeight: Decimal | null
-    minWidth: Decimal | null
-    maxWidth: Decimal | null
+    minHeight: number | null
+    maxHeight: number | null
+    minWidth: number | null
+    maxWidth: number | null
   }
 
   export type ProductSumAggregateOutputType = {
+    fabricId: number | null
+    blindTypeId: number | null
     price: Decimal | null
     motorPrice: Decimal | null
-    minHeight: Decimal | null
-    maxHeight: Decimal | null
-    minWidth: Decimal | null
-    maxWidth: Decimal | null
+    minHeight: number | null
+    maxHeight: number | null
+    minWidth: number | null
+    maxWidth: number | null
   }
 
   export type ProductMinAggregateOutputType = {
     id: string | null
     categoryId: string | null
     subcategoryId: string | null
+    fabricId: number | null
+    blindTypeId: number | null
     sku: string | null
     name: string | null
     slug: string | null
@@ -8952,10 +8958,10 @@ export namespace Prisma {
     posterImageUrl: string | null
     price: Decimal | null
     motorPrice: Decimal | null
-    minHeight: Decimal | null
-    maxHeight: Decimal | null
-    minWidth: Decimal | null
-    maxWidth: Decimal | null
+    minHeight: number | null
+    maxHeight: number | null
+    minWidth: number | null
+    maxWidth: number | null
     color: string | null
     pattern: string | null
     composition: string | null
@@ -8977,6 +8983,8 @@ export namespace Prisma {
     id: string | null
     categoryId: string | null
     subcategoryId: string | null
+    fabricId: number | null
+    blindTypeId: number | null
     sku: string | null
     name: string | null
     slug: string | null
@@ -8985,10 +8993,10 @@ export namespace Prisma {
     posterImageUrl: string | null
     price: Decimal | null
     motorPrice: Decimal | null
-    minHeight: Decimal | null
-    maxHeight: Decimal | null
-    minWidth: Decimal | null
-    maxWidth: Decimal | null
+    minHeight: number | null
+    maxHeight: number | null
+    minWidth: number | null
+    maxWidth: number | null
     color: string | null
     pattern: string | null
     composition: string | null
@@ -9010,6 +9018,8 @@ export namespace Prisma {
     id: number
     categoryId: number
     subcategoryId: number
+    fabricId: number
+    blindTypeId: number
     sku: number
     name: number
     slug: number
@@ -9043,6 +9053,8 @@ export namespace Prisma {
 
 
   export type ProductAvgAggregateInputType = {
+    fabricId?: true
+    blindTypeId?: true
     price?: true
     motorPrice?: true
     minHeight?: true
@@ -9052,6 +9064,8 @@ export namespace Prisma {
   }
 
   export type ProductSumAggregateInputType = {
+    fabricId?: true
+    blindTypeId?: true
     price?: true
     motorPrice?: true
     minHeight?: true
@@ -9064,6 +9078,8 @@ export namespace Prisma {
     id?: true
     categoryId?: true
     subcategoryId?: true
+    fabricId?: true
+    blindTypeId?: true
     sku?: true
     name?: true
     slug?: true
@@ -9097,6 +9113,8 @@ export namespace Prisma {
     id?: true
     categoryId?: true
     subcategoryId?: true
+    fabricId?: true
+    blindTypeId?: true
     sku?: true
     name?: true
     slug?: true
@@ -9130,6 +9148,8 @@ export namespace Prisma {
     id?: true
     categoryId?: true
     subcategoryId?: true
+    fabricId?: true
+    blindTypeId?: true
     sku?: true
     name?: true
     slug?: true
@@ -9251,6 +9271,8 @@ export namespace Prisma {
     id: string
     categoryId: string
     subcategoryId: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -9260,10 +9282,10 @@ export namespace Prisma {
     productImages: string[]
     price: Decimal
     motorPrice: Decimal
-    minHeight: Decimal
-    maxHeight: Decimal
-    minWidth: Decimal
-    maxWidth: Decimal
+    minHeight: number
+    maxHeight: number
+    minWidth: number
+    maxWidth: number
     color: string | null
     pattern: string | null
     composition: string | null
@@ -9304,6 +9326,8 @@ export namespace Prisma {
     id?: boolean
     categoryId?: boolean
     subcategoryId?: boolean
+    fabricId?: boolean
+    blindTypeId?: boolean
     sku?: boolean
     name?: boolean
     slug?: boolean
@@ -9342,6 +9366,8 @@ export namespace Prisma {
     id?: boolean
     categoryId?: boolean
     subcategoryId?: boolean
+    fabricId?: boolean
+    blindTypeId?: boolean
     sku?: boolean
     name?: boolean
     slug?: boolean
@@ -9378,6 +9404,8 @@ export namespace Prisma {
     id?: boolean
     categoryId?: boolean
     subcategoryId?: boolean
+    fabricId?: boolean
+    blindTypeId?: boolean
     sku?: boolean
     name?: boolean
     slug?: boolean
@@ -9414,6 +9442,8 @@ export namespace Prisma {
     id?: boolean
     categoryId?: boolean
     subcategoryId?: boolean
+    fabricId?: boolean
+    blindTypeId?: boolean
     sku?: boolean
     name?: boolean
     slug?: boolean
@@ -9444,7 +9474,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "subcategoryId" | "sku" | "name" | "slug" | "shortDescription" | "description" | "posterImageUrl" | "productImages" | "price" | "motorPrice" | "minHeight" | "maxHeight" | "minWidth" | "maxWidth" | "color" | "pattern" | "composition" | "isMotorized" | "additionalInfo" | "measuringGuide" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "subcategoryId" | "fabricId" | "blindTypeId" | "sku" | "name" | "slug" | "shortDescription" | "description" | "posterImageUrl" | "productImages" | "price" | "motorPrice" | "minHeight" | "maxHeight" | "minWidth" | "maxWidth" | "color" | "pattern" | "composition" | "isMotorized" | "additionalInfo" | "measuringGuide" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     subcategory?: boolean | SubcategoryDefaultArgs<ExtArgs>
@@ -9471,6 +9501,8 @@ export namespace Prisma {
       id: string
       categoryId: string
       subcategoryId: string
+      fabricId: number
+      blindTypeId: number
       sku: string
       name: string
       slug: string
@@ -9480,10 +9512,10 @@ export namespace Prisma {
       productImages: string[]
       price: Prisma.Decimal
       motorPrice: Prisma.Decimal
-      minHeight: Prisma.Decimal
-      maxHeight: Prisma.Decimal
-      minWidth: Prisma.Decimal
-      maxWidth: Prisma.Decimal
+      minHeight: number
+      maxHeight: number
+      minWidth: number
+      maxWidth: number
       color: string | null
       pattern: string | null
       composition: string | null
@@ -9928,6 +9960,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Product", 'String'>
     readonly categoryId: FieldRef<"Product", 'String'>
     readonly subcategoryId: FieldRef<"Product", 'String'>
+    readonly fabricId: FieldRef<"Product", 'Int'>
+    readonly blindTypeId: FieldRef<"Product", 'Int'>
     readonly sku: FieldRef<"Product", 'String'>
     readonly name: FieldRef<"Product", 'String'>
     readonly slug: FieldRef<"Product", 'String'>
@@ -9937,10 +9971,10 @@ export namespace Prisma {
     readonly productImages: FieldRef<"Product", 'String[]'>
     readonly price: FieldRef<"Product", 'Decimal'>
     readonly motorPrice: FieldRef<"Product", 'Decimal'>
-    readonly minHeight: FieldRef<"Product", 'Decimal'>
-    readonly maxHeight: FieldRef<"Product", 'Decimal'>
-    readonly minWidth: FieldRef<"Product", 'Decimal'>
-    readonly maxWidth: FieldRef<"Product", 'Decimal'>
+    readonly minHeight: FieldRef<"Product", 'Int'>
+    readonly maxHeight: FieldRef<"Product", 'Int'>
+    readonly minWidth: FieldRef<"Product", 'Int'>
+    readonly maxWidth: FieldRef<"Product", 'Int'>
     readonly color: FieldRef<"Product", 'String'>
     readonly pattern: FieldRef<"Product", 'String'>
     readonly composition: FieldRef<"Product", 'String'>
@@ -14145,6 +14179,8 @@ export namespace Prisma {
     id: 'id',
     categoryId: 'categoryId',
     subcategoryId: 'subcategoryId',
+    fabricId: 'fabricId',
+    blindTypeId: 'blindTypeId',
     sku: 'sku',
     name: 'name',
     slug: 'slug',
@@ -14361,6 +14397,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -14431,16 +14481,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'Float[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -14990,6 +15040,8 @@ export namespace Prisma {
     id?: UuidFilter<"Product"> | string
     categoryId?: UuidFilter<"Product"> | string
     subcategoryId?: UuidFilter<"Product"> | string
+    fabricId?: IntFilter<"Product"> | number
+    blindTypeId?: IntFilter<"Product"> | number
     sku?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     slug?: StringFilter<"Product"> | string
@@ -14999,10 +15051,10 @@ export namespace Prisma {
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFilter<"Product"> | number
+    maxHeight?: IntFilter<"Product"> | number
+    minWidth?: IntFilter<"Product"> | number
+    maxWidth?: IntFilter<"Product"> | number
     color?: StringNullableFilter<"Product"> | string | null
     pattern?: StringNullableFilter<"Product"> | string | null
     composition?: StringNullableFilter<"Product"> | string | null
@@ -15027,6 +15079,8 @@ export namespace Prisma {
     id?: SortOrder
     categoryId?: SortOrder
     subcategoryId?: SortOrder
+    fabricId?: SortOrder
+    blindTypeId?: SortOrder
     sku?: SortOrder
     name?: SortOrder
     slug?: SortOrder
@@ -15069,6 +15123,8 @@ export namespace Prisma {
     NOT?: ProductWhereInput | ProductWhereInput[]
     categoryId?: UuidFilter<"Product"> | string
     subcategoryId?: UuidFilter<"Product"> | string
+    fabricId?: IntFilter<"Product"> | number
+    blindTypeId?: IntFilter<"Product"> | number
     name?: StringFilter<"Product"> | string
     slug?: StringFilter<"Product"> | string
     shortDescription?: StringNullableFilter<"Product"> | string | null
@@ -15077,10 +15133,10 @@ export namespace Prisma {
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFilter<"Product"> | number
+    maxHeight?: IntFilter<"Product"> | number
+    minWidth?: IntFilter<"Product"> | number
+    maxWidth?: IntFilter<"Product"> | number
     color?: StringNullableFilter<"Product"> | string | null
     pattern?: StringNullableFilter<"Product"> | string | null
     composition?: StringNullableFilter<"Product"> | string | null
@@ -15105,6 +15161,8 @@ export namespace Prisma {
     id?: SortOrder
     categoryId?: SortOrder
     subcategoryId?: SortOrder
+    fabricId?: SortOrder
+    blindTypeId?: SortOrder
     sku?: SortOrder
     name?: SortOrder
     slug?: SortOrder
@@ -15147,6 +15205,8 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"Product"> | string
     categoryId?: UuidWithAggregatesFilter<"Product"> | string
     subcategoryId?: UuidWithAggregatesFilter<"Product"> | string
+    fabricId?: IntWithAggregatesFilter<"Product"> | number
+    blindTypeId?: IntWithAggregatesFilter<"Product"> | number
     sku?: StringWithAggregatesFilter<"Product"> | string
     name?: StringWithAggregatesFilter<"Product"> | string
     slug?: StringWithAggregatesFilter<"Product"> | string
@@ -15156,10 +15216,10 @@ export namespace Prisma {
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    minHeight?: IntWithAggregatesFilter<"Product"> | number
+    maxHeight?: IntWithAggregatesFilter<"Product"> | number
+    minWidth?: IntWithAggregatesFilter<"Product"> | number
+    maxWidth?: IntWithAggregatesFilter<"Product"> | number
     color?: StringNullableWithAggregatesFilter<"Product"> | string | null
     pattern?: StringNullableWithAggregatesFilter<"Product"> | string | null
     composition?: StringNullableWithAggregatesFilter<"Product"> | string | null
@@ -16122,6 +16182,8 @@ export namespace Prisma {
 
   export type ProductCreateInput = {
     id?: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -16131,10 +16193,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -16159,6 +16221,8 @@ export namespace Prisma {
     id?: string
     categoryId: string
     subcategoryId: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -16168,10 +16232,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -16192,6 +16256,8 @@ export namespace Prisma {
 
   export type ProductUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -16201,10 +16267,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16229,6 +16295,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     subcategoryId?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -16238,10 +16306,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16264,6 +16332,8 @@ export namespace Prisma {
     id?: string
     categoryId: string
     subcategoryId: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -16273,10 +16343,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -16296,6 +16366,8 @@ export namespace Prisma {
 
   export type ProductUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -16305,10 +16377,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16330,6 +16402,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     subcategoryId?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -16339,10 +16413,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17275,6 +17349,17 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type StringNullableListFilter<$PrismaModel = never> = {
     equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     has?: string | StringFieldRefInput<$PrismaModel> | null
@@ -17318,6 +17403,8 @@ export namespace Prisma {
     id?: SortOrder
     categoryId?: SortOrder
     subcategoryId?: SortOrder
+    fabricId?: SortOrder
+    blindTypeId?: SortOrder
     sku?: SortOrder
     name?: SortOrder
     slug?: SortOrder
@@ -17349,6 +17436,8 @@ export namespace Prisma {
   }
 
   export type ProductAvgOrderByAggregateInput = {
+    fabricId?: SortOrder
+    blindTypeId?: SortOrder
     price?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
@@ -17361,6 +17450,8 @@ export namespace Prisma {
     id?: SortOrder
     categoryId?: SortOrder
     subcategoryId?: SortOrder
+    fabricId?: SortOrder
+    blindTypeId?: SortOrder
     sku?: SortOrder
     name?: SortOrder
     slug?: SortOrder
@@ -17394,6 +17485,8 @@ export namespace Prisma {
     id?: SortOrder
     categoryId?: SortOrder
     subcategoryId?: SortOrder
+    fabricId?: SortOrder
+    blindTypeId?: SortOrder
     sku?: SortOrder
     name?: SortOrder
     slug?: SortOrder
@@ -17424,12 +17517,30 @@ export namespace Prisma {
   }
 
   export type ProductSumOrderByAggregateInput = {
+    fabricId?: SortOrder
+    blindTypeId?: SortOrder
     price?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -18110,6 +18221,14 @@ export namespace Prisma {
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type ProductUpdateproductImagesInput = {
     set?: string[]
     push?: string | string[]
@@ -18501,6 +18620,33 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -19144,6 +19290,8 @@ export namespace Prisma {
 
   export type ProductCreateWithoutCategoryInput = {
     id?: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -19153,10 +19301,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -19179,6 +19327,8 @@ export namespace Prisma {
   export type ProductUncheckedCreateWithoutCategoryInput = {
     id?: string
     subcategoryId: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -19188,10 +19338,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -19291,6 +19441,8 @@ export namespace Prisma {
     id?: UuidFilter<"Product"> | string
     categoryId?: UuidFilter<"Product"> | string
     subcategoryId?: UuidFilter<"Product"> | string
+    fabricId?: IntFilter<"Product"> | number
+    blindTypeId?: IntFilter<"Product"> | number
     sku?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     slug?: StringFilter<"Product"> | string
@@ -19300,10 +19452,10 @@ export namespace Prisma {
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFilter<"Product"> | number
+    maxHeight?: IntFilter<"Product"> | number
+    minWidth?: IntFilter<"Product"> | number
+    maxWidth?: IntFilter<"Product"> | number
     color?: StringNullableFilter<"Product"> | string | null
     pattern?: StringNullableFilter<"Product"> | string | null
     composition?: StringNullableFilter<"Product"> | string | null
@@ -19404,6 +19556,8 @@ export namespace Prisma {
 
   export type ProductCreateWithoutSubcategoryInput = {
     id?: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -19413,10 +19567,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -19439,6 +19593,8 @@ export namespace Prisma {
   export type ProductUncheckedCreateWithoutSubcategoryInput = {
     id?: string
     categoryId: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -19448,10 +19604,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -20001,6 +20157,8 @@ export namespace Prisma {
 
   export type ProductCreateWithoutOrderItemsInput = {
     id?: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -20010,10 +20168,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -20037,6 +20195,8 @@ export namespace Prisma {
     id?: string
     categoryId: string
     subcategoryId: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -20046,10 +20206,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -20138,6 +20298,8 @@ export namespace Prisma {
 
   export type ProductUpdateWithoutOrderItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -20147,10 +20309,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20174,6 +20336,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     subcategoryId?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -20183,10 +20347,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20353,6 +20517,8 @@ export namespace Prisma {
   export type ProductCreateManyCategoryInput = {
     id?: string
     subcategoryId: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -20362,10 +20528,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -20403,6 +20569,8 @@ export namespace Prisma {
 
   export type ProductUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -20412,10 +20580,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20438,6 +20606,8 @@ export namespace Prisma {
   export type ProductUncheckedUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     subcategoryId?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -20447,10 +20617,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20472,6 +20642,8 @@ export namespace Prisma {
   export type ProductUncheckedUpdateManyWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     subcategoryId?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -20481,10 +20653,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20561,6 +20733,8 @@ export namespace Prisma {
   export type ProductCreateManySubcategoryInput = {
     id?: string
     categoryId: string
+    fabricId: number
+    blindTypeId: number
     sku: string
     name: string
     slug: string
@@ -20570,10 +20744,10 @@ export namespace Prisma {
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
-    minHeight?: Decimal | DecimalJsLike | number | string
-    maxHeight?: Decimal | DecimalJsLike | number | string
-    minWidth?: Decimal | DecimalJsLike | number | string
-    maxWidth?: Decimal | DecimalJsLike | number | string
+    minHeight?: number
+    maxHeight?: number
+    minWidth?: number
+    maxWidth?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -20593,6 +20767,8 @@ export namespace Prisma {
 
   export type ProductUpdateWithoutSubcategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -20602,10 +20778,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20628,6 +20804,8 @@ export namespace Prisma {
   export type ProductUncheckedUpdateWithoutSubcategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -20637,10 +20815,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20662,6 +20840,8 @@ export namespace Prisma {
   export type ProductUncheckedUpdateManyWithoutSubcategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
+    fabricId?: IntFieldUpdateOperationsInput | number
+    blindTypeId?: IntFieldUpdateOperationsInput | number
     sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -20671,10 +20851,10 @@ export namespace Prisma {
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxHeight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    minWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    maxWidth?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minHeight?: IntFieldUpdateOperationsInput | number
+    maxHeight?: IntFieldUpdateOperationsInput | number
+    minWidth?: IntFieldUpdateOperationsInput | number
+    maxWidth?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
