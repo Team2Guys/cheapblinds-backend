@@ -8926,6 +8926,7 @@ export namespace Prisma {
     fabricId: number | null
     blindTypeId: number | null
     price: Decimal | null
+    discountPrice: Decimal | null
     motorPrice: Decimal | null
     minHeight: number | null
     maxHeight: number | null
@@ -8937,6 +8938,7 @@ export namespace Prisma {
     fabricId: number | null
     blindTypeId: number | null
     price: Decimal | null
+    discountPrice: Decimal | null
     motorPrice: Decimal | null
     minHeight: number | null
     maxHeight: number | null
@@ -8957,6 +8959,7 @@ export namespace Prisma {
     description: string | null
     posterImageUrl: string | null
     price: Decimal | null
+    discountPrice: Decimal | null
     motorPrice: Decimal | null
     minHeight: number | null
     maxHeight: number | null
@@ -8992,6 +8995,7 @@ export namespace Prisma {
     description: string | null
     posterImageUrl: string | null
     price: Decimal | null
+    discountPrice: Decimal | null
     motorPrice: Decimal | null
     minHeight: number | null
     maxHeight: number | null
@@ -9028,6 +9032,7 @@ export namespace Prisma {
     posterImageUrl: number
     productImages: number
     price: number
+    discountPrice: number
     motorPrice: number
     minHeight: number
     maxHeight: number
@@ -9056,6 +9061,7 @@ export namespace Prisma {
     fabricId?: true
     blindTypeId?: true
     price?: true
+    discountPrice?: true
     motorPrice?: true
     minHeight?: true
     maxHeight?: true
@@ -9067,6 +9073,7 @@ export namespace Prisma {
     fabricId?: true
     blindTypeId?: true
     price?: true
+    discountPrice?: true
     motorPrice?: true
     minHeight?: true
     maxHeight?: true
@@ -9087,6 +9094,7 @@ export namespace Prisma {
     description?: true
     posterImageUrl?: true
     price?: true
+    discountPrice?: true
     motorPrice?: true
     minHeight?: true
     maxHeight?: true
@@ -9122,6 +9130,7 @@ export namespace Prisma {
     description?: true
     posterImageUrl?: true
     price?: true
+    discountPrice?: true
     motorPrice?: true
     minHeight?: true
     maxHeight?: true
@@ -9158,6 +9167,7 @@ export namespace Prisma {
     posterImageUrl?: true
     productImages?: true
     price?: true
+    discountPrice?: true
     motorPrice?: true
     minHeight?: true
     maxHeight?: true
@@ -9281,6 +9291,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages: string[]
     price: Decimal
+    discountPrice: Decimal
     motorPrice: Decimal
     minHeight: number
     maxHeight: number
@@ -9336,6 +9347,7 @@ export namespace Prisma {
     posterImageUrl?: boolean
     productImages?: boolean
     price?: boolean
+    discountPrice?: boolean
     motorPrice?: boolean
     minHeight?: boolean
     maxHeight?: boolean
@@ -9376,6 +9388,7 @@ export namespace Prisma {
     posterImageUrl?: boolean
     productImages?: boolean
     price?: boolean
+    discountPrice?: boolean
     motorPrice?: boolean
     minHeight?: boolean
     maxHeight?: boolean
@@ -9414,6 +9427,7 @@ export namespace Prisma {
     posterImageUrl?: boolean
     productImages?: boolean
     price?: boolean
+    discountPrice?: boolean
     motorPrice?: boolean
     minHeight?: boolean
     maxHeight?: boolean
@@ -9452,6 +9466,7 @@ export namespace Prisma {
     posterImageUrl?: boolean
     productImages?: boolean
     price?: boolean
+    discountPrice?: boolean
     motorPrice?: boolean
     minHeight?: boolean
     maxHeight?: boolean
@@ -9474,7 +9489,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "subcategoryId" | "fabricId" | "blindTypeId" | "sku" | "name" | "slug" | "shortDescription" | "description" | "posterImageUrl" | "productImages" | "price" | "motorPrice" | "minHeight" | "maxHeight" | "minWidth" | "maxWidth" | "color" | "pattern" | "composition" | "isMotorized" | "additionalInfo" | "measuringGuide" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "subcategoryId" | "fabricId" | "blindTypeId" | "sku" | "name" | "slug" | "shortDescription" | "description" | "posterImageUrl" | "productImages" | "price" | "discountPrice" | "motorPrice" | "minHeight" | "maxHeight" | "minWidth" | "maxWidth" | "color" | "pattern" | "composition" | "isMotorized" | "additionalInfo" | "measuringGuide" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     subcategory?: boolean | SubcategoryDefaultArgs<ExtArgs>
@@ -9511,6 +9526,7 @@ export namespace Prisma {
       posterImageUrl: string
       productImages: string[]
       price: Prisma.Decimal
+      discountPrice: Prisma.Decimal
       motorPrice: Prisma.Decimal
       minHeight: number
       maxHeight: number
@@ -9970,6 +9986,7 @@ export namespace Prisma {
     readonly posterImageUrl: FieldRef<"Product", 'String'>
     readonly productImages: FieldRef<"Product", 'String[]'>
     readonly price: FieldRef<"Product", 'Decimal'>
+    readonly discountPrice: FieldRef<"Product", 'Decimal'>
     readonly motorPrice: FieldRef<"Product", 'Decimal'>
     readonly minHeight: FieldRef<"Product", 'Int'>
     readonly maxHeight: FieldRef<"Product", 'Int'>
@@ -14189,6 +14206,7 @@ export namespace Prisma {
     posterImageUrl: 'posterImageUrl',
     productImages: 'productImages',
     price: 'price',
+    discountPrice: 'discountPrice',
     motorPrice: 'motorPrice',
     minHeight: 'minHeight',
     maxHeight: 'maxHeight',
@@ -15050,6 +15068,7 @@ export namespace Prisma {
     posterImageUrl?: StringFilter<"Product"> | string
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     minHeight?: IntFilter<"Product"> | number
     maxHeight?: IntFilter<"Product"> | number
@@ -15089,6 +15108,7 @@ export namespace Prisma {
     posterImageUrl?: SortOrder
     productImages?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
@@ -15132,6 +15152,7 @@ export namespace Prisma {
     posterImageUrl?: StringFilter<"Product"> | string
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     minHeight?: IntFilter<"Product"> | number
     maxHeight?: IntFilter<"Product"> | number
@@ -15171,6 +15192,7 @@ export namespace Prisma {
     posterImageUrl?: SortOrder
     productImages?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
@@ -15215,6 +15237,7 @@ export namespace Prisma {
     posterImageUrl?: StringWithAggregatesFilter<"Product"> | string
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
     minHeight?: IntWithAggregatesFilter<"Product"> | number
     maxHeight?: IntWithAggregatesFilter<"Product"> | number
@@ -16192,6 +16215,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -16231,6 +16255,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -16266,6 +16291,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -16305,6 +16331,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -16342,6 +16369,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -16376,6 +16404,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -16412,6 +16441,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -17413,6 +17443,7 @@ export namespace Prisma {
     posterImageUrl?: SortOrder
     productImages?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
@@ -17439,6 +17470,7 @@ export namespace Prisma {
     fabricId?: SortOrder
     blindTypeId?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
@@ -17459,6 +17491,7 @@ export namespace Prisma {
     description?: SortOrder
     posterImageUrl?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
@@ -17494,6 +17527,7 @@ export namespace Prisma {
     description?: SortOrder
     posterImageUrl?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
@@ -17520,6 +17554,7 @@ export namespace Prisma {
     fabricId?: SortOrder
     blindTypeId?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
@@ -19300,6 +19335,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -19337,6 +19373,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -19451,6 +19488,7 @@ export namespace Prisma {
     posterImageUrl?: StringFilter<"Product"> | string
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     minHeight?: IntFilter<"Product"> | number
     maxHeight?: IntFilter<"Product"> | number
@@ -19566,6 +19604,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -19603,6 +19642,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -20167,6 +20207,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -20205,6 +20246,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -20308,6 +20350,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -20346,6 +20389,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -20527,6 +20571,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -20579,6 +20624,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -20616,6 +20662,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -20652,6 +20699,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -20743,6 +20791,7 @@ export namespace Prisma {
     posterImageUrl: string
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
@@ -20777,6 +20826,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -20814,6 +20864,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
@@ -20850,6 +20901,7 @@ export namespace Prisma {
     posterImageUrl?: StringFieldUpdateOperationsInput | string
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number

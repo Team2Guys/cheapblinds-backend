@@ -81,6 +81,7 @@ export async function seedProducts() {
       fabricId: row.fabricId || null,
       blindTypeId: row.blindTypeId || null,
       price: Number(row.price || 0),
+      discountPrice: Number(row.discountPrice || 0),
       isMotorized: row.isMotorized === true || row.isMotorized === 'TRUE',
       motorPrice: Number(row.motorPrice || 0),
       maxWidth: Number(row.maxWidth || 0),
