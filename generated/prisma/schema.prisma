@@ -188,6 +188,7 @@ model Product {
   posterImageUrl   String
   productImages    String[]      @default([])
   price            Decimal       @default(0)
+  discountPrice    Decimal       @default(0)
   motorPrice       Decimal       @default(0)
   minHeight        Int           @default(0)
   maxHeight        Int           @default(1)

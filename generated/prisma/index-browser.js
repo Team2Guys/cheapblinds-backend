@@ -220,6 +220,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   posterImageUrl: 'posterImageUrl',
   productImages: 'productImages',
   price: 'price',
+  discountPrice: 'discountPrice',
   motorPrice: 'motorPrice',
   minHeight: 'minHeight',
   maxHeight: 'maxHeight',
