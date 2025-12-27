@@ -50,7 +50,9 @@ export const env = cleanEnv(process.env, validators, {
   reporter: ({ errors }) => {
     const invalidVars = Object.keys(errors);
     if (invalidVars.length > 0) {
-      console.error(`Invalid ENV variables: ${invalidVars}`);
+      console.error(
+        `- ${invalidVars.join('\n- ')} \n\nPlease set the above environment variables correctly.\n\n`
+      );
       process.exit(1);
     }
   }
