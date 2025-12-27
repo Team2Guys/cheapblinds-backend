@@ -92,6 +92,7 @@ model User {
   email                    String   @unique
   password                 String
   isEmailVerified          Boolean  @default(false)
+  isMember                 Boolean  @default(false)
   createdAt                DateTime @default(now())
   updatedAt                DateTime @updatedAt
 
@@ -185,6 +186,10 @@ model Product {
   slug             String
   shortDescription String?
   description      String?       @db.Text()
+  metaTitle        String?       @db.Text()
+  metaDescription  String?       @db.Text()
+  canonicalTag     String?
+  breadcrumb       String?
   posterImageUrl   String
   productImages    String[]      @default([])
   price            Decimal       @default(0)
@@ -194,17 +199,13 @@ model Product {
   maxHeight        Int           @default(1)
   minWidth         Int           @default(0)
   maxWidth         Int           @default(1)
-  stock            Int           @default(0)
+  inStock          Boolean       @default(false)
   color            String?
   pattern          String?
-  composition      String?
+  material         String?
   isMotorized      Boolean       @default(false)
   additionalInfo   String?       @db.Text()
   measuringGuide   String?       @db.Text()
-  metaTitle        String?
-  metaDescription  String?
-  canonicalTag     String?
-  breadcrumb       String?
   seoSchema        String?       @db.Text()
   status           ContentStatus @default(PUBLISHED)
   lastEditedBy     String?
