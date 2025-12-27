@@ -226,6 +226,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   maxHeight: 'maxHeight',
   minWidth: 'minWidth',
   maxWidth: 'maxWidth',
+  stock: 'stock',
   color: 'color',
   pattern: 'pattern',
   composition: 'composition',
