@@ -8932,6 +8932,7 @@ export namespace Prisma {
     maxHeight: number | null
     minWidth: number | null
     maxWidth: number | null
+    stock: number | null
   }
 
   export type ProductSumAggregateOutputType = {
@@ -8944,6 +8945,7 @@ export namespace Prisma {
     maxHeight: number | null
     minWidth: number | null
     maxWidth: number | null
+    stock: number | null
   }
 
   export type ProductMinAggregateOutputType = {
@@ -8965,6 +8967,7 @@ export namespace Prisma {
     maxHeight: number | null
     minWidth: number | null
     maxWidth: number | null
+    stock: number | null
     color: string | null
     pattern: string | null
     composition: string | null
@@ -9001,6 +9004,7 @@ export namespace Prisma {
     maxHeight: number | null
     minWidth: number | null
     maxWidth: number | null
+    stock: number | null
     color: string | null
     pattern: string | null
     composition: string | null
@@ -9038,6 +9042,7 @@ export namespace Prisma {
     maxHeight: number
     minWidth: number
     maxWidth: number
+    stock: number
     color: number
     pattern: number
     composition: number
@@ -9067,6 +9072,7 @@ export namespace Prisma {
     maxHeight?: true
     minWidth?: true
     maxWidth?: true
+    stock?: true
   }
 
   export type ProductSumAggregateInputType = {
@@ -9079,6 +9085,7 @@ export namespace Prisma {
     maxHeight?: true
     minWidth?: true
     maxWidth?: true
+    stock?: true
   }
 
   export type ProductMinAggregateInputType = {
@@ -9100,6 +9107,7 @@ export namespace Prisma {
     maxHeight?: true
     minWidth?: true
     maxWidth?: true
+    stock?: true
     color?: true
     pattern?: true
     composition?: true
@@ -9136,6 +9144,7 @@ export namespace Prisma {
     maxHeight?: true
     minWidth?: true
     maxWidth?: true
+    stock?: true
     color?: true
     pattern?: true
     composition?: true
@@ -9173,6 +9182,7 @@ export namespace Prisma {
     maxHeight?: true
     minWidth?: true
     maxWidth?: true
+    stock?: true
     color?: true
     pattern?: true
     composition?: true
@@ -9297,6 +9307,7 @@ export namespace Prisma {
     maxHeight: number
     minWidth: number
     maxWidth: number
+    stock: number
     color: string | null
     pattern: string | null
     composition: string | null
@@ -9353,6 +9364,7 @@ export namespace Prisma {
     maxHeight?: boolean
     minWidth?: boolean
     maxWidth?: boolean
+    stock?: boolean
     color?: boolean
     pattern?: boolean
     composition?: boolean
@@ -9394,6 +9406,7 @@ export namespace Prisma {
     maxHeight?: boolean
     minWidth?: boolean
     maxWidth?: boolean
+    stock?: boolean
     color?: boolean
     pattern?: boolean
     composition?: boolean
@@ -9433,6 +9446,7 @@ export namespace Prisma {
     maxHeight?: boolean
     minWidth?: boolean
     maxWidth?: boolean
+    stock?: boolean
     color?: boolean
     pattern?: boolean
     composition?: boolean
@@ -9472,6 +9486,7 @@ export namespace Prisma {
     maxHeight?: boolean
     minWidth?: boolean
     maxWidth?: boolean
+    stock?: boolean
     color?: boolean
     pattern?: boolean
     composition?: boolean
@@ -9489,7 +9504,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "subcategoryId" | "fabricId" | "blindTypeId" | "sku" | "name" | "slug" | "shortDescription" | "description" | "posterImageUrl" | "productImages" | "price" | "discountPrice" | "motorPrice" | "minHeight" | "maxHeight" | "minWidth" | "maxWidth" | "color" | "pattern" | "composition" | "isMotorized" | "additionalInfo" | "measuringGuide" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "subcategoryId" | "fabricId" | "blindTypeId" | "sku" | "name" | "slug" | "shortDescription" | "description" | "posterImageUrl" | "productImages" | "price" | "discountPrice" | "motorPrice" | "minHeight" | "maxHeight" | "minWidth" | "maxWidth" | "stock" | "color" | "pattern" | "composition" | "isMotorized" | "additionalInfo" | "measuringGuide" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     subcategory?: boolean | SubcategoryDefaultArgs<ExtArgs>
@@ -9532,6 +9547,7 @@ export namespace Prisma {
       maxHeight: number
       minWidth: number
       maxWidth: number
+      stock: number
       color: string | null
       pattern: string | null
       composition: string | null
@@ -9992,6 +10008,7 @@ export namespace Prisma {
     readonly maxHeight: FieldRef<"Product", 'Int'>
     readonly minWidth: FieldRef<"Product", 'Int'>
     readonly maxWidth: FieldRef<"Product", 'Int'>
+    readonly stock: FieldRef<"Product", 'Int'>
     readonly color: FieldRef<"Product", 'String'>
     readonly pattern: FieldRef<"Product", 'String'>
     readonly composition: FieldRef<"Product", 'String'>
@@ -14212,6 +14229,7 @@ export namespace Prisma {
     maxHeight: 'maxHeight',
     minWidth: 'minWidth',
     maxWidth: 'maxWidth',
+    stock: 'stock',
     color: 'color',
     pattern: 'pattern',
     composition: 'composition',
@@ -15074,6 +15092,7 @@ export namespace Prisma {
     maxHeight?: IntFilter<"Product"> | number
     minWidth?: IntFilter<"Product"> | number
     maxWidth?: IntFilter<"Product"> | number
+    stock?: IntFilter<"Product"> | number
     color?: StringNullableFilter<"Product"> | string | null
     pattern?: StringNullableFilter<"Product"> | string | null
     composition?: StringNullableFilter<"Product"> | string | null
@@ -15114,6 +15133,7 @@ export namespace Prisma {
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    stock?: SortOrder
     color?: SortOrderInput | SortOrder
     pattern?: SortOrderInput | SortOrder
     composition?: SortOrderInput | SortOrder
@@ -15158,6 +15178,7 @@ export namespace Prisma {
     maxHeight?: IntFilter<"Product"> | number
     minWidth?: IntFilter<"Product"> | number
     maxWidth?: IntFilter<"Product"> | number
+    stock?: IntFilter<"Product"> | number
     color?: StringNullableFilter<"Product"> | string | null
     pattern?: StringNullableFilter<"Product"> | string | null
     composition?: StringNullableFilter<"Product"> | string | null
@@ -15198,6 +15219,7 @@ export namespace Prisma {
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    stock?: SortOrder
     color?: SortOrderInput | SortOrder
     pattern?: SortOrderInput | SortOrder
     composition?: SortOrderInput | SortOrder
@@ -15243,6 +15265,7 @@ export namespace Prisma {
     maxHeight?: IntWithAggregatesFilter<"Product"> | number
     minWidth?: IntWithAggregatesFilter<"Product"> | number
     maxWidth?: IntWithAggregatesFilter<"Product"> | number
+    stock?: IntWithAggregatesFilter<"Product"> | number
     color?: StringNullableWithAggregatesFilter<"Product"> | string | null
     pattern?: StringNullableWithAggregatesFilter<"Product"> | string | null
     composition?: StringNullableWithAggregatesFilter<"Product"> | string | null
@@ -16221,6 +16244,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -16261,6 +16285,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -16297,6 +16322,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16337,6 +16363,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16375,6 +16402,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -16410,6 +16438,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16447,6 +16476,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17449,6 +17479,7 @@ export namespace Prisma {
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    stock?: SortOrder
     color?: SortOrder
     pattern?: SortOrder
     composition?: SortOrder
@@ -17476,6 +17507,7 @@ export namespace Prisma {
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    stock?: SortOrder
   }
 
   export type ProductMaxOrderByAggregateInput = {
@@ -17497,6 +17529,7 @@ export namespace Prisma {
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    stock?: SortOrder
     color?: SortOrder
     pattern?: SortOrder
     composition?: SortOrder
@@ -17533,6 +17566,7 @@ export namespace Prisma {
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    stock?: SortOrder
     color?: SortOrder
     pattern?: SortOrder
     composition?: SortOrder
@@ -17560,6 +17594,7 @@ export namespace Prisma {
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    stock?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -19341,6 +19376,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -19379,6 +19415,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -19494,6 +19531,7 @@ export namespace Prisma {
     maxHeight?: IntFilter<"Product"> | number
     minWidth?: IntFilter<"Product"> | number
     maxWidth?: IntFilter<"Product"> | number
+    stock?: IntFilter<"Product"> | number
     color?: StringNullableFilter<"Product"> | string | null
     pattern?: StringNullableFilter<"Product"> | string | null
     composition?: StringNullableFilter<"Product"> | string | null
@@ -19610,6 +19648,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -19648,6 +19687,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -20213,6 +20253,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -20252,6 +20293,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -20356,6 +20398,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20395,6 +20438,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20577,6 +20621,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -20630,6 +20675,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20668,6 +20714,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20705,6 +20752,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20797,6 +20845,7 @@ export namespace Prisma {
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    stock?: number
     color?: string | null
     pattern?: string | null
     composition?: string | null
@@ -20832,6 +20881,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20870,6 +20920,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20907,6 +20958,7 @@ export namespace Prisma {
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    stock?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
     composition?: NullableStringFieldUpdateOperationsInput | string | null

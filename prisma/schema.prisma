@@ -194,6 +194,7 @@ model Product {
   maxHeight        Int           @default(1)
   minWidth         Int           @default(0)
   maxWidth         Int           @default(1)
+  stock            Int           @default(0)
   color            String?
   pattern          String?
   composition      String?
