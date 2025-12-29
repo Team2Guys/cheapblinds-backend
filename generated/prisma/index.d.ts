@@ -6482,7 +6482,7 @@ export namespace Prisma {
     description: string | null
     metaTitle: string | null
     metaDescription: string | null
-    canonicalTag: string | null
+    canonicalUrl: string | null
     breadcrumb: string | null
     posterImageUrl: string | null
     seoSchema: string | null
@@ -6500,7 +6500,7 @@ export namespace Prisma {
     description: string | null
     metaTitle: string | null
     metaDescription: string | null
-    canonicalTag: string | null
+    canonicalUrl: string | null
     breadcrumb: string | null
     posterImageUrl: string | null
     seoSchema: string | null
@@ -6518,7 +6518,7 @@ export namespace Prisma {
     description: number
     metaTitle: number
     metaDescription: number
-    canonicalTag: number
+    canonicalUrl: number
     breadcrumb: number
     posterImageUrl: number
     seoSchema: number
@@ -6538,7 +6538,7 @@ export namespace Prisma {
     description?: true
     metaTitle?: true
     metaDescription?: true
-    canonicalTag?: true
+    canonicalUrl?: true
     breadcrumb?: true
     posterImageUrl?: true
     seoSchema?: true
@@ -6556,7 +6556,7 @@ export namespace Prisma {
     description?: true
     metaTitle?: true
     metaDescription?: true
-    canonicalTag?: true
+    canonicalUrl?: true
     breadcrumb?: true
     posterImageUrl?: true
     seoSchema?: true
@@ -6574,7 +6574,7 @@ export namespace Prisma {
     description?: true
     metaTitle?: true
     metaDescription?: true
-    canonicalTag?: true
+    canonicalUrl?: true
     breadcrumb?: true
     posterImageUrl?: true
     seoSchema?: true
@@ -6665,7 +6665,7 @@ export namespace Prisma {
     description: string | null
     metaTitle: string | null
     metaDescription: string | null
-    canonicalTag: string | null
+    canonicalUrl: string | null
     breadcrumb: string | null
     posterImageUrl: string | null
     seoSchema: string | null
@@ -6700,7 +6700,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     seoSchema?: boolean
@@ -6721,7 +6721,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     seoSchema?: boolean
@@ -6739,7 +6739,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     seoSchema?: boolean
@@ -6757,7 +6757,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     seoSchema?: boolean
@@ -6767,7 +6767,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "shortDescription" | "description" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "posterImageUrl" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "shortDescription" | "description" | "metaTitle" | "metaDescription" | "canonicalUrl" | "breadcrumb" | "posterImageUrl" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | Category$productsArgs<ExtArgs>
     subcategories?: boolean | Category$subcategoriesArgs<ExtArgs>
@@ -6790,7 +6790,7 @@ export namespace Prisma {
       description: string | null
       metaTitle: string | null
       metaDescription: string | null
-      canonicalTag: string | null
+      canonicalUrl: string | null
       breadcrumb: string | null
       posterImageUrl: string | null
       seoSchema: string | null
@@ -7230,7 +7230,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Category", 'String'>
     readonly metaTitle: FieldRef<"Category", 'String'>
     readonly metaDescription: FieldRef<"Category", 'String'>
-    readonly canonicalTag: FieldRef<"Category", 'String'>
+    readonly canonicalUrl: FieldRef<"Category", 'String'>
     readonly breadcrumb: FieldRef<"Category", 'String'>
     readonly posterImageUrl: FieldRef<"Category", 'String'>
     readonly seoSchema: FieldRef<"Category", 'String'>
@@ -7711,7 +7711,7 @@ export namespace Prisma {
     description: string | null
     metaTitle: string | null
     metaDescription: string | null
-    canonicalTag: string | null
+    canonicalUrl: string | null
     breadcrumb: string | null
     posterImageUrl: string | null
     seoSchema: string | null
@@ -7730,7 +7730,7 @@ export namespace Prisma {
     description: string | null
     metaTitle: string | null
     metaDescription: string | null
-    canonicalTag: string | null
+    canonicalUrl: string | null
     breadcrumb: string | null
     posterImageUrl: string | null
     seoSchema: string | null
@@ -7749,7 +7749,7 @@ export namespace Prisma {
     description: number
     metaTitle: number
     metaDescription: number
-    canonicalTag: number
+    canonicalUrl: number
     breadcrumb: number
     posterImageUrl: number
     seoSchema: number
@@ -7770,7 +7770,7 @@ export namespace Prisma {
     description?: true
     metaTitle?: true
     metaDescription?: true
-    canonicalTag?: true
+    canonicalUrl?: true
     breadcrumb?: true
     posterImageUrl?: true
     seoSchema?: true
@@ -7789,7 +7789,7 @@ export namespace Prisma {
     description?: true
     metaTitle?: true
     metaDescription?: true
-    canonicalTag?: true
+    canonicalUrl?: true
     breadcrumb?: true
     posterImageUrl?: true
     seoSchema?: true
@@ -7808,7 +7808,7 @@ export namespace Prisma {
     description?: true
     metaTitle?: true
     metaDescription?: true
-    canonicalTag?: true
+    canonicalUrl?: true
     breadcrumb?: true
     posterImageUrl?: true
     seoSchema?: true
@@ -7900,7 +7900,7 @@ export namespace Prisma {
     description: string | null
     metaTitle: string | null
     metaDescription: string | null
-    canonicalTag: string | null
+    canonicalUrl: string | null
     breadcrumb: string | null
     posterImageUrl: string | null
     seoSchema: string | null
@@ -7936,7 +7936,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     seoSchema?: boolean
@@ -7958,7 +7958,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     seoSchema?: boolean
@@ -7978,7 +7978,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     seoSchema?: boolean
@@ -7998,7 +7998,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     seoSchema?: boolean
@@ -8008,7 +8008,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type SubcategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "name" | "slug" | "shortDescription" | "description" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "posterImageUrl" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["subcategory"]>
+  export type SubcategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "name" | "slug" | "shortDescription" | "description" | "metaTitle" | "metaDescription" | "canonicalUrl" | "breadcrumb" | "posterImageUrl" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["subcategory"]>
   export type SubcategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     products?: boolean | Subcategory$productsArgs<ExtArgs>
@@ -8036,7 +8036,7 @@ export namespace Prisma {
       description: string | null
       metaTitle: string | null
       metaDescription: string | null
-      canonicalTag: string | null
+      canonicalUrl: string | null
       breadcrumb: string | null
       posterImageUrl: string | null
       seoSchema: string | null
@@ -8477,7 +8477,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Subcategory", 'String'>
     readonly metaTitle: FieldRef<"Subcategory", 'String'>
     readonly metaDescription: FieldRef<"Subcategory", 'String'>
-    readonly canonicalTag: FieldRef<"Subcategory", 'String'>
+    readonly canonicalUrl: FieldRef<"Subcategory", 'String'>
     readonly breadcrumb: FieldRef<"Subcategory", 'String'>
     readonly posterImageUrl: FieldRef<"Subcategory", 'String'>
     readonly seoSchema: FieldRef<"Subcategory", 'String'>
@@ -8972,7 +8972,7 @@ export namespace Prisma {
     description: string | null
     metaTitle: string | null
     metaDescription: string | null
-    canonicalTag: string | null
+    canonicalUrl: string | null
     breadcrumb: string | null
     posterImageUrl: string | null
     productUrl: string | null
@@ -9010,7 +9010,7 @@ export namespace Prisma {
     description: string | null
     metaTitle: string | null
     metaDescription: string | null
-    canonicalTag: string | null
+    canonicalUrl: string | null
     breadcrumb: string | null
     posterImageUrl: string | null
     productUrl: string | null
@@ -9048,7 +9048,7 @@ export namespace Prisma {
     description: number
     metaTitle: number
     metaDescription: number
-    canonicalTag: number
+    canonicalUrl: number
     breadcrumb: number
     posterImageUrl: number
     productUrl: number
@@ -9113,7 +9113,7 @@ export namespace Prisma {
     description?: true
     metaTitle?: true
     metaDescription?: true
-    canonicalTag?: true
+    canonicalUrl?: true
     breadcrumb?: true
     posterImageUrl?: true
     productUrl?: true
@@ -9151,7 +9151,7 @@ export namespace Prisma {
     description?: true
     metaTitle?: true
     metaDescription?: true
-    canonicalTag?: true
+    canonicalUrl?: true
     breadcrumb?: true
     posterImageUrl?: true
     productUrl?: true
@@ -9189,7 +9189,7 @@ export namespace Prisma {
     description?: true
     metaTitle?: true
     metaDescription?: true
-    canonicalTag?: true
+    canonicalUrl?: true
     breadcrumb?: true
     posterImageUrl?: true
     productUrl?: true
@@ -9315,7 +9315,7 @@ export namespace Prisma {
     description: string | null
     metaTitle: string | null
     metaDescription: string | null
-    canonicalTag: string | null
+    canonicalUrl: string | null
     breadcrumb: string | null
     posterImageUrl: string | null
     productUrl: string | null
@@ -9373,7 +9373,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     productUrl?: boolean
@@ -9416,7 +9416,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     productUrl?: boolean
@@ -9457,7 +9457,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     productUrl?: boolean
@@ -9498,7 +9498,7 @@ export namespace Prisma {
     description?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
-    canonicalTag?: boolean
+    canonicalUrl?: boolean
     breadcrumb?: boolean
     posterImageUrl?: boolean
     productUrl?: boolean
@@ -9524,7 +9524,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "subcategoryId" | "fabricId" | "blindTypeId" | "sku" | "name" | "slug" | "shortDescription" | "description" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "posterImageUrl" | "productUrl" | "productImages" | "price" | "discountPrice" | "motorPrice" | "minHeight" | "maxHeight" | "minWidth" | "maxWidth" | "inStock" | "color" | "pattern" | "material" | "isMotorized" | "additionalInfo" | "measuringGuide" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "subcategoryId" | "fabricId" | "blindTypeId" | "sku" | "name" | "slug" | "shortDescription" | "description" | "metaTitle" | "metaDescription" | "canonicalUrl" | "breadcrumb" | "posterImageUrl" | "productUrl" | "productImages" | "price" | "discountPrice" | "motorPrice" | "minHeight" | "maxHeight" | "minWidth" | "maxWidth" | "inStock" | "color" | "pattern" | "material" | "isMotorized" | "additionalInfo" | "measuringGuide" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     subcategory?: boolean | SubcategoryDefaultArgs<ExtArgs>
@@ -9560,7 +9560,7 @@ export namespace Prisma {
       description: string | null
       metaTitle: string | null
       metaDescription: string | null
-      canonicalTag: string | null
+      canonicalUrl: string | null
       breadcrumb: string | null
       posterImageUrl: string | null
       productUrl: string | null
@@ -10022,7 +10022,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Product", 'String'>
     readonly metaTitle: FieldRef<"Product", 'String'>
     readonly metaDescription: FieldRef<"Product", 'String'>
-    readonly canonicalTag: FieldRef<"Product", 'String'>
+    readonly canonicalUrl: FieldRef<"Product", 'String'>
     readonly breadcrumb: FieldRef<"Product", 'String'>
     readonly posterImageUrl: FieldRef<"Product", 'String'>
     readonly productUrl: FieldRef<"Product", 'String'>
@@ -14197,7 +14197,7 @@ export namespace Prisma {
     description: 'description',
     metaTitle: 'metaTitle',
     metaDescription: 'metaDescription',
-    canonicalTag: 'canonicalTag',
+    canonicalUrl: 'canonicalUrl',
     breadcrumb: 'breadcrumb',
     posterImageUrl: 'posterImageUrl',
     seoSchema: 'seoSchema',
@@ -14219,7 +14219,7 @@ export namespace Prisma {
     description: 'description',
     metaTitle: 'metaTitle',
     metaDescription: 'metaDescription',
-    canonicalTag: 'canonicalTag',
+    canonicalUrl: 'canonicalUrl',
     breadcrumb: 'breadcrumb',
     posterImageUrl: 'posterImageUrl',
     seoSchema: 'seoSchema',
@@ -14245,7 +14245,7 @@ export namespace Prisma {
     description: 'description',
     metaTitle: 'metaTitle',
     metaDescription: 'metaDescription',
-    canonicalTag: 'canonicalTag',
+    canonicalUrl: 'canonicalUrl',
     breadcrumb: 'breadcrumb',
     posterImageUrl: 'posterImageUrl',
     productUrl: 'productUrl',
@@ -14887,7 +14887,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Category"> | string | null
     metaTitle?: StringNullableFilter<"Category"> | string | null
     metaDescription?: StringNullableFilter<"Category"> | string | null
-    canonicalTag?: StringNullableFilter<"Category"> | string | null
+    canonicalUrl?: StringNullableFilter<"Category"> | string | null
     breadcrumb?: StringNullableFilter<"Category"> | string | null
     posterImageUrl?: StringNullableFilter<"Category"> | string | null
     seoSchema?: StringNullableFilter<"Category"> | string | null
@@ -14907,7 +14907,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
-    canonicalTag?: SortOrderInput | SortOrder
+    canonicalUrl?: SortOrderInput | SortOrder
     breadcrumb?: SortOrderInput | SortOrder
     posterImageUrl?: SortOrderInput | SortOrder
     seoSchema?: SortOrderInput | SortOrder
@@ -14930,7 +14930,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Category"> | string | null
     metaTitle?: StringNullableFilter<"Category"> | string | null
     metaDescription?: StringNullableFilter<"Category"> | string | null
-    canonicalTag?: StringNullableFilter<"Category"> | string | null
+    canonicalUrl?: StringNullableFilter<"Category"> | string | null
     breadcrumb?: StringNullableFilter<"Category"> | string | null
     posterImageUrl?: StringNullableFilter<"Category"> | string | null
     seoSchema?: StringNullableFilter<"Category"> | string | null
@@ -14950,7 +14950,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
-    canonicalTag?: SortOrderInput | SortOrder
+    canonicalUrl?: SortOrderInput | SortOrder
     breadcrumb?: SortOrderInput | SortOrder
     posterImageUrl?: SortOrderInput | SortOrder
     seoSchema?: SortOrderInput | SortOrder
@@ -14974,7 +14974,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Category"> | string | null
     metaTitle?: StringNullableWithAggregatesFilter<"Category"> | string | null
     metaDescription?: StringNullableWithAggregatesFilter<"Category"> | string | null
-    canonicalTag?: StringNullableWithAggregatesFilter<"Category"> | string | null
+    canonicalUrl?: StringNullableWithAggregatesFilter<"Category"> | string | null
     breadcrumb?: StringNullableWithAggregatesFilter<"Category"> | string | null
     posterImageUrl?: StringNullableWithAggregatesFilter<"Category"> | string | null
     seoSchema?: StringNullableWithAggregatesFilter<"Category"> | string | null
@@ -14996,7 +14996,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Subcategory"> | string | null
     metaTitle?: StringNullableFilter<"Subcategory"> | string | null
     metaDescription?: StringNullableFilter<"Subcategory"> | string | null
-    canonicalTag?: StringNullableFilter<"Subcategory"> | string | null
+    canonicalUrl?: StringNullableFilter<"Subcategory"> | string | null
     breadcrumb?: StringNullableFilter<"Subcategory"> | string | null
     posterImageUrl?: StringNullableFilter<"Subcategory"> | string | null
     seoSchema?: StringNullableFilter<"Subcategory"> | string | null
@@ -15017,7 +15017,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
-    canonicalTag?: SortOrderInput | SortOrder
+    canonicalUrl?: SortOrderInput | SortOrder
     breadcrumb?: SortOrderInput | SortOrder
     posterImageUrl?: SortOrderInput | SortOrder
     seoSchema?: SortOrderInput | SortOrder
@@ -15042,7 +15042,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Subcategory"> | string | null
     metaTitle?: StringNullableFilter<"Subcategory"> | string | null
     metaDescription?: StringNullableFilter<"Subcategory"> | string | null
-    canonicalTag?: StringNullableFilter<"Subcategory"> | string | null
+    canonicalUrl?: StringNullableFilter<"Subcategory"> | string | null
     breadcrumb?: StringNullableFilter<"Subcategory"> | string | null
     posterImageUrl?: StringNullableFilter<"Subcategory"> | string | null
     seoSchema?: StringNullableFilter<"Subcategory"> | string | null
@@ -15063,7 +15063,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
-    canonicalTag?: SortOrderInput | SortOrder
+    canonicalUrl?: SortOrderInput | SortOrder
     breadcrumb?: SortOrderInput | SortOrder
     posterImageUrl?: SortOrderInput | SortOrder
     seoSchema?: SortOrderInput | SortOrder
@@ -15088,7 +15088,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Subcategory"> | string | null
     metaTitle?: StringNullableWithAggregatesFilter<"Subcategory"> | string | null
     metaDescription?: StringNullableWithAggregatesFilter<"Subcategory"> | string | null
-    canonicalTag?: StringNullableWithAggregatesFilter<"Subcategory"> | string | null
+    canonicalUrl?: StringNullableWithAggregatesFilter<"Subcategory"> | string | null
     breadcrumb?: StringNullableWithAggregatesFilter<"Subcategory"> | string | null
     posterImageUrl?: StringNullableWithAggregatesFilter<"Subcategory"> | string | null
     seoSchema?: StringNullableWithAggregatesFilter<"Subcategory"> | string | null
@@ -15114,7 +15114,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Product"> | string | null
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDescription?: StringNullableFilter<"Product"> | string | null
-    canonicalTag?: StringNullableFilter<"Product"> | string | null
+    canonicalUrl?: StringNullableFilter<"Product"> | string | null
     breadcrumb?: StringNullableFilter<"Product"> | string | null
     posterImageUrl?: StringNullableFilter<"Product"> | string | null
     productUrl?: StringNullableFilter<"Product"> | string | null
@@ -15156,7 +15156,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
-    canonicalTag?: SortOrderInput | SortOrder
+    canonicalUrl?: SortOrderInput | SortOrder
     breadcrumb?: SortOrderInput | SortOrder
     posterImageUrl?: SortOrderInput | SortOrder
     productUrl?: SortOrderInput | SortOrder
@@ -15202,7 +15202,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Product"> | string | null
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDescription?: StringNullableFilter<"Product"> | string | null
-    canonicalTag?: StringNullableFilter<"Product"> | string | null
+    canonicalUrl?: StringNullableFilter<"Product"> | string | null
     breadcrumb?: StringNullableFilter<"Product"> | string | null
     posterImageUrl?: StringNullableFilter<"Product"> | string | null
     productUrl?: StringNullableFilter<"Product"> | string | null
@@ -15244,7 +15244,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
-    canonicalTag?: SortOrderInput | SortOrder
+    canonicalUrl?: SortOrderInput | SortOrder
     breadcrumb?: SortOrderInput | SortOrder
     posterImageUrl?: SortOrderInput | SortOrder
     productUrl?: SortOrderInput | SortOrder
@@ -15291,7 +15291,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Product"> | string | null
     metaTitle?: StringNullableWithAggregatesFilter<"Product"> | string | null
     metaDescription?: StringNullableWithAggregatesFilter<"Product"> | string | null
-    canonicalTag?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    canonicalUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
     breadcrumb?: StringNullableWithAggregatesFilter<"Product"> | string | null
     posterImageUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
     productUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
@@ -16005,7 +16005,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -16025,7 +16025,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -16045,7 +16045,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16065,7 +16065,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16085,7 +16085,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -16103,7 +16103,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16121,7 +16121,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16139,7 +16139,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -16160,7 +16160,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -16179,7 +16179,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16200,7 +16200,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16220,7 +16220,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -16238,7 +16238,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16257,7 +16257,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16278,7 +16278,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -16320,7 +16320,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -16358,7 +16358,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16400,7 +16400,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16440,7 +16440,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -16477,7 +16477,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16516,7 +16516,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17337,7 +17337,7 @@ export namespace Prisma {
     description?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
-    canonicalTag?: SortOrder
+    canonicalUrl?: SortOrder
     breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
     seoSchema?: SortOrder
@@ -17355,7 +17355,7 @@ export namespace Prisma {
     description?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
-    canonicalTag?: SortOrder
+    canonicalUrl?: SortOrder
     breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
     seoSchema?: SortOrder
@@ -17373,7 +17373,7 @@ export namespace Prisma {
     description?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
-    canonicalTag?: SortOrder
+    canonicalUrl?: SortOrder
     breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
     seoSchema?: SortOrder
@@ -17412,7 +17412,7 @@ export namespace Prisma {
     description?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
-    canonicalTag?: SortOrder
+    canonicalUrl?: SortOrder
     breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
     seoSchema?: SortOrder
@@ -17431,7 +17431,7 @@ export namespace Prisma {
     description?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
-    canonicalTag?: SortOrder
+    canonicalUrl?: SortOrder
     breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
     seoSchema?: SortOrder
@@ -17450,7 +17450,7 @@ export namespace Prisma {
     description?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
-    canonicalTag?: SortOrder
+    canonicalUrl?: SortOrder
     breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
     seoSchema?: SortOrder
@@ -17523,7 +17523,7 @@ export namespace Prisma {
     description?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
-    canonicalTag?: SortOrder
+    canonicalUrl?: SortOrder
     breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
     productUrl?: SortOrder
@@ -17574,7 +17574,7 @@ export namespace Prisma {
     description?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
-    canonicalTag?: SortOrder
+    canonicalUrl?: SortOrder
     breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
     productUrl?: SortOrder
@@ -17612,7 +17612,7 @@ export namespace Prisma {
     description?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
-    canonicalTag?: SortOrder
+    canonicalUrl?: SortOrder
     breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
     productUrl?: SortOrder
@@ -19433,7 +19433,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -19473,7 +19473,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -19518,7 +19518,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -19537,7 +19537,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -19590,7 +19590,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Product"> | string | null
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDescription?: StringNullableFilter<"Product"> | string | null
-    canonicalTag?: StringNullableFilter<"Product"> | string | null
+    canonicalUrl?: StringNullableFilter<"Product"> | string | null
     breadcrumb?: StringNullableFilter<"Product"> | string | null
     posterImageUrl?: StringNullableFilter<"Product"> | string | null
     productUrl?: StringNullableFilter<"Product"> | string | null
@@ -19644,7 +19644,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Subcategory"> | string | null
     metaTitle?: StringNullableFilter<"Subcategory"> | string | null
     metaDescription?: StringNullableFilter<"Subcategory"> | string | null
-    canonicalTag?: StringNullableFilter<"Subcategory"> | string | null
+    canonicalUrl?: StringNullableFilter<"Subcategory"> | string | null
     breadcrumb?: StringNullableFilter<"Subcategory"> | string | null
     posterImageUrl?: StringNullableFilter<"Subcategory"> | string | null
     seoSchema?: StringNullableFilter<"Subcategory"> | string | null
@@ -19662,7 +19662,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -19681,7 +19681,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -19708,7 +19708,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -19748,7 +19748,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -19804,7 +19804,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19823,7 +19823,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19858,7 +19858,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -19877,7 +19877,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -19901,7 +19901,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -19921,7 +19921,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -20003,7 +20003,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20022,7 +20022,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20052,7 +20052,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20072,7 +20072,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20319,7 +20319,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -20360,7 +20360,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -20466,7 +20466,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20507,7 +20507,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20691,7 +20691,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -20725,7 +20725,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     seoSchema?: string | null
@@ -20746,7 +20746,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20786,7 +20786,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20825,7 +20825,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20859,7 +20859,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20878,7 +20878,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20897,7 +20897,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20919,7 +20919,7 @@ export namespace Prisma {
     description?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
-    canonicalTag?: string | null
+    canonicalUrl?: string | null
     breadcrumb?: string | null
     posterImageUrl?: string | null
     productUrl?: string | null
@@ -20956,7 +20956,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20996,7 +20996,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21035,7 +21035,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productUrl?: NullableStringFieldUpdateOperationsInput | string | null
