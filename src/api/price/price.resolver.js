@@ -6,7 +6,11 @@ const { handlePromise } = commonUtils;
 export const priceResolvers = {
   Query: {
     fabricPrice: handlePromise((_parent, { input }) =>
-      priceServices.fabricPrice(input)
+      priceServices.getFabricPrice(input)
+    ),
+
+    optionsPrice: handlePromise((_parent, { input }) =>
+      priceServices.getOptionsPrice(input)
     )
   }
 };

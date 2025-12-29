@@ -190,7 +190,8 @@ model Product {
   metaDescription  String?       @db.Text()
   canonicalTag     String?
   breadcrumb       String?
-  posterImageUrl   String
+  posterImageUrl   String?
+  productUrl       String?
   productImages    String[]      @default([])
   price            Decimal       @default(0)
   discountPrice    Decimal       @default(0)

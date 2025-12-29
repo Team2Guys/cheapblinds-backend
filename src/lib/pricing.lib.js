@@ -31,3 +31,19 @@ export const getFabricPrice = async (drop, width, fabricId, blindTypeId) => {
 
   return response.data[0];
 };
+
+export const getOptionsPrice = async (drop, width, fabricId, blindTypeId) => {
+  const response = await axios.get(optionApiUrl, {
+    params: {
+      key: ILLUMIN8S_API_KEY,
+      drop,
+      width,
+      fabricid: fabricId,
+      blindtypeid: blindTypeId,
+      retailerId: ILLUMIN8S_RETAILER_ID,
+      retailermasterid: ILLUMIN8S_RETAILER_MASTER_ID
+    }
+  });
+
+  return response.data;
+};
