@@ -64,8 +64,6 @@ export async function seedProducts() {
         `❌ Row ${rowNum}: Subcategory "${row.subcategoryName}" not found under category "${row.categoryName}"`
       );
 
-    const slug = slugify(row.name, { lower: true, strict: true });
-
     return {
       rowNum,
       categoryId,
@@ -74,7 +72,7 @@ export async function seedProducts() {
       blindTypeId: row.blindTypeId || null,
       sku: row.sku || '',
       name: row.name,
-      slug,
+      slug: row.slug,
       shortDescription: row.shortDescription || '',
       description: row.description || '',
       metaTitle: row.metaTitle || row.name,
