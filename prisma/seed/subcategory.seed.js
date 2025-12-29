@@ -2,7 +2,6 @@
 import xlsx from 'xlsx';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import slugify from 'slugify';
 import { prisma } from '#lib/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -49,7 +48,7 @@ export async function seedSubcategories() {
     return {
       categoryId,
       name: row.name,
-      slug: slugify(row.name, { lower: true, strict: true }),
+      slug: row.slug,
       description: row.description || '',
       shortDescription: row.shortDescription || '',
       metaTitle: row.metaTitle || row.name,
