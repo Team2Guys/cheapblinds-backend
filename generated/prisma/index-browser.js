@@ -223,6 +223,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   canonicalTag: 'canonicalTag',
   breadcrumb: 'breadcrumb',
   posterImageUrl: 'posterImageUrl',
+  productUrl: 'productUrl',
   productImages: 'productImages',
   price: 'price',
   discountPrice: 'discountPrice',
