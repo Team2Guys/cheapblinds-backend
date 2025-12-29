@@ -46,12 +46,10 @@ export async function seedSubcategories() {
         `❌ Row ${rowNum}: Category "${row.categoryName}" not found in DB`
       );
 
-    const slug = slugify(row.name, { lower: true, strict: true });
-
     return {
       categoryId,
       name: row.name,
-      slug,
+      slug: slugify(row.name, { lower: true, strict: true }),
       description: row.description || '',
       shortDescription: row.shortDescription || '',
       metaTitle: row.metaTitle || row.name,

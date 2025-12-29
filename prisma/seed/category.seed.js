@@ -28,14 +28,13 @@ export async function seedCategories() {
   for (const [index, row] of rows.entries()) {
     if (!row.name) throw new Error(`❌ Row ${index + 1}: name is required`);
 
-    const slug = slugify(row.name, { lower: true, strict: true });
     console.log(`➡️ [${index + 1}] ${row.name}`);
 
     const data = {
       name: row.name,
       description: row.description || '',
       shortDescription: row.shortDescription || '',
-      slug,
+      slug: slugify(row.name, { lower: true, strict: true }),
       metaTitle: row.metaTitle || row.name,
       metaDescription: row.metaDescription || '',
       canonicalTag: row.canonicalTag || '',
