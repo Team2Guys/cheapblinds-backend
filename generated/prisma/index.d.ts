@@ -3040,6 +3040,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     isEmailVerified: boolean | null
+    isMember: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3053,6 +3054,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     isEmailVerified: boolean | null
+    isMember: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3066,6 +3068,7 @@ export namespace Prisma {
     email: number
     password: number
     isEmailVerified: number
+    isMember: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3081,6 +3084,7 @@ export namespace Prisma {
     email?: true
     password?: true
     isEmailVerified?: true
+    isMember?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3094,6 +3098,7 @@ export namespace Prisma {
     email?: true
     password?: true
     isEmailVerified?: true
+    isMember?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3107,6 +3112,7 @@ export namespace Prisma {
     email?: true
     password?: true
     isEmailVerified?: true
+    isMember?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3193,6 +3199,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified: boolean
+    isMember: boolean
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -3223,6 +3230,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     addresses?: boolean | User$addressesArgs<ExtArgs>
@@ -3241,6 +3249,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     defaultShippingAddress?: boolean | User$defaultShippingAddressArgs<ExtArgs>
@@ -3256,6 +3265,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     defaultShippingAddress?: boolean | User$defaultShippingAddressArgs<ExtArgs>
@@ -3271,11 +3281,12 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "defaultShippingAddressId" | "defaultBillingAddressId" | "firstName" | "lastName" | "email" | "password" | "isEmailVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "defaultShippingAddressId" | "defaultBillingAddressId" | "firstName" | "lastName" | "email" | "password" | "isEmailVerified" | "isMember" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     addresses?: boolean | User$addressesArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
@@ -3309,6 +3320,7 @@ export namespace Prisma {
       email: string
       password: string
       isEmailVerified: boolean
+      isMember: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -3746,6 +3758,7 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly isEmailVerified: FieldRef<"User", 'Boolean'>
+    readonly isMember: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -8926,6 +8939,7 @@ export namespace Prisma {
     fabricId: number | null
     blindTypeId: number | null
     price: Decimal | null
+    discountPrice: Decimal | null
     motorPrice: Decimal | null
     minHeight: number | null
     maxHeight: number | null
@@ -8937,6 +8951,7 @@ export namespace Prisma {
     fabricId: number | null
     blindTypeId: number | null
     price: Decimal | null
+    discountPrice: Decimal | null
     motorPrice: Decimal | null
     minHeight: number | null
     maxHeight: number | null
@@ -8955,23 +8970,26 @@ export namespace Prisma {
     slug: string | null
     shortDescription: string | null
     description: string | null
+    metaTitle: string | null
+    metaDescription: string | null
+    canonicalTag: string | null
+    breadcrumb: string | null
     posterImageUrl: string | null
+    productUrl: string | null
     price: Decimal | null
+    discountPrice: Decimal | null
     motorPrice: Decimal | null
     minHeight: number | null
     maxHeight: number | null
     minWidth: number | null
     maxWidth: number | null
+    inStock: boolean | null
     color: string | null
     pattern: string | null
-    composition: string | null
+    material: string | null
     isMotorized: boolean | null
     additionalInfo: string | null
     measuringGuide: string | null
-    metaTitle: string | null
-    metaDescription: string | null
-    canonicalTag: string | null
-    breadcrumb: string | null
     seoSchema: string | null
     status: $Enums.ContentStatus | null
     lastEditedBy: string | null
@@ -8990,23 +9008,26 @@ export namespace Prisma {
     slug: string | null
     shortDescription: string | null
     description: string | null
+    metaTitle: string | null
+    metaDescription: string | null
+    canonicalTag: string | null
+    breadcrumb: string | null
     posterImageUrl: string | null
+    productUrl: string | null
     price: Decimal | null
+    discountPrice: Decimal | null
     motorPrice: Decimal | null
     minHeight: number | null
     maxHeight: number | null
     minWidth: number | null
     maxWidth: number | null
+    inStock: boolean | null
     color: string | null
     pattern: string | null
-    composition: string | null
+    material: string | null
     isMotorized: boolean | null
     additionalInfo: string | null
     measuringGuide: string | null
-    metaTitle: string | null
-    metaDescription: string | null
-    canonicalTag: string | null
-    breadcrumb: string | null
     seoSchema: string | null
     status: $Enums.ContentStatus | null
     lastEditedBy: string | null
@@ -9025,24 +9046,27 @@ export namespace Prisma {
     slug: number
     shortDescription: number
     description: number
+    metaTitle: number
+    metaDescription: number
+    canonicalTag: number
+    breadcrumb: number
     posterImageUrl: number
+    productUrl: number
     productImages: number
     price: number
+    discountPrice: number
     motorPrice: number
     minHeight: number
     maxHeight: number
     minWidth: number
     maxWidth: number
+    inStock: number
     color: number
     pattern: number
-    composition: number
+    material: number
     isMotorized: number
     additionalInfo: number
     measuringGuide: number
-    metaTitle: number
-    metaDescription: number
-    canonicalTag: number
-    breadcrumb: number
     seoSchema: number
     status: number
     lastEditedBy: number
@@ -9056,6 +9080,7 @@ export namespace Prisma {
     fabricId?: true
     blindTypeId?: true
     price?: true
+    discountPrice?: true
     motorPrice?: true
     minHeight?: true
     maxHeight?: true
@@ -9067,6 +9092,7 @@ export namespace Prisma {
     fabricId?: true
     blindTypeId?: true
     price?: true
+    discountPrice?: true
     motorPrice?: true
     minHeight?: true
     maxHeight?: true
@@ -9085,23 +9111,26 @@ export namespace Prisma {
     slug?: true
     shortDescription?: true
     description?: true
+    metaTitle?: true
+    metaDescription?: true
+    canonicalTag?: true
+    breadcrumb?: true
     posterImageUrl?: true
+    productUrl?: true
     price?: true
+    discountPrice?: true
     motorPrice?: true
     minHeight?: true
     maxHeight?: true
     minWidth?: true
     maxWidth?: true
+    inStock?: true
     color?: true
     pattern?: true
-    composition?: true
+    material?: true
     isMotorized?: true
     additionalInfo?: true
     measuringGuide?: true
-    metaTitle?: true
-    metaDescription?: true
-    canonicalTag?: true
-    breadcrumb?: true
     seoSchema?: true
     status?: true
     lastEditedBy?: true
@@ -9120,23 +9149,26 @@ export namespace Prisma {
     slug?: true
     shortDescription?: true
     description?: true
+    metaTitle?: true
+    metaDescription?: true
+    canonicalTag?: true
+    breadcrumb?: true
     posterImageUrl?: true
+    productUrl?: true
     price?: true
+    discountPrice?: true
     motorPrice?: true
     minHeight?: true
     maxHeight?: true
     minWidth?: true
     maxWidth?: true
+    inStock?: true
     color?: true
     pattern?: true
-    composition?: true
+    material?: true
     isMotorized?: true
     additionalInfo?: true
     measuringGuide?: true
-    metaTitle?: true
-    metaDescription?: true
-    canonicalTag?: true
-    breadcrumb?: true
     seoSchema?: true
     status?: true
     lastEditedBy?: true
@@ -9155,24 +9187,27 @@ export namespace Prisma {
     slug?: true
     shortDescription?: true
     description?: true
+    metaTitle?: true
+    metaDescription?: true
+    canonicalTag?: true
+    breadcrumb?: true
     posterImageUrl?: true
+    productUrl?: true
     productImages?: true
     price?: true
+    discountPrice?: true
     motorPrice?: true
     minHeight?: true
     maxHeight?: true
     minWidth?: true
     maxWidth?: true
+    inStock?: true
     color?: true
     pattern?: true
-    composition?: true
+    material?: true
     isMotorized?: true
     additionalInfo?: true
     measuringGuide?: true
-    metaTitle?: true
-    metaDescription?: true
-    canonicalTag?: true
-    breadcrumb?: true
     seoSchema?: true
     status?: true
     lastEditedBy?: true
@@ -9278,24 +9313,27 @@ export namespace Prisma {
     slug: string
     shortDescription: string | null
     description: string | null
-    posterImageUrl: string
+    metaTitle: string | null
+    metaDescription: string | null
+    canonicalTag: string | null
+    breadcrumb: string | null
+    posterImageUrl: string | null
+    productUrl: string | null
     productImages: string[]
     price: Decimal
+    discountPrice: Decimal
     motorPrice: Decimal
     minHeight: number
     maxHeight: number
     minWidth: number
     maxWidth: number
+    inStock: boolean
     color: string | null
     pattern: string | null
-    composition: string | null
+    material: string | null
     isMotorized: boolean
     additionalInfo: string | null
     measuringGuide: string | null
-    metaTitle: string | null
-    metaDescription: string | null
-    canonicalTag: string | null
-    breadcrumb: string | null
     seoSchema: string | null
     status: $Enums.ContentStatus
     lastEditedBy: string | null
@@ -9333,24 +9371,27 @@ export namespace Prisma {
     slug?: boolean
     shortDescription?: boolean
     description?: boolean
+    metaTitle?: boolean
+    metaDescription?: boolean
+    canonicalTag?: boolean
+    breadcrumb?: boolean
     posterImageUrl?: boolean
+    productUrl?: boolean
     productImages?: boolean
     price?: boolean
+    discountPrice?: boolean
     motorPrice?: boolean
     minHeight?: boolean
     maxHeight?: boolean
     minWidth?: boolean
     maxWidth?: boolean
+    inStock?: boolean
     color?: boolean
     pattern?: boolean
-    composition?: boolean
+    material?: boolean
     isMotorized?: boolean
     additionalInfo?: boolean
     measuringGuide?: boolean
-    metaTitle?: boolean
-    metaDescription?: boolean
-    canonicalTag?: boolean
-    breadcrumb?: boolean
     seoSchema?: boolean
     status?: boolean
     lastEditedBy?: boolean
@@ -9373,24 +9414,27 @@ export namespace Prisma {
     slug?: boolean
     shortDescription?: boolean
     description?: boolean
+    metaTitle?: boolean
+    metaDescription?: boolean
+    canonicalTag?: boolean
+    breadcrumb?: boolean
     posterImageUrl?: boolean
+    productUrl?: boolean
     productImages?: boolean
     price?: boolean
+    discountPrice?: boolean
     motorPrice?: boolean
     minHeight?: boolean
     maxHeight?: boolean
     minWidth?: boolean
     maxWidth?: boolean
+    inStock?: boolean
     color?: boolean
     pattern?: boolean
-    composition?: boolean
+    material?: boolean
     isMotorized?: boolean
     additionalInfo?: boolean
     measuringGuide?: boolean
-    metaTitle?: boolean
-    metaDescription?: boolean
-    canonicalTag?: boolean
-    breadcrumb?: boolean
     seoSchema?: boolean
     status?: boolean
     lastEditedBy?: boolean
@@ -9411,24 +9455,27 @@ export namespace Prisma {
     slug?: boolean
     shortDescription?: boolean
     description?: boolean
+    metaTitle?: boolean
+    metaDescription?: boolean
+    canonicalTag?: boolean
+    breadcrumb?: boolean
     posterImageUrl?: boolean
+    productUrl?: boolean
     productImages?: boolean
     price?: boolean
+    discountPrice?: boolean
     motorPrice?: boolean
     minHeight?: boolean
     maxHeight?: boolean
     minWidth?: boolean
     maxWidth?: boolean
+    inStock?: boolean
     color?: boolean
     pattern?: boolean
-    composition?: boolean
+    material?: boolean
     isMotorized?: boolean
     additionalInfo?: boolean
     measuringGuide?: boolean
-    metaTitle?: boolean
-    metaDescription?: boolean
-    canonicalTag?: boolean
-    breadcrumb?: boolean
     seoSchema?: boolean
     status?: boolean
     lastEditedBy?: boolean
@@ -9449,24 +9496,27 @@ export namespace Prisma {
     slug?: boolean
     shortDescription?: boolean
     description?: boolean
+    metaTitle?: boolean
+    metaDescription?: boolean
+    canonicalTag?: boolean
+    breadcrumb?: boolean
     posterImageUrl?: boolean
+    productUrl?: boolean
     productImages?: boolean
     price?: boolean
+    discountPrice?: boolean
     motorPrice?: boolean
     minHeight?: boolean
     maxHeight?: boolean
     minWidth?: boolean
     maxWidth?: boolean
+    inStock?: boolean
     color?: boolean
     pattern?: boolean
-    composition?: boolean
+    material?: boolean
     isMotorized?: boolean
     additionalInfo?: boolean
     measuringGuide?: boolean
-    metaTitle?: boolean
-    metaDescription?: boolean
-    canonicalTag?: boolean
-    breadcrumb?: boolean
     seoSchema?: boolean
     status?: boolean
     lastEditedBy?: boolean
@@ -9474,7 +9524,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "subcategoryId" | "fabricId" | "blindTypeId" | "sku" | "name" | "slug" | "shortDescription" | "description" | "posterImageUrl" | "productImages" | "price" | "motorPrice" | "minHeight" | "maxHeight" | "minWidth" | "maxWidth" | "color" | "pattern" | "composition" | "isMotorized" | "additionalInfo" | "measuringGuide" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categoryId" | "subcategoryId" | "fabricId" | "blindTypeId" | "sku" | "name" | "slug" | "shortDescription" | "description" | "metaTitle" | "metaDescription" | "canonicalTag" | "breadcrumb" | "posterImageUrl" | "productUrl" | "productImages" | "price" | "discountPrice" | "motorPrice" | "minHeight" | "maxHeight" | "minWidth" | "maxWidth" | "inStock" | "color" | "pattern" | "material" | "isMotorized" | "additionalInfo" | "measuringGuide" | "seoSchema" | "status" | "lastEditedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     subcategory?: boolean | SubcategoryDefaultArgs<ExtArgs>
@@ -9508,24 +9558,27 @@ export namespace Prisma {
       slug: string
       shortDescription: string | null
       description: string | null
-      posterImageUrl: string
+      metaTitle: string | null
+      metaDescription: string | null
+      canonicalTag: string | null
+      breadcrumb: string | null
+      posterImageUrl: string | null
+      productUrl: string | null
       productImages: string[]
       price: Prisma.Decimal
+      discountPrice: Prisma.Decimal
       motorPrice: Prisma.Decimal
       minHeight: number
       maxHeight: number
       minWidth: number
       maxWidth: number
+      inStock: boolean
       color: string | null
       pattern: string | null
-      composition: string | null
+      material: string | null
       isMotorized: boolean
       additionalInfo: string | null
       measuringGuide: string | null
-      metaTitle: string | null
-      metaDescription: string | null
-      canonicalTag: string | null
-      breadcrumb: string | null
       seoSchema: string | null
       status: $Enums.ContentStatus
       lastEditedBy: string | null
@@ -9967,24 +10020,27 @@ export namespace Prisma {
     readonly slug: FieldRef<"Product", 'String'>
     readonly shortDescription: FieldRef<"Product", 'String'>
     readonly description: FieldRef<"Product", 'String'>
+    readonly metaTitle: FieldRef<"Product", 'String'>
+    readonly metaDescription: FieldRef<"Product", 'String'>
+    readonly canonicalTag: FieldRef<"Product", 'String'>
+    readonly breadcrumb: FieldRef<"Product", 'String'>
     readonly posterImageUrl: FieldRef<"Product", 'String'>
+    readonly productUrl: FieldRef<"Product", 'String'>
     readonly productImages: FieldRef<"Product", 'String[]'>
     readonly price: FieldRef<"Product", 'Decimal'>
+    readonly discountPrice: FieldRef<"Product", 'Decimal'>
     readonly motorPrice: FieldRef<"Product", 'Decimal'>
     readonly minHeight: FieldRef<"Product", 'Int'>
     readonly maxHeight: FieldRef<"Product", 'Int'>
     readonly minWidth: FieldRef<"Product", 'Int'>
     readonly maxWidth: FieldRef<"Product", 'Int'>
+    readonly inStock: FieldRef<"Product", 'Boolean'>
     readonly color: FieldRef<"Product", 'String'>
     readonly pattern: FieldRef<"Product", 'String'>
-    readonly composition: FieldRef<"Product", 'String'>
+    readonly material: FieldRef<"Product", 'String'>
     readonly isMotorized: FieldRef<"Product", 'Boolean'>
     readonly additionalInfo: FieldRef<"Product", 'String'>
     readonly measuringGuide: FieldRef<"Product", 'String'>
-    readonly metaTitle: FieldRef<"Product", 'String'>
-    readonly metaDescription: FieldRef<"Product", 'String'>
-    readonly canonicalTag: FieldRef<"Product", 'String'>
-    readonly breadcrumb: FieldRef<"Product", 'String'>
     readonly seoSchema: FieldRef<"Product", 'String'>
     readonly status: FieldRef<"Product", 'ContentStatus'>
     readonly lastEditedBy: FieldRef<"Product", 'String'>
@@ -14095,6 +14151,7 @@ export namespace Prisma {
     email: 'email',
     password: 'password',
     isEmailVerified: 'isEmailVerified',
+    isMember: 'isMember',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -14186,24 +14243,27 @@ export namespace Prisma {
     slug: 'slug',
     shortDescription: 'shortDescription',
     description: 'description',
+    metaTitle: 'metaTitle',
+    metaDescription: 'metaDescription',
+    canonicalTag: 'canonicalTag',
+    breadcrumb: 'breadcrumb',
     posterImageUrl: 'posterImageUrl',
+    productUrl: 'productUrl',
     productImages: 'productImages',
     price: 'price',
+    discountPrice: 'discountPrice',
     motorPrice: 'motorPrice',
     minHeight: 'minHeight',
     maxHeight: 'maxHeight',
     minWidth: 'minWidth',
     maxWidth: 'maxWidth',
+    inStock: 'inStock',
     color: 'color',
     pattern: 'pattern',
-    composition: 'composition',
+    material: 'material',
     isMotorized: 'isMotorized',
     additionalInfo: 'additionalInfo',
     measuringGuide: 'measuringGuide',
-    metaTitle: 'metaTitle',
-    metaDescription: 'metaDescription',
-    canonicalTag: 'canonicalTag',
-    breadcrumb: 'breadcrumb',
     seoSchema: 'seoSchema',
     status: 'status',
     lastEditedBy: 'lastEditedBy',
@@ -14581,6 +14641,7 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     isEmailVerified?: BoolFilter<"User"> | boolean
+    isMember?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     addresses?: AddressListRelationFilter
@@ -14598,6 +14659,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     isEmailVerified?: SortOrder
+    isMember?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     addresses?: AddressOrderByRelationAggregateInput
@@ -14618,6 +14680,7 @@ export namespace Prisma {
     lastName?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     isEmailVerified?: BoolFilter<"User"> | boolean
+    isMember?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     addresses?: AddressListRelationFilter
@@ -14635,6 +14698,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     isEmailVerified?: SortOrder
+    isMember?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -14654,6 +14718,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     isEmailVerified?: BoolWithAggregatesFilter<"User"> | boolean
+    isMember?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -15047,24 +15112,27 @@ export namespace Prisma {
     slug?: StringFilter<"Product"> | string
     shortDescription?: StringNullableFilter<"Product"> | string | null
     description?: StringNullableFilter<"Product"> | string | null
-    posterImageUrl?: StringFilter<"Product"> | string
+    metaTitle?: StringNullableFilter<"Product"> | string | null
+    metaDescription?: StringNullableFilter<"Product"> | string | null
+    canonicalTag?: StringNullableFilter<"Product"> | string | null
+    breadcrumb?: StringNullableFilter<"Product"> | string | null
+    posterImageUrl?: StringNullableFilter<"Product"> | string | null
+    productUrl?: StringNullableFilter<"Product"> | string | null
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     minHeight?: IntFilter<"Product"> | number
     maxHeight?: IntFilter<"Product"> | number
     minWidth?: IntFilter<"Product"> | number
     maxWidth?: IntFilter<"Product"> | number
+    inStock?: BoolFilter<"Product"> | boolean
     color?: StringNullableFilter<"Product"> | string | null
     pattern?: StringNullableFilter<"Product"> | string | null
-    composition?: StringNullableFilter<"Product"> | string | null
+    material?: StringNullableFilter<"Product"> | string | null
     isMotorized?: BoolFilter<"Product"> | boolean
     additionalInfo?: StringNullableFilter<"Product"> | string | null
     measuringGuide?: StringNullableFilter<"Product"> | string | null
-    metaTitle?: StringNullableFilter<"Product"> | string | null
-    metaDescription?: StringNullableFilter<"Product"> | string | null
-    canonicalTag?: StringNullableFilter<"Product"> | string | null
-    breadcrumb?: StringNullableFilter<"Product"> | string | null
     seoSchema?: StringNullableFilter<"Product"> | string | null
     status?: EnumContentStatusFilter<"Product"> | $Enums.ContentStatus
     lastEditedBy?: StringNullableFilter<"Product"> | string | null
@@ -15086,24 +15154,27 @@ export namespace Prisma {
     slug?: SortOrder
     shortDescription?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
-    posterImageUrl?: SortOrder
+    metaTitle?: SortOrderInput | SortOrder
+    metaDescription?: SortOrderInput | SortOrder
+    canonicalTag?: SortOrderInput | SortOrder
+    breadcrumb?: SortOrderInput | SortOrder
+    posterImageUrl?: SortOrderInput | SortOrder
+    productUrl?: SortOrderInput | SortOrder
     productImages?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    inStock?: SortOrder
     color?: SortOrderInput | SortOrder
     pattern?: SortOrderInput | SortOrder
-    composition?: SortOrderInput | SortOrder
+    material?: SortOrderInput | SortOrder
     isMotorized?: SortOrder
     additionalInfo?: SortOrderInput | SortOrder
     measuringGuide?: SortOrderInput | SortOrder
-    metaTitle?: SortOrderInput | SortOrder
-    metaDescription?: SortOrderInput | SortOrder
-    canonicalTag?: SortOrderInput | SortOrder
-    breadcrumb?: SortOrderInput | SortOrder
     seoSchema?: SortOrderInput | SortOrder
     status?: SortOrder
     lastEditedBy?: SortOrderInput | SortOrder
@@ -15129,24 +15200,27 @@ export namespace Prisma {
     slug?: StringFilter<"Product"> | string
     shortDescription?: StringNullableFilter<"Product"> | string | null
     description?: StringNullableFilter<"Product"> | string | null
-    posterImageUrl?: StringFilter<"Product"> | string
+    metaTitle?: StringNullableFilter<"Product"> | string | null
+    metaDescription?: StringNullableFilter<"Product"> | string | null
+    canonicalTag?: StringNullableFilter<"Product"> | string | null
+    breadcrumb?: StringNullableFilter<"Product"> | string | null
+    posterImageUrl?: StringNullableFilter<"Product"> | string | null
+    productUrl?: StringNullableFilter<"Product"> | string | null
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     minHeight?: IntFilter<"Product"> | number
     maxHeight?: IntFilter<"Product"> | number
     minWidth?: IntFilter<"Product"> | number
     maxWidth?: IntFilter<"Product"> | number
+    inStock?: BoolFilter<"Product"> | boolean
     color?: StringNullableFilter<"Product"> | string | null
     pattern?: StringNullableFilter<"Product"> | string | null
-    composition?: StringNullableFilter<"Product"> | string | null
+    material?: StringNullableFilter<"Product"> | string | null
     isMotorized?: BoolFilter<"Product"> | boolean
     additionalInfo?: StringNullableFilter<"Product"> | string | null
     measuringGuide?: StringNullableFilter<"Product"> | string | null
-    metaTitle?: StringNullableFilter<"Product"> | string | null
-    metaDescription?: StringNullableFilter<"Product"> | string | null
-    canonicalTag?: StringNullableFilter<"Product"> | string | null
-    breadcrumb?: StringNullableFilter<"Product"> | string | null
     seoSchema?: StringNullableFilter<"Product"> | string | null
     status?: EnumContentStatusFilter<"Product"> | $Enums.ContentStatus
     lastEditedBy?: StringNullableFilter<"Product"> | string | null
@@ -15168,24 +15242,27 @@ export namespace Prisma {
     slug?: SortOrder
     shortDescription?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
-    posterImageUrl?: SortOrder
+    metaTitle?: SortOrderInput | SortOrder
+    metaDescription?: SortOrderInput | SortOrder
+    canonicalTag?: SortOrderInput | SortOrder
+    breadcrumb?: SortOrderInput | SortOrder
+    posterImageUrl?: SortOrderInput | SortOrder
+    productUrl?: SortOrderInput | SortOrder
     productImages?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    inStock?: SortOrder
     color?: SortOrderInput | SortOrder
     pattern?: SortOrderInput | SortOrder
-    composition?: SortOrderInput | SortOrder
+    material?: SortOrderInput | SortOrder
     isMotorized?: SortOrder
     additionalInfo?: SortOrderInput | SortOrder
     measuringGuide?: SortOrderInput | SortOrder
-    metaTitle?: SortOrderInput | SortOrder
-    metaDescription?: SortOrderInput | SortOrder
-    canonicalTag?: SortOrderInput | SortOrder
-    breadcrumb?: SortOrderInput | SortOrder
     seoSchema?: SortOrderInput | SortOrder
     status?: SortOrder
     lastEditedBy?: SortOrderInput | SortOrder
@@ -15212,24 +15289,27 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Product"> | string
     shortDescription?: StringNullableWithAggregatesFilter<"Product"> | string | null
     description?: StringNullableWithAggregatesFilter<"Product"> | string | null
-    posterImageUrl?: StringWithAggregatesFilter<"Product"> | string
+    metaTitle?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    metaDescription?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    canonicalTag?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    breadcrumb?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    posterImageUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    productUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
     minHeight?: IntWithAggregatesFilter<"Product"> | number
     maxHeight?: IntWithAggregatesFilter<"Product"> | number
     minWidth?: IntWithAggregatesFilter<"Product"> | number
     maxWidth?: IntWithAggregatesFilter<"Product"> | number
+    inStock?: BoolWithAggregatesFilter<"Product"> | boolean
     color?: StringNullableWithAggregatesFilter<"Product"> | string | null
     pattern?: StringNullableWithAggregatesFilter<"Product"> | string | null
-    composition?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    material?: StringNullableWithAggregatesFilter<"Product"> | string | null
     isMotorized?: BoolWithAggregatesFilter<"Product"> | boolean
     additionalInfo?: StringNullableWithAggregatesFilter<"Product"> | string | null
     measuringGuide?: StringNullableWithAggregatesFilter<"Product"> | string | null
-    metaTitle?: StringNullableWithAggregatesFilter<"Product"> | string | null
-    metaDescription?: StringNullableWithAggregatesFilter<"Product"> | string | null
-    canonicalTag?: StringNullableWithAggregatesFilter<"Product"> | string | null
-    breadcrumb?: StringNullableWithAggregatesFilter<"Product"> | string | null
     seoSchema?: StringNullableWithAggregatesFilter<"Product"> | string | null
     status?: EnumContentStatusWithAggregatesFilter<"Product"> | $Enums.ContentStatus
     lastEditedBy?: StringNullableWithAggregatesFilter<"Product"> | string | null
@@ -15645,6 +15725,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressCreateNestedManyWithoutUserInput
@@ -15662,6 +15743,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
@@ -15675,6 +15757,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUpdateManyWithoutUserNestedInput
@@ -15692,6 +15775,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
@@ -15707,6 +15791,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15718,6 +15803,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15731,6 +15817,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16189,24 +16276,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -16228,24 +16318,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -16263,24 +16356,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16302,24 +16398,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16339,24 +16438,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -16373,24 +16475,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16409,24 +16514,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17039,6 +17147,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     isEmailVerified?: SortOrder
+    isMember?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17052,6 +17161,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     isEmailVerified?: SortOrder
+    isMember?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17065,6 +17175,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     isEmailVerified?: SortOrder
+    isMember?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17410,24 +17521,27 @@ export namespace Prisma {
     slug?: SortOrder
     shortDescription?: SortOrder
     description?: SortOrder
+    metaTitle?: SortOrder
+    metaDescription?: SortOrder
+    canonicalTag?: SortOrder
+    breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
+    productUrl?: SortOrder
     productImages?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    inStock?: SortOrder
     color?: SortOrder
     pattern?: SortOrder
-    composition?: SortOrder
+    material?: SortOrder
     isMotorized?: SortOrder
     additionalInfo?: SortOrder
     measuringGuide?: SortOrder
-    metaTitle?: SortOrder
-    metaDescription?: SortOrder
-    canonicalTag?: SortOrder
-    breadcrumb?: SortOrder
     seoSchema?: SortOrder
     status?: SortOrder
     lastEditedBy?: SortOrder
@@ -17439,6 +17553,7 @@ export namespace Prisma {
     fabricId?: SortOrder
     blindTypeId?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
@@ -17457,23 +17572,26 @@ export namespace Prisma {
     slug?: SortOrder
     shortDescription?: SortOrder
     description?: SortOrder
+    metaTitle?: SortOrder
+    metaDescription?: SortOrder
+    canonicalTag?: SortOrder
+    breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
+    productUrl?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    inStock?: SortOrder
     color?: SortOrder
     pattern?: SortOrder
-    composition?: SortOrder
+    material?: SortOrder
     isMotorized?: SortOrder
     additionalInfo?: SortOrder
     measuringGuide?: SortOrder
-    metaTitle?: SortOrder
-    metaDescription?: SortOrder
-    canonicalTag?: SortOrder
-    breadcrumb?: SortOrder
     seoSchema?: SortOrder
     status?: SortOrder
     lastEditedBy?: SortOrder
@@ -17492,23 +17610,26 @@ export namespace Prisma {
     slug?: SortOrder
     shortDescription?: SortOrder
     description?: SortOrder
+    metaTitle?: SortOrder
+    metaDescription?: SortOrder
+    canonicalTag?: SortOrder
+    breadcrumb?: SortOrder
     posterImageUrl?: SortOrder
+    productUrl?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
     minWidth?: SortOrder
     maxWidth?: SortOrder
+    inStock?: SortOrder
     color?: SortOrder
     pattern?: SortOrder
-    composition?: SortOrder
+    material?: SortOrder
     isMotorized?: SortOrder
     additionalInfo?: SortOrder
     measuringGuide?: SortOrder
-    metaTitle?: SortOrder
-    metaDescription?: SortOrder
-    canonicalTag?: SortOrder
-    breadcrumb?: SortOrder
     seoSchema?: SortOrder
     status?: SortOrder
     lastEditedBy?: SortOrder
@@ -17520,6 +17641,7 @@ export namespace Prisma {
     fabricId?: SortOrder
     blindTypeId?: SortOrder
     price?: SortOrder
+    discountPrice?: SortOrder
     motorPrice?: SortOrder
     minHeight?: SortOrder
     maxHeight?: SortOrder
@@ -19079,6 +19201,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: OrderCreateNestedManyWithoutUserInput
@@ -19095,6 +19218,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
@@ -19112,6 +19236,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressCreateNestedManyWithoutUserInput
@@ -19127,6 +19252,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
@@ -19145,6 +19271,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressCreateNestedManyWithoutUserInput
@@ -19160,6 +19287,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
@@ -19189,6 +19317,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUpdateManyWithoutUserNestedInput
@@ -19205,6 +19334,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -19228,6 +19358,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUpdateManyWithoutUserNestedInput
@@ -19243,6 +19374,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
@@ -19267,6 +19399,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUpdateManyWithoutUserNestedInput
@@ -19282,6 +19415,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
@@ -19297,24 +19431,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -19334,24 +19471,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -19448,24 +19588,27 @@ export namespace Prisma {
     slug?: StringFilter<"Product"> | string
     shortDescription?: StringNullableFilter<"Product"> | string | null
     description?: StringNullableFilter<"Product"> | string | null
-    posterImageUrl?: StringFilter<"Product"> | string
+    metaTitle?: StringNullableFilter<"Product"> | string | null
+    metaDescription?: StringNullableFilter<"Product"> | string | null
+    canonicalTag?: StringNullableFilter<"Product"> | string | null
+    breadcrumb?: StringNullableFilter<"Product"> | string | null
+    posterImageUrl?: StringNullableFilter<"Product"> | string | null
+    productUrl?: StringNullableFilter<"Product"> | string | null
     productImages?: StringNullableListFilter<"Product">
     price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
     minHeight?: IntFilter<"Product"> | number
     maxHeight?: IntFilter<"Product"> | number
     minWidth?: IntFilter<"Product"> | number
     maxWidth?: IntFilter<"Product"> | number
+    inStock?: BoolFilter<"Product"> | boolean
     color?: StringNullableFilter<"Product"> | string | null
     pattern?: StringNullableFilter<"Product"> | string | null
-    composition?: StringNullableFilter<"Product"> | string | null
+    material?: StringNullableFilter<"Product"> | string | null
     isMotorized?: BoolFilter<"Product"> | boolean
     additionalInfo?: StringNullableFilter<"Product"> | string | null
     measuringGuide?: StringNullableFilter<"Product"> | string | null
-    metaTitle?: StringNullableFilter<"Product"> | string | null
-    metaDescription?: StringNullableFilter<"Product"> | string | null
-    canonicalTag?: StringNullableFilter<"Product"> | string | null
-    breadcrumb?: StringNullableFilter<"Product"> | string | null
     seoSchema?: StringNullableFilter<"Product"> | string | null
     status?: EnumContentStatusFilter<"Product"> | $Enums.ContentStatus
     lastEditedBy?: StringNullableFilter<"Product"> | string | null
@@ -19563,24 +19706,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -19600,24 +19746,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -19979,6 +20128,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressCreateNestedManyWithoutUserInput
@@ -19995,6 +20145,7 @@ export namespace Prisma {
     email: string
     password: string
     isEmailVerified?: boolean
+    isMember?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
@@ -20071,6 +20222,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUpdateManyWithoutUserNestedInput
@@ -20087,6 +20239,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isMember?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
@@ -20164,24 +20317,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -20202,24 +20358,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -20305,24 +20464,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20343,24 +20505,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20524,24 +20689,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -20576,24 +20744,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20613,24 +20784,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20649,24 +20823,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20740,24 +20917,27 @@ export namespace Prisma {
     slug: string
     shortDescription?: string | null
     description?: string | null
-    posterImageUrl: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalTag?: string | null
+    breadcrumb?: string | null
+    posterImageUrl?: string | null
+    productUrl?: string | null
     productImages?: ProductCreateproductImagesInput | string[]
     price?: Decimal | DecimalJsLike | number | string
+    discountPrice?: Decimal | DecimalJsLike | number | string
     motorPrice?: Decimal | DecimalJsLike | number | string
     minHeight?: number
     maxHeight?: number
     minWidth?: number
     maxWidth?: number
+    inStock?: boolean
     color?: string | null
     pattern?: string | null
-    composition?: string | null
+    material?: string | null
     isMotorized?: boolean
     additionalInfo?: string | null
     measuringGuide?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalTag?: string | null
-    breadcrumb?: string | null
     seoSchema?: string | null
     status?: $Enums.ContentStatus
     lastEditedBy?: string | null
@@ -20774,24 +20954,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20811,24 +20994,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20847,24 +21033,27 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImageUrl?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
+    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productImages?: ProductUpdateproductImagesInput | string[]
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    discountPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motorPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     minHeight?: IntFieldUpdateOperationsInput | number
     maxHeight?: IntFieldUpdateOperationsInput | number
     minWidth?: IntFieldUpdateOperationsInput | number
     maxWidth?: IntFieldUpdateOperationsInput | number
+    inStock?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     pattern?: NullableStringFieldUpdateOperationsInput | string | null
-    composition?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     isMotorized?: BoolFieldUpdateOperationsInput | boolean
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
     measuringGuide?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalTag?: NullableStringFieldUpdateOperationsInput | string | null
-    breadcrumb?: NullableStringFieldUpdateOperationsInput | string | null
     seoSchema?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
     lastEditedBy?: NullableStringFieldUpdateOperationsInput | string | null
