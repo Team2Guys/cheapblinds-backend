@@ -8,7 +8,7 @@ export const subcategoryTypeDefs = gql`
     slug: String!
     metaTitle: String!
     metaDescription: String!
-    canonicalTag: String!
+    canonicalUrl: String!
     breadcrumb: String!
     posterImageUrl: String!
     lastEditedBy: String!
@@ -25,7 +25,7 @@ export const subcategoryTypeDefs = gql`
     slug: String
     metaTitle: String
     metaDescription: String
-    canonicalTag: String
+    canonicalUrl: String
     breadcrumb: String
     posterImageUrl: String
     lastEditedBy: String

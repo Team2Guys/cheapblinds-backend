@@ -138,7 +138,7 @@ model Category {
   description      String?       @db.Text()
   metaTitle        String?
   metaDescription  String?
-  canonicalTag     String?
+  canonicalUrl     String?
   breadcrumb       String?
   posterImageUrl   String?
   seoSchema        String?       @db.Text()
@@ -160,7 +160,7 @@ model Subcategory {
   description      String?       @db.Text()
   metaTitle        String?
   metaDescription  String?
-  canonicalTag     String?
+  canonicalUrl     String?
   breadcrumb       String?
   posterImageUrl   String?
   seoSchema        String?       @db.Text()
@@ -188,7 +188,7 @@ model Product {
   description      String?       @db.Text()
   metaTitle        String?       @db.Text()
   metaDescription  String?       @db.Text()
-  canonicalTag     String?
+  canonicalUrl     String?
   breadcrumb       String?
   posterImageUrl   String?
   productUrl       String?
