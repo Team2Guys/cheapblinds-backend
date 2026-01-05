@@ -6,63 +6,71 @@ export const productTypeDefs = gql`
     subcategoryId: ID!
     fabricId: Int!
     blindTypeId: Int!
+    sku: String!
     name: String!
-    description: String
-    shortDescription: String
     slug: String
+    shortDescription: String
+    description: String
     metaTitle: String
     metaDescription: String
     canonicalUrl: String
     breadcrumb: String
     posterImageUrl: String
+    productUrl: String!
     productImages: [String!]!
-    seoSchema: String
     price: Float!
     discountPrice: Float
     motorPrice: Float
-    width: Float
-    height: Float
-    stock: Int
+    minHeight: Float
+    maxHeight: Float
+    minWidth: Float
+    maxWidth: Float
+    inStock: Int
     color: String
     pattern: String
-    composition: String
+    material: String
     isMotorized: Boolean
     additionalInfo: String
     measuringGuide: String
+    seoSchema: String
     lastEditedBy: String!
     status: ContentStatus!
   }
 
   input UpdateProductByIdInput {
-    categoryId: ID!
-    subcategoryId: ID!
-    fabricId: Int!
-    blindTypeId: Int!
-    name: String!
-    description: String
-    shortDescription: String
+    categoryId: ID
+    subcategoryId: ID
+    fabricId: Int
+    blindTypeId: Int
+    sku: String
+    name: String
     slug: String
+    shortDescription: String
+    description: String
     metaTitle: String
     metaDescription: String
     canonicalUrl: String
     breadcrumb: String
     posterImageUrl: String
-    productImages: [String!]!
-    seoSchema: String
-    price: Float!
+    productUrl: String
+    productImages: [String!]
+    price: Float
     discountPrice: Float
     motorPrice: Float
-    width: Float
-    height: Float
-    stock: Int
+    minHeight: Float
+    maxHeight: Float
+    minWidth: Float
+    maxWidth: Float
+    inStock: Int
     color: String
     pattern: String
-    composition: String
+    material: String
     isMotorized: Boolean
     additionalInfo: String
     measuringGuide: String
-    lastEditedBy: String!
-    status: ContentStatus!
+    seoSchema: String
+    lastEditedBy: String
+    status: ContentStatus
   }
 
   input GetProductBySlugsInput {
