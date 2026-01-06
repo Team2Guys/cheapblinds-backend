@@ -2,7 +2,6 @@
 import xlsx from 'xlsx';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import slugify from 'slugify';
 import { prisma } from '#lib/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -132,18 +131,23 @@ export async function seedProducts() {
 // Helper to parse Postgres array string
 export function parsePgArray(value, rowNum, fieldName) {
   if (Array.isArray(value)) return value;
+  if (!value || value === '{}' || value === '[]') return [];
+
   if (typeof value !== 'string')
     throw new Error(`❌ Row ${rowNum}: ${fieldName} must be a string or array`);
 
   const trimmed = value.trim();
-  if (!trimmed.startsWith('{') || !trimmed.endsWith('}'))
-    throw new Error(
-      `❌ Row ${rowNum}: ${fieldName} is not a valid array format`
-    );
 
-  return trimmed
-    .slice(1, -1)
-    .split(',')
-    .map((v) => v.trim().replace(/^"(.*)"$/, '$1'))
-    .filter(Boolean);
+  if (
+    (trimmed.startsWith('{') && trimmed.endsWith('}')) ||
+    (trimmed.startsWith('[') && trimmed.endsWith(']'))
+  ) {
+    return trimmed
+      .slice(1, -1)
+      .split(',')
+      .map((v) => v.trim().replace(/^"(.*)"$/, '$1'))
+      .filter(Boolean);
+  }
+
+  throw new Error(`❌ Row ${rowNum}: ${fieldName} is not a valid array format`);
 }

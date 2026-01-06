@@ -137,27 +137,30 @@ export const commonTypeDefs = gql`
     slug: String
     shortDescription: String
     description: String
+    metaTitle: String
+    metaDescription: String
+    canonicalUrl: String
+    breadcrumb: String
     posterImageUrl: String
+    productUrl: String!
     productImages: [String!]!
     price: Float!
+    discountPrice: Float
     motorPrice: Float
     minHeight: Float
     maxHeight: Float
     minWidth: Float
     maxWidth: Float
+    inStock: Int
     color: String
     pattern: String
-    composition: String
+    material: String
     isMotorized: Boolean
     additionalInfo: String
     measuringGuide: String
-    metaTitle: String
-    metaDescription: String
-    canonicalUrl: String
-    breadcrumb: String
     seoSchema: String
-    status: ContentStatus!
     lastEditedBy: String!
+    status: ContentStatus!
     category: Category!
     subcategory: Subcategory!
     createdAt: DateTime!
