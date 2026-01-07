@@ -198,7 +198,7 @@ export const commonTypeDefs = gql`
     totalAmount: Float!
     shippingCost: Float!
     notes: String!
-    orderItems: [OrderItemInput!]!
+    orderItems: [OrderItem!]!
     paymentStatus: PaymentStatus!
     orderStatus: OrderStatus!
     lastEditedBy: String!
@@ -210,32 +210,40 @@ export const commonTypeDefs = gql`
     id: ID!
     orderId: ID!
     productId: ID!
+    fabricId: Int!
+    blindTypeId: Int!
     sku: String!
     name: String!
     posterImageUrl: String!
     productUrl: String!
     price: Float!
+    finalPrice: Float!
+    motorPrice: Float!
     drop: Float!
     width: Float!
     isMotorized: Boolean!
-    motorPrice: Float!
-    color: String!
+    recessType: String!
+    options: JSON!
   }
 
   input OrderItemInput {
     id: ID!
     orderId: ID!
     productId: ID!
+    fabricId: Int!
+    blindTypeId: Int!
     sku: String!
     name: String!
     posterImageUrl: String!
     productUrl: String!
     price: Float!
+    finalPrice: Float!
+    motorPrice: Float!
     drop: Float!
     width: Float!
     isMotorized: Boolean!
-    motorPrice: Float!
-    color: String!
+    recessType: String!
+    options: JSON!
   }
 
   type Inquiry {
