@@ -21,8 +21,8 @@ export const productTypeDefs = gql`
     price: Float!
     discountPrice: Float
     motorPrice: Float
-    minHeight: Float
-    maxHeight: Float
+    minDrop: Float
+    maxDrop: Float
     minWidth: Float
     maxWidth: Float
     inStock: Int
@@ -57,8 +57,8 @@ export const productTypeDefs = gql`
     price: Float
     discountPrice: Float
     motorPrice: Float
-    minHeight: Float
-    maxHeight: Float
+    minDrop: Float
+    maxDrop: Float
     minWidth: Float
     maxWidth: Float
     inStock: Int
