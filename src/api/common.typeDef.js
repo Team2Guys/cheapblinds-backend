@@ -39,6 +39,23 @@ export const commonTypeDefs = gql`
     ARCHIVED
   }
 
+  enum OrderStatus {
+    PENDING
+    PAID
+    CANCELED
+    FAILED
+    SHIPPED
+    COMPLETED
+  }
+
+  enum PaymentStatus {
+    FREE
+    PENDING
+    PAID
+    CANCELED
+    FAILED
+  }
+
   type GenericResponse {
     message: String!
   }
@@ -182,9 +199,9 @@ export const commonTypeDefs = gql`
     shippingCost: Float!
     notes: String!
     orderItems: [OrderItem!]!
+    paymentStatus: PaymentStatus!
+    orderStatus: OrderStatus!
     lastEditedBy: String!
-    paymentStatus: String!
-    orderStatus: String!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -211,7 +228,7 @@ export const commonTypeDefs = gql`
     email: String!
     phone: String!
     message: String!
-    inquiryType: String!
+    inquiryType: InquiryType!
     inquiryStatus: String!
     createdAt: DateTime!
     updatedAt: DateTime!

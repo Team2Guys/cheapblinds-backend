@@ -271,16 +271,29 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
   productId: 'productId',
+  fabricId: 'fabricId',
+  blindTypeId: 'blindTypeId',
   sku: 'sku',
   name: 'name',
   posterImageUrl: 'posterImageUrl',
   productUrl: 'productUrl',
   price: 'price',
+  finalPrice: 'finalPrice',
+  motorPrice: 'motorPrice',
   drop: 'drop',
   width: 'width',
   isMotorized: 'isMotorized',
-  motorPrice: 'motorPrice',
-  color: 'color'
+  recessType: 'recessType',
+  orderItemOptionsId: 'orderItemOptionsId'
+};
+
+exports.Prisma.OrderItemOptionsScalarFieldEnum = {
+  id: 'id',
+  headrailType: 'headrailType',
+  stackingStyle: 'stackingStyle',
+  lining: 'lining',
+  chainControl: 'chainControl',
+  chainSide: 'chainSide'
 };
 
 exports.Prisma.InquiryScalarFieldEnum = {
@@ -383,6 +396,7 @@ exports.Prisma.ModelName = {
   Product: 'Product',
   Order: 'Order',
   OrderItem: 'OrderItem',
+  OrderItemOptions: 'OrderItemOptions',
   Inquiry: 'Inquiry'
 };
 

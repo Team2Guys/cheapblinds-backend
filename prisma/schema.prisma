@@ -194,8 +194,8 @@ model Product {
   productUrl       String?
   productImages    String[]      @default([])
   price            Decimal       @default(0)
-  discountPrice    Decimal       @default(0)
-  motorPrice       Decimal       @default(0)
+  discountPrice    Decimal?
+  motorPrice       Decimal?
   minDrop          Int           @default(0)
   maxDrop          Int           @default(1)
   minWidth         Int           @default(0)
@@ -245,22 +245,38 @@ model Order {
 }
 
 model OrderItem {
-  id             String  @id @default(uuid())
-  orderId        String  @db.Uuid
-  productId      String? @db.Uuid
-  sku            String
+  id             String           @id @default(uuid())
+  orderId        String           @db.Uuid
+  productId      String?          @db.Uuid
+  fabricId       Int
+  blindTypeId    Int
+  sku            String           @unique
   name           String
   posterImageUrl String?
-  productUrl     String
-  price          Decimal
-  drop           Decimal @default(0)
-  width          Decimal @default(0)
-  isMotorized    Boolean @default(false)
-  motorPrice     Decimal @default(0)
-  color          String?
+  productUrl     String?
+  price          Decimal          @default(0)
+  finalPrice     Decimal          @default(0)
+  motorPrice     Decimal?
+  drop           Int              @default(0)
+  width          Int              @default(1)
+  isMotorized    Boolean          @default(false)
+  recessType     String?
+  options        OrderItemOptions @relation(name: "OrderItemOptions", fields: [orderItemOptionsId], references: [id])
 
-  order   Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
-  product Product? @relation(name: "ProductOrderItems", fields: [productId], references: [id], onDelete: SetNull)
+  order              Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
+  product            Product? @relation(name: "ProductOrderItems", fields: [productId], references: [id], onDelete: SetNull)
+  orderItemOptionsId String
+}
+
+model OrderItemOptions {
+  id            String  @id @default(uuid())
+  headrailType  String?
+  stackingStyle String?
+  lining        String?
+  chainControl  String?
+  chainSide     String?
+
+  orderItems OrderItem[] @relation(name: "OrderItemOptions")
 }
 
 model Inquiry {
