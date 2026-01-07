@@ -5,6 +5,7 @@
   "license": "ISC",
   "main": "src/app.js",
   "scripts": {
+    "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "lint:js": "eslint \"./**/*.{js,jsx}\"",
     "format:code": "prettier --write \"src/**/*.js\"",
