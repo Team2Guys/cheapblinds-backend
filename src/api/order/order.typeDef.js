@@ -15,9 +15,9 @@ export const orderTypeDefs = gql`
     shippingCost: Float!
     notes: String!
     orderItems: [OrderItem!]!
+    paymentStatus: PaymentStatus!
+    orderStatus: OrderStatus!
     lastEditedBy: String!
-    paymentStatus: String!
-    orderStatus: String!
   }
 
   input UpdateOrderByIdInput {
@@ -35,9 +35,9 @@ export const orderTypeDefs = gql`
     shippingCost: Float
     notes: String
     orderItems: [OrderItem!]
+    paymentStatus: PaymentStatus
+    orderStatus: OrderStatus
     lastEditedBy: String
-    paymentStatus: String
-    orderStatus: String
   }
 
   type Query {
