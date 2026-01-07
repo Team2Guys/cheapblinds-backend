@@ -198,7 +198,7 @@ export const commonTypeDefs = gql`
     totalAmount: Float!
     shippingCost: Float!
     notes: String!
-    orderItems: [OrderItem!]!
+    orderItems: [OrderItemInput!]!
     paymentStatus: PaymentStatus!
     orderStatus: OrderStatus!
     lastEditedBy: String!
@@ -206,7 +206,7 @@ export const commonTypeDefs = gql`
     updatedAt: DateTime!
   }
 
-  type OrderItem {
+  type OrderItemInput {
     id: ID!
     orderId: ID!
     productId: ID!
