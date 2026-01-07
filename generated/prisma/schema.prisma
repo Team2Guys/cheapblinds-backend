@@ -196,8 +196,8 @@ model Product {
   price            Decimal       @default(0)
   discountPrice    Decimal       @default(0)
   motorPrice       Decimal       @default(0)
-  minHeight        Int           @default(0)
-  maxHeight        Int           @default(1)
+  minDrop          Int           @default(0)
+  maxDrop          Int           @default(1)
   minWidth         Int           @default(0)
   maxWidth         Int           @default(1)
   inStock          Boolean       @default(false)
@@ -250,18 +250,14 @@ model OrderItem {
   productId      String? @db.Uuid
   sku            String
   name           String
-  slug           String
-  categoryUrl    String
-  subcategoryUrl String
+  posterImageUrl String?
+  productUrl     String
   price          Decimal
-  height         Decimal @default(0)
+  drop           Decimal @default(0)
   width          Decimal @default(0)
   isMotorized    Boolean @default(false)
   motorPrice     Decimal @default(0)
   color          String?
-  pattern        String?
-  composition    String?
-  posterImageUrl String?
 
   order   Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
   product Product? @relation(name: "ProductOrderItems", fields: [productId], references: [id], onDelete: SetNull)
