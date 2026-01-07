@@ -206,7 +206,23 @@ export const commonTypeDefs = gql`
     updatedAt: DateTime!
   }
 
-  type OrderItemInput {
+  type OrderItem {
+    id: ID!
+    orderId: ID!
+    productId: ID!
+    sku: String!
+    name: String!
+    posterImageUrl: String!
+    productUrl: String!
+    price: Float!
+    drop: Float!
+    width: Float!
+    isMotorized: Boolean!
+    motorPrice: Float!
+    color: String!
+  }
+
+  input OrderItemInput {
     id: ID!
     orderId: ID!
     productId: ID!
