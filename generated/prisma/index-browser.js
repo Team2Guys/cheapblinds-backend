@@ -228,8 +228,8 @@ exports.Prisma.ProductScalarFieldEnum = {
   price: 'price',
   discountPrice: 'discountPrice',
   motorPrice: 'motorPrice',
-  minHeight: 'minHeight',
-  maxHeight: 'maxHeight',
+  minDrop: 'minDrop',
+  maxDrop: 'maxDrop',
   minWidth: 'minWidth',
   maxWidth: 'maxWidth',
   inStock: 'inStock',
@@ -273,18 +273,14 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   productId: 'productId',
   sku: 'sku',
   name: 'name',
-  slug: 'slug',
-  categoryUrl: 'categoryUrl',
-  subcategoryUrl: 'subcategoryUrl',
+  posterImageUrl: 'posterImageUrl',
+  productUrl: 'productUrl',
   price: 'price',
-  height: 'height',
+  drop: 'drop',
   width: 'width',
   isMotorized: 'isMotorized',
   motorPrice: 'motorPrice',
-  color: 'color',
-  pattern: 'pattern',
-  composition: 'composition',
-  posterImageUrl: 'posterImageUrl'
+  color: 'color'
 };
 
 exports.Prisma.InquiryScalarFieldEnum = {
