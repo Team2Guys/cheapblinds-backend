@@ -147,8 +147,8 @@ export const commonTypeDefs = gql`
     price: Float!
     discountPrice: Float
     motorPrice: Float
-    minHeight: Float
-    maxHeight: Float
+    minDrop: Float
+    maxDrop: Float
     minWidth: Float
     maxWidth: Float
     inStock: Int
@@ -174,19 +174,35 @@ export const commonTypeDefs = gql`
     lastName: String!
     email: String!
     phone: String!
+    address: String!
+    city: String!
     state: String!
     country: String!
-    city: String!
-    address: String!
     totalAmount: Float!
     shippingCost: Float!
     notes: String!
-    items: [JSON!]!
+    orderItems: [OrderItem!]!
     lastEditedBy: String!
     paymentStatus: String!
     orderStatus: String!
     createdAt: DateTime!
     updatedAt: DateTime!
+  }
+
+  type OrderItem {
+    id: ID!
+    orderId: ID!
+    productId: ID!
+    sku: String!
+    name: String!
+    posterImageUrl: String!
+    productUrl: String!
+    price: Float!
+    drop: Float!
+    width: Float!
+    isMotorized: Boolean!
+    motorPrice: Float!
+    color: String!
   }
 
   type Inquiry {
