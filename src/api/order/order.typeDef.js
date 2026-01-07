@@ -34,7 +34,7 @@ export const orderTypeDefs = gql`
     totalAmount: Float
     shippingCost: Float
     notes: String
-    orderItems: [OrderItem!]
+    orderItems: [OrderItemInput!]
     paymentStatus: PaymentStatus
     orderStatus: OrderStatus
     lastEditedBy: String
