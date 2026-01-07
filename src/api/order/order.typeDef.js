@@ -3,21 +3,21 @@ import { gql } from 'graphql-tag';
 export const orderTypeDefs = gql`
   input CreateOrderInput {
     userId: ID!
-    firstName: String
-    lastName: String
-    email: String
-    phone: String
-    state: String
-    country: String
-    city: String
-    address: String
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String!
+    address: String!
+    city: String!
+    state: String!
+    country: String!
     totalAmount: Float!
     shippingCost: Float!
-    notes: String
-    items: [JSON!]
-    lastEditedBy: String
-    paymentStatus: String
-    orderStatus: String
+    notes: String!
+    orderItems: [OrderItem!]!
+    lastEditedBy: String!
+    paymentStatus: String!
+    orderStatus: String!
   }
 
   input UpdateOrderByIdInput {
@@ -27,14 +27,14 @@ export const orderTypeDefs = gql`
     lastName: String
     email: String
     phone: String
+    address: String
+    city: String
     state: String
     country: String
-    city: String
-    address: String
-    totalAmount: Float!
-    shippingCost: Float!
+    totalAmount: Float
+    shippingCost: Float
     notes: String
-    items: [JSON!]
+    orderItems: [OrderItem!]
     lastEditedBy: String
     paymentStatus: String
     orderStatus: String
