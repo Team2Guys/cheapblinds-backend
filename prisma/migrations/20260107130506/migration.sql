@@ -147,8 +147,8 @@ CREATE TABLE "Product" (
     "productUrl" TEXT,
     "productImages" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "price" DECIMAL(65,30) NOT NULL DEFAULT 0,
-    "discountPrice" DECIMAL(65,30) NOT NULL DEFAULT 0,
-    "motorPrice" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "discountPrice" DECIMAL(65,30),
+    "motorPrice" DECIMAL(65,30),
     "minDrop" INTEGER NOT NULL DEFAULT 0,
     "maxDrop" INTEGER NOT NULL DEFAULT 1,
     "minWidth" INTEGER NOT NULL DEFAULT 0,
@@ -198,16 +198,21 @@ CREATE TABLE "OrderItem" (
     "id" TEXT NOT NULL,
     "orderId" UUID NOT NULL,
     "productId" UUID,
+    "fabricId" INTEGER NOT NULL,
+    "blindTypeId" INTEGER NOT NULL,
     "sku" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "posterImageUrl" TEXT,
-    "productUrl" TEXT NOT NULL,
-    "price" DECIMAL(65,30) NOT NULL,
-    "drop" DECIMAL(65,30) NOT NULL DEFAULT 0,
-    "width" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "productUrl" TEXT,
+    "price" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "finalPrice" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "motorPrice" DECIMAL(65,30),
+    "drop" INTEGER NOT NULL DEFAULT 0,
+    "width" INTEGER NOT NULL DEFAULT 1,
     "isMotorized" BOOLEAN NOT NULL DEFAULT false,
-    "motorPrice" DECIMAL(65,30) NOT NULL DEFAULT 0,
-    "color" TEXT,
+    "recessType" TEXT,
+    "options" JSONB,
+    "orderItemOptionsId" TEXT NOT NULL,
 
     CONSTRAINT "OrderItem_pkey" PRIMARY KEY ("id")
 );
@@ -256,6 +261,9 @@ CREATE UNIQUE INDEX "Product_sku_key" ON "Product"("sku");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Product_subcategoryId_slug_key" ON "Product"("subcategoryId", "slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "OrderItem_sku_key" ON "OrderItem"("sku");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_defaultShippingAddressId_fkey" FOREIGN KEY ("defaultShippingAddressId") REFERENCES "Address"("id") ON DELETE SET NULL ON UPDATE CASCADE;
