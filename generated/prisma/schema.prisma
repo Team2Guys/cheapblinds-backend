@@ -245,38 +245,27 @@ model Order {
 }
 
 model OrderItem {
-  id             String           @id @default(uuid())
-  orderId        String           @db.Uuid
-  productId      String?          @db.Uuid
+  id             String   @id @default(uuid())
+  orderId        String   @db.Uuid
+  productId      String?  @db.Uuid
   fabricId       Int
   blindTypeId    Int
-  sku            String           @unique
+  sku            String   @unique
   name           String
   posterImageUrl String?
   productUrl     String?
-  price          Decimal          @default(0)
-  finalPrice     Decimal          @default(0)
+  price          Decimal  @default(0)
+  finalPrice     Decimal  @default(0)
   motorPrice     Decimal?
-  drop           Int              @default(0)
-  width          Int              @default(1)
-  isMotorized    Boolean          @default(false)
+  drop           Int      @default(0)
+  width          Int      @default(1)
+  isMotorized    Boolean  @default(false)
   recessType     String?
-  options        OrderItemOptions @relation(name: "OrderItemOptions", fields: [orderItemOptionsId], references: [id])
+  options        Json?
 
   order              Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
   product            Product? @relation(name: "ProductOrderItems", fields: [productId], references: [id], onDelete: SetNull)
   orderItemOptionsId String
-}
-
-model OrderItemOptions {
-  id            String  @id @default(uuid())
-  headrailType  String?
-  stackingStyle String?
-  lining        String?
-  chainControl  String?
-  chainSide     String?
-
-  orderItems OrderItem[] @relation(name: "OrderItemOptions")
 }
 
 model Inquiry {
