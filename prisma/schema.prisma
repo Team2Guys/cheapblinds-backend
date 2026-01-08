@@ -215,7 +215,6 @@ model Product {
 
   category    Category    @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Cascade)
   subcategory Subcategory @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
-  orderItems  OrderItem[] @relation(name: "ProductOrderItems")
 
   @@unique([subcategoryId, slug])
 }
@@ -239,33 +238,9 @@ model Order {
   lastEditedBy  String?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
+  orderItems    Json[]
 
-  user       User        @relation(name: "UserOrders", fields: [userId], references: [id], onDelete: Restrict)
-  orderItems OrderItem[] @relation(name: "OrderItems")
-}
-
-model OrderItem {
-  id             String   @id @default(uuid())
-  orderId        String   @db.Uuid
-  productId      String?  @db.Uuid
-  fabricId       Int
-  blindTypeId    Int
-  sku            String   @unique
-  name           String
-  posterImageUrl String?
-  productUrl     String?
-  price          Decimal  @default(0)
-  finalPrice     Decimal  @default(0)
-  motorPrice     Decimal?
-  drop           Int      @default(0)
-  width          Int      @default(1)
-  isMotorized    Boolean  @default(false)
-  recessType     String?
-  options        Json?
-
-  order              Order    @relation(name: "OrderItems", fields: [orderId], references: [id], onDelete: Cascade)
-  product            Product? @relation(name: "ProductOrderItems", fields: [productId], references: [id], onDelete: SetNull)
-  orderItemOptionsId String
+  user User @relation(name: "UserOrders", fields: [userId], references: [id], onDelete: Restrict)
 }
 
 model Inquiry {
