@@ -3,7 +3,7 @@ version: "3.9"
 services:
   api:
     build: .
-    container_name: cheapblinds-api
+    container_name: cheapblinds-backend
     ports:
       - "5000:5000"
       - "5555:5555"
