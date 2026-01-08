@@ -198,52 +198,12 @@ export const commonTypeDefs = gql`
     totalAmount: Float!
     shippingCost: Float!
     notes: String!
-    orderItems: [OrderItem!]!
+    orderItems: [JSON!]!
     paymentStatus: PaymentStatus!
     orderStatus: OrderStatus!
     lastEditedBy: String!
     createdAt: DateTime!
     updatedAt: DateTime!
-  }
-
-  type OrderItem {
-    id: ID!
-    orderId: ID!
-    productId: ID!
-    fabricId: Int!
-    blindTypeId: Int!
-    sku: String!
-    name: String!
-    posterImageUrl: String!
-    productUrl: String!
-    price: Float!
-    finalPrice: Float!
-    motorPrice: Float!
-    drop: Float!
-    width: Float!
-    isMotorized: Boolean!
-    recessType: String!
-    options: JSON!
-  }
-
-  input OrderItemInput {
-    id: ID!
-    orderId: ID!
-    productId: ID!
-    fabricId: Int!
-    blindTypeId: Int!
-    sku: String!
-    name: String!
-    posterImageUrl: String!
-    productUrl: String!
-    price: Float!
-    finalPrice: Float!
-    motorPrice: Float!
-    drop: Float!
-    width: Float!
-    isMotorized: Boolean!
-    recessType: String!
-    options: JSON!
   }
 
   type Inquiry {
