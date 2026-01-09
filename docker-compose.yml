@@ -3,15 +3,13 @@ version: "3.9"
 services:
   api:
     build: .
-    container_name: cheapblinds-api
+    container_name: cheapblinds-backend
     ports:
       - "5000:5000"
-      - "5555:5555"
     env_file:
       - .env
     environment:
-      DATABASE_URL: postgres://postgres:password@db:5432/cheapblinds
-      NODE_ENV: development
+      NODE_ENV: production
     depends_on:
       - db
 
@@ -22,8 +20,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: cheapblinds
-    ports:
-      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
