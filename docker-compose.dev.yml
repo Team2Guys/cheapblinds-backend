@@ -5,15 +5,17 @@ services:
     build: .
     container_name: cheapblinds-backend-dev
     ports:
-      - "5000:5000"
-      - "5555:5555"
+      - "5000:5000"              # dev mapped to a different host port
+      - "5555:5555"              # optional extra port if needed
     volumes:
-      - .:/usr/src/app           # Live code sync
+      - .:/usr/src/app           # live code sync
       - /usr/src/app/node_modules
     environment:
       NODE_ENV: development
       DATABASE_URL: postgres://postgres:postgres@db:5432/cheapblinds
-    command: npm run dev          # Hot reload
+    command: npx nodemon src/app.js          # uses nodemon for hot reload
+    env_file:
+      - .env
     depends_on:
       - db
 
@@ -25,7 +27,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: cheapblinds
     ports:
-      - "5432:5432"               # Local access
+      - "5432:5432"               # accessible for local Prisma migrations
     volumes:
       - postgres_data_dev:/var/lib/postgresql/data
     healthcheck:

@@ -5,9 +5,9 @@ services:
     build: .
     container_name: cheapblinds-backend
     ports:
-      - "5000:5000"         # Exposes only app port
+      - "5000:5000"              # production app port
     env_file:
-      - .env
+      - .env.production
     environment:
       NODE_ENV: production
       DATABASE_URL: postgres://postgres:postgres@db:5432/cheapblinds
