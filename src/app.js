@@ -26,9 +26,6 @@ const getNetworkIP = () => {
   return null;
 };
 
-/**
- * Runtime metadata (mirrors Next.js startup banner)
- */
 const RUNTIME_INFO = {
   framework: 'Express Server',
   nodeVersion: process.version,
