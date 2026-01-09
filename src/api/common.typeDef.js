@@ -97,7 +97,7 @@ export const commonTypeDefs = gql`
     country: String!
     city: String!
     address: String!
-    addressType: String!
+    addressType: AddressType!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -187,14 +187,8 @@ export const commonTypeDefs = gql`
   type Order {
     id: ID!
     userId: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
-    phone: String!
-    address: String!
-    city: String!
-    state: String!
-    country: String!
+    shippingAddress: JSON!
+    billingAddress: JSON!
     totalAmount: Float!
     shippingCost: Float!
     notes: String!
