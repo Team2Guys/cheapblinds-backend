@@ -12,9 +12,6 @@ const { handlePromise } = commonUtils;
 
 const app = express();
 
-/**
- * Resolve external IPv4 address (same logic Next.js uses internally)
- */
 const getNetworkIP = () => {
   const nets = os.networkInterfaces();
 
