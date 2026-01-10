@@ -9,13 +9,9 @@ export const productServices = {
   getProductList: async () => {
     const cacheKey = 'products:list';
 
-    const cached = await redis.get(cacheKey);
-    if (cached) {
-      console.log('Redis HIT: product list');
-      return JSON.parse(cached);
-    }
+    const cachedProducts = await redis.get(cacheKey);
+    if (cachedProducts) return JSON.parse(cachedProducts);
 
-    console.log('Redis MISS: product list');
     const products = await read.productList();
 
     await redis.set(cacheKey, JSON.stringify(products), 'EX', CACHE_TTL);
@@ -27,7 +23,6 @@ export const productServices = {
 
     const cached = await redis.get(cacheKey);
     if (cached) {
-      console.log('Redis HIT: product by id', id);
       return JSON.parse(cached);
     }
 
