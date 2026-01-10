@@ -8,7 +8,7 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "lint:js": "eslint \"./**/*.{js,jsx}\"",
-    "docker:up-dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up",
+    "docker:up-dev": "docker compose -f docker-compose.dev.yml up --build",
     "docker:up-prod": "docker compose up -d --build",
     "format:code": "prettier --write \"src/**/*.js\"",
     "format:prisma": "npx prisma format",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "eslint": "^9.20.0",
-    "nodemon": "^3.1.9",
+    "nodemon": "^3.1.11",
     "prettier": "^3.5.0"
   },
   "dependencies": {
@@ -50,9 +50,11 @@
     "graphql-tag": "^2.12.6",
     "helmet": "^8.1.0",
     "http-errors": "^2.0.0",
+    "ioredis": "^5.9.1",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^7.0.7",
     "prisma": "^7.1.0",
+    "redis": "^5.10.0",
     "slugify": "^1.6.6",
     "winston": "^3.17.0",
     "xlsx": "^0.18.5",

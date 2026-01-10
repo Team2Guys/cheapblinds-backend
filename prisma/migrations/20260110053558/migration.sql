@@ -62,10 +62,10 @@ CREATE TABLE "Address" (
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "city" TEXT NOT NULL,
     "state" TEXT NOT NULL,
     "country" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
     "addressType" "AddressType" NOT NULL DEFAULT 'HOME',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -137,18 +137,16 @@ CREATE TABLE "Product" (
     "sku" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
+    "breadcrumb" TEXT,
     "shortDescription" TEXT,
     "description" TEXT,
-    "metaTitle" TEXT,
-    "metaDescription" TEXT,
-    "canonicalUrl" TEXT,
-    "breadcrumb" TEXT,
     "posterImageUrl" TEXT,
-    "productUrl" TEXT,
     "productImages" TEXT[] DEFAULT ARRAY[]::TEXT[],
-    "price" DECIMAL(65,30) NOT NULL DEFAULT 0,
-    "discountPrice" DECIMAL(65,30),
-    "motorPrice" DECIMAL(65,30),
+    "productUrl" TEXT,
+    "isMotorized" BOOLEAN NOT NULL DEFAULT false,
+    "additionalInfo" TEXT,
+    "measuringGuide" TEXT,
+    "material" TEXT,
     "minDrop" INTEGER NOT NULL DEFAULT 0,
     "maxDrop" INTEGER NOT NULL DEFAULT 1,
     "minWidth" INTEGER NOT NULL DEFAULT 0,
@@ -156,13 +154,15 @@ CREATE TABLE "Product" (
     "inStock" BOOLEAN NOT NULL DEFAULT false,
     "color" TEXT,
     "pattern" TEXT,
-    "material" TEXT,
-    "isMotorized" BOOLEAN NOT NULL DEFAULT false,
-    "additionalInfo" TEXT,
-    "measuringGuide" TEXT,
+    "price" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "motorPrice" DECIMAL(65,30),
+    "discountPrice" DECIMAL(65,30),
+    "metaTitle" TEXT,
+    "metaDescription" TEXT,
+    "canonicalUrl" TEXT,
     "seoSchema" TEXT,
-    "status" "ContentStatus" NOT NULL DEFAULT 'PUBLISHED',
     "lastEditedBy" TEXT,
+    "status" "ContentStatus" NOT NULL DEFAULT 'PUBLISHED',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -173,14 +173,8 @@ CREATE TABLE "Product" (
 CREATE TABLE "Order" (
     "id" UUID NOT NULL,
     "userId" UUID NOT NULL,
-    "firstName" TEXT NOT NULL,
-    "lastName" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "city" TEXT NOT NULL,
-    "state" TEXT NOT NULL,
-    "country" TEXT NOT NULL,
+    "shippingAddress" JSONB NOT NULL,
+    "billingAddress" JSONB NOT NULL,
     "totalAmount" DECIMAL(65,30) NOT NULL DEFAULT 0,
     "shippingCost" DECIMAL(65,30) NOT NULL DEFAULT 0,
     "notes" TEXT,
@@ -189,32 +183,9 @@ CREATE TABLE "Order" (
     "lastEditedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "orderItems" JSONB[],
 
     CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "OrderItem" (
-    "id" TEXT NOT NULL,
-    "orderId" UUID NOT NULL,
-    "productId" UUID,
-    "fabricId" INTEGER NOT NULL,
-    "blindTypeId" INTEGER NOT NULL,
-    "sku" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "posterImageUrl" TEXT,
-    "productUrl" TEXT,
-    "price" DECIMAL(65,30) NOT NULL DEFAULT 0,
-    "finalPrice" DECIMAL(65,30) NOT NULL DEFAULT 0,
-    "motorPrice" DECIMAL(65,30),
-    "drop" INTEGER NOT NULL DEFAULT 0,
-    "width" INTEGER NOT NULL DEFAULT 1,
-    "isMotorized" BOOLEAN NOT NULL DEFAULT false,
-    "recessType" TEXT,
-    "options" JSONB,
-    "orderItemOptionsId" TEXT NOT NULL,
-
-    CONSTRAINT "OrderItem_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -262,9 +233,6 @@ CREATE UNIQUE INDEX "Product_sku_key" ON "Product"("sku");
 -- CreateIndex
 CREATE UNIQUE INDEX "Product_subcategoryId_slug_key" ON "Product"("subcategoryId", "slug");
 
--- CreateIndex
-CREATE UNIQUE INDEX "OrderItem_sku_key" ON "OrderItem"("sku");
-
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_defaultShippingAddressId_fkey" FOREIGN KEY ("defaultShippingAddressId") REFERENCES "Address"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
@@ -278,16 +246,10 @@ ALTER TABLE "Address" ADD CONSTRAINT "Address_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Subcategory" ADD CONSTRAINT "Subcategory_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Product" ADD CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Product" ADD CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Product" ADD CONSTRAINT "Product_subcategoryId_fkey" FOREIGN KEY ("subcategoryId") REFERENCES "Subcategory"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Order" ADD CONSTRAINT "Order_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "OrderItem" ADD CONSTRAINT "OrderItem_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Order"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "OrderItem" ADD CONSTRAINT "OrderItem_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE SET NULL ON UPDATE CASCADE;
