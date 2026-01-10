@@ -43,7 +43,9 @@ const validators = {
   ILLUMIN8S_API_KEY: str({ desc: 'Illumin8s API Key' }),
   ILLUMIN8S_RETAILER_ID: str({ desc: 'Illumin8s Retailer ID' }),
   ILLUMIN8S_RETAILER_MASTER_ID: str({ desc: 'Illumin8s Retailer Master ID' }),
-  ILLUMIN8S_MEASURE_ID: str({ desc: 'Illumin8s Measure ID' })
+  ILLUMIN8S_MEASURE_ID: str({ desc: 'Illumin8s Measure ID' }),
+
+  REDIS_URL: url({ desc: 'Redis URL' })
 };
 
 export const env = cleanEnv(process.env, validators, {
