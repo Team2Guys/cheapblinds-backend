@@ -21,7 +21,7 @@ export const categoryRepository = {
 
     categoryByPath: ({ path }) =>
       prisma.category.findUnique({
-        where: { path },
+        where: { newPath: path },
         include: {
           subcategories: {
             include: {

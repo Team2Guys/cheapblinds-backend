@@ -90,12 +90,13 @@ CREATE TABLE "Category" (
     "shortDescription" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "breadcrumb" TEXT NOT NULL,
-    "path" TEXT NOT NULL,
+    "oldPath" TEXT,
+    "newPath" TEXT NOT NULL,
     "posterImageUrl" TEXT NOT NULL DEFAULT 'https://placehold.co/600x600?text=Product+Image',
     "metaTitle" TEXT NOT NULL,
     "metaDescription" TEXT NOT NULL,
     "canonicalUrl" TEXT NOT NULL,
-    "seoSchema" TEXT NOT NULL,
+    "seoSchema" TEXT,
     "lastEditedBy" TEXT NOT NULL,
     "status" "ContentStatus" NOT NULL DEFAULT 'PUBLISHED',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -109,15 +110,15 @@ CREATE TABLE "Subcategory" (
     "id" UUID NOT NULL,
     "categoryId" UUID NOT NULL,
     "name" TEXT NOT NULL,
-    "shortDescription" TEXT,
-    "description" TEXT,
-    "breadcrumb" TEXT,
+    "shortDescription" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "breadcrumb" TEXT NOT NULL,
     "oldPath" TEXT,
     "newPath" TEXT NOT NULL,
-    "posterImageUrl" TEXT,
-    "metaTitle" TEXT,
-    "metaDescription" TEXT,
-    "canonicalUrl" TEXT,
+    "posterImageUrl" TEXT NOT NULL DEFAULT 'https://placehold.co/600x600?text=Product+Image',
+    "metaTitle" TEXT NOT NULL,
+    "metaDescription" TEXT NOT NULL,
+    "canonicalUrl" TEXT NOT NULL,
     "seoSchema" TEXT,
     "lastEditedBy" TEXT NOT NULL,
     "status" "ContentStatus" NOT NULL DEFAULT 'PUBLISHED',
@@ -136,12 +137,12 @@ CREATE TABLE "Product" (
     "blindTypeId" INTEGER NOT NULL,
     "sku" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "shortDescription" TEXT,
-    "description" TEXT,
-    "breadcrumb" TEXT,
+    "shortDescription" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "breadcrumb" TEXT NOT NULL,
     "oldPath" TEXT,
     "newPath" TEXT NOT NULL,
-    "posterImageUrl" TEXT,
+    "posterImageUrl" TEXT NOT NULL DEFAULT 'https://placehold.co/600x600?text=Product+Image',
     "productImages" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "isMotorized" BOOLEAN NOT NULL DEFAULT false,
     "additionalInfo" TEXT,
@@ -222,13 +223,19 @@ CREATE UNIQUE INDEX "NewsletterSubscriber_email_key" ON "NewsletterSubscriber"("
 CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Category_path_key" ON "Category"("path");
+CREATE UNIQUE INDEX "Category_newPath_key" ON "Category"("newPath");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Subcategory_newPath_key" ON "Subcategory"("newPath");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Subcategory_categoryId_newPath_key" ON "Subcategory"("categoryId", "newPath");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Product_sku_key" ON "Product"("sku");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Product_newPath_key" ON "Product"("newPath");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Product_subcategoryId_newPath_key" ON "Product"("subcategoryId", "newPath");
