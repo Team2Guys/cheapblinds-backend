@@ -1,12 +1,15 @@
 import createError from 'http-errors';
+import { adminCache } from './admin.cache.js';
 import { adminRepository } from './admin.repository.js';
 import { bcryptUtils } from '#lib/index.js';
-import { cache } from '#lib/index.js';
 
 const { write, read, update, remove } = adminRepository;
-const CACHE_TTL = 120;
 
 export const adminServices = {
+  getAdminList: () => adminCache.getAdminList(),
+
+  getAdminById: (id) => adminCache.getAdminById(id),
+
   createAdmin: async (input) => {
     const { email, password, ...rest } = input;
 
@@ -21,44 +24,19 @@ export const adminServices = {
       ...rest
     });
 
-    // Invalidate cached admin list
-    await cache.del('admins:list');
-    return admin;
-  },
-
-  getAdminList: async () => {
-    const key = 'admins:list';
-    const cached = await cache.get(key);
-    if (cached) return cached;
-
-    const admins = await read.adminList();
-    if (admins.length) await cache.set(key, admins, CACHE_TTL);
-    return admins;
-  },
-
-  getAdminById: async (id) => {
-    const key = `admins:id:${id}`;
-    const cached = await cache.get(key);
-    if (cached) return cached;
-
-    const admin = await read.adminById(id);
-    if (admin) await cache.set(key, admin, CACHE_TTL);
+    await adminCache.invalidateAdmin(admin.id);
     return admin;
   },
 
   updateAdminById: async (id, input) => {
     const admin = await update.adminById(id, input);
-
-    await cache.del(`admins:id:${id}`);
-    await cache.del('admins:list');
+    await adminCache.invalidateAdmin(id);
     return admin;
   },
 
   removeAdminById: async (id) => {
     const admin = await remove.adminById(id);
-
-    await cache.del(`admins:id:${id}`);
-    await cache.del('admins:list');
+    await adminCache.invalidateAdmin(id);
     return admin;
   }
 };
