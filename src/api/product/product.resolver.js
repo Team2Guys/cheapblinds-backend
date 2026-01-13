@@ -12,8 +12,8 @@ export const productResolvers = {
       productServices.getProductById(id)
     ),
 
-    productByPaths: handlePromise((_parent, { input }) =>
-      productServices.getProductByPaths(input)
+    productByPath: handlePromise((_parent, { input }) =>
+      productServices.getProductByPath(input)
     )
   },
 

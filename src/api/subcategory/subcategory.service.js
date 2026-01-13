@@ -32,15 +32,12 @@ export const subcategoryServices = {
     return subcategory;
   },
 
-  getSubcategoryByPaths: async ({ categoryPath, subcategoryPath }) => {
-    const key = `subcategories:path:${categoryPath}:${subcategoryPath}`;
+  getSubcategoryByPath: async ({ path }) => {
+    const key = `subcategories:path:${path}`;
     const cached = await cache.get(key);
     if (cached) return cached;
 
-    const subcategory = await read.subcategoryByPaths({
-      categoryPath,
-      subcategoryPath
-    });
+    const subcategory = await read.subcategoryByPath({ path });
     if (subcategory) await cache.set(key, subcategory, CACHE_TTL);
     return subcategory;
   },
