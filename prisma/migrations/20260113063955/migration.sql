@@ -17,10 +17,10 @@ CREATE TYPE "InquiryType" AS ENUM ('EMAIL', 'PHONE', 'WHATSAPP', 'OTHER');
 CREATE TYPE "InquiryStatus" AS ENUM ('NEW', 'READ', 'RESOLVED');
 
 -- CreateEnum
-CREATE TYPE "Permissions" AS ENUM ('ADD_PRODUCTS', 'EDIT_PRODUCTS', 'DELETE_PRODUCTS', 'ADD_CATEGORY', 'DELETE_CATEGORY', 'EDIT_CATEGORY', 'CHECK_PROFIT', 'CHECK_REVENUE', 'CHECK_VISITORS', 'VIEW_USERS', 'VIEW_SALES', 'VIEW_ADMINS', 'VIEW_TOTAL_PRODUCTS', 'VIEW_TOTAL_CATEGORIES');
+CREATE TYPE "AddressType" AS ENUM ('HOME', 'OFFICE', 'OTHER');
 
 -- CreateEnum
-CREATE TYPE "AddressType" AS ENUM ('HOME', 'OFFICE', 'OTHER');
+CREATE TYPE "Permissions" AS ENUM ('ADD_PRODUCTS', 'EDIT_PRODUCTS', 'DELETE_PRODUCTS', 'ADD_CATEGORY', 'DELETE_CATEGORY', 'EDIT_CATEGORY', 'CHECK_PROFIT', 'CHECK_REVENUE', 'CHECK_VISITORS', 'VIEW_USERS', 'VIEW_SALES', 'VIEW_ADMINS', 'VIEW_TOTAL_PRODUCTS', 'VIEW_TOTAL_CATEGORIES');
 
 -- CreateTable
 CREATE TABLE "Admin" (
@@ -30,7 +30,7 @@ CREATE TABLE "Admin" (
     "password" TEXT NOT NULL,
     "role" "AdminRole" NOT NULL DEFAULT 'ADMIN',
     "permissions" "Permissions"[] DEFAULT ARRAY[]::"Permissions"[],
-    "lastEditedBy" TEXT,
+    "lastEditedBy" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -47,7 +47,6 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "isEmailVerified" BOOLEAN NOT NULL DEFAULT false,
-    "isMember" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -88,17 +87,17 @@ CREATE TABLE "NewsletterSubscriber" (
 CREATE TABLE "Category" (
     "id" UUID NOT NULL,
     "name" TEXT NOT NULL,
-    "slug" TEXT NOT NULL,
-    "shortDescription" TEXT,
-    "description" TEXT,
-    "metaTitle" TEXT,
-    "metaDescription" TEXT,
-    "canonicalUrl" TEXT,
-    "breadcrumb" TEXT,
-    "posterImageUrl" TEXT,
-    "seoSchema" TEXT,
+    "shortDescription" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "breadcrumb" TEXT NOT NULL,
+    "path" TEXT NOT NULL,
+    "posterImageUrl" TEXT NOT NULL DEFAULT 'https://placehold.co/600x600?text=Product+Image',
+    "metaTitle" TEXT NOT NULL,
+    "metaDescription" TEXT NOT NULL,
+    "canonicalUrl" TEXT NOT NULL,
+    "seoSchema" TEXT NOT NULL,
+    "lastEditedBy" TEXT NOT NULL,
     "status" "ContentStatus" NOT NULL DEFAULT 'PUBLISHED',
-    "lastEditedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -110,17 +109,18 @@ CREATE TABLE "Subcategory" (
     "id" UUID NOT NULL,
     "categoryId" UUID NOT NULL,
     "name" TEXT NOT NULL,
-    "slug" TEXT NOT NULL,
     "shortDescription" TEXT,
     "description" TEXT,
+    "breadcrumb" TEXT,
+    "oldPath" TEXT,
+    "newPath" TEXT NOT NULL,
+    "posterImageUrl" TEXT,
     "metaTitle" TEXT,
     "metaDescription" TEXT,
     "canonicalUrl" TEXT,
-    "breadcrumb" TEXT,
-    "posterImageUrl" TEXT,
     "seoSchema" TEXT,
+    "lastEditedBy" TEXT NOT NULL,
     "status" "ContentStatus" NOT NULL DEFAULT 'PUBLISHED',
-    "lastEditedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -136,13 +136,13 @@ CREATE TABLE "Product" (
     "blindTypeId" INTEGER NOT NULL,
     "sku" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "slug" TEXT NOT NULL,
-    "breadcrumb" TEXT,
     "shortDescription" TEXT,
     "description" TEXT,
+    "breadcrumb" TEXT,
+    "oldPath" TEXT,
+    "newPath" TEXT NOT NULL,
     "posterImageUrl" TEXT,
     "productImages" TEXT[] DEFAULT ARRAY[]::TEXT[],
-    "productUrl" TEXT,
     "isMotorized" BOOLEAN NOT NULL DEFAULT false,
     "additionalInfo" TEXT,
     "measuringGuide" TEXT,
@@ -161,7 +161,7 @@ CREATE TABLE "Product" (
     "metaDescription" TEXT,
     "canonicalUrl" TEXT,
     "seoSchema" TEXT,
-    "lastEditedBy" TEXT,
+    "lastEditedBy" TEXT NOT NULL,
     "status" "ContentStatus" NOT NULL DEFAULT 'PUBLISHED',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -178,12 +178,12 @@ CREATE TABLE "Order" (
     "totalAmount" DECIMAL(65,30) NOT NULL DEFAULT 0,
     "shippingCost" DECIMAL(65,30) NOT NULL DEFAULT 0,
     "notes" TEXT,
+    "orderItems" JSONB[],
+    "lastEditedBy" TEXT NOT NULL,
     "paymentStatus" "PaymentStatus" NOT NULL DEFAULT 'PENDING',
     "orderStatus" "OrderStatus" NOT NULL DEFAULT 'PENDING',
-    "lastEditedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "orderItems" JSONB[],
 
     CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
 );
@@ -222,16 +222,16 @@ CREATE UNIQUE INDEX "NewsletterSubscriber_email_key" ON "NewsletterSubscriber"("
 CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Category_slug_key" ON "Category"("slug");
+CREATE UNIQUE INDEX "Category_path_key" ON "Category"("path");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Subcategory_categoryId_slug_key" ON "Subcategory"("categoryId", "slug");
+CREATE UNIQUE INDEX "Subcategory_categoryId_newPath_key" ON "Subcategory"("categoryId", "newPath");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Product_sku_key" ON "Product"("sku");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Product_subcategoryId_slug_key" ON "Product"("subcategoryId", "slug");
+CREATE UNIQUE INDEX "Product_subcategoryId_newPath_key" ON "Product"("subcategoryId", "newPath");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_defaultShippingAddressId_fkey" FOREIGN KEY ("defaultShippingAddressId") REFERENCES "Address"("id") ON DELETE SET NULL ON UPDATE CASCADE;

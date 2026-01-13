@@ -3,42 +3,42 @@ import { gql } from 'graphql-tag';
 export const categoryTypeDefs = gql`
   input CreateCategoryInput {
     name: String!
-    description: String!
     shortDescription: String!
-    slug: String!
+    description: String!
+    breadcrumb: String!
+    path: String!
+    posterImageUrl: String!
     metaTitle: String!
     metaDescription: String!
     canonicalUrl: String!
-    breadcrumb: String!
-    posterImageUrl: String!
-    lastEditedBy: String!
     seoSchema: String!
+    lastEditedBy: String!
     status: ContentStatus!
   }
 
   input UpdateCategoryByIdInput {
     name: String
-    description: String
     shortDescription: String
-    slug: String
+    description: String
+    breadcrumb: String
+    path: String
+    posterImageUrl: String
     metaTitle: String
     metaDescription: String
     canonicalUrl: String
-    breadcrumb: String
-    posterImageUrl: String
-    lastEditedBy: String
     seoSchema: String
+    lastEditedBy: String
     status: ContentStatus
   }
 
-  input GetCategoryBySlugInput {
-    slug: String!
+  input GetCategoryByPathInput {
+    path: String!
   }
 
   type Query {
     categoryList: [Category!]!
     categoryById(id: ID!): Category
-    categoryBySlug(input: GetCategoryBySlugInput!): Category
+    categoryByPath(input: GetCategoryByPathInput!): Category
   }
 
   type Mutation {

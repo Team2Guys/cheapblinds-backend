@@ -1,17 +1,63 @@
 import { subcategoryRepository } from './subcategory.repository.js';
+import { cache } from '#lib/index.js';
 
 const { write, read, update, remove } = subcategoryRepository;
+const CACHE_TTL = 120;
 
 export const subcategoryServices = {
-  createSubcategory: (input) => write.subcategory(input),
+  createSubcategory: async (input) => {
+    const subcategory = await write.subcategory(input);
+    // Invalidate caches
+    await cache.del('subcategories:list');
+    return subcategory;
+  },
 
-  getSubcategoryList: () => read.subcategoryList(),
+  getSubcategoryList: async () => {
+    const key = 'subcategories:list';
+    const cached = await cache.get(key);
+    if (cached) return cached;
 
-  getSubcategoryById: (id) => read.subcategoryById(id),
+    const subcategories = await read.subcategoryList();
+    if (subcategories.length) await cache.set(key, subcategories, CACHE_TTL);
+    return subcategories;
+  },
 
-  getSubcategoryBySlugs: (input) => read.subcategoryBySlugs(input),
+  getSubcategoryById: async (id) => {
+    const key = `subcategories:id:${id}`;
+    const cached = await cache.get(key);
+    if (cached) return cached;
 
-  updateSubcategoryById: (id, input) => update.subcategoryById(id, input),
+    const subcategory = await read.subcategoryById(id);
+    if (subcategory) await cache.set(key, subcategory, CACHE_TTL);
+    return subcategory;
+  },
 
-  removeSubcategoryById: (id) => remove.subcategoryById(id)
+  getSubcategoryByPaths: async ({ categoryPath, subcategoryPath }) => {
+    const key = `subcategories:path:${categoryPath}:${subcategoryPath}`;
+    const cached = await cache.get(key);
+    if (cached) return cached;
+
+    const subcategory = await read.subcategoryByPaths({
+      categoryPath,
+      subcategoryPath
+    });
+    if (subcategory) await cache.set(key, subcategory, CACHE_TTL);
+    return subcategory;
+  },
+
+  updateSubcategoryById: async (id, input) => {
+    const subcategory = await update.subcategoryById(id, input);
+
+    await cache.del(`subcategories:id:${id}`);
+    await cache.del('subcategories:list');
+    return subcategory;
+  },
+
+  removeSubcategoryById: async (id) => {
+    const subcategory = await remove.subcategoryById(id);
+
+    await cache.del(`subcategories:id:${id}`);
+    await cache.del('subcategories:list');
+    return subcategory;
+  }
 };

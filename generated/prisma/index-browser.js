@@ -141,7 +141,6 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   isEmailVerified: 'isEmailVerified',
-  isMember: 'isMember',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -173,17 +172,17 @@ exports.Prisma.NewsletterSubscriberScalarFieldEnum = {
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  slug: 'slug',
-  breadcrumb: 'breadcrumb',
   shortDescription: 'shortDescription',
   description: 'description',
+  breadcrumb: 'breadcrumb',
+  path: 'path',
   posterImageUrl: 'posterImageUrl',
   metaTitle: 'metaTitle',
   metaDescription: 'metaDescription',
   canonicalUrl: 'canonicalUrl',
   seoSchema: 'seoSchema',
-  status: 'status',
   lastEditedBy: 'lastEditedBy',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -192,17 +191,18 @@ exports.Prisma.SubcategoryScalarFieldEnum = {
   id: 'id',
   categoryId: 'categoryId',
   name: 'name',
-  slug: 'slug',
-  breadcrumb: 'breadcrumb',
   shortDescription: 'shortDescription',
   description: 'description',
+  breadcrumb: 'breadcrumb',
+  oldPath: 'oldPath',
+  newPath: 'newPath',
   posterImageUrl: 'posterImageUrl',
   metaTitle: 'metaTitle',
   metaDescription: 'metaDescription',
   canonicalUrl: 'canonicalUrl',
   seoSchema: 'seoSchema',
-  status: 'status',
   lastEditedBy: 'lastEditedBy',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -215,13 +215,13 @@ exports.Prisma.ProductScalarFieldEnum = {
   blindTypeId: 'blindTypeId',
   sku: 'sku',
   name: 'name',
-  slug: 'slug',
-  breadcrumb: 'breadcrumb',
   shortDescription: 'shortDescription',
   description: 'description',
+  breadcrumb: 'breadcrumb',
+  oldPath: 'oldPath',
+  newPath: 'newPath',
   posterImageUrl: 'posterImageUrl',
   productImages: 'productImages',
-  productUrl: 'productUrl',
   isMotorized: 'isMotorized',
   additionalInfo: 'additionalInfo',
   measuringGuide: 'measuringGuide',
@@ -254,12 +254,12 @@ exports.Prisma.OrderScalarFieldEnum = {
   totalAmount: 'totalAmount',
   shippingCost: 'shippingCost',
   notes: 'notes',
+  orderItems: 'orderItems',
+  lastEditedBy: 'lastEditedBy',
   paymentStatus: 'paymentStatus',
   orderStatus: 'orderStatus',
-  lastEditedBy: 'lastEditedBy',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  orderItems: 'orderItems'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.InquiryScalarFieldEnum = {

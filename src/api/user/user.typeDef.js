@@ -2,11 +2,11 @@ import { gql } from 'graphql-tag';
 
 export const userTypeDefs = gql`
   input UpdateUserByIdInput {
+    defaultShippingAddressId: ID
+    defaultBillingAddressId: ID
     firstName: String
     lastName: String
     email: String
-    defaultShippingAddressId: ID
-    defaultBillingAddressId: ID
   }
 
   type Query {

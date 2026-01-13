@@ -1,83 +1,61 @@
 import { productRepository } from './product.repository.js';
-import { redis } from '#lib/index.js';
+import { cache } from '#lib/index.js';
 
 const { write, read, update, remove } = productRepository;
-
 const CACHE_TTL = 120; // seconds
 
 export const productServices = {
   getProductList: async () => {
-    const cacheKey = 'products:list';
-
-    const cachedProducts = await redis.get(cacheKey);
-    if (cachedProducts) return JSON.parse(cachedProducts);
+    const key = 'products:list';
+    const cached = await cache.get(key);
+    if (cached) return cached;
 
     const products = await read.productList();
-
-    await redis.set(cacheKey, JSON.stringify(products), 'EX', CACHE_TTL);
+    if (products.length) await cache.set(key, products, CACHE_TTL);
     return products;
   },
 
   getProductById: async (id) => {
-    const cacheKey = `products:id:${id}`;
-
-    const cached = await redis.get(cacheKey);
-    if (cached) {
-      return JSON.parse(cached);
-    }
+    const key = `products:id:${id}`;
+    const cached = await cache.get(key);
+    if (cached) return cached;
 
     const product = await read.productById(id);
-
-    if (product) {
-      await redis.set(cacheKey, JSON.stringify(product), 'EX', CACHE_TTL);
-    }
-
+    if (product) await cache.set(key, product, CACHE_TTL);
     return product;
   },
 
-  getProductBySlugs: async (input) => {
-    const { categorySlug, subcategorySlug, productSlug } = input;
-    const cacheKey = `products:slug:${categorySlug}:${subcategorySlug}:${productSlug}`;
+  getProductByPaths: async ({ categoryPath, subcategoryPath, productPath }) => {
+    const key = `products:path:${categoryPath}:${subcategoryPath}:${productPath}`;
+    const cached = await cache.get(key);
+    if (cached) return cached;
 
-    const cached = await redis.get(cacheKey);
-    if (cached) {
-      console.log('Redis HIT: product by slugs');
-      return JSON.parse(cached);
-    }
-
-    const product = await read.productBySlugs(input);
-
-    if (product) {
-      await redis.set(cacheKey, JSON.stringify(product), 'EX', CACHE_TTL);
-    }
-
+    const product = await read.productByPaths({
+      categoryPath,
+      subcategoryPath,
+      productPath
+    });
+    if (product) await cache.set(key, product, CACHE_TTL);
     return product;
   },
 
   createProduct: async (input) => {
     const product = await write.product(input);
-
-    // invalidate caches
-    await redis.del('products:list');
-
+    await cache.del('products:list');
     return product;
   },
 
   updateProductById: async (id, input) => {
     const product = await update.productById(id, input);
-
-    await redis.del('products:list');
-    await redis.del(`products:id:${id}`);
-
+    await cache.del('products:list');
+    await cache.del(`products:id:${id}`);
     return product;
   },
 
   removeProductById: async (id) => {
     const product = await remove.productById(id);
-
-    await redis.del('products:list');
-    await redis.del(`products:id:${id}`);
-
+    await cache.del('products:list');
+    await cache.del(`products:id:${id}`);
     return product;
   }
 };
