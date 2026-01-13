@@ -143,7 +143,8 @@ export const commonTypeDefs = gql`
     shortDescription: String
     description: String
     breadcrumb: String
-    path: String!
+    oldPath: String
+    newPath: String!
     posterImageUrl: String
     metaTitle: String
     metaDescription: String
