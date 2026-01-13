@@ -6,7 +6,7 @@ export const adminTypeDefs = gql`
     email: String!
     password: String!
     role: AdminRole!
-    permissions: [String!]!
+    permissions: [Permissions!]!
     lastEditedBy: String!
   }
 
@@ -14,7 +14,7 @@ export const adminTypeDefs = gql`
     name: String
     email: String
     role: AdminRole
-    permissions: [String!]
+    permissions: [Permissions!]
     lastEditedBy: String
   }
 

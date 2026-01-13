@@ -48,6 +48,12 @@ enum InquiryStatus {
   RESOLVED
 }
 
+enum AddressType {
+  HOME
+  OFFICE
+  OTHER
+}
+
 enum Permissions {
   ADD_PRODUCTS
   EDIT_PRODUCTS
@@ -65,36 +71,33 @@ enum Permissions {
   VIEW_TOTAL_CATEGORIES
 }
 
-enum AddressType {
-  HOME
-  OFFICE
-  OTHER
-}
-
 model Admin {
-  id           String        @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid //  Automatically assigned UUID primary key.
+
   name         String
   email        String        @unique
   password     String
   role         AdminRole     @default(ADMIN)
   permissions  Permissions[] @default([])
-  lastEditedBy String?
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  lastEditedBy String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model User {
-  id                       String   @id @default(uuid()) @db.Uuid
-  defaultShippingAddressId String?  @unique @db.Uuid
-  defaultBillingAddressId  String?  @unique @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
+
+  defaultShippingAddressId String? @unique @db.Uuid
+  defaultBillingAddressId  String? @unique @db.Uuid
   firstName                String
   lastName                 String
-  email                    String   @unique
+  email                    String  @unique
   password                 String
-  isEmailVerified          Boolean  @default(false)
-  isMember                 Boolean  @default(false)
-  createdAt                DateTime @default(now())
-  updatedAt                DateTime @updatedAt
+  isEmailVerified          Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   addresses              Address[] @relation(name: "UserAddresses")
   orders                 Order[]   @relation(name: "UserOrders")
@@ -103,7 +106,8 @@ model User {
 }
 
 model Address {
-  id          String      @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
+
   userId      String      @db.Uuid
   firstName   String
   lastName    String
@@ -114,8 +118,9 @@ model Address {
   city        String
   address     String
   addressType AddressType @default(HOME)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user               User  @relation(name: "UserAddresses", fields: [userId], references: [id], onDelete: Cascade)
   defaultShippingFor User? @relation(name: "DefaultShipping")
@@ -123,73 +128,81 @@ model Address {
 }
 
 model NewsletterSubscriber {
-  id        String   @id @default(uuid()) @db.Uuid
-  email     String   @unique
-  isActive  Boolean  @default(true)
+  id String @id @default(uuid()) @db.Uuid
+
+  email    String  @unique
+  isActive Boolean @default(true)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Category {
-  id               String        @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
+
   name             String        @unique
-  slug             String        @unique
-  breadcrumb       String?
-  shortDescription String?
-  description      String?       @db.Text()
-  posterImageUrl   String?
-  metaTitle        String?
-  metaDescription  String?
-  canonicalUrl     String?
-  seoSchema        String?       @db.Text()
+  shortDescription String
+  description      String        @db.Text()
+  breadcrumb       String
+  path             String        @unique
+  posterImageUrl   String        @default("https://placehold.co/600x600?text=Product+Image")
+  metaTitle        String
+  metaDescription  String
+  canonicalUrl     String
+  seoSchema        String        @db.Text()
+  lastEditedBy     String
   status           ContentStatus @default(PUBLISHED)
-  lastEditedBy     String?
-  createdAt        DateTime      @default(now())
-  updatedAt        DateTime      @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   products      Product[]     @relation(name: "CategoryProducts")
   subcategories Subcategory[] @relation(name: "CategorySubcategories")
 }
 
 model Subcategory {
-  id               String        @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
+
   categoryId       String        @db.Uuid
   name             String
-  slug             String
-  breadcrumb       String?
   shortDescription String?
   description      String?       @db.Text()
+  breadcrumb       String?
+  oldPath          String?
+  newPath          String
   posterImageUrl   String?
   metaTitle        String?
   metaDescription  String?
   canonicalUrl     String?
   seoSchema        String?       @db.Text()
+  lastEditedBy     String
   status           ContentStatus @default(PUBLISHED)
-  lastEditedBy     String?
-  createdAt        DateTime      @default(now())
-  updatedAt        DateTime      @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   category Category  @relation(name: "CategorySubcategories", fields: [categoryId], references: [id], onDelete: Cascade)
   products Product[] @relation(name: "SubcategoryProducts")
 
-  @@unique([categoryId, slug])
+  @@unique([categoryId, newPath])
 }
 
 model Product {
-  id               String        @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
+
   categoryId       String        @db.Uuid
   subcategoryId    String        @db.Uuid
   fabricId         Int
   blindTypeId      Int
   sku              String        @unique
   name             String
-  slug             String
-  breadcrumb       String?
   shortDescription String?
   description      String?       @db.Text()
+  breadcrumb       String?
+  oldPath          String?
+  newPath          String
   posterImageUrl   String?
   productImages    String[]      @default([])
-  productUrl       String?
   isMotorized      Boolean       @default(false)
   additionalInfo   String?       @db.Text()
   measuringGuide   String?       @db.Text()
@@ -208,43 +221,48 @@ model Product {
   metaDescription  String?       @db.Text()
   canonicalUrl     String?
   seoSchema        String?       @db.Text()
-  lastEditedBy     String?
+  lastEditedBy     String
   status           ContentStatus @default(PUBLISHED)
-  createdAt        DateTime      @default(now())
-  updatedAt        DateTime      @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   category    Category    @relation(name: "CategoryProducts", fields: [categoryId], references: [id], onDelete: Restrict)
   subcategory Subcategory @relation(name: "SubcategoryProducts", fields: [subcategoryId], references: [id], onDelete: Cascade)
 
-  @@unique([subcategoryId, slug])
+  @@unique([subcategoryId, newPath])
 }
 
 model Order {
-  id              String        @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
+
   userId          String        @db.Uuid
   shippingAddress Json
   billingAddress  Json
   totalAmount     Decimal       @default(0)
   shippingCost    Decimal       @default(0)
   notes           String?       @db.Text()
+  orderItems      Json[]
+  lastEditedBy    String
   paymentStatus   PaymentStatus @default(PENDING)
   orderStatus     OrderStatus   @default(PENDING)
-  lastEditedBy    String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  orderItems      Json[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user User @relation(name: "UserOrders", fields: [userId], references: [id], onDelete: Restrict)
 }
 
 model Inquiry {
-  id            String        @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
+
   name          String
   email         String
   phone         String
   message       String?       @db.Text()
   inquiryType   InquiryType   @default(OTHER)
   inquiryStatus InquiryStatus @default(NEW)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

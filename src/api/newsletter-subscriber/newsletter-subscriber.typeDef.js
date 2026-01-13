@@ -7,7 +7,7 @@ export const newsletterSubscriberTypeDefs = gql`
   }
 
   input UpdateNewsletterSubscriberByIdInput {
-    isActive: Boolean
+    isActive: Boolean!
   }
 
   type Query {

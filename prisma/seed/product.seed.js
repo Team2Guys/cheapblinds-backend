@@ -71,19 +71,17 @@ export async function seedProducts() {
       blindTypeId: row.blindTypeId || null,
       sku: row.sku || '',
       name: row.name,
-      slug: row.slug,
       shortDescription: row.shortDescription || '',
       description: row.description || '',
-      metaTitle: row.metaTitle || row.name,
-      metaDescription: row.metaDescription || '',
-      canonicalUrl: row.canonicalUrl || '',
       breadcrumb: row.breadcrumb || '',
+      oldPath: row.oldPath || '',
+      newPath: row.newPath || '',
       posterImageUrl: row.posterImageUrl || '',
-      productUrl: row.productUrl || '',
       productImages: parsePgArray(row.productImages, rowNum, 'productImages'),
-      price: Number(row.price || 0),
-      discountPrice: Number(row.discountPrice || 0),
-      motorPrice: Number(row.motorPrice || 0),
+      isMotorized: row.isMotorized === true || row.isMotorized === 'TRUE',
+      additionalInfo: row.additionalInfo || '',
+      measuringGuide: row.measuringGuide || '',
+      material: row.composition || '',
       minDrop: Number(row.minDrop || 0),
       maxDrop: Number(row.maxDrop || 0),
       minWidth: Number(row.minWidth || 0),
@@ -91,13 +89,15 @@ export async function seedProducts() {
       inStock: row.inStock === 'TRUE' ? true : false,
       color: row.color || '',
       pattern: row.pattern || '',
-      material: row.composition || '',
-      isMotorized: row.isMotorized === true || row.isMotorized === 'TRUE',
-      additionalInfo: row.additionalInfo || '',
-      measuringGuide: row.measuringGuide || '',
+      price: Number(row.price || 0),
+      motorPrice: Number(row.motorPrice || 0),
+      discountPrice: Number(row.discountPrice || 0),
+      metaTitle: row.metaTitle || row.name,
+      metaDescription: row.metaDescription || '',
+      canonicalUrl: row.canonicalUrl || '',
       seoSchema: row.seoSchema || '',
-      status: (row.status || 'PUBLISHED').toUpperCase(),
-      lastEditedBy: row.lastEditedBy || 'seed-script'
+      lastEditedBy: row.lastEditedBy || 'seed-script',
+      status: (row.status || 'PUBLISHED').toUpperCase()
     };
   });
 
@@ -108,9 +108,9 @@ export async function seedProducts() {
     try {
       await prisma.product.upsert({
         where: {
-          subcategoryId_slug: {
+          subcategoryId_newPath: {
             subcategoryId: row.subcategoryId,
-            slug: row.slug
+            newPath: row.newPath
           }
         },
         update: { ...row, rowNum: undefined },

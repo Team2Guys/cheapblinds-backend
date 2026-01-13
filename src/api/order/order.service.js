@@ -1,17 +1,63 @@
 import { orderRepository } from './order.repository.js';
+import { cache } from '#lib/index.js';
 
 const { write, read, update, remove } = orderRepository;
+const CACHE_TTL = 120;
 
 export const orderServices = {
-  createOrder: (input) => write.order(input),
+  createOrder: async (input, userId) => {
+    const order = await write.order(input);
+    // Invalidate caches
+    await cache.del('orders:list');
+    await cache.del(`orders:user:${userId}`);
+    return order;
+  },
 
-  getOrderList: () => read.orderList(),
+  getOrderList: async () => {
+    const key = 'orders:list';
+    const cached = await cache.get(key);
+    if (cached) return cached;
 
-  getOrderListByUserId: (id) => read.orderListByUserId(id),
+    const orders = await read.orderList();
+    if (orders.length) await cache.set(key, orders, CACHE_TTL);
+    return orders;
+  },
 
-  getOrderById: (id) => read.orderById(id),
+  getOrderListByUserId: async (userId) => {
+    const key = `orders:user:${userId}`;
+    const cached = await cache.get(key);
+    if (cached) return cached;
 
-  updateOrderById: (id, input) => update.orderById(id, input),
+    const orders = await read.orderListByUserId(userId);
+    if (orders.length) await cache.set(key, orders, CACHE_TTL);
+    return orders;
+  },
 
-  removeOrderById: (id) => remove.orderById(id)
+  getOrderById: async (id) => {
+    const key = `orders:id:${id}`;
+    const cached = await cache.get(key);
+    if (cached) return cached;
+
+    const order = await read.orderById(id);
+    if (order) await cache.set(key, order, CACHE_TTL);
+    return order;
+  },
+
+  updateOrderById: async (id, input, userId) => {
+    const order = await update.orderById(id, input);
+
+    await cache.del(`orders:id:${id}`);
+    await cache.del('orders:list');
+    await cache.del(`orders:user:${userId}`);
+    return order;
+  },
+
+  removeOrderById: async (id, userId) => {
+    const order = await remove.orderById(id);
+
+    await cache.del(`orders:id:${id}`);
+    await cache.del('orders:list');
+    await cache.del(`orders:user:${userId}`);
+    return order;
+  }
 };

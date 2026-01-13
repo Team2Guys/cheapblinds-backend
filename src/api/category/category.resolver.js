@@ -12,8 +12,8 @@ export const categoryResolvers = {
       categoryServices.getCategoryById(id)
     ),
 
-    categoryBySlug: handlePromise((_parent, { input }) =>
-      categoryServices.getCategoryBySlug(input)
+    categoryByPath: handlePromise((_parent, { input }) =>
+      categoryServices.getCategoryByPath(input)
     )
   },
 

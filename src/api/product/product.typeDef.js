@@ -8,19 +8,17 @@ export const productTypeDefs = gql`
     blindTypeId: Int!
     sku: String!
     name: String!
-    slug: String
     shortDescription: String
     description: String
-    metaTitle: String
-    metaDescription: String
-    canonicalUrl: String
     breadcrumb: String
+    oldPath: String
+    newPath: String
     posterImageUrl: String
-    productUrl: String!
     productImages: [String!]!
-    price: Float!
-    discountPrice: Float
-    motorPrice: Float
+    isMotorized: Boolean
+    additionalInfo: String
+    measuringGuide: String
+    material: String
     minDrop: Float
     maxDrop: Float
     minWidth: Float
@@ -28,35 +26,36 @@ export const productTypeDefs = gql`
     inStock: Int
     color: String
     pattern: String
-    material: String
-    isMotorized: Boolean
-    additionalInfo: String
-    measuringGuide: String
+    price: Float!
+    motorPrice: Float
+    discountPrice: Float
+    metaTitle: String
+    metaDescription: String
+    canonicalUrl: String
     seoSchema: String
     lastEditedBy: String!
     status: ContentStatus!
   }
 
   input UpdateProductByIdInput {
-    categoryId: ID
-    subcategoryId: ID
-    fabricId: Int
-    blindTypeId: Int
-    sku: String
-    name: String
-    slug: String
+    id: ID
+    categoryId: ID!
+    subcategoryId: ID!
+    fabricId: Int!
+    blindTypeId: Int!
+    sku: String!
+    name: String!
     shortDescription: String
     description: String
-    metaTitle: String
-    metaDescription: String
-    canonicalUrl: String
     breadcrumb: String
+    oldPath: String
+    newPath: String
     posterImageUrl: String
-    productUrl: String
-    productImages: [String!]
-    price: Float
-    discountPrice: Float
-    motorPrice: Float
+    productImages: [String!]!
+    isMotorized: Boolean
+    additionalInfo: String
+    measuringGuide: String
+    material: String
     minDrop: Float
     maxDrop: Float
     minWidth: Float
@@ -64,25 +63,27 @@ export const productTypeDefs = gql`
     inStock: Int
     color: String
     pattern: String
-    material: String
-    isMotorized: Boolean
-    additionalInfo: String
-    measuringGuide: String
+    price: Float!
+    motorPrice: Float
+    discountPrice: Float
+    metaTitle: String
+    metaDescription: String
+    canonicalUrl: String
     seoSchema: String
-    lastEditedBy: String
-    status: ContentStatus
+    lastEditedBy: String!
+    status: ContentStatus!
   }
 
-  input GetProductBySlugsInput {
-    categorySlug: String!
-    subcategorySlug: String!
-    productSlug: String!
+  input GetProductByPathsInput {
+    categoryPath: String!
+    subcategoryPath: String!
+    productPath: String!
   }
 
   type Query {
     productList: [Product!]!
     productById(id: ID!): Product
-    productBySlugs(input: GetProductBySlugsInput!): Product
+    productByPaths(input: GetProductByPathsInput!): Product
   }
 
   type Mutation {

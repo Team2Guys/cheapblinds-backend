@@ -2,7 +2,6 @@
 import xlsx from 'xlsx';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import slugify from 'slugify';
 import { prisma } from '#lib/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -28,18 +27,17 @@ export async function seedCategories() {
   for (const [index, row] of rows.entries()) {
     if (!row.name) throw new Error(`❌ Row ${index + 1}: name is required`);
 
-    const slug = slugify(row.name, { lower: true, strict: true });
     console.log(`➡️ [${index + 1}] ${row.name}`);
 
     const data = {
       name: row.name,
-      description: row.description || '',
       shortDescription: row.shortDescription || '',
-      slug,
+      description: row.description || '',
+      breadcrumb: row.breadcrumb || '',
+      path: row.path || '',
       metaTitle: row.metaTitle || row.name,
       metaDescription: row.metaDescription || '',
       canonicalUrl: row.canonicalUrl || '',
-      breadcrumb: row.breadcrumb || '',
       posterImageUrl: row.posterImageUrl || '',
       seoSchema: row.seoSchema || '',
       status: (row.status || 'PUBLISHED').toUpperCase(),
@@ -47,7 +45,7 @@ export async function seedCategories() {
     };
 
     await prisma.category.upsert({
-      where: { slug },
+      where: { path: data.path },
       update: data,
       create: data
     });

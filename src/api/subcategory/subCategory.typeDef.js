@@ -2,19 +2,20 @@ import { gql } from 'graphql-tag';
 
 export const subcategoryTypeDefs = gql`
   input CreateSubcategoryInput {
+    categoryId: ID!
     name: String!
-    description: String!
     shortDescription: String!
-    slug: String!
+    description: String!
+    breadcrumb: String!
+    oldPath: String
+    newPath: String!
     metaTitle: String!
     metaDescription: String!
     canonicalUrl: String!
-    breadcrumb: String!
     posterImageUrl: String!
     lastEditedBy: String!
     seoSchema: String!
     status: ContentStatus!
-    categoryId: ID!
   }
 
   input UpdateSubcategoryByIdInput {
@@ -22,7 +23,7 @@ export const subcategoryTypeDefs = gql`
     name: String
     description: String
     shortDescription: String
-    slug: String
+    path: String
     metaTitle: String
     metaDescription: String
     canonicalUrl: String
@@ -34,15 +35,15 @@ export const subcategoryTypeDefs = gql`
     categoryId: ID
   }
 
-  input GetSubcategoryBySlugsInput {
-    subcategorySlug: String!
-    categorySlug: String!
+  input GetSubcategoryByPathsInput {
+    subcategoryPath: String!
+    categoryPath: String!
   }
 
   type Query {
     subcategoryList: [Subcategory!]!
     subcategoryById(id: ID!): Subcategory
-    subcategoryBySlugs(input: GetSubcategoryBySlugsInput!): Subcategory
+    subcategoryByPaths(input: GetSubcategoryByPathsInput!): Subcategory
   }
 
   type Mutation {
