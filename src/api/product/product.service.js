@@ -25,16 +25,12 @@ export const productServices = {
     return product;
   },
 
-  getProductByPaths: async ({ categoryPath, subcategoryPath, productPath }) => {
-    const key = `products:path:${categoryPath}:${subcategoryPath}:${productPath}`;
+  getProductByPath: async ({ path }) => {
+    const key = `product:path:${path}`;
     const cached = await cache.get(key);
     if (cached) return cached;
 
-    const product = await read.productByPaths({
-      categoryPath,
-      subcategoryPath,
-      productPath
-    });
+    const product = await read.productByPath({ path });
     if (product) await cache.set(key, product, CACHE_TTL);
     return product;
   },

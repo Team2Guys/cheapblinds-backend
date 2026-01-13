@@ -35,15 +35,14 @@ export const subcategoryTypeDefs = gql`
     categoryId: ID
   }
 
-  input GetSubcategoryByPathsInput {
-    subcategoryPath: String!
-    categoryPath: String!
+  input GetSubcategoryByPathInput {
+    path: String!
   }
 
   type Query {
     subcategoryList: [Subcategory!]!
     subcategoryById(id: ID!): Subcategory
-    subcategoryByPaths(input: GetSubcategoryByPathsInput!): Subcategory
+    subcategoryByPath(input: GetSubcategoryByPathInput!): Subcategory
   }
 
   type Mutation {
