@@ -1,24 +1,27 @@
-# Stage 1: Dev
-FROM node:24-alpine AS dev
+FROM node:24-alpine
+
 WORKDIR /usr/src/app
+
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
+
 COPY package*.json ./
-RUN npm install
-RUN npm install -g nodemon
+
+RUN if [ "$NODE_ENV" = "production" ]; then \
+    npm install --omit=dev; \
+    else \
+    npm install && npm install -g nodemon; \
+    fi
+
 COPY . .
+
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
-EXPOSE 5000
-ENV NODE_ENV=development
-CMD ["npx", "nodemon", "src/app.js"]
 
-# Stage 2: Prod
-FROM node:24-alpine AS prod
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install --production
-COPY . .
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup 
-USER appuser
 EXPOSE 5000
-ENV NODE_ENV=production
-CMD ["node", "src/app.js"]
+
+CMD if [ "$NODE_ENV" = "production" ]; then \
+    node src/app.js; \
+    else \
+    npx nodemon src/app.js; \
+    fi
