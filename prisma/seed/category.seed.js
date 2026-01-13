@@ -34,7 +34,8 @@ export async function seedCategories() {
       shortDescription: row.shortDescription || '',
       description: row.description || '',
       breadcrumb: row.breadcrumb || '',
-      path: row.path || '',
+      oldPath: row.oldPath || '',
+      newPath: row.newPath || '',
       metaTitle: row.metaTitle || row.name,
       metaDescription: row.metaDescription || '',
       canonicalUrl: row.canonicalUrl || '',
@@ -45,7 +46,7 @@ export async function seedCategories() {
     };
 
     await prisma.category.upsert({
-      where: { path: data.path },
+      where: { newPath: data.newPath },
       update: data,
       create: data
     });
