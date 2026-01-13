@@ -8,8 +8,8 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "lint:js": "eslint \"./**/*.{js,jsx}\"",
-    "docker:up-dev": "docker compose -f docker-compose.dev.yml up --build",
-    "docker:up-prod": "docker compose up -d --build",
+    "docker:up-dev": "cross-env NODE_ENV=development ENV_FILE=.env docker compose up --build",
+    "docker:up-prod": "cross-env NODE_ENV=production ENV_FILE=.env.development docker compose up -d --build",
     "format:code": "prettier --write \"src/**/*.js\"",
     "format:prisma": "npx prisma format",
     "db:init": "npx prisma init",
@@ -25,6 +25,7 @@
     "seed": "node prisma/seed.js"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "eslint": "^9.20.0",
     "nodemon": "^3.1.11",
     "prettier": "^3.5.0"
