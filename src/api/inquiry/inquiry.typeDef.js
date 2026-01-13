@@ -6,11 +6,11 @@ export const inquiryTypeDefs = gql`
     email: String!
     phone: String!
     message: String
-    inquiryType: String
+    inquiryType: InquiryType
   }
 
   input UpdateInquiryByIdInput {
-    inquiryStatus: String!
+    inquiryStatus: InquiryStatus!
   }
 
   type Query {

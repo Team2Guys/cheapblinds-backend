@@ -48,17 +48,18 @@ export async function seedSubcategories() {
     return {
       categoryId,
       name: row.name,
-      slug: row.slug,
-      description: row.description || '',
       shortDescription: row.shortDescription || '',
+      description: row.description || '',
+      breadcrumb: row.breadcrumb || '',
+      oldPath: row.oldPath || '',
+      newPath: row.newPath || '',
+      posterImageUrl: row.posterImageUrl || '',
       metaTitle: row.metaTitle || row.name,
       metaDescription: row.metaDescription || '',
       canonicalUrl: row.canonicalUrl || '',
-      breadcrumb: row.breadcrumb || '',
-      posterImageUrl: row.posterImageUrl || '',
       seoSchema: row.seoSchema || '',
-      status: (row.status || 'PUBLISHED').toUpperCase(),
-      lastEditedBy: row.lastEditedBy || 'seed-script'
+      lastEditedBy: row.lastEditedBy || 'seed-script',
+      status: (row.status || 'PUBLISHED').toUpperCase()
     };
   });
 
@@ -70,8 +71,8 @@ export async function seedSubcategories() {
 
     await prisma.subcategory.upsert({
       where: {
-        categoryId_slug: {
-          slug: row.slug,
+        categoryId_newPath: {
+          newPath: row.newPath,
           categoryId: row.categoryId
         }
       },
