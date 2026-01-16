@@ -2,29 +2,29 @@ import { z } from 'zod';
 
 export const createProductSchema = z
   .object({
-    categoryId: z.string().min(1, 'Category ID is required').trim(),
-    subcategoryId: z.string().min(1, 'Subcategory ID is required').trim(),
+    categoryId: z.string().trim().min(1, 'Category ID is required'),
+    subcategoryId: z.string().trim().min(1, 'Subcategory ID is required'),
     fabricId: z.number().int(),
     blindTypeId: z.number().int(),
-    sku: z.string().min(1, 'SKU is required').trim(),
-    name: z.string().min(1, 'Name is required').trim(),
+    sku: z.string().trim().min(1, 'SKU is required'),
+    name: z.string().trim().min(1, 'Name is required'),
 
-    shortDescription: z.string().nullable().optional().trim(),
-    description: z.string().nullable().optional().trim(),
-    breadcrumb: z.string().nullable().optional().trim(),
+    shortDescription: z.string().trim().nullable().optional(),
+    description: z.string().trim().nullable().optional(),
+    breadcrumb: z.string().trim().nullable().optional(),
 
-    oldPath: z.string().nullable().optional().trim(),
-    newPath: z.string().nullable().optional().trim(),
+    oldPath: z.string().trim().nullable().optional(),
+    newPath: z.string().trim().nullable().optional(),
 
-    posterImageUrl: z.string().url('Invalid URL').nullable().optional().trim(),
+    posterImageUrl: z.url('Invalid URL').trim().nullable().optional(),
     productImages: z
       .array(z.string().trim())
       .min(1, 'At least one product image is required'),
 
     isMotorized: z.boolean().optional(),
-    additionalInfo: z.string().nullable().optional().trim(),
-    measuringGuide: z.string().nullable().optional().trim(),
-    material: z.string().nullable().optional().trim(),
+    additionalInfo: z.string().trim().nullable().optional(),
+    measuringGuide: z.string().trim().nullable().optional(),
+    material: z.string().trim().nullable().optional(),
 
     minDrop: z.number().nullable().optional(),
     maxDrop: z.number().nullable().optional(),
@@ -33,19 +33,19 @@ export const createProductSchema = z
 
     inStock: z.number().int().nullable().optional(),
 
-    color: z.string().nullable().optional().trim(),
-    pattern: z.string().nullable().optional().trim(),
+    color: z.string().trim().nullable().optional(),
+    pattern: z.string().trim().nullable().optional(),
 
     price: z.number().positive('Price must be positive'),
     motorPrice: z.number().positive().nullable().optional(),
     discountPrice: z.number().positive().nullable().optional(),
 
-    metaTitle: z.string().nullable().optional().trim(),
-    metaDescription: z.string().nullable().optional().trim(),
-    canonicalUrl: z.string().nullable().optional().trim(),
-    seoSchema: z.string().nullable().optional().trim(),
+    metaTitle: z.string().trim().nullable().optional(),
+    metaDescription: z.string().trim().nullable().optional(),
+    canonicalUrl: z.string().trim().nullable().optional(),
+    seoSchema: z.string().trim().nullable().optional(),
 
-    lastEditedBy: z.string().min(1, 'Last edited by is required').trim(),
+    lastEditedBy: z.string().trim().min(1, 'Last edited by is required'),
     status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED'])
   })
   .strict()
@@ -56,12 +56,12 @@ export const createProductSchema = z
 
 export const updateProductSchema = createProductSchema
   .extend({
-    id: z.string().min(1, 'Product ID is required').trim()
+    id: z.string().trim().min(1, 'Product ID is required')
   })
   .strict();
 
 export const getProductByPathSchema = z
   .object({
-    path: z.string().min(1, 'Path is required').trim()
+    path: z.string().trim().min(1, 'Path is required')
   })
   .strict();

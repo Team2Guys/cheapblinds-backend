@@ -2,10 +2,10 @@ import { z } from 'zod';
 
 export const createInquirySchema = z
   .object({
-    name: z.string().min(1, 'Name is required').trim(),
-    email: z.string().email('Invalid email').trim(),
-    phone: z.string().min(5, 'Phone number is too short').trim(),
-    message: z.string().nullable().optional().trim(),
+    name: z.string().trim().min(1, 'Name is required'),
+    email: z.email('Invalid email').trim(),
+    phone: z.string().trim().min(5, 'Phone number is too short'),
+    message: z.string().trim().nullable().optional(),
     inquiryType: z.enum(['EMAIL', 'PHONE', 'WHATSAPP', 'OTHER']).optional()
   })
   .strict();
