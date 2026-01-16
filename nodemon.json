@@ -1,0 +1,6 @@
+{
+  "watch": ["src", "prisma", ".env", ".env.example"],
+  "ext": "js,json",
+  "ignore": ["node_modules"],
+  "exec": "node ./src/app.js"
+}
