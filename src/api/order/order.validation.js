@@ -7,8 +7,8 @@ export const createOrderSchema = z
     userId: z.string().trim().min(1, 'User ID is required'),
     shippingAddress: addressObj,
     billingAddress: addressObj,
-    totalAmount: z.number().positive('Total amount must be positive'),
-    shippingCost: z.number().positive('Shipping cost must be positive'),
+    totalAmount: z.number().nonnegative('Total amount must be positive'),
+    shippingCost: z.number().nonnegative('Shipping cost must be positive'),
     notes: z.string().trim().nullable().optional(),
     orderItems: z
       .array(z.object({}).passthrough())

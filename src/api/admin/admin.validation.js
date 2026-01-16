@@ -18,18 +18,21 @@ const permissions = z.enum([
   'VIEW_TOTAL_CATEGORIES'
 ]);
 
-const baseAdmin = {
-  name: z.string().min(1, 'Name is required').trim(),
-  email: z.string().email('Invalid email').trim(),
-  password: z.string().min(6, 'Password must be at least 6 characters').trim(),
-  role: roles,
-  permissions: z
-    .array(permissions)
-    .min(1, 'At least one permission is required'),
-  lastEditedBy: z.string().min(1, 'Last edited by is required').trim()
-};
-
-export const createAdminSchema = z.object(baseAdmin).strict();
+export const createAdminSchema = z
+  .object({
+    name: z.string().min(1, 'Name is required').trim(),
+    email: z.email('Invalid email').trim(),
+    password: z
+      .string()
+      .min(6, 'Password must be at least 6 characters')
+      .trim(),
+    role: roles,
+    permissions: z
+      .array(permissions)
+      .min(1, 'At least one permission is required'),
+    lastEditedBy: z.string().min(1, 'Last edited by is required').trim()
+  })
+  .strict();
 
 export const updateAdminSchema = z
   .object({
