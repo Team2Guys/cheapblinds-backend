@@ -1,18 +1,18 @@
 import { z } from 'zod';
 
 const baseCategory = {
-  name: z.string().min(1, 'Category name is required').trim(),
-  shortDescription: z.string().min(1, 'Short description is required').trim(),
-  description: z.string().min(1, 'Description is required').trim(),
-  breadcrumb: z.string().min(1, 'Breadcrumb is required').trim(),
-  oldPath: z.string().nullable().optional().trim(),
-  newPath: z.string().min(1, 'New path is required').trim(),
-  posterImageUrl: z.string().url('Invalid URL').nullable().optional().trim(),
-  metaTitle: z.string().nullable().optional().trim(),
-  metaDescription: z.string().nullable().optional().trim(),
-  canonicalUrl: z.string().nullable().optional().trim(),
-  seoSchema: z.string().nullable().optional().trim(),
-  lastEditedBy: z.string().min(1, 'Last edited by is required').trim(),
+  name: z.string().trim().min(1, 'Category name is required'),
+  shortDescription: z.string().trim().min(1, 'Short description is required'),
+  description: z.string().trim().min(1, 'Description is required'),
+  breadcrumb: z.string().trim().min(1, 'Breadcrumb is required'),
+  oldPath: z.string().trim().nullable().optional(),
+  newPath: z.string().trim().min(1, 'New path is required'),
+  posterImageUrl: z.string().trim().url('Invalid URL').nullable().optional(),
+  metaTitle: z.string().trim().nullable().optional(),
+  metaDescription: z.string().trim().nullable().optional(),
+  canonicalUrl: z.string().trim().nullable().optional(),
+  seoSchema: z.string().trim().nullable().optional(),
+  lastEditedBy: z.string().trim().min(1, 'Last edited by is required'),
   status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED'])
 };
 

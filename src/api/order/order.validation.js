@@ -4,12 +4,12 @@ const addressObj = z.object({}).passthrough();
 
 export const createOrderSchema = z
   .object({
-    userId: z.string().min(1, 'User ID is required').trim(),
+    userId: z.string().trim().min(1, 'User ID is required'),
     shippingAddress: addressObj,
     billingAddress: addressObj,
     totalAmount: z.number().positive('Total amount must be positive'),
     shippingCost: z.number().positive('Shipping cost must be positive'),
-    notes: z.string().nullable().optional().trim(),
+    notes: z.string().trim().nullable().optional(),
     orderItems: z
       .array(z.object({}).passthrough())
       .min(1, 'At least one order item is required'),
@@ -22,13 +22,13 @@ export const createOrderSchema = z
       'SHIPPED',
       'COMPLETED'
     ]),
-    lastEditedBy: z.string().min(1, 'Last edited by is required').trim()
+    lastEditedBy: z.string().trim().min(1, 'Last edited by is required')
   })
   .strict();
 
 export const updateOrderSchema = createOrderSchema
   .partial()
   .extend({
-    id: z.string().min(1, 'Order ID is required').trim()
+    id: z.string().trim().min(1, 'Order ID is required')
   })
   .strict();

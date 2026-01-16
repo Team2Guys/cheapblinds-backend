@@ -2,10 +2,10 @@ import { z } from 'zod';
 
 export const updateUserSchema = z
   .object({
-    defaultShippingAddressId: z.string().nullable().optional().trim(),
-    defaultBillingAddressId: z.string().nullable().optional().trim(),
-    firstName: z.string().min(1, 'First name is required').optional().trim(),
-    lastName: z.string().min(1, 'Last name is required').optional().trim(),
-    email: z.string().email('Invalid email').optional().trim()
+    defaultShippingAddressId: z.string().trim().nullable().optional(),
+    defaultBillingAddressId: z.string().trim().nullable().optional(),
+    firstName: z.string().trim().min(1, 'First name is required').optional(),
+    lastName: z.string().trim().min(1, 'Last name is required').optional(),
+    email: z.email('Invalid email').trim().optional()
   })
   .strict();
