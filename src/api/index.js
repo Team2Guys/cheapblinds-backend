@@ -18,6 +18,7 @@ import {
   subcategoryResolvers
 } from './subcategory/index.js';
 import { productTypeDefs, productResolvers } from './product/index.js';
+import { searchTypeDefs, searchResolvers } from './search/index.js';
 import { commonTypeDefs } from './common.typeDef.js';
 
 export const typeDefs = mergeTypeDefs([
@@ -32,6 +33,7 @@ export const typeDefs = mergeTypeDefs([
   priceTypeDefs,
   subcategoryTypeDefs,
   productTypeDefs,
+  searchTypeDefs,
   userTypeDefs,
   commonTypeDefs
 ]);
@@ -48,5 +50,6 @@ export const resolvers = mergeResolvers([
   priceResolvers,
   subcategoryResolvers,
   productResolvers,
+  searchResolvers,
   userResolvers
 ]);
