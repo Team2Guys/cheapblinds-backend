@@ -2,12 +2,15 @@ import { z } from 'zod';
 
 export const getPricingSchema = z
   .object({
-    drop: z.number().positive('Drop must be positive'),
-    width: z.number().positive('Width must be positive'),
-    fabricId: z.number().int().positive('Fabric ID must be positive integer'),
+    drop: z.number().nonnegative('Drop must be positive'),
+    width: z.number().nonnegative('Width must be positive'),
+    fabricId: z
+      .number()
+      .int()
+      .nonnegative('Fabric ID must be positive integer'),
     blindTypeId: z
       .number()
       .int()
-      .positive('Blind type ID must be positive integer')
+      .nonnegative('Blind type ID must be positive integer')
   })
   .strict();

@@ -36,9 +36,9 @@ export const createProductSchema = z
     color: z.string().trim().nullable().optional(),
     pattern: z.string().trim().nullable().optional(),
 
-    price: z.number().positive('Price must be positive'),
-    motorPrice: z.number().positive().nullable().optional(),
-    discountPrice: z.number().positive().nullable().optional(),
+    price: z.number().nonnegative('Price must be positive'),
+    motorPrice: z.number().nonnegative().nullable().optional(),
+    discountPrice: z.number().nonnegative().nullable().optional(),
 
     metaTitle: z.string().trim().nullable().optional(),
     metaDescription: z.string().trim().nullable().optional(),
