@@ -1,5 +1,7 @@
 import { orderServices } from './order.service.js';
 import { verificationUtils, commonUtils } from '#lib/index.js';
+import { createOrderSchema, updateOrderSchema } from './order.validation.js';
+import { validate } from '#lib/validation.lib.js';
 
 const { handlePromise } = commonUtils;
 const { verifyAccess } = verificationUtils;
@@ -19,13 +21,17 @@ export const orderResolvers = {
 
   Mutation: {
     createOrder: handlePromise(
-      verifyAccess((_parent, { input }) => orderServices.createOrder(input))
+      verifyAccess((_parent, { input }) => {
+        const validated = validate(createOrderSchema, input);
+        return orderServices.createOrder(validated);
+      })
     ),
 
     updateOrderById: handlePromise(
-      verifyAccess((_parent, { id, input }) =>
-        orderServices.updateOrderById(id, input)
-      )
+      verifyAccess((_parent, { id, input }) => {
+        const validated = validate(updateOrderSchema, { id, ...input });
+        return orderServices.updateOrderById(id, validated);
+      })
     ),
 
     removeOrderById: handlePromise(

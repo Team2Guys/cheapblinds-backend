@@ -1,5 +1,7 @@
 import { adminServices } from './admin.service.js';
 import { verificationUtils, commonUtils } from '#lib/index.js';
+import { createAdminSchema, updateAdminSchema } from './admin.validation.js';
+import { validate } from '#lib/validation.lib.js';
 
 const { handlePromise } = commonUtils;
 const { verifyAccess, verifyRole } = verificationUtils;
@@ -22,15 +24,19 @@ export const adminResolvers = {
   Mutation: {
     createAdmin: handlePromise(
       verifyRole(['ADMIN', 'SUPER_ADMIN'])(
-        verifyAccess((_parent, { input }) => adminServices.createAdmin(input))
+        verifyAccess((_parent, { input }) => {
+          const validated = validate(createAdminSchema, input);
+          return adminServices.createAdmin(validated);
+        })
       )
     ),
 
     updateAdminById: handlePromise(
       verifyRole(['ADMIN', 'SUPER_ADMIN'])(
-        verifyAccess((_parent, { id, input }) =>
-          adminServices.updateAdminById(id, input)
-        )
+        verifyAccess((_parent, { id, input }) => {
+          const validated = validate(updateAdminSchema, input);
+          return adminServices.updateAdminById(id, validated);
+        })
       )
     ),
 
