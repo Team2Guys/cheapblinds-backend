@@ -1,6 +1,16 @@
 import { gql } from 'graphql-tag';
 
 export const newsletterSubscriberTypeDefs = gql`
+  type NewsletterSubscriber {
+    id: ID!
+
+    email: String!
+    isActive: Boolean!
+
+    createdAt: DateTime!
+    updatedAt: DateTime!
+  }
+
   input CreateNewsletterSubscriberInput {
     email: String!
     isActive: Boolean!
