@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-// Reuse your GraphQL enums as Zod enums
 const roles = z.enum(['ADMIN', 'SUPER_ADMIN']);
 const permissions = z.enum([
   'ADD_PRODUCTS',
@@ -19,19 +18,25 @@ const permissions = z.enum([
   'VIEW_TOTAL_CATEGORIES'
 ]);
 
-export const createAdminSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  password: z.string().min(6),
+const baseAdmin = {
+  name: z.string().min(1, 'Name is required').trim(),
+  email: z.string().email('Invalid email').trim(),
+  password: z.string().min(6, 'Password must be at least 6 characters').trim(),
   role: roles,
-  permissions: z.array(permissions).min(1),
-  lastEditedBy: z.string().min(1)
-});
+  permissions: z
+    .array(permissions)
+    .min(1, 'At least one permission is required'),
+  lastEditedBy: z.string().min(1, 'Last edited by is required').trim()
+};
 
-export const updateAdminSchema = z.object({
-  name: z.string().min(1).optional(),
-  email: z.string().email().optional(),
-  role: roles.optional(),
-  permissions: z.array(permissions).optional(),
-  lastEditedBy: z.string().min(1).optional()
-});
+export const createAdminSchema = z.object(baseAdmin).strict();
+
+export const updateAdminSchema = z
+  .object({
+    name: baseAdmin.name.optional(),
+    email: baseAdmin.email.optional(),
+    role: baseAdmin.role.optional(),
+    permissions: z.array(permissions).optional(),
+    lastEditedBy: baseAdmin.lastEditedBy.optional()
+  })
+  .strict();

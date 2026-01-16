@@ -1,39 +1,34 @@
 import { z } from 'zod';
 
-export const createOrderSchema = z.object({
-  userId: z.string().min(1),
-  shippingAddress: z.object({}).passthrough(),
-  billingAddress: z.object({}).passthrough(),
-  totalAmount: z.number().positive(),
-  shippingCost: z.number().positive(),
-  notes: z.string().nullable().optional(),
-  orderItems: z.array(z.object({}).passthrough()).min(1),
-  paymentStatus: z.enum(['FREE', 'PENDING', 'PAID', 'CANCELED', 'FAILED']),
-  orderStatus: z.enum([
-    'PENDING',
-    'PAID',
-    'CANCELED',
-    'FAILED',
-    'SHIPPED',
-    'COMPLETED'
-  ]),
-  lastEditedBy: z.string().min(1)
-});
+const addressObj = z.object({}).passthrough();
 
-export const updateOrderSchema = z.object({
-  id: z.string().min(1),
-  userId: z.string().optional(),
-  shippingAddress: z.object({}).passthrough().optional(),
-  billingAddress: z.object({}).passthrough().optional(),
-  totalAmount: z.number().positive().optional(),
-  shippingCost: z.number().positive().optional(),
-  notes: z.string().nullable().optional(),
-  orderItems: z.array(z.object({}).passthrough()).optional(),
-  paymentStatus: z
-    .enum(['FREE', 'PENDING', 'PAID', 'CANCELED', 'FAILED'])
-    .optional(),
-  orderStatus: z
-    .enum(['PENDING', 'PAID', 'CANCELED', 'FAILED', 'SHIPPED', 'COMPLETED'])
-    .optional(),
-  lastEditedBy: z.string().optional()
-});
+export const createOrderSchema = z
+  .object({
+    userId: z.string().min(1, 'User ID is required').trim(),
+    shippingAddress: addressObj,
+    billingAddress: addressObj,
+    totalAmount: z.number().positive('Total amount must be positive'),
+    shippingCost: z.number().positive('Shipping cost must be positive'),
+    notes: z.string().nullable().optional().trim(),
+    orderItems: z
+      .array(z.object({}).passthrough())
+      .min(1, 'At least one order item is required'),
+    paymentStatus: z.enum(['FREE', 'PENDING', 'PAID', 'CANCELED', 'FAILED']),
+    orderStatus: z.enum([
+      'PENDING',
+      'PAID',
+      'CANCELED',
+      'FAILED',
+      'SHIPPED',
+      'COMPLETED'
+    ]),
+    lastEditedBy: z.string().min(1, 'Last edited by is required').trim()
+  })
+  .strict();
+
+export const updateOrderSchema = createOrderSchema
+  .partial()
+  .extend({
+    id: z.string().min(1, 'Order ID is required').trim()
+  })
+  .strict();
